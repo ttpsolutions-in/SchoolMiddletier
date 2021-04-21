@@ -1,0 +1,67 @@
+﻿
+
+<style>
+    .nodatatxt {
+        position: absolute;
+        top: 80px;
+        opacity: 0.25;
+        font-size: 1.5em;
+        width: 100%;
+        text-align: center;
+        z-index: 1000;
+    }
+</style>
+<div class="card">
+    <div class="card-header">
+        <b>{{PageTitle}} </b>
+    </div>
+    <div ng-if="ShowSpinnerStatus" class="loader"></div>
+    <div class="card-body" id="tblCustomers">
+        <form id="wholeSaleDashboard" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="ProfileImage">Photo</label>
+                    <input type="file" class="form-control" id="ProfileImage" name="ProfileImage" accept="image/*"
+                           ng-model="Profile.ProfileImage" my-upload>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="txtAlbum">Album</label>
+                    <input type="text" class="form-control input-sm" id="Album" name="Album"
+                           ng-model="Album">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="Description">Description</label>
+                    <input type="text" class="form-control input-sm" id="Description" name="Description"
+                           ng-model="Description">
+                </div>                
+                <div class="form-group col-md-3">
+                    <br />
+                    <button type="button" ng-click="CropAndSave()">Crop &Aacute; Save</button>
+                </div>    
+            </div>
+            <div class="row">
+                <div class="form-group col-12">                    
+                    <img src="{{image}}" id="widePhoto">
+
+                </div>
+                
+            </div>
+        </form>
+    </div>
+</div>
+<html>
+<head>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+    <meta name="Robots" content="NOINDEX " />
+</head>
+<body>
+    <script type="text/javascript">
+        feather.replace();
+        var gearPage = document.getElementById('GearPage');
+        if (null != gearPage) {
+            gearPage.parentNode.removeChild(gearPage);
+            document.title = "Error";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,2094 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StpaulsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Albums">
+          <Key>
+            <PropertyRef Name="AlbumId" />
+          </Key>
+          <Property Name="AlbumId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlbumName" Type="varchar" MaxLength="250" />
+          <Property Name="UpdatableName" Type="varchar" MaxLength="250" />
+          <Property Name="Active" Type="tinyint" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClassFee">
+          <Key>
+            <PropertyRef Name="ClassFeeId" />
+          </Key>
+          <Property Name="ClassFeeId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FeeNameId" Type="smallint" Nullable="false" />
+          <Property Name="ClassId" Type="smallint" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Batch" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="LocationId" Type="smallint" />
+          <Property Name="PaymentOrder" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="FilesNPhotos">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="250" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+          <Property Name="UpdatedFileFolderName" Type="varchar" MaxLength="250" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="FileOrFolder" Type="tinyint" />
+          <Property Name="FileOrPhoto" Type="tinyint" />
+          <Property Name="Active" Type="tinyint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UploadDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="100" />
+          <Property Name="StudentClassId" Type="int" />
+          <Property Name="DocTypeId" Type="smallint" />
+          <Property Name="Parent" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="MasterData">
+          <Key>
+            <PropertyRef Name="MasterDataId" />
+          </Key>
+          <Property Name="MasterDataId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasterDataName" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="ParentId" Type="smallint" />
+          <Property Name="Active" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="MessageId" />
+          </Key>
+          <Property Name="MessageId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MessageBody" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PageHistory">
+          <Key>
+            <PropertyRef Name="PageHistoryId" />
+          </Key>
+          <Property Name="PageHistoryId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PageBody" Type="varchar(max)" Nullable="false" />
+          <Property Name="PageLeft" Type="varchar" MaxLength="2000" />
+          <Property Name="PageRight" Type="varchar" MaxLength="2000" />
+          <Property Name="Version" Type="tinyint" Nullable="false" />
+          <Property Name="ParentPageId" Type="smallint" Nullable="false" />
+          <Property Name="Published" Type="tinyint" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="PageId" />
+          </Key>
+          <Property Name="PageId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PageTitle" Type="varchar" MaxLength="100" />
+          <Property Name="LatestPublishedId" Type="smallint" />
+          <Property Name="LatestDraftId" Type="smallint" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="CurrentVersion" Type="tinyint" />
+          <Property Name="label" Type="varchar" MaxLength="25" />
+          <Property Name="faIcon" Type="varchar" MaxLength="100" />
+          <Property Name="link" Type="varchar" MaxLength="200" />
+          <Property Name="ParentId" Type="smallint" />
+          <Property Name="IsTemplate" Type="tinyint" />
+          <Property Name="DisplayOrder" Type="smallint" />
+          <Property Name="HasSubmenu" Type="tinyint" />
+          <Property Name="HomePage" Type="tinyint" />
+          <Property Name="Module" Type="smallint" />
+          <Property Name="OrgId" Type="smallint" />
+          <Property Name="FullPath" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PaymentDetails">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentAmt" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="ReceivedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="ReceiptNo" Type="smallint" />
+          <Property Name="ClassFeeId" Type="smallint" />
+          <Property Name="Active" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="PhotoGallery">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+          </Key>
+          <Property Name="PhotoId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhotoPath" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="UploadDate" Type="datetime" />
+          <Property Name="Active" Type="tinyint" />
+          <Property Name="AlbumId" Type="smallint" />
+          <Property Name="PhotoOrFile" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="StudentClass">
+          <Key>
+            <PropertyRef Name="StudentClassId" />
+          </Key>
+          <Property Name="StudentClassId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="ClassId" Type="smallint" Nullable="false" />
+          <Property Name="RollNo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Section" Type="smallint" Nullable="false" />
+          <Property Name="Batch" Type="smallint" Nullable="false" />
+          <Property Name="FeeTypeId" Type="smallint" Nullable="false" />
+          <Property Name="LanguageSubject" Type="smallint" />
+          <Property Name="Remarks" Type="varchar" MaxLength="250" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="AdmissionDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="StudentDocuments">
+          <Key>
+            <PropertyRef Name="StudentDocId" />
+          </Key>
+          <Property Name="StudentDocId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UploadDate" Type="datetime" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="StudentClassId" Type="int" Nullable="false" />
+          <Property Name="DocTypeId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentFeePayment">
+          <Key>
+            <PropertyRef Name="StudentFeeId" />
+          </Key>
+          <Property Name="StudentFeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="StudentClassId" Type="int" Nullable="false" />
+          <Property Name="ClassFeeId" Type="smallint" Nullable="false" />
+          <Property Name="FeeAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PaidAmt" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="BalanceAmt" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+          <Property Name="Batch" Type="smallint" Nullable="false" />
+          <Property Name="Remarks" Type="varchar" MaxLength="250" />
+          <Property Name="Active" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="StudentFeeReceipt">
+          <Key>
+            <PropertyRef Name="StudentReceiptId" />
+          </Key>
+          <Property Name="StudentReceiptId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Less" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="OfflineReceiptNo" Type="smallint" />
+          <Property Name="ReceiptDate" Type="datetime" Nullable="false" />
+          <Property Name="StudentClassId" Type="int" />
+          <Property Name="StudentId" Type="int" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FatherName" Type="varchar" MaxLength="50" />
+          <Property Name="MotherName" Type="varchar" MaxLength="50" />
+          <Property Name="Gender" Type="smallint" />
+          <Property Name="PermanentAddress" Type="varchar" MaxLength="250" />
+          <Property Name="PresentAddress" Type="varchar" MaxLength="250" />
+          <Property Name="WhatsAppNumber" Type="varchar" MaxLength="15" />
+          <Property Name="City" Type="smallint" />
+          <Property Name="Pincode" Type="varchar" MaxLength="10" />
+          <Property Name="State" Type="smallint" />
+          <Property Name="Country" Type="smallint" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Bloodgroup" Type="smallint" />
+          <Property Name="Category" Type="smallint" />
+          <Property Name="BankAccountNo" Type="varchar" MaxLength="30" />
+          <Property Name="IFSCCode" Type="varchar" MaxLength="30" />
+          <Property Name="MICRNo" Type="varchar" MaxLength="30" />
+          <Property Name="AadharNo" Type="varchar" MaxLength="30" />
+          <Property Name="Photo" Type="varchar" MaxLength="50" />
+          <Property Name="Religion" Type="smallint" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="30" />
+          <Property Name="AlternateContact" Type="varchar" MaxLength="30" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="50" />
+          <Property Name="ClassAdmissionSought" Type="smallint" />
+          <Property Name="LastSchoolPercentage" Type="varchar" MaxLength="10" />
+          <Property Name="TransferFromSchool" Type="varchar" MaxLength="100" />
+          <Property Name="TransferFromSchoolBoard" Type="varchar" MaxLength="100" />
+          <Property Name="Remarks" Type="varchar" MaxLength="250" />
+          <Property Name="FatherOccupation" Type="varchar" MaxLength="100" />
+          <Property Name="FatherContactNo" Type="varchar" MaxLength="20" />
+          <Property Name="MotherContactNo" Type="varchar" MaxLength="20" />
+          <Property Name="MotherOccupation" Type="varchar" MaxLength="100" />
+          <Property Name="PrimaryContactFatherOrMother" Type="smallint" />
+          <Property Name="NameOfContactPerson" Type="varchar" MaxLength="30" />
+          <Property Name="RelationWithContactPerson" Type="varchar" MaxLength="30" />
+          <Property Name="ContactPersonContactNo" Type="varchar" MaxLength="20" />
+          <Property Name="Active" Type="tinyint" />
+          <Property Name="StudentDeclaration" Type="tinyint" />
+          <Property Name="ParentDeclaration" Type="tinyint" />
+          <Property Name="LocationId" Type="smallint" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeeMaster_ClassMaster">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="ClassFee" Type="Self.ClassFee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="ClassFee">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeeMaster_FeeNameMaster">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="ClassFee" Type="Self.ClassFee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="ClassFee">
+              <PropertyRef Name="FeeNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeeMaster_LocationMaster">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="ClassFee" Type="Self.ClassFee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="ClassFee">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilesNPhotos_MasterData">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="FilesNPhotos" Type="Self.FilesNPhotos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="FilesNPhotos">
+              <PropertyRef Name="DocTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PageHistory_Pages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="PageHistory" Type="Self.PageHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="PageId" />
+            </Principal>
+            <Dependent Role="PageHistory">
+              <PropertyRef Name="ParentPageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pages_MasterData">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="Module" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDetails_ClassFee">
+          <End Role="ClassFee" Type="Self.ClassFee" Multiplicity="0..1" />
+          <End Role="PaymentDetails" Type="Self.PaymentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassFee">
+              <PropertyRef Name="ClassFeeId" />
+            </Principal>
+            <Dependent Role="PaymentDetails">
+              <PropertyRef Name="ClassFeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDetails_FeePayment">
+          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="0..1" />
+          <End Role="PaymentDetails" Type="Self.PaymentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentFeePayment">
+              <PropertyRef Name="StudentFeeId" />
+            </Principal>
+            <Dependent Role="PaymentDetails">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDetails_StudentFeeReceipt">
+          <End Role="StudentFeeReceipt" Type="Self.StudentFeeReceipt" Multiplicity="0..1" />
+          <End Role="PaymentDetails" Type="Self.PaymentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentFeeReceipt">
+              <PropertyRef Name="StudentReceiptId" />
+            </Principal>
+            <Dependent Role="PaymentDetails">
+              <PropertyRef Name="ReceiptNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoGallery_Albums">
+          <End Role="Albums" Type="Self.Albums" Multiplicity="0..1" />
+          <End Role="PhotoGallery" Type="Self.PhotoGallery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Albums">
+              <PropertyRef Name="AlbumId" />
+            </Principal>
+            <Dependent Role="PhotoGallery">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentClass_Class">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="StudentClass">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentClass_Feetype">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="StudentClass">
+              <PropertyRef Name="FeeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentClass_Student">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentClass">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDocuments_MasterData">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="StudentDocuments" Type="Self.StudentDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="StudentDocuments">
+              <PropertyRef Name="DocTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDocuments_StudentClass">
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="1" />
+          <End Role="StudentDocuments" Type="Self.StudentDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentClass">
+              <PropertyRef Name="StudentClassId" />
+            </Principal>
+            <Dependent Role="StudentDocuments">
+              <PropertyRef Name="StudentClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeePayment_ClassFee">
+          <End Role="ClassFee" Type="Self.ClassFee" Multiplicity="1" />
+          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassFee">
+              <PropertyRef Name="ClassFeeId" />
+            </Principal>
+            <Dependent Role="StudentFeePayment">
+              <PropertyRef Name="ClassFeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeePayment_Student">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentFeePayment">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeePayment_StudentFeePayment">
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="1" />
+          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentClass">
+              <PropertyRef Name="StudentClassId" />
+            </Principal>
+            <Dependent Role="StudentFeePayment">
+              <PropertyRef Name="StudentClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeeReceipt_StudentClass">
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="0..1" />
+          <End Role="StudentFeeReceipt" Type="Self.StudentFeeReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentClass">
+              <PropertyRef Name="StudentClassId" />
+            </Principal>
+            <Dependent Role="StudentFeeReceipt">
+              <PropertyRef Name="StudentClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeeReceipt_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="StudentFeeReceipt" Type="Self.StudentFeeReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentFeeReceipt">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentPhoto_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="StudentDocuments" Type="Self.StudentDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentDocuments">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Bloodgroup">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Bloodgroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Category">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_City">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Country">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Gender">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_LocationMaster">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Religion">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Religion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_State">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="State" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StpaulsModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassFee" EntityType="Self.ClassFee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FilesNPhotos" EntityType="Self.FilesNPhotos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MasterData" EntityType="Self.MasterData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PageHistory" EntityType="Self.PageHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentDetails" EntityType="Self.PaymentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotoGallery" EntityType="Self.PhotoGallery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentClass" EntityType="Self.StudentClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentDocuments" EntityType="Self.StudentDocuments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentFeePayment" EntityType="Self.StudentFeePayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentFeeReceipt" EntityType="Self.StudentFeeReceipt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeeMaster_ClassMaster" Association="Self.FK_FeeMaster_ClassMaster">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="ClassFee" EntitySet="ClassFee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeeMaster_FeeNameMaster" Association="Self.FK_FeeMaster_FeeNameMaster">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="ClassFee" EntitySet="ClassFee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeeMaster_LocationMaster" Association="Self.FK_FeeMaster_LocationMaster">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="ClassFee" EntitySet="ClassFee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilesNPhotos_MasterData" Association="Self.FK_FilesNPhotos_MasterData">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="FilesNPhotos" EntitySet="FilesNPhotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PageHistory_Pages" Association="Self.FK_PageHistory_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="PageHistory" EntitySet="PageHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pages_MasterData" Association="Self.FK_Pages_MasterData">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDetails_ClassFee" Association="Self.FK_PaymentDetails_ClassFee">
+            <End Role="ClassFee" EntitySet="ClassFee" />
+            <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDetails_FeePayment" Association="Self.FK_PaymentDetails_FeePayment">
+            <End Role="StudentFeePayment" EntitySet="StudentFeePayment" />
+            <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDetails_StudentFeeReceipt" Association="Self.FK_PaymentDetails_StudentFeeReceipt">
+            <End Role="StudentFeeReceipt" EntitySet="StudentFeeReceipt" />
+            <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoGallery_Albums" Association="Self.FK_PhotoGallery_Albums">
+            <End Role="Albums" EntitySet="Albums" />
+            <End Role="PhotoGallery" EntitySet="PhotoGallery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentClass_Class" Association="Self.FK_StudentClass_Class">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="StudentClass" EntitySet="StudentClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentClass_Feetype" Association="Self.FK_StudentClass_Feetype">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="StudentClass" EntitySet="StudentClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentClass_Student" Association="Self.FK_StudentClass_Student">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentClass" EntitySet="StudentClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDocuments_MasterData" Association="Self.FK_StudentDocuments_MasterData">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="StudentDocuments" EntitySet="StudentDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDocuments_StudentClass" Association="Self.FK_StudentDocuments_StudentClass">
+            <End Role="StudentClass" EntitySet="StudentClass" />
+            <End Role="StudentDocuments" EntitySet="StudentDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeePayment_ClassFee" Association="Self.FK_StudentFeePayment_ClassFee">
+            <End Role="ClassFee" EntitySet="ClassFee" />
+            <End Role="StudentFeePayment" EntitySet="StudentFeePayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeePayment_Student" Association="Self.FK_StudentFeePayment_Student">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentFeePayment" EntitySet="StudentFeePayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeePayment_StudentFeePayment" Association="Self.FK_StudentFeePayment_StudentFeePayment">
+            <End Role="StudentClass" EntitySet="StudentClass" />
+            <End Role="StudentFeePayment" EntitySet="StudentFeePayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeeReceipt_StudentClass" Association="Self.FK_StudentFeeReceipt_StudentClass">
+            <End Role="StudentClass" EntitySet="StudentClass" />
+            <End Role="StudentFeeReceipt" EntitySet="StudentFeeReceipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeeReceipt_Students" Association="Self.FK_StudentFeeReceipt_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentFeeReceipt" EntitySet="StudentFeeReceipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentPhoto_Students" Association="Self.FK_StudentPhoto_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentDocuments" EntitySet="StudentDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Bloodgroup" Association="Self.FK_Students_Bloodgroup">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Category" Association="Self.FK_Students_Category">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_City" Association="Self.FK_Students_City">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Country" Association="Self.FK_Students_Country">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Gender" Association="Self.FK_Students_Gender">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_LocationMaster" Association="Self.FK_Students_LocationMaster">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Religion" Association="Self.FK_Students_Religion">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_State" Association="Self.FK_Students_State">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StpaulsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="AlbumId" />
+          </Key>
+          <Property Name="AlbumId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlbumName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatableName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Byte" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PhotoGalleries" Relationship="Self.FK_PhotoGallery_Albums" FromRole="Albums" ToRole="PhotoGallery" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="FilesNPhoto">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedFileFolderName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="FileOrFolder" Type="Byte" />
+          <Property Name="FileOrPhoto" Type="Byte" />
+          <Property Name="Active" Type="Byte" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UploadDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StudentClassId" Type="Int32" />
+          <Property Name="DocTypeId" Type="Int16" />
+          <Property Name="Parent" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MasterData" Relationship="StpaulsModel.FK_FilesNPhotos_MasterData" FromRole="FilesNPhoto" ToRole="MasterData" />
+        </EntityType>
+        <EntityType Name="MasterData">
+          <Key>
+            <PropertyRef Name="MasterDataId" />
+          </Key>
+          <Property Name="MasterDataId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasterDataName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ParentId" Type="Int16" />
+          <Property Name="Active" Type="Byte" />
+          <NavigationProperty Name="StudentClasses" Relationship="Self.FK_StudentClass_Class" FromRole="MasterData" ToRole="StudentClass" />
+          <NavigationProperty Name="StudentClasses1" Relationship="Self.FK_StudentClass_Feetype" FromRole="MasterData" ToRole="StudentClass" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_Students_Bloodgroup" FromRole="MasterData" ToRole="Students" />
+          <NavigationProperty Name="Students1" Relationship="Self.FK_Students_Category" FromRole="MasterData" ToRole="Students" />
+          <NavigationProperty Name="Students2" Relationship="Self.FK_Students_City" FromRole="MasterData" ToRole="Students" />
+          <NavigationProperty Name="Students3" Relationship="Self.FK_Students_Country" FromRole="MasterData" ToRole="Students" />
+          <NavigationProperty Name="Students4" Relationship="Self.FK_Students_Gender" FromRole="MasterData" ToRole="Students" />
+          <NavigationProperty Name="Students5" Relationship="Self.FK_Students_LocationMaster" FromRole="MasterData" ToRole="Students" />
+          <NavigationProperty Name="Students6" Relationship="Self.FK_Students_Religion" FromRole="MasterData" ToRole="Students" />
+          <NavigationProperty Name="Students7" Relationship="Self.FK_Students_State" FromRole="MasterData" ToRole="Students" />
+          <NavigationProperty Name="ClassFees" Relationship="StpaulsModel.FK_FeeMaster_ClassMaster1" FromRole="MasterData" ToRole="ClassFee" />
+          <NavigationProperty Name="ClassFees1" Relationship="StpaulsModel.FK_FeeMaster_FeeNameMaster1" FromRole="MasterData" ToRole="ClassFee" />
+          <NavigationProperty Name="ClassFees2" Relationship="StpaulsModel.FK_FeeMaster_LocationMaster1" FromRole="MasterData" ToRole="ClassFee" />
+          <NavigationProperty Name="Pages" Relationship="StpaulsModel.FK_Pages_Pages" FromRole="MasterData" ToRole="Page" />
+          <NavigationProperty Name="StudentDocuments" Relationship="StpaulsModel.FK_StudentDocuments_MasterData" FromRole="MasterData" ToRole="StudentDocument" />
+          <NavigationProperty Name="FilesNPhotos" Relationship="StpaulsModel.FK_FilesNPhotos_MasterData" FromRole="MasterData" ToRole="FilesNPhoto" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageId" />
+          </Key>
+          <Property Name="MessageId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MessageBody" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PageHistory">
+          <Key>
+            <PropertyRef Name="PageHistoryId" />
+          </Key>
+          <Property Name="PageHistoryId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PageBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PageLeft" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="PageRight" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="Version" Type="Byte" Nullable="false" />
+          <Property Name="ParentPageId" Type="Int16" Nullable="false" />
+          <Property Name="Published" Type="Byte" Nullable="false" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Page" Relationship="Self.FK_PageHistory_Pages" FromRole="PageHistory" ToRole="Pages" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="PageId" />
+          </Key>
+          <Property Name="PageId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PageTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LatestPublishedId" Type="Int16" />
+          <Property Name="LatestDraftId" Type="Int16" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CurrentVersion" Type="Byte" />
+          <Property Name="label" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="faIcon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="link" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ParentId" Type="Int16" />
+          <Property Name="IsTemplate" Type="Byte" />
+          <Property Name="DisplayOrder" Type="Int16" />
+          <Property Name="HasSubmenu" Type="Byte" />
+          <Property Name="HomePage" Type="Byte" />
+          <NavigationProperty Name="PageHistories" Relationship="Self.FK_PageHistory_Pages" FromRole="Pages" ToRole="PageHistory" />
+          <Property Name="Module" Type="Int16" />
+          <NavigationProperty Name="MasterData" Relationship="StpaulsModel.FK_Pages_Pages" FromRole="Page" ToRole="MasterData" />
+          <Property Name="OrgId" Type="Int16" />
+          <Property Name="FullPath" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PhotoGallery">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+          </Key>
+          <Property Name="PhotoId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhotoPath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UploadDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Byte" />
+          <Property Name="AlbumId" Type="Int16" />
+          <Property Name="PhotoOrFile" Type="Byte" />
+          <NavigationProperty Name="Album" Relationship="Self.FK_PhotoGallery_Albums" FromRole="PhotoGallery" ToRole="Albums" />
+        </EntityType>
+        <EntityType Name="StudentClass">
+          <Key>
+            <PropertyRef Name="StudentClassId" />
+          </Key>
+          <Property Name="StudentClassId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="ClassId" Type="Int16" Nullable="false" />
+          <Property Name="RollNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Section" Type="Int16" Nullable="false" />
+          <Property Name="Batch" Type="Int16" Nullable="false" />
+          <Property Name="FeeTypeId" Type="Int16" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_StudentClass_Class" FromRole="StudentClass" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="Self.FK_StudentClass_Feetype" FromRole="StudentClass" ToRole="MasterData" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_StudentClass_Student" FromRole="StudentClass" ToRole="Students" />
+          <NavigationProperty Name="StudentFeePayments" Relationship="Self.FK_StudentFeePayment_StudentFeePayment" FromRole="StudentClass" ToRole="StudentFeePayment" />
+          <Property Name="LanguageSubject" Type="Int16" />
+          <NavigationProperty Name="StudentFeeReceipts" Relationship="StpaulsModel.FK_StudentFeeReceipt_StudentClass" FromRole="StudentClass" ToRole="StudentFeeReceipt" />
+          <Property Name="AdmissionDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="StudentDocuments" Relationship="StpaulsModel.FK_StudentDocuments_StudentClass" FromRole="StudentClass" ToRole="StudentDocument" />
+        </EntityType>
+        <EntityType Name="StudentFeePayment">
+          <Key>
+            <PropertyRef Name="StudentFeeId" />
+          </Key>
+          <Property Name="StudentFeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentClassId" Type="Int32" Nullable="false" />
+          <Property Name="PaidAmt" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="BalanceAmt" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StudentClass" Relationship="Self.FK_StudentFeePayment_StudentFeePayment" FromRole="StudentFeePayment" ToRole="StudentClass" />
+          <Property Name="ClassFeeId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" />
+          <NavigationProperty Name="ClassFee" Relationship="StpaulsModel.FK_StudentFeePayment_ClassFee" FromRole="StudentFeePayment" ToRole="ClassFee" />
+          <Property Name="Batch" Type="Int16" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="StpaulsModel.FK_StudentFeePayment_StudentFeePayment1" FromRole="StudentFeePayment" ToRole="Student" />
+          <Property Name="FeeAmount" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="PaymentDetails" Relationship="StpaulsModel.FK_PaymentDetails_PaymentDetails1" FromRole="StudentFeePayment" ToRole="PaymentDetail" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MotherName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="Int16" />
+          <Property Name="City" Type="Int16" />
+          <Property Name="Pincode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Int16" />
+          <Property Name="Country" Type="Int16" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Bloodgroup" Type="Int16" />
+          <Property Name="Category" Type="Int16" />
+          <Property Name="BankAccountNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IFSCCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MICRNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="AadharNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Religion" Type="Int16" />
+          <Property Name="ContactNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="AlternateContact" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TransferFromSchool" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TransferFromSchoolBoard" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Byte" />
+          <Property Name="LocationId" Type="Int16" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_Students_Bloodgroup" FromRole="Students" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="Self.FK_Students_Category" FromRole="Students" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData2" Relationship="Self.FK_Students_City" FromRole="Students" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData3" Relationship="Self.FK_Students_Country" FromRole="Students" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData4" Relationship="Self.FK_Students_Gender" FromRole="Students" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData5" Relationship="Self.FK_Students_LocationMaster" FromRole="Students" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData6" Relationship="Self.FK_Students_Religion" FromRole="Students" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData7" Relationship="Self.FK_Students_State" FromRole="Students" ToRole="MasterData" />
+          <NavigationProperty Name="StudentClasses" Relationship="Self.FK_StudentClass_Student" FromRole="Students" ToRole="StudentClass" />
+          <Property Name="FatherOccupation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FatherContactNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MotherContactNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PrimaryContactFatherOrMother" Type="Int16" />
+          <NavigationProperty Name="StudentFeePayments" Relationship="StpaulsModel.FK_StudentFeePayment_StudentFeePayment1" FromRole="Student" ToRole="StudentFeePayment" />
+          <Property Name="PermanentAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PresentAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="WhatsAppNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ClassAdmissionSought" Type="Int16" />
+          <Property Name="LastSchoolPercentage" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MotherOccupation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NameOfContactPerson" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RelationWithContactPerson" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPersonContactNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="StudentDeclaration" Type="Byte" />
+          <Property Name="ParentDeclaration" Type="Byte" />
+          <NavigationProperty Name="StudentDocuments" Relationship="StpaulsModel.FK_StudentPhoto_Students1" FromRole="Student" ToRole="StudentDocument" />
+          <NavigationProperty Name="StudentFeeReceipts" Relationship="StpaulsModel.FK_StudentFeeReceipt_Students" FromRole="Student" ToRole="StudentFeeReceipt" />
+        </EntityType>
+        <Association Name="FK_PhotoGallery_Albums">
+          <End Role="Albums" Type="Self.Album" Multiplicity="0..1" />
+          <End Role="PhotoGallery" Type="Self.PhotoGallery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Albums">
+              <PropertyRef Name="AlbumId" />
+            </Principal>
+            <Dependent Role="PhotoGallery">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentClass_Class">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="StudentClass">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentClass_Feetype">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="StudentClass">
+              <PropertyRef Name="FeeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Bloodgroup">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Bloodgroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Category">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_City">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Country">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Gender">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_LocationMaster">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Religion">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Religion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_State">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="State" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PageHistory_Pages">
+          <End Role="Pages" Type="Self.Page" Multiplicity="1" />
+          <End Role="PageHistory" Type="Self.PageHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="PageId" />
+            </Principal>
+            <Dependent Role="PageHistory">
+              <PropertyRef Name="ParentPageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentClass_Student">
+          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentClass">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeePayment_StudentFeePayment">
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="1" />
+          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentClass">
+              <PropertyRef Name="StudentClassId" />
+            </Principal>
+            <Dependent Role="StudentFeePayment">
+              <PropertyRef Name="StudentClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="StpaulsEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Albums" EntityType="Self.Album" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="FilesNPhotos" EntityType="Self.FilesNPhoto" />
+          <EntitySet Name="MasterDatas" EntityType="Self.MasterData" />
+          <EntitySet Name="Messages" EntityType="Self.Message" />
+          <EntitySet Name="PageHistories" EntityType="Self.PageHistory" />
+          <EntitySet Name="Pages" EntityType="Self.Page" />
+          <EntitySet Name="PhotoGalleries" EntityType="Self.PhotoGallery" />
+          <EntitySet Name="StudentClasses" EntityType="Self.StudentClass" />
+          <EntitySet Name="StudentFeePayments" EntityType="Self.StudentFeePayment" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <AssociationSet Name="FK_PhotoGallery_Albums" Association="Self.FK_PhotoGallery_Albums">
+            <End Role="Albums" EntitySet="Albums" />
+            <End Role="PhotoGallery" EntitySet="PhotoGalleries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentClass_Class" Association="Self.FK_StudentClass_Class">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="StudentClass" EntitySet="StudentClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentClass_Feetype" Association="Self.FK_StudentClass_Feetype">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="StudentClass" EntitySet="StudentClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Bloodgroup" Association="Self.FK_Students_Bloodgroup">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Category" Association="Self.FK_Students_Category">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_City" Association="Self.FK_Students_City">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Country" Association="Self.FK_Students_Country">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Gender" Association="Self.FK_Students_Gender">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_LocationMaster" Association="Self.FK_Students_LocationMaster">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Religion" Association="Self.FK_Students_Religion">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_State" Association="Self.FK_Students_State">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PageHistory_Pages" Association="Self.FK_PageHistory_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="PageHistory" EntitySet="PageHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentClass_Student" Association="Self.FK_StudentClass_Student">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentClass" EntitySet="StudentClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeePayment_StudentFeePayment" Association="Self.FK_StudentFeePayment_StudentFeePayment">
+            <End Role="StudentClass" EntitySet="StudentClasses" />
+            <End Role="StudentFeePayment" EntitySet="StudentFeePayments" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="ClassFees" EntityType="StpaulsModel.ClassFee" />
+          <AssociationSet Name="FK_FeeMaster_ClassMaster1" Association="StpaulsModel.FK_FeeMaster_ClassMaster1">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="ClassFee" EntitySet="ClassFees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeeMaster_FeeNameMaster1" Association="StpaulsModel.FK_FeeMaster_FeeNameMaster1">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="ClassFee" EntitySet="ClassFees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeeMaster_LocationMaster1" Association="StpaulsModel.FK_FeeMaster_LocationMaster1">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="ClassFee" EntitySet="ClassFees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeePayment_ClassFee" Association="StpaulsModel.FK_StudentFeePayment_ClassFee">
+            <End Role="ClassFee" EntitySet="ClassFees" />
+            <End Role="StudentFeePayment" EntitySet="StudentFeePayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeePayment_StudentFeePayment1" Association="StpaulsModel.FK_StudentFeePayment_StudentFeePayment1">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentFeePayment" EntitySet="StudentFeePayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pages_Pages" Association="StpaulsModel.FK_Pages_Pages">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="Page" EntitySet="Pages" />
+          </AssociationSet>
+          <EntitySet Name="PaymentDetails" EntityType="StpaulsModel.PaymentDetail" />
+          <AssociationSet Name="FK_PaymentDetails_PaymentDetails" Association="StpaulsModel.FK_PaymentDetails_PaymentDetails">
+            <End Role="PaymentDetail" EntitySet="PaymentDetails" />
+            <End Role="PaymentDetail1" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDetails_PaymentDetails1" Association="StpaulsModel.FK_PaymentDetails_PaymentDetails1">
+            <End Role="StudentFeePayment" EntitySet="StudentFeePayments" />
+            <End Role="PaymentDetail" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDetails_ClassFee" Association="StpaulsModel.FK_PaymentDetails_ClassFee">
+            <End Role="ClassFee" EntitySet="ClassFees" />
+            <End Role="PaymentDetail" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <EntitySet Name="StudentFeeReceipts" EntityType="StpaulsModel.StudentFeeReceipt" />
+          <AssociationSet Name="FK_PaymentDetails_StudentFeeReceipt" Association="StpaulsModel.FK_PaymentDetails_StudentFeeReceipt">
+            <End Role="StudentFeeReceipt" EntitySet="StudentFeeReceipts" />
+            <End Role="PaymentDetail" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeeReceipt_StudentClass" Association="StpaulsModel.FK_StudentFeeReceipt_StudentClass">
+            <End Role="StudentClass" EntitySet="StudentClasses" />
+            <End Role="StudentFeeReceipt" EntitySet="StudentFeeReceipts" />
+          </AssociationSet>
+          <EntitySet Name="StudentDocuments" EntityType="StpaulsModel.StudentDocument" />
+          <AssociationSet Name="FK_StudentPhoto_Students1" Association="StpaulsModel.FK_StudentPhoto_Students1">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentDocument" EntitySet="StudentDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDocuments_MasterData" Association="StpaulsModel.FK_StudentDocuments_MasterData">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="StudentDocument" EntitySet="StudentDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeeReceipt_Students" Association="StpaulsModel.FK_StudentFeeReceipt_Students">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentFeeReceipt" EntitySet="StudentFeeReceipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDocuments_StudentClass" Association="StpaulsModel.FK_StudentDocuments_StudentClass">
+            <End Role="StudentClass" EntitySet="StudentClasses" />
+            <End Role="StudentDocument" EntitySet="StudentDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilesNPhotos_MasterData" Association="StpaulsModel.FK_FilesNPhotos_MasterData">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="FilesNPhoto" EntitySet="FilesNPhotos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ClassFee">
+          <Key>
+            <PropertyRef Name="ClassFeeId" />
+          </Key>
+          <Property Name="ClassFeeId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FeeNameId" Type="Int16" Nullable="false" />
+          <Property Name="ClassId" Type="Int16" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Batch" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="LocationId" Type="Int16" />
+          <NavigationProperty Name="MasterData" Relationship="StpaulsModel.FK_FeeMaster_ClassMaster1" FromRole="ClassFee" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="StpaulsModel.FK_FeeMaster_FeeNameMaster1" FromRole="ClassFee" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData2" Relationship="StpaulsModel.FK_FeeMaster_LocationMaster1" FromRole="ClassFee" ToRole="MasterData" />
+          <NavigationProperty Name="StudentFeePayments" Relationship="StpaulsModel.FK_StudentFeePayment_ClassFee" FromRole="ClassFee" ToRole="StudentFeePayment" />
+          <Property Name="PaymentOrder" Type="Byte" />
+          <NavigationProperty Name="PaymentDetails" Relationship="StpaulsModel.FK_PaymentDetails_ClassFee" FromRole="ClassFee" ToRole="PaymentDetail" />
+        </EntityType>
+        <Association Name="FK_FeeMaster_ClassMaster1">
+          <End Type="StpaulsModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="StpaulsModel.ClassFee" Role="ClassFee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="ClassFee">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeeMaster_FeeNameMaster1">
+          <End Type="StpaulsModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="StpaulsModel.ClassFee" Role="ClassFee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="ClassFee">
+              <PropertyRef Name="FeeNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeeMaster_LocationMaster1">
+          <End Type="StpaulsModel.MasterData" Role="MasterData" Multiplicity="0..1" />
+          <End Type="StpaulsModel.ClassFee" Role="ClassFee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="ClassFee">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeePayment_ClassFee">
+          <End Type="StpaulsModel.ClassFee" Role="ClassFee" Multiplicity="1" />
+          <End Type="StpaulsModel.StudentFeePayment" Role="StudentFeePayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassFee">
+              <PropertyRef Name="ClassFeeId" />
+            </Principal>
+            <Dependent Role="StudentFeePayment">
+              <PropertyRef Name="ClassFeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeePayment_StudentFeePayment1">
+          <End Type="StpaulsModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="StpaulsModel.StudentFeePayment" Role="StudentFeePayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentFeePayment">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pages_Pages">
+          <End Type="StpaulsModel.MasterData" Role="MasterData" Multiplicity="0..1" />
+          <End Type="StpaulsModel.Page" Role="Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="Module" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PaymentDetail">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentAmt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="ReceivedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <NavigationProperty Name="PaymentDetails1" Relationship="StpaulsModel.FK_PaymentDetails_PaymentDetails" FromRole="PaymentDetail" ToRole="PaymentDetail1" />
+          <NavigationProperty Name="PaymentDetail1" Relationship="StpaulsModel.FK_PaymentDetails_PaymentDetails" FromRole="PaymentDetail1" ToRole="PaymentDetail" />
+          <NavigationProperty Name="StudentFeePayment" Relationship="StpaulsModel.FK_PaymentDetails_PaymentDetails1" FromRole="PaymentDetail" ToRole="StudentFeePayment" />
+          <Property Name="ReceiptNo" Type="Int16" />
+          <Property Name="ClassFeeId" Type="Int16" />
+          <NavigationProperty Name="ClassFee" Relationship="StpaulsModel.FK_PaymentDetails_ClassFee" FromRole="PaymentDetail" ToRole="ClassFee" />
+          <NavigationProperty Name="StudentFeeReceipt" Relationship="StpaulsModel.FK_PaymentDetails_StudentFeeReceipt" FromRole="PaymentDetail" ToRole="StudentFeeReceipt" />
+          <Property Name="Active" Type="Byte" />
+        </EntityType>
+        <Association Name="FK_PaymentDetails_PaymentDetails">
+          <End Type="StpaulsModel.PaymentDetail" Role="PaymentDetail" Multiplicity="1" />
+          <End Type="StpaulsModel.PaymentDetail" Role="PaymentDetail1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentDetail">
+              <PropertyRef Name="PaymentId" />
+            </Principal>
+            <Dependent Role="PaymentDetail1">
+              <PropertyRef Name="PaymentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDetails_PaymentDetails1">
+          <End Type="StpaulsModel.StudentFeePayment" Role="StudentFeePayment" Multiplicity="0..1" />
+          <End Type="StpaulsModel.PaymentDetail" Role="PaymentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentFeePayment">
+              <PropertyRef Name="StudentFeeId" />
+            </Principal>
+            <Dependent Role="PaymentDetail">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDetails_ClassFee">
+          <End Type="StpaulsModel.ClassFee" Role="ClassFee" Multiplicity="0..1" />
+          <End Type="StpaulsModel.PaymentDetail" Role="PaymentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassFee">
+              <PropertyRef Name="ClassFeeId" />
+            </Principal>
+            <Dependent Role="PaymentDetail">
+              <PropertyRef Name="ClassFeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StudentFeeReceipt">
+          <Key>
+            <PropertyRef Name="StudentReceiptId" />
+          </Key>
+          <Property Name="StudentReceiptId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Less" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="OfflineReceiptNo" Type="Int16" />
+          <Property Name="ReceiptDate" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="StudentClassId" Type="Int32" />
+          <NavigationProperty Name="PaymentDetails" Relationship="StpaulsModel.FK_PaymentDetails_StudentFeeReceipt" FromRole="StudentFeeReceipt" ToRole="PaymentDetail" />
+          <NavigationProperty Name="StudentClass" Relationship="StpaulsModel.FK_StudentFeeReceipt_StudentClass" FromRole="StudentFeeReceipt" ToRole="StudentClass" />
+          <Property Name="StudentId" Type="Int32" />
+          <NavigationProperty Name="Student" Relationship="StpaulsModel.FK_StudentFeeReceipt_Students" FromRole="StudentFeeReceipt" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_PaymentDetails_StudentFeeReceipt">
+          <End Type="StpaulsModel.StudentFeeReceipt" Role="StudentFeeReceipt" Multiplicity="0..1" />
+          <End Type="StpaulsModel.PaymentDetail" Role="PaymentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentFeeReceipt">
+              <PropertyRef Name="StudentReceiptId" />
+            </Principal>
+            <Dependent Role="PaymentDetail">
+              <PropertyRef Name="ReceiptNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeeReceipt_StudentClass">
+          <End Type="StpaulsModel.StudentClass" Role="StudentClass" Multiplicity="0..1" />
+          <End Type="StpaulsModel.StudentFeeReceipt" Role="StudentFeeReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentClass">
+              <PropertyRef Name="StudentClassId" />
+            </Principal>
+            <Dependent Role="StudentFeeReceipt">
+              <PropertyRef Name="StudentClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StudentDocument">
+          <Key>
+            <PropertyRef Name="StudentDocId" />
+          </Key>
+          <Property Name="StudentDocId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="DocTypeId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="StpaulsModel.FK_StudentPhoto_Students1" FromRole="StudentDocument" ToRole="Student" />
+          <NavigationProperty Name="MasterData" Relationship="StpaulsModel.FK_StudentDocuments_MasterData" FromRole="StudentDocument" ToRole="MasterData" />
+          <Property Name="StudentClassId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StudentClass" Relationship="StpaulsModel.FK_StudentDocuments_StudentClass" FromRole="StudentDocument" ToRole="StudentClass" />
+        </EntityType>
+        <Association Name="FK_StudentPhoto_Students1">
+          <End Type="StpaulsModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="StpaulsModel.StudentDocument" Role="StudentDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentDocument">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDocuments_MasterData">
+          <End Type="StpaulsModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="StpaulsModel.StudentDocument" Role="StudentDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="StudentDocument">
+              <PropertyRef Name="DocTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeeReceipt_Students">
+          <End Type="StpaulsModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="StpaulsModel.StudentFeeReceipt" Role="StudentFeeReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentFeeReceipt">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDocuments_StudentClass">
+          <End Type="StpaulsModel.StudentClass" Role="StudentClass" Multiplicity="1" />
+          <End Type="StpaulsModel.StudentDocument" Role="StudentDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentClass">
+              <PropertyRef Name="StudentClassId" />
+            </Principal>
+            <Dependent Role="StudentDocument">
+              <PropertyRef Name="StudentClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilesNPhotos_MasterData">
+          <End Type="StpaulsModel.MasterData" Role="MasterData" Multiplicity="0..1" />
+          <End Type="StpaulsModel.FilesNPhoto" Role="FilesNPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="FilesNPhoto">
+              <PropertyRef Name="DocTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StpaulsModelStoreContainer" CdmEntityContainer="StpaulsEntities1">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="StpaulsModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Albums">
+            <EntityTypeMapping TypeName="StpaulsModel.Album">
+              <MappingFragment StoreEntitySet="Albums">
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="AlbumName" ColumnName="AlbumName" />
+                <ScalarProperty Name="UpdatableName" ColumnName="UpdatableName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="StpaulsModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="StpaulsModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="StpaulsModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="StpaulsModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FilesNPhotos">
+            <EntityTypeMapping TypeName="StpaulsModel.FilesNPhoto">
+              <MappingFragment StoreEntitySet="FilesNPhotos">
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="DocTypeId" ColumnName="DocTypeId" />
+                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UpdatedFileFolderName" ColumnName="UpdatedFileFolderName" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="FileOrFolder" ColumnName="FileOrFolder" />
+                <ScalarProperty Name="FileOrPhoto" ColumnName="FileOrPhoto" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MasterDatas">
+            <EntityTypeMapping TypeName="StpaulsModel.MasterData">
+              <MappingFragment StoreEntitySet="MasterData">
+                <ScalarProperty Name="MasterDataId" ColumnName="MasterDataId" />
+                <ScalarProperty Name="MasterDataName" ColumnName="MasterDataName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="StpaulsModel.Message">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="MessageBody" ColumnName="MessageBody" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PageHistories">
+            <EntityTypeMapping TypeName="StpaulsModel.PageHistory">
+              <MappingFragment StoreEntitySet="PageHistory">
+                <ScalarProperty Name="PageHistoryId" ColumnName="PageHistoryId" />
+                <ScalarProperty Name="PageBody" ColumnName="PageBody" />
+                <ScalarProperty Name="PageLeft" ColumnName="PageLeft" />
+                <ScalarProperty Name="PageRight" ColumnName="PageRight" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="ParentPageId" ColumnName="ParentPageId" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="StpaulsModel.Page">
+              <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="FullPath" ColumnName="FullPath" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="Module" ColumnName="Module" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="PageTitle" ColumnName="PageTitle" />
+                <ScalarProperty Name="LatestPublishedId" ColumnName="LatestPublishedId" />
+                <ScalarProperty Name="LatestDraftId" ColumnName="LatestDraftId" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CurrentVersion" ColumnName="CurrentVersion" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="faIcon" ColumnName="faIcon" />
+                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="IsTemplate" ColumnName="IsTemplate" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="HasSubmenu" ColumnName="HasSubmenu" />
+                <ScalarProperty Name="HomePage" ColumnName="HomePage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotoGalleries">
+            <EntityTypeMapping TypeName="StpaulsModel.PhotoGallery">
+              <MappingFragment StoreEntitySet="PhotoGallery">
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="PhotoOrFile" ColumnName="PhotoOrFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentClasses">
+            <EntityTypeMapping TypeName="StpaulsModel.StudentClass">
+              <MappingFragment StoreEntitySet="StudentClass">
+                <ScalarProperty Name="AdmissionDate" ColumnName="AdmissionDate" />
+                <ScalarProperty Name="LanguageSubject" ColumnName="LanguageSubject" />
+                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="RollNo" ColumnName="RollNo" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+                <ScalarProperty Name="FeeTypeId" ColumnName="FeeTypeId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentFeePayments">
+            <EntityTypeMapping TypeName="StpaulsModel.StudentFeePayment">
+              <MappingFragment StoreEntitySet="StudentFeePayment">
+                <ScalarProperty Name="FeeAmount" ColumnName="FeeAmount" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ClassFeeId" ColumnName="ClassFeeId" />
+                <ScalarProperty Name="StudentFeeId" ColumnName="StudentFeeId" />
+                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
+                <ScalarProperty Name="PaidAmt" ColumnName="PaidAmt" />
+                <ScalarProperty Name="BalanceAmt" ColumnName="BalanceAmt" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="StpaulsModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="ParentDeclaration" ColumnName="ParentDeclaration" />
+                <ScalarProperty Name="StudentDeclaration" ColumnName="StudentDeclaration" />
+                <ScalarProperty Name="ContactPersonContactNo" ColumnName="ContactPersonContactNo" />
+                <ScalarProperty Name="RelationWithContactPerson" ColumnName="RelationWithContactPerson" />
+                <ScalarProperty Name="NameOfContactPerson" ColumnName="NameOfContactPerson" />
+                <ScalarProperty Name="MotherOccupation" ColumnName="MotherOccupation" />
+                <ScalarProperty Name="LastSchoolPercentage" ColumnName="LastSchoolPercentage" />
+                <ScalarProperty Name="ClassAdmissionSought" ColumnName="ClassAdmissionSought" />
+                <ScalarProperty Name="WhatsAppNumber" ColumnName="WhatsAppNumber" />
+                <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="PrimaryContactFatherOrMother" ColumnName="PrimaryContactFatherOrMother" />
+                <ScalarProperty Name="MotherContactNo" ColumnName="MotherContactNo" />
+                <ScalarProperty Name="FatherContactNo" ColumnName="FatherContactNo" />
+                <ScalarProperty Name="FatherOccupation" ColumnName="FatherOccupation" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Bloodgroup" ColumnName="Bloodgroup" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
+                <ScalarProperty Name="IFSCCode" ColumnName="IFSCCode" />
+                <ScalarProperty Name="MICRNo" ColumnName="MICRNo" />
+                <ScalarProperty Name="AadharNo" ColumnName="AadharNo" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="AlternateContact" ColumnName="AlternateContact" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="TransferFromSchool" ColumnName="TransferFromSchool" />
+                <ScalarProperty Name="TransferFromSchoolBoard" ColumnName="TransferFromSchoolBoard" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="StpaulsModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="ClassFees">
+            <EntityTypeMapping TypeName="StpaulsModel.ClassFee">
+              <MappingFragment StoreEntitySet="ClassFee">
+                <ScalarProperty Name="PaymentOrder" ColumnName="PaymentOrder" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="FeeNameId" ColumnName="FeeNameId" />
+                <ScalarProperty Name="ClassFeeId" ColumnName="ClassFeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentDetails">
+            <EntityTypeMapping TypeName="StpaulsModel.PaymentDetail">
+              <MappingFragment StoreEntitySet="PaymentDetails">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ClassFeeId" ColumnName="ClassFeeId" />
+                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ReceivedBy" ColumnName="ReceivedBy" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="PaymentAmt" ColumnName="PaymentAmt" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentFeeReceipts">
+            <EntityTypeMapping TypeName="StpaulsModel.StudentFeeReceipt">
+              <MappingFragment StoreEntitySet="StudentFeeReceipt">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
+                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+                <ScalarProperty Name="OfflineReceiptNo" ColumnName="OfflineReceiptNo" />
+                <ScalarProperty Name="Less" ColumnName="Less" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="StudentReceiptId" ColumnName="StudentReceiptId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentDocuments">
+            <EntityTypeMapping TypeName="StpaulsModel.StudentDocument">
+              <MappingFragment StoreEntitySet="StudentDocuments">
+                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DocTypeId" ColumnName="DocTypeId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="DocName" ColumnName="DocName" />
+                <ScalarProperty Name="StudentDocId" ColumnName="StudentDocId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
