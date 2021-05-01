@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="315f1c2a8aaa46aca66167274f8a489d" Name="Diagram1">
+        <EntityTypeShape EntityType="StpaulsModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.Album" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.ClassFee" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.FilesNPhoto" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.MasterData" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.Message" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.PageHistory" Width="1.5" PointX="5.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.Page" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.PaymentDetail" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.PhotoGallery" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.StudentClass" Width="1.5" PointX="5.25" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.StudentDocument" Width="1.5" PointX="7.5" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.StudentFeePayment" Width="1.5" PointX="5.25" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.StudentFeeReceipt" Width="1.5" PointX="7.5" PointY="33.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.Student" Width="1.5" PointX="3" PointY="29.125" IsExpanded="true" />
+        <AssociationConnector Association="StpaulsModel.FK_PhotoGallery_Albums" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_FeeMaster_ClassMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_FeeMaster_FeeNameMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_FeeMaster_LocationMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_PaymentDetails_ClassFee" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_StudentFeePayment_ClassFee" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_FilesNPhotos_MasterData" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_Pages_MasterData" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_StudentClass_Class" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_StudentClass_Feetype" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_StudentDocuments_MasterData" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_Students_Bloodgroup" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_Students_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_Students_City" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_Students_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_Students_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_Students_LocationMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_Students_ReasonForLeaving" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_Students_Religion" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_Students_State" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_PageHistory_Pages" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_PaymentDetails_FeePayment" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_PaymentDetails_StudentFeeReceipt" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_StudentClass_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_StudentDocuments_StudentClass" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_StudentFeePayment_StudentFeePayment" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_StudentFeeReceipt_StudentClass" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_StudentPhoto_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_StudentFeePayment_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.FK_StudentFeeReceipt_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="StpaulsModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

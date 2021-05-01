@@ -29,6 +29,7 @@ namespace schools.Models
         public Nullable<int> StudentClassId { get; set; }
         public Nullable<short> DocTypeId { get; set; }
         public string Parent { get; set; }
+        public Nullable<short> Batch { get; set; }
     
         public virtual MasterData MasterData { get; set; }
     }

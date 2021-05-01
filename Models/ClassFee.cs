@@ -17,8 +17,8 @@ namespace schools.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ClassFee()
         {
-            this.StudentFeePayments = new HashSet<StudentFeePayment>();
             this.PaymentDetails = new HashSet<PaymentDetail>();
+            this.StudentFeePayments = new HashSet<StudentFeePayment>();
         }
     
         public short ClassFeeId { get; set; }
@@ -34,8 +34,8 @@ namespace schools.Models
         public virtual MasterData MasterData1 { get; set; }
         public virtual MasterData MasterData2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentFeePayment> StudentFeePayments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaymentDetail> PaymentDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentFeePayment> StudentFeePayments { get; set; }
     }
 }

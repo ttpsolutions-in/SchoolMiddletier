@@ -23,6 +23,7 @@ namespace StPauls.Controllers
             string imageName = null;
             StringBuilder sb = new StringBuilder();
             var httpRequest = HttpContext.Current.Request;
+            var batch = httpRequest["batch"]==null?"0": httpRequest["batch"];
             var folderName = httpRequest["folderName"];
             var fileOrPhoto = httpRequest["fileOrPhoto"];
             var description = httpRequest["description"];
@@ -30,12 +31,15 @@ namespace StPauls.Controllers
             var StudentId = 0;
             var StudentClassId = 0;
             var DocTypeId = 0;
+            var PageId = 0;
             if (httpRequest["StudentId"] != null)
                 StudentId = Convert.ToInt32(httpRequest["StudentId"]);
             if (httpRequest["StudentClassId"] != null)
                 StudentClassId = Convert.ToInt32(httpRequest["StudentClassId"]);
             if (httpRequest["DocTypeId"] != null)
                 DocTypeId = Convert.ToInt32(httpRequest["DocTypeId"]);
+            if (httpRequest["PageId"] != null)
+                PageId = Convert.ToInt32(httpRequest["PageId"]);
 
             if (httpRequest["parentId"] != null)
                 parentId = Convert.ToInt16(httpRequest["parentId"]);
@@ -83,6 +87,12 @@ namespace StPauls.Controllers
                         student.Photo = imageName;
                         db.SaveChanges();
                     }
+                    else if (PageId > 0)
+                    {
+                        Page page = db.Pages.First(s => s.PageId == PageId);
+                        page.PhotoPath = imageName;
+                        db.SaveChanges();
+                    }
                     else
                     {
                         FilesNPhoto file = new FilesNPhoto()
@@ -93,6 +103,7 @@ namespace StPauls.Controllers
                             UpdatedFileFolderName = imageName,
                             FileOrPhoto = Convert.ToByte(fileOrPhoto),
                             FileOrFolder = 0,
+                            Batch = Convert.ToInt16(batch),
                             StudentClassId = Convert.ToInt32(StudentClassId),
                             DocTypeId = Convert.ToInt16(DocTypeId),
                             Active = 1,

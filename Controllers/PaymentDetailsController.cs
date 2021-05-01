@@ -23,7 +23,9 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<PaymentDetail>("PaymentDetails");
+    builder.EntitySet<ClassFee>("ClassFees"); 
     builder.EntitySet<StudentFeePayment>("StudentFeePayments"); 
+    builder.EntitySet<StudentFeeReceipt>("StudentFeeReceipts"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class PaymentDetailsController : ODataController
@@ -148,18 +150,11 @@ namespace schools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/PaymentDetails(5)/PaymentDetails1
+        // GET: odata/PaymentDetails(5)/ClassFee
         [EnableQuery]
-        public SingleResult<PaymentDetail> GetPaymentDetails1([FromODataUri] int key)
+        public SingleResult<ClassFee> GetClassFee([FromODataUri] int key)
         {
-            return SingleResult.Create(db.PaymentDetails.Where(m => m.PaymentId == key).Select(m => m.PaymentDetails1));
-        }
-
-        // GET: odata/PaymentDetails(5)/PaymentDetail1
-        [EnableQuery]
-        public SingleResult<PaymentDetail> GetPaymentDetail1([FromODataUri] int key)
-        {
-            return SingleResult.Create(db.PaymentDetails.Where(m => m.PaymentId == key).Select(m => m.PaymentDetail1));
+            return SingleResult.Create(db.PaymentDetails.Where(m => m.PaymentId == key).Select(m => m.ClassFee));
         }
 
         // GET: odata/PaymentDetails(5)/StudentFeePayment
@@ -167,6 +162,13 @@ namespace schools.Controllers
         public SingleResult<StudentFeePayment> GetStudentFeePayment([FromODataUri] int key)
         {
             return SingleResult.Create(db.PaymentDetails.Where(m => m.PaymentId == key).Select(m => m.StudentFeePayment));
+        }
+
+        // GET: odata/PaymentDetails(5)/StudentFeeReceipt
+        [EnableQuery]
+        public SingleResult<StudentFeeReceipt> GetStudentFeeReceipt([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.PaymentDetails.Where(m => m.PaymentId == key).Select(m => m.StudentFeeReceipt));
         }
 
         protected override void Dispose(bool disposing)

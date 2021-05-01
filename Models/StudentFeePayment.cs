@@ -21,21 +21,23 @@ namespace schools.Models
         }
     
         public int StudentFeeId { get; set; }
+        public int StudentId { get; set; }
         public int StudentClassId { get; set; }
+        public short ClassFeeId { get; set; }
+        public Nullable<short> FeeNameId { get; set; }
+        public Nullable<decimal> FeeAmount { get; set; }
+        public Nullable<decimal> PayableAmt { get; set; }
         public decimal PaidAmt { get; set; }
         public decimal BalanceAmt { get; set; }
         public System.DateTime PaymentDate { get; set; }
-        public string Remarks { get; set; }
-        public short ClassFeeId { get; set; }
-        public Nullable<byte> Active { get; set; }
         public short Batch { get; set; }
-        public int StudentId { get; set; }
-        public Nullable<decimal> FeeAmount { get; set; }
+        public string Remarks { get; set; }
+        public Nullable<byte> Active { get; set; }
     
-        public virtual StudentClass StudentClass { get; set; }
         public virtual ClassFee ClassFee { get; set; }
-        public virtual Student Student { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaymentDetail> PaymentDetails { get; set; }
+        public virtual StudentClass StudentClass { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

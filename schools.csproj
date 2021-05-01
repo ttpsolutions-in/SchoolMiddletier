@@ -304,77 +304,77 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClassFee.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.edmx</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FilesNPhoto.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MasterData.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Message.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Page.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PageHistory.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PaymentDetail.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhotoGallery.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\schoolModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>schoolModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\schoolModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>schoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\schoolModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>schoolModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Student.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentClass.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentDocument.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentFeePayment.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentFeeReceipt.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -390,15 +390,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\DBModel.Context.tt">
+    <Content Include="Models\schoolModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBModel.edmx</DependentUpon>
-      <LastGenOutput>DBModel.Context.cs</LastGenOutput>
+      <DependentUpon>schoolModel.edmx</DependentUpon>
+      <LastGenOutput>schoolModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DBModel.tt">
+    <Content Include="Models\schoolModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBModel.edmx</DependentUpon>
-      <LastGenOutput>DBModel.cs</LastGenOutput>
+      <DependentUpon>schoolModel.edmx</DependentUpon>
+      <LastGenOutput>schoolModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -421,12 +421,12 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\DBModel.edmx">
+    <EntityDeploy Include="Models\schoolModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>schoolModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DBModel.edmx.diagram">
-      <DependentUpon>DBModel.edmx</DependentUpon>
+    <Content Include="Models\schoolModel.edmx.diagram">
+      <DependentUpon>schoolModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

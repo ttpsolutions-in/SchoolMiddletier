@@ -38,9 +38,10 @@ namespace schools.Models
         public Nullable<short> Module { get; set; }
         public Nullable<short> OrgId { get; set; }
         public string FullPath { get; set; }
+        public string PhotoPath { get; set; }
     
+        public virtual MasterData MasterData { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PageHistory> PageHistories { get; set; }
-        public virtual MasterData MasterData { get; set; }
     }
 }

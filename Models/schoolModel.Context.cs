@@ -13,10 +13,10 @@ namespace schools.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class StpaulsEntities1 : DbContext
+    public partial class StpaulsEntities : DbContext
     {
-        public StpaulsEntities1()
-            : base("name=StpaulsEntities1")
+        public StpaulsEntities()
+            : base("name=StpaulsEntities")
         {
         }
     
@@ -31,18 +31,18 @@ namespace schools.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<ClassFee> ClassFees { get; set; }
         public virtual DbSet<FilesNPhoto> FilesNPhotos { get; set; }
         public virtual DbSet<MasterData> MasterDatas { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<PageHistory> PageHistories { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
+        public virtual DbSet<PaymentDetail> PaymentDetails { get; set; }
         public virtual DbSet<PhotoGallery> PhotoGalleries { get; set; }
         public virtual DbSet<StudentClass> StudentClasses { get; set; }
-        public virtual DbSet<StudentFeePayment> StudentFeePayments { get; set; }
-        public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<ClassFee> ClassFees { get; set; }
-        public virtual DbSet<PaymentDetail> PaymentDetails { get; set; }
-        public virtual DbSet<StudentFeeReceipt> StudentFeeReceipts { get; set; }
         public virtual DbSet<StudentDocument> StudentDocuments { get; set; }
+        public virtual DbSet<StudentFeePayment> StudentFeePayments { get; set; }
+        public virtual DbSet<StudentFeeReceipt> StudentFeeReceipts { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
     }
 }

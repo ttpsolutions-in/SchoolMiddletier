@@ -23,10 +23,8 @@ namespace schools.Models
         public Nullable<short> ClassFeeId { get; set; }
         public Nullable<byte> Active { get; set; }
     
-        public virtual PaymentDetail PaymentDetails1 { get; set; }
-        public virtual PaymentDetail PaymentDetail1 { get; set; }
-        public virtual StudentFeePayment StudentFeePayment { get; set; }
         public virtual ClassFee ClassFee { get; set; }
+        public virtual StudentFeePayment StudentFeePayment { get; set; }
         public virtual StudentFeeReceipt StudentFeeReceipt { get; set; }
     }
 }
