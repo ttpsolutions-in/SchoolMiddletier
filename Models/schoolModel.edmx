@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="StpaulsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="StpaulsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -159,7 +159,7 @@
           <Property Name="UpdateDate" Type="datetime" Nullable="false" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
           <Property Name="CurrentVersion" Type="tinyint" />
-          <Property Name="label" Type="varchar" MaxLength="25" />
+          <Property Name="label" Type="varchar" MaxLength="100" />
           <Property Name="faIcon" Type="varchar" MaxLength="100" />
           <Property Name="link" Type="varchar" MaxLength="200" />
           <Property Name="ParentId" Type="smallint" />
@@ -878,8 +878,7 @@
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StpaulsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1060,7 +1059,7 @@
           <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Active" Type="Byte" Nullable="false" />
           <Property Name="CurrentVersion" Type="Byte" />
-          <Property Name="label" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="label" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="faIcon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="link" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ParentId" Type="Int16" />

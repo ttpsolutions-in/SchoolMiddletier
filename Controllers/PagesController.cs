@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -29,6 +32,7 @@ namespace StPauls.Controllers
     */
     public class PagesController : ODataController
     {
+        string errorPath = ConfigurationManager.AppSettings["dev"];
         private StpaulsEntities db = new StpaulsEntities();
 
         // GET: odata/Pages
@@ -118,6 +122,23 @@ namespace StPauls.Controllers
             try
             {
                 await db.SaveChangesAsync();
+            }
+            catch (DbEntityValidationException e)
+            {
+                string error = "";
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    error += $"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors:";
+                    
+                    //Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                    //    eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        error += $"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"";
+                    }
+                }
+                File.AppendAllText(errorPath, error);
+                throw;
             }
             catch (DbUpdateConcurrencyException)
             {

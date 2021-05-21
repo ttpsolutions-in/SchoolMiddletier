@@ -14,7 +14,7 @@ namespace StPauls.Controllers
 {
     public class ImageController : ApiController
     {
-
+        string errorPath = ConfigurationManager.AppSettings["dev"];
         [HttpPost]
         [Route("api/uploadimage")]
         public HttpResponseMessage UploadImage()
@@ -117,8 +117,11 @@ namespace StPauls.Controllers
             }
             catch (Exception e)
             {
-                throw e;
+                
+                File.AppendAllText(errorPath, e.StackTrace);
                 //File.AppendAllText(@"D:\ProjectGit\stpauls\Uploads\log.txt", e.Message);
+            
+                throw e;
             }
             //}
             return Request.CreateResponse(HttpStatusCode.OK);
@@ -142,68 +145,77 @@ namespace StPauls.Controllers
             if (httpRequest["parentId"] != null)
                 parentId = Convert.ToInt16(httpRequest["parentId"]);
 
-
-            FilesNPhoto fileNPhoto = null;
-            using (StpaulsEntities db = new StpaulsEntities())
+            try
             {
-                if (parentId == 0)
+                FilesNPhoto fileNPhoto = null;
+                using (StpaulsEntities db = new StpaulsEntities())
                 {
-                    fileNPhoto = new FilesNPhoto()
+                    if (parentId == 0)
                     {
-                        UpdatedFileFolderName = folderName,
-                        FileOrFolder = 1,
-                        FileOrPhoto = Convert.ToByte(fileOrPhoto),
-                        FileName = folderName,
-                        Active = 1,
-                        ParentId = 0
-                    };
-                    fileNPhoto = db.FilesNPhotos.Add(fileNPhoto);
-                    db.SaveChanges();
-                    parentId = fileNPhoto.FileId;
-                }
-            }
-
-            var fileDir = HttpContext.Current.Server.MapPath("~/Image/" + folderName);
-            var photoPath = "Image/" + folderName;
-            if (!Directory.Exists(fileDir))
-            {
-                Directory.CreateDirectory(fileDir);
-            }
-            using (StpaulsEntities db = new StpaulsEntities())
-            {
-                foreach (string fName in httpRequest.Files)
-                {
-                    try
-                    {
-                        var postedFile = httpRequest.Files[fName];
-                        imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).ToArray()).Replace(" ", "-");
-                        imageName = imageName + Path.GetExtension(postedFile.FileName);
-                        var filepath = fileDir + "/" + imageName;
-                        postedFile.SaveAs(filepath);
-
-                        FilesNPhoto file = new FilesNPhoto()
+                        fileNPhoto = new FilesNPhoto()
                         {
-                            ParentId = parentId,
-                            Description = description,
-                            FileName = imageName,
-                            UpdatedFileFolderName = imageName,
-                            FileOrFolder = 0,
+                            UpdatedFileFolderName = folderName,
+                            FileOrFolder = 1,
                             FileOrPhoto = Convert.ToByte(fileOrPhoto),
+                            FileName = folderName,
                             Active = 1,
-                            UploadDate = DateTime.Now,
-                            CreatedDate = DateTime.Now
+                            ParentId = 0
                         };
-                        //File.AppendAllText(@"D:\ProjectGit\stpauls\Uploads\log.txt", "\n" + albumId.ToString()+ ":" + DateTime.Now);
-                        db.FilesNPhotos.Add(file);
+                        fileNPhoto = db.FilesNPhotos.Add(fileNPhoto);
                         db.SaveChanges();
-
-                    }
-                    catch (Exception e)
-                    {
-                        throw e;
-                        //File.AppendAllText(@"D:\ProjectGit\stpauls\Uploads\log.txt", e.Message);
+                        parentId = fileNPhoto.FileId;
                     }
                 }
+
+                var fileDir = HttpContext.Current.Server.MapPath("~/Image/" + folderName);
+                var photoPath = "Image/" + folderName;
+                if (!Directory.Exists(fileDir))
+                {
+                    Directory.CreateDirectory(fileDir);
+                }
+                using (StpaulsEntities db = new StpaulsEntities())
+                {
+                    foreach (string fName in httpRequest.Files)
+                    {
+                        try
+                        {
+                            var postedFile = httpRequest.Files[fName];
+                            imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).ToArray()).Replace(" ", "-");
+                            imageName = imageName + Path.GetExtension(postedFile.FileName);
+                            var filepath = fileDir + "/" + imageName;
+                            postedFile.SaveAs(filepath);
+
+                            FilesNPhoto file = new FilesNPhoto()
+                            {
+                                ParentId = parentId,
+                                Description = description,
+                                FileName = imageName,
+                                UpdatedFileFolderName = imageName,
+                                FileOrFolder = 0,
+                                FileOrPhoto = Convert.ToByte(fileOrPhoto),
+                                Active = 1,
+                                UploadDate = DateTime.Now,
+                                CreatedDate = DateTime.Now
+                            };
+                            //File.AppendAllText(@"D:\ProjectGit\stpauls\Uploads\log.txt", "\n" + albumId.ToString()+ ":" + DateTime.Now);
+                            db.FilesNPhotos.Add(file);
+                            db.SaveChanges();
+
+                        }
+                        catch (Exception e)
+                        {
+                            File.AppendAllText(errorPath, e.StackTrace);
+                            //File.AppendAllText(@"D:\ProjectGit\stpauls\Uploads\log.txt", e.Message);
+                            throw e;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                File.AppendAllText(errorPath, e.StackTrace);
+                //File.AppendAllText(@"D:\ProjectGit\stpauls\Uploads\log.txt", e.Message);
+                throw e;
             }
             return Request.CreateResponse(HttpStatusCode.OK);
         }
