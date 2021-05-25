@@ -366,6 +366,8 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlbumsController.cs" />
+    <Compile Include="Controllers\ApplicationDetailsController.cs" />
+    <Compile Include="Controllers\AppUsersController.cs" />
     <Compile Include="Controllers\ClassFeesController.cs" />
     <Compile Include="Controllers\FilesNPhotoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -383,6 +385,7 @@
     <Compile Include="Controllers\StudentFeePaymentsController.cs" />
     <Compile Include="Controllers\StudentFeeReceiptsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Controllers\TaskConfigurationsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
