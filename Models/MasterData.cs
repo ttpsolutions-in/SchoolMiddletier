@@ -41,6 +41,9 @@ namespace schools.Models
         public string Description { get; set; }
         public Nullable<short> ParentId { get; set; }
         public Nullable<byte> Active { get; set; }
+        public Nullable<short> ApplicationId { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<short> CreatedBy { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassFee> ClassFees { get; set; }

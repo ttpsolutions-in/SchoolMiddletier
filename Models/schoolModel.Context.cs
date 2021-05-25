@@ -44,5 +44,8 @@ namespace schools.Models
         public virtual DbSet<StudentFeePayment> StudentFeePayments { get; set; }
         public virtual DbSet<StudentFeeReceipt> StudentFeeReceipts { get; set; }
         public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<ApplicationDetail> ApplicationDetails { get; set; }
+        public virtual DbSet<AppUser> AppUsers { get; set; }
+        public virtual DbSet<TaskConfiguration> TaskConfigurations { get; set; }
     }
 }

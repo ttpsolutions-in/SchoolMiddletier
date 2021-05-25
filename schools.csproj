@@ -392,6 +392,12 @@
     <Compile Include="Models\Album.cs">
       <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ApplicationDetail.cs">
+      <DependentUpon>schoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AppUser.cs">
+      <DependentUpon>schoolModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
@@ -460,6 +466,9 @@
       <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentFeeReceipt.cs">
+      <DependentUpon>schoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskConfiguration.cs">
       <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

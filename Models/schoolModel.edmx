@@ -25,6 +25,27 @@
           <Property Name="Active" Type="tinyint" />
           <Property Name="UpdateDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="ApplicationDetail">
+          <Key>
+            <PropertyRef Name="ApplicationDetailId" />
+          </Key>
+          <Property Name="ApplicationDetailId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationId" Type="smallint" />
+          <Property Name="Logo" Type="varchar" MaxLength="250" />
+          <Property Name="Active" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="AppUsers">
+          <Key>
+            <PropertyRef Name="ApplicationUserId" />
+          </Key>
+          <Property Name="ApplicationUserId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="250" />
+          <Property Name="ApplicationId" Type="smallint" />
+          <Property Name="RoleId" Type="smallint" />
+          <Property Name="Active" Type="tinyint" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -119,6 +140,9 @@
           <Property Name="Description" Type="varchar" MaxLength="100" />
           <Property Name="ParentId" Type="smallint" />
           <Property Name="Active" Type="tinyint" />
+          <Property Name="ApplicationId" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="smallint" />
         </EntityType>
         <EntityType Name="Messages">
           <Key>
@@ -303,6 +327,24 @@
           <Property Name="ParentDeclaration" Type="tinyint" />
           <Property Name="LocationId" Type="smallint" />
           <Property Name="ReasonForLeavingId" Type="smallint" />
+        </EntityType>
+        <EntityType Name="TaskConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskName" Type="varchar" MaxLength="250" />
+          <Property Name="DBConnection" Type="varchar" MaxLength="250" />
+          <Property Name="TableName" Type="varchar" MaxLength="50" />
+          <Property Name="ColNameNValue" Type="varchar" MaxLength="250" />
+          <Property Name="Action" Type="smallint" />
+          <Property Name="Active" Type="tinyint" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="UserEmailForAlert" Type="varchar" MaxLength="250" />
+          <Property Name="AlertMessage" Type="varchar" MaxLength="500" />
+          <Property Name="Status" Type="smallint" />
+          <Property Name="LastRun" Type="datetime" />
+          <Property Name="ApplicationId" Type="smallint" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -723,6 +765,8 @@
         <EntityContainer Name="StpaulsModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationDetail" EntityType="Self.ApplicationDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppUsers" EntityType="Self.AppUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -741,6 +785,7 @@
           <EntitySet Name="StudentFeePayment" EntityType="Self.StudentFeePayment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentFeeReceipt" EntityType="Self.StudentFeeReceipt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskConfiguration" EntityType="Self.TaskConfiguration" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -1018,6 +1063,9 @@
           <NavigationProperty Name="Students6" Relationship="Self.FK_Students_ReasonForLeaving" FromRole="MasterData" ToRole="Students" />
           <NavigationProperty Name="Students7" Relationship="Self.FK_Students_Religion" FromRole="MasterData" ToRole="Students" />
           <NavigationProperty Name="Students8" Relationship="Self.FK_Students_State" FromRole="MasterData" ToRole="Students" />
+          <Property Name="ApplicationId" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int16" />
         </EntityType>
         <EntityType Name="Message">
           <Key>
@@ -1783,7 +1831,49 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="ApplicationDetails" EntityType="StpaulsModel.ApplicationDetail" />
+          <EntitySet Name="AppUsers" EntityType="StpaulsModel.AppUser" />
+          <EntitySet Name="TaskConfigurations" EntityType="StpaulsModel.TaskConfiguration" />
         </EntityContainer>
+        <EntityType Name="ApplicationDetail">
+          <Key>
+            <PropertyRef Name="ApplicationDetailId" />
+          </Key>
+          <Property Name="ApplicationDetailId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationId" Type="Int16" />
+          <Property Name="Logo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Byte" />
+        </EntityType>
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="ApplicationUserId" />
+          </Key>
+          <Property Name="ApplicationUserId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ApplicationId" Type="Int16" />
+          <Property Name="RoleId" Type="Int16" />
+          <Property Name="Active" Type="Byte" />
+        </EntityType>
+        <EntityType Name="TaskConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DBConnection" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="TableName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ColNameNValue" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Action" Type="Int16" />
+          <Property Name="Active" Type="Byte" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UserEmailForAlert" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="AlertMessage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int16" />
+          <Property Name="LastRun" Type="DateTime" Precision="3" />
+          <Property Name="ApplicationId" Type="Int16" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1895,6 +1985,9 @@
           <EntitySetMapping Name="MasterDatas">
             <EntityTypeMapping TypeName="StpaulsModel.MasterData">
               <MappingFragment StoreEntitySet="MasterData">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="MasterDataId" ColumnName="MasterDataId" />
                 <ScalarProperty Name="MasterDataName" ColumnName="MasterDataName" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2105,6 +2198,48 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ApplicationDetails">
+            <EntityTypeMapping TypeName="StpaulsModel.ApplicationDetail">
+              <MappingFragment StoreEntitySet="ApplicationDetail">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="ApplicationDetailId" ColumnName="ApplicationDetailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppUsers">
+            <EntityTypeMapping TypeName="StpaulsModel.AppUser">
+              <MappingFragment StoreEntitySet="AppUsers">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ApplicationUserId" ColumnName="ApplicationUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskConfigurations">
+            <EntityTypeMapping TypeName="StpaulsModel.TaskConfiguration">
+              <MappingFragment StoreEntitySet="TaskConfiguration">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="LastRun" ColumnName="LastRun" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AlertMessage" ColumnName="AlertMessage" />
+                <ScalarProperty Name="UserEmailForAlert" ColumnName="UserEmailForAlert" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="ColNameNValue" ColumnName="ColNameNValue" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="DBConnection" ColumnName="DBConnection" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -57,6 +57,9 @@
         <AssociationConnector Association="StpaulsModel.FK_StudentFeePayment_Student" ManuallyRouted="false" />
         <AssociationConnector Association="StpaulsModel.FK_StudentFeeReceipt_Students" ManuallyRouted="false" />
         <AssociationConnector Association="StpaulsModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="StpaulsModel.ApplicationDetail" Width="1.5" PointX="10.375" PointY="4.75" />
+        <EntityTypeShape EntityType="StpaulsModel.AppUser" Width="1.5" PointX="10.375" PointY="7.75" />
+        <EntityTypeShape EntityType="StpaulsModel.TaskConfiguration" Width="1.5" PointX="7.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
