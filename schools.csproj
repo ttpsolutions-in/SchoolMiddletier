@@ -398,6 +398,9 @@
     <Compile Include="Models\ApplicationDetail.cs">
       <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ApplicationRoleUser.cs">
+      <DependentUpon>schoolModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AppUser.cs">
       <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>

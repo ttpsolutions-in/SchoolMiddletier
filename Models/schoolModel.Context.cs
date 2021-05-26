@@ -47,5 +47,6 @@ namespace schools.Models
         public virtual DbSet<ApplicationDetail> ApplicationDetails { get; set; }
         public virtual DbSet<AppUser> AppUsers { get; set; }
         public virtual DbSet<TaskConfiguration> TaskConfigurations { get; set; }
+        public virtual DbSet<ApplicationRoleUser> ApplicationRoleUsers { get; set; }
     }
 }

@@ -34,6 +34,20 @@
           <Property Name="Logo" Type="varchar" MaxLength="250" />
           <Property Name="Active" Type="tinyint" />
         </EntityType>
+        <EntityType Name="ApplicationRoleUsers">
+          <Key>
+            <PropertyRef Name="ApplicationRoleUserId" />
+          </Key>
+          <Property Name="ApplicationRoleUserId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="smallint" Nullable="false" />
+          <Property Name="ApplicationId" Type="smallint" Nullable="false" />
+          <Property Name="RoleId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="smallint" Nullable="false" />
+        </EntityType>
         <EntityType Name="AppUsers">
           <Key>
             <PropertyRef Name="ApplicationUserId" />
@@ -41,10 +55,16 @@
           <Property Name="ApplicationUserId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="varchar" MaxLength="100" />
           <Property Name="EmailAddress" Type="varchar" MaxLength="50" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="20" />
           <Property Name="Address" Type="varchar" MaxLength="250" />
-          <Property Name="ApplicationId" Type="smallint" />
-          <Property Name="RoleId" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="ValidFrom" Type="datetime" />
+          <Property Name="ValidTo" Type="datetime" />
           <Property Name="Active" Type="tinyint" />
+          <Property Name="Remarks" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -766,6 +786,7 @@
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicationDetail" EntityType="Self.ApplicationDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationRoleUsers" EntityType="Self.ApplicationRoleUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppUsers" EntityType="Self.AppUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -1834,6 +1855,7 @@
           <EntitySet Name="ApplicationDetails" EntityType="StpaulsModel.ApplicationDetail" />
           <EntitySet Name="AppUsers" EntityType="StpaulsModel.AppUser" />
           <EntitySet Name="TaskConfigurations" EntityType="StpaulsModel.TaskConfiguration" />
+          <EntitySet Name="ApplicationRoleUsers" EntityType="StpaulsModel.ApplicationRoleUser" />
         </EntityContainer>
         <EntityType Name="ApplicationDetail">
           <Key>
@@ -1852,9 +1874,15 @@
           <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="ApplicationId" Type="Int16" />
-          <Property Name="RoleId" Type="Int16" />
           <Property Name="Active" Type="Byte" />
+          <Property Name="ContactNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="ValidFrom" Type="DateTime" Precision="3" />
+          <Property Name="ValidTo" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TaskConfiguration">
           <Key>
@@ -1873,6 +1901,20 @@
           <Property Name="Status" Type="Int16" />
           <Property Name="LastRun" Type="DateTime" Precision="3" />
           <Property Name="ApplicationId" Type="Int16" />
+        </EntityType>
+        <EntityType Name="ApplicationRoleUser">
+          <Key>
+            <PropertyRef Name="ApplicationRoleUserId" />
+          </Key>
+          <Property Name="ApplicationRoleUserId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int16" Nullable="false" />
+          <Property Name="ApplicationId" Type="Int16" Nullable="false" />
+          <Property Name="RoleId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int16" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2211,9 +2253,15 @@
           <EntitySetMapping Name="AppUsers">
             <EntityTypeMapping TypeName="StpaulsModel.AppUser">
               <MappingFragment StoreEntitySet="AppUsers">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+                <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -2237,6 +2285,21 @@
                 <ScalarProperty Name="DBConnection" ColumnName="DBConnection" />
                 <ScalarProperty Name="TaskName" ColumnName="TaskName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationRoleUsers">
+            <EntityTypeMapping TypeName="StpaulsModel.ApplicationRoleUser">
+              <MappingFragment StoreEntitySet="ApplicationRoleUsers">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ApplicationRoleUserId" ColumnName="ApplicationRoleUserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -18,8 +18,14 @@ namespace schools.Models
         public string UserName { get; set; }
         public string EmailAddress { get; set; }
         public string Address { get; set; }
-        public Nullable<short> ApplicationId { get; set; }
-        public Nullable<short> RoleId { get; set; }
         public Nullable<byte> Active { get; set; }
+        public string ContactNo { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<short> CreatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<short> UpdatedBy { get; set; }
+        public Nullable<System.DateTime> ValidFrom { get; set; }
+        public Nullable<System.DateTime> ValidTo { get; set; }
+        public string Remarks { get; set; }
     }
 }
