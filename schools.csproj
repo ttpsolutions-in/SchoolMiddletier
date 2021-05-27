@@ -367,6 +367,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\ApplicationDetailsController.cs" />
+    <Compile Include="Controllers\ApplicationRoleUsersController.cs" />
     <Compile Include="Controllers\AppUsersController.cs" />
     <Compile Include="Controllers\ClassFeesController.cs" />
     <Compile Include="Controllers\FilesNPhotoesController.cs" />

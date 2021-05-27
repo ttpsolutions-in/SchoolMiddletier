@@ -60,6 +60,7 @@ namespace schools
             builder.EntitySet<TaskConfiguration>("TaskConfigurations");
             builder.EntitySet<AppUser>("AppUsers");
             builder.EntitySet<ApplicationDetail>("ApplicationDetails");
+            builder.EntitySet<ApplicationRoleUser>("ApplicationRoleUsers");
 
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 

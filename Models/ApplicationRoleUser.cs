@@ -23,5 +23,7 @@ namespace schools.Models
         public short CreatedBy { get; set; }
         public System.DateTime UpdatedDate { get; set; }
         public short UpdatedBy { get; set; }
+    
+        public virtual AppUser AppUser { get; set; }
     }
 }

@@ -65,6 +65,10 @@
           <Property Name="ValidTo" Type="datetime" />
           <Property Name="Active" Type="tinyint" />
           <Property Name="Remarks" Type="varchar" MaxLength="250" />
+          <Property Name="ManagerId" Type="smallint" />
+          <Property Name="OrgId" Type="smallint" />
+          <Property Name="DepartmentId" Type="smallint" />
+          <Property Name="LocationId" Type="smallint" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -163,6 +167,7 @@
           <Property Name="ApplicationId" Type="smallint" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="OrgId" Type="smallint" />
         </EntityType>
         <EntityType Name="Messages">
           <Key>
@@ -365,7 +370,32 @@
           <Property Name="Status" Type="smallint" />
           <Property Name="LastRun" Type="datetime" />
           <Property Name="ApplicationId" Type="smallint" />
+          <Property Name="OrgId" Type="smallint" />
         </EntityType>
+        <Association Name="FK_ApplicationRoleUsers_AppUsers">
+          <End Role="AppUsers" Type="Self.AppUsers" Multiplicity="1" />
+          <End Role="ApplicationRoleUsers" Type="Self.ApplicationRoleUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppUsers">
+              <PropertyRef Name="ApplicationUserId" />
+            </Principal>
+            <Dependent Role="ApplicationRoleUsers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppUsers_MasterData">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="AppUsers" Type="Self.AppUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="AppUsers">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -782,6 +812,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TaskConfiguration_MasterData">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="TaskConfiguration" Type="Self.TaskConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="TaskConfiguration">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="StpaulsModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
@@ -807,6 +849,14 @@
           <EntitySet Name="StudentFeeReceipt" EntityType="Self.StudentFeeReceipt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaskConfiguration" EntityType="Self.TaskConfiguration" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ApplicationRoleUsers_AppUsers" Association="Self.FK_ApplicationRoleUsers_AppUsers">
+            <End Role="AppUsers" EntitySet="AppUsers" />
+            <End Role="ApplicationRoleUsers" EntitySet="ApplicationRoleUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppUsers_MasterData" Association="Self.FK_AppUsers_MasterData">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="AppUsers" EntitySet="AppUsers" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -942,6 +992,10 @@
           <AssociationSet Name="FK_Students_State" Association="Self.FK_Students_State">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskConfiguration_MasterData" Association="Self.FK_TaskConfiguration_MasterData">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="TaskConfiguration" EntitySet="TaskConfiguration" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1087,6 +1141,9 @@
           <Property Name="ApplicationId" Type="Int16" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int16" />
+          <NavigationProperty Name="AppUsers" Relationship="StpaulsModel.FK_AppUsers_MasterData" FromRole="MasterData" ToRole="AppUser" />
+          <NavigationProperty Name="TaskConfigurations" Relationship="StpaulsModel.FK_TaskConfiguration_MasterData" FromRole="MasterData" ToRole="TaskConfiguration" />
+          <Property Name="OrgId" Type="Int16" />
         </EntityType>
         <EntityType Name="Message">
           <Key>
@@ -1856,6 +1913,18 @@
           <EntitySet Name="AppUsers" EntityType="StpaulsModel.AppUser" />
           <EntitySet Name="TaskConfigurations" EntityType="StpaulsModel.TaskConfiguration" />
           <EntitySet Name="ApplicationRoleUsers" EntityType="StpaulsModel.ApplicationRoleUser" />
+          <AssociationSet Name="FK_ApplicationRoleUsers_AppUsers" Association="StpaulsModel.FK_ApplicationRoleUsers_AppUsers">
+            <End Role="AppUser" EntitySet="AppUsers" />
+            <End Role="ApplicationRoleUser" EntitySet="ApplicationRoleUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppUsers_MasterData" Association="StpaulsModel.FK_AppUsers_MasterData">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="AppUser" EntitySet="AppUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskConfiguration_MasterData" Association="StpaulsModel.FK_TaskConfiguration_MasterData">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="TaskConfiguration" EntitySet="TaskConfigurations" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ApplicationDetail">
           <Key>
@@ -1883,6 +1952,12 @@
           <Property Name="ValidFrom" Type="DateTime" Precision="3" />
           <Property Name="ValidTo" Type="DateTime" Precision="3" />
           <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ManagerId" Type="Int16" />
+          <Property Name="OrgId" Type="Int16" />
+          <NavigationProperty Name="ApplicationRoleUsers" Relationship="StpaulsModel.FK_ApplicationRoleUsers_AppUsers" FromRole="AppUser" ToRole="ApplicationRoleUser" />
+          <NavigationProperty Name="MasterData" Relationship="StpaulsModel.FK_AppUsers_MasterData" FromRole="AppUser" ToRole="MasterData" />
+          <Property Name="DepartmentId" Type="Int16" />
+          <Property Name="LocationId" Type="Int16" />
         </EntityType>
         <EntityType Name="TaskConfiguration">
           <Key>
@@ -1901,6 +1976,8 @@
           <Property Name="Status" Type="Int16" />
           <Property Name="LastRun" Type="DateTime" Precision="3" />
           <Property Name="ApplicationId" Type="Int16" />
+          <Property Name="OrgId" Type="Int16" />
+          <NavigationProperty Name="MasterData" Relationship="StpaulsModel.FK_TaskConfiguration_MasterData" FromRole="TaskConfiguration" ToRole="MasterData" />
         </EntityType>
         <EntityType Name="ApplicationRoleUser">
           <Key>
@@ -1915,7 +1992,44 @@
           <Property Name="CreatedBy" Type="Int16" Nullable="false" />
           <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="AppUser" Relationship="StpaulsModel.FK_ApplicationRoleUsers_AppUsers" FromRole="ApplicationRoleUser" ToRole="AppUser" />
         </EntityType>
+        <Association Name="FK_ApplicationRoleUsers_AppUsers">
+          <End Type="StpaulsModel.AppUser" Role="AppUser" Multiplicity="1" />
+          <End Type="StpaulsModel.ApplicationRoleUser" Role="ApplicationRoleUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppUser">
+              <PropertyRef Name="ApplicationUserId" />
+            </Principal>
+            <Dependent Role="ApplicationRoleUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppUsers_MasterData">
+          <End Type="StpaulsModel.MasterData" Role="MasterData" Multiplicity="0..1" />
+          <End Type="StpaulsModel.AppUser" Role="AppUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="AppUser">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskConfiguration_MasterData">
+          <End Type="StpaulsModel.MasterData" Role="MasterData" Multiplicity="0..1" />
+          <End Type="StpaulsModel.TaskConfiguration" Role="TaskConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="TaskConfiguration">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2027,6 +2141,7 @@
           <EntitySetMapping Name="MasterDatas">
             <EntityTypeMapping TypeName="StpaulsModel.MasterData">
               <MappingFragment StoreEntitySet="MasterData">
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
@@ -2253,6 +2368,10 @@
           <EntitySetMapping Name="AppUsers">
             <EntityTypeMapping TypeName="StpaulsModel.AppUser">
               <MappingFragment StoreEntitySet="AppUsers">
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
                 <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
@@ -2272,6 +2391,7 @@
           <EntitySetMapping Name="TaskConfigurations">
             <EntityTypeMapping TypeName="StpaulsModel.TaskConfiguration">
               <MappingFragment StoreEntitySet="TaskConfiguration">
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="LastRun" ColumnName="LastRun" />
                 <ScalarProperty Name="Status" ColumnName="Status" />

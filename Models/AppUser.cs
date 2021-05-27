@@ -14,6 +14,12 @@ namespace schools.Models
     
     public partial class AppUser
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AppUser()
+        {
+            this.ApplicationRoleUsers = new HashSet<ApplicationRoleUser>();
+        }
+    
         public short ApplicationUserId { get; set; }
         public string UserName { get; set; }
         public string EmailAddress { get; set; }
@@ -27,5 +33,13 @@ namespace schools.Models
         public Nullable<System.DateTime> ValidFrom { get; set; }
         public Nullable<System.DateTime> ValidTo { get; set; }
         public string Remarks { get; set; }
+        public Nullable<short> ManagerId { get; set; }
+        public Nullable<short> OrgId { get; set; }
+        public Nullable<short> DepartmentId { get; set; }
+        public Nullable<short> LocationId { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ApplicationRoleUser> ApplicationRoleUsers { get; set; }
+        public virtual MasterData MasterData { get; set; }
     }
 }

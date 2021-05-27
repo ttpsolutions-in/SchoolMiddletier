@@ -27,5 +27,8 @@ namespace schools.Models
         public Nullable<short> Status { get; set; }
         public Nullable<System.DateTime> LastRun { get; set; }
         public Nullable<short> ApplicationId { get; set; }
+        public Nullable<short> OrgId { get; set; }
+    
+        public virtual MasterData MasterData { get; set; }
     }
 }
