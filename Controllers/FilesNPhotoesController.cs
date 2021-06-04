@@ -23,6 +23,7 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<FilesNPhoto>("FilesNPhotoes");
+    builder.EntitySet<MasterData>("MasterDatas"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class FilesNPhotoesController : ODataController
@@ -89,22 +90,7 @@ namespace schools.Controllers
             }
 
             db.FilesNPhotos.Add(filesNPhoto);
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (FilesNPhotoExists(filesNPhoto.FileId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await db.SaveChangesAsync();
 
             return Created(filesNPhoto);
         }
@@ -160,6 +146,13 @@ namespace schools.Controllers
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // GET: odata/FilesNPhotoes(5)/MasterData
+        [EnableQuery]
+        public SingleResult<MasterData> GetMasterData([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.FilesNPhotos.Where(m => m.FileId == key).Select(m => m.MasterData));
         }
 
         protected override void Dispose(bool disposing)

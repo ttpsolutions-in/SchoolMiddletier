@@ -4,17 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="315f1c2a8aaa46aca66167274f8a489d" Name="Diagram1">
+      <Diagram DiagramId="088f68bbfa0941de97471e55f50152b8" Name="Diagram1">
         <EntityTypeShape EntityType="StpaulsModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StpaulsModel.Album" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.ApplicationDetail" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StpaulsModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="StpaulsModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="StpaulsModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StpaulsModel.AspNetUser" Width="1.875" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="StpaulsModel.ClassFee" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="StpaulsModel.FilesNPhoto" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
         <EntityTypeShape EntityType="StpaulsModel.MasterData" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StpaulsModel.Message" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.Message" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StpaulsModel.PageHistory" Width="1.5" PointX="5.25" PointY="19.125" IsExpanded="true" />
         <EntityTypeShape EntityType="StpaulsModel.Page" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
         <EntityTypeShape EntityType="StpaulsModel.PaymentDetail" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
@@ -24,6 +25,7 @@
         <EntityTypeShape EntityType="StpaulsModel.StudentFeePayment" Width="1.5" PointX="5.25" PointY="23.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StpaulsModel.StudentFeeReceipt" Width="1.5" PointX="7.5" PointY="33.25" IsExpanded="true" />
         <EntityTypeShape EntityType="StpaulsModel.Student" Width="1.5" PointX="3" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpaulsModel.TaskConfiguration" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="true" />
         <AssociationConnector Association="StpaulsModel.FK_PhotoGallery_Albums" ManuallyRouted="false" />
         <AssociationConnector Association="StpaulsModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="StpaulsModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
@@ -57,17 +59,6 @@
         <AssociationConnector Association="StpaulsModel.FK_StudentFeePayment_Student" ManuallyRouted="false" />
         <AssociationConnector Association="StpaulsModel.FK_StudentFeeReceipt_Students" ManuallyRouted="false" />
         <AssociationConnector Association="StpaulsModel.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="StpaulsModel.ApplicationDetail" Width="1.5" PointX="10.375" PointY="4.75" />
-        <EntityTypeShape EntityType="StpaulsModel.AppUser" Width="2" PointX="10.375" PointY="7.75" />
-        <EntityTypeShape EntityType="StpaulsModel.TaskConfiguration" Width="1.5" PointX="7.375" PointY="11.75" />
-        <AssociationConnector Association="StpaulsModel.FK_AppUsers_MasterData" />
-        <AssociationConnector Association="StpaulsModel.FK_TaskConfiguration_MasterData" />
-        <EntityTypeShape EntityType="StpaulsModel.ApplicationRole" Width="1.5" PointX="3" PointY="25" />
-        <AssociationConnector Association="StpaulsModel.FK_ApplicationRoleUsers_MasterApplication1" />
-        <EntityTypeShape EntityType="StpaulsModel.RoleUser" Width="1.5" PointX="12.375" PointY="0.75" />
-        <AssociationConnector Association="StpaulsModel.FK_RoleUser_AppUsers" />
-        <AssociationConnector Association="StpaulsModel.FK_RoleUser_MasterDataOrgId" />
-        <AssociationConnector Association="StpaulsModel.FK_RoleUser_MasterDataRoleId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

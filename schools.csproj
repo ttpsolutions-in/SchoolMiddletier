@@ -366,8 +366,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlbumsController.cs" />
-    <Compile Include="Controllers\ApplicationRolesController.cs" />
-    <Compile Include="Controllers\AppUsersController.cs" />
     <Compile Include="Controllers\ClassFeesController.cs" />
     <Compile Include="Controllers\FilesNPhotoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -380,7 +378,6 @@
     <Compile Include="Controllers\PaymentDetailsController.cs" />
     <Compile Include="Controllers\PhotoGalleriesController.cs" />
     <Compile Include="Controllers\PhotoGalleryAPIController.cs" />
-    <Compile Include="Controllers\RoleUsersController.cs" />
     <Compile Include="Controllers\StudentClassesController.cs" />
     <Compile Include="Controllers\StudentDocumentsController.cs" />
     <Compile Include="Controllers\StudentFeePaymentsController.cs" />
@@ -393,92 +390,83 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ApplicationDetail.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ApplicationRole.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AppUser.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClassFee.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FilesNPhoto.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MasterData.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Message.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Page.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PageHistory.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PaymentDetail.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhotoGallery.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RoleUser.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\schoolModel.Context.cs">
+    <Compile Include="Models\stpauls.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>schoolModel.Context.tt</DependentUpon>
+      <DependentUpon>stpauls.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\schoolModel.cs">
+    <Compile Include="Models\stpauls.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\schoolModel.Designer.cs">
+    <Compile Include="Models\stpauls.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>schoolModel.edmx</DependentUpon>
+      <DependentUpon>stpauls.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Student.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentClass.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentDocument.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentFeePayment.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentFeeReceipt.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaskConfiguration.cs">
-      <DependentUpon>schoolModel.tt</DependentUpon>
+      <DependentUpon>stpauls.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -494,15 +482,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\schoolModel.Context.tt">
+    <Content Include="Models\stpauls.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>schoolModel.edmx</DependentUpon>
-      <LastGenOutput>schoolModel.Context.cs</LastGenOutput>
+      <DependentUpon>stpauls.edmx</DependentUpon>
+      <LastGenOutput>stpauls.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\schoolModel.tt">
+    <Content Include="Models\stpauls.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>schoolModel.edmx</DependentUpon>
-      <LastGenOutput>schoolModel.cs</LastGenOutput>
+      <DependentUpon>stpauls.edmx</DependentUpon>
+      <LastGenOutput>stpauls.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -525,12 +513,12 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\schoolModel.edmx">
+    <EntityDeploy Include="Models\stpauls.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>schoolModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>stpauls.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\schoolModel.edmx.diagram">
-      <DependentUpon>schoolModel.edmx</DependentUpon>
+    <Content Include="Models\stpauls.edmx.diagram">
+      <DependentUpon>stpauls.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
