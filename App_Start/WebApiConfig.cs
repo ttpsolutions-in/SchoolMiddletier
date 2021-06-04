@@ -57,7 +57,10 @@ namespace schools
             builder.EntitySet<PaymentDetail>("PaymentDetails");
             builder.EntitySet<StudentFeeReceipt>("StudentFeeReceipts");
             builder.EntitySet<StudentDocument>("StudentDocuments");
-
+            builder.EntitySet<TaskConfiguration>("TaskConfigurations");
+            builder.EntitySet<AppUser>("AppUsers");
+            builder.EntitySet<ApplicationDetail>("ApplicationDetails");
+            builder.EntitySet<ApplicationRoleUser>("ApplicationRoleUsers");
 
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 

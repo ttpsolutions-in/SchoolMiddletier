@@ -19,6 +19,7 @@ namespace StPauls.Controllers
         [Route("api/uploadimage")]
         public HttpResponseMessage UploadImage()
         {
+            string response = "";
             int parentId = 0;
             string imageName = null;
             StringBuilder sb = new StringBuilder();
@@ -75,6 +76,8 @@ namespace StPauls.Controllers
             {
                 imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(20).ToArray()).Replace(" ", "-");
                 imageName = imageName + DateTime.Now.ToString("yymmssfff")+ Path.GetExtension(postedFile.FileName);
+                response = imageName;
+
                 var filepath = fileDir + "/" + imageName;
                 postedFile.SaveAs(filepath);
                 //browsePath = photoPath + "/" + imageName;
@@ -124,7 +127,7 @@ namespace StPauls.Controllers
                 throw e;
             }
             //}
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(response);
         }
 
         [HttpPost]

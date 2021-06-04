@@ -366,6 +366,8 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlbumsController.cs" />
+    <Compile Include="Controllers\ApplicationRolesController.cs" />
+    <Compile Include="Controllers\AppUsersController.cs" />
     <Compile Include="Controllers\ClassFeesController.cs" />
     <Compile Include="Controllers\FilesNPhotoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -378,6 +380,7 @@
     <Compile Include="Controllers\PaymentDetailsController.cs" />
     <Compile Include="Controllers\PhotoGalleriesController.cs" />
     <Compile Include="Controllers\PhotoGalleryAPIController.cs" />
+    <Compile Include="Controllers\RoleUsersController.cs" />
     <Compile Include="Controllers\StudentClassesController.cs" />
     <Compile Include="Controllers\StudentDocumentsController.cs" />
     <Compile Include="Controllers\StudentFeePaymentsController.cs" />
@@ -390,6 +393,15 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs">
+      <DependentUpon>schoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationDetail.cs">
+      <DependentUpon>schoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationRole.cs">
+      <DependentUpon>schoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AppUser.cs">
       <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetRole.cs">
@@ -432,6 +444,9 @@
     <Compile Include="Models\PhotoGallery.cs">
       <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RoleUser.cs">
+      <DependentUpon>schoolModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\schoolModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -460,6 +475,9 @@
       <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentFeeReceipt.cs">
+      <DependentUpon>schoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskConfiguration.cs">
       <DependentUpon>schoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
