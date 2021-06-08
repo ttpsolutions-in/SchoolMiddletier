@@ -22,29 +22,32 @@ namespace schools.Controllers
     using System.Web.Http.OData.Extensions;
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Message>("Messages");
+    builder.EntitySet<Exam>("Exams");
+    builder.EntitySet<MasterData>("MasterDatas"); 
+    builder.EntitySet<ExamSlot>("ExamSlots"); 
+    builder.EntitySet<ExamStudentClass>("ExamStudentClasses"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class MessagesController : ODataController
+    public class ExamsController : ODataController
     {
         private TTPEntities db = new TTPEntities();
 
-        // GET: odata/Messages
+        // GET: odata/Exams
         [EnableQuery]
-        public IQueryable<Message> GetMessages()
+        public IQueryable<Exam> GetExams()
         {
-            return db.Messages;
+            return db.Exams;
         }
 
-        // GET: odata/Messages(5)
+        // GET: odata/Exams(5)
         [EnableQuery]
-        public SingleResult<Message> GetMessage([FromODataUri] short key)
+        public SingleResult<Exam> GetExam([FromODataUri] short key)
         {
-            return SingleResult.Create(db.Messages.Where(message => message.MessageId == key));
+            return SingleResult.Create(db.Exams.Where(exam => exam.ExamId == key));
         }
 
-        // PUT: odata/Messages(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<Message> patch)
+        // PUT: odata/Exams(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<Exam> patch)
         {
             Validate(patch.GetEntity());
 
@@ -53,13 +56,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            Message message = await db.Messages.FindAsync(key);
-            if (message == null)
+            Exam exam = await db.Exams.FindAsync(key);
+            if (exam == null)
             {
                 return NotFound();
             }
 
-            patch.Put(message);
+            patch.Put(exam);
 
             try
             {
@@ -67,7 +70,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MessageExists(key))
+                if (!ExamExists(key))
                 {
                     return NotFound();
                 }
@@ -77,26 +80,26 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(message);
+            return Updated(exam);
         }
 
-        // POST: odata/Messages
-        public async Task<IHttpActionResult> Post(Message message)
+        // POST: odata/Exams
+        public async Task<IHttpActionResult> Post(Exam exam)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Messages.Add(message);
+            db.Exams.Add(exam);
             await db.SaveChangesAsync();
 
-            return Created(message);
+            return Created(exam);
         }
 
-        // PATCH: odata/Messages(5)
+        // PATCH: odata/Exams(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<Message> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<Exam> patch)
         {
             Validate(patch.GetEntity());
 
@@ -105,13 +108,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            Message message = await db.Messages.FindAsync(key);
-            if (message == null)
+            Exam exam = await db.Exams.FindAsync(key);
+            if (exam == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(message);
+            patch.Patch(exam);
 
             try
             {
@@ -119,7 +122,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MessageExists(key))
+                if (!ExamExists(key))
                 {
                     return NotFound();
                 }
@@ -129,22 +132,50 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(message);
+            return Updated(exam);
         }
 
-        // DELETE: odata/Messages(5)
+        // DELETE: odata/Exams(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] short key)
         {
-            Message message = await db.Messages.FindAsync(key);
-            if (message == null)
+            Exam exam = await db.Exams.FindAsync(key);
+            if (exam == null)
             {
                 return NotFound();
             }
 
-            db.Messages.Remove(message);
+            db.Exams.Remove(exam);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // GET: odata/Exams(5)/MasterData
+        [EnableQuery]
+        public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.Exams.Where(m => m.ExamId == key).Select(m => m.MasterData));
+        }
+
+        // GET: odata/Exams(5)/MasterData1
+        [EnableQuery]
+        public SingleResult<MasterData> GetMasterData1([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.Exams.Where(m => m.ExamId == key).Select(m => m.MasterData1));
+        }
+
+        // GET: odata/Exams(5)/ExamSlots
+        [EnableQuery]
+        public IQueryable<ExamSlot> GetExamSlots([FromODataUri] short key)
+        {
+            return db.Exams.Where(m => m.ExamId == key).SelectMany(m => m.ExamSlots);
+        }
+
+        // GET: odata/Exams(5)/ExamStudentClasses
+        [EnableQuery]
+        public IQueryable<ExamStudentClass> GetExamStudentClasses([FromODataUri] short key)
+        {
+            return db.Exams.Where(m => m.ExamId == key).SelectMany(m => m.ExamStudentClasses);
         }
 
         protected override void Dispose(bool disposing)
@@ -156,9 +187,9 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool MessageExists(short key)
+        private bool ExamExists(short key)
         {
-            return db.Messages.Count(e => e.MessageId == key) > 0;
+            return db.Exams.Count(e => e.ExamId == key) > 0;
         }
     }
 }

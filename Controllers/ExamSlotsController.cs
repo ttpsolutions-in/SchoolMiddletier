@@ -22,29 +22,31 @@ namespace schools.Controllers
     using System.Web.Http.OData.Extensions;
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Message>("Messages");
+    builder.EntitySet<ExamSlot>("ExamSlots");
+    builder.EntitySet<Exam>("Exams"); 
+    builder.EntitySet<SlotAndClassSubject>("SlotAndClassSubjects"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class MessagesController : ODataController
+    public class ExamSlotsController : ODataController
     {
         private TTPEntities db = new TTPEntities();
 
-        // GET: odata/Messages
+        // GET: odata/ExamSlots
         [EnableQuery]
-        public IQueryable<Message> GetMessages()
+        public IQueryable<ExamSlot> GetExamSlots()
         {
-            return db.Messages;
+            return db.ExamSlots;
         }
 
-        // GET: odata/Messages(5)
+        // GET: odata/ExamSlots(5)
         [EnableQuery]
-        public SingleResult<Message> GetMessage([FromODataUri] short key)
+        public SingleResult<ExamSlot> GetExamSlot([FromODataUri] short key)
         {
-            return SingleResult.Create(db.Messages.Where(message => message.MessageId == key));
+            return SingleResult.Create(db.ExamSlots.Where(examSlot => examSlot.ExamSlotId == key));
         }
 
-        // PUT: odata/Messages(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<Message> patch)
+        // PUT: odata/ExamSlots(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<ExamSlot> patch)
         {
             Validate(patch.GetEntity());
 
@@ -53,13 +55,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            Message message = await db.Messages.FindAsync(key);
-            if (message == null)
+            ExamSlot examSlot = await db.ExamSlots.FindAsync(key);
+            if (examSlot == null)
             {
                 return NotFound();
             }
 
-            patch.Put(message);
+            patch.Put(examSlot);
 
             try
             {
@@ -67,7 +69,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MessageExists(key))
+                if (!ExamSlotExists(key))
                 {
                     return NotFound();
                 }
@@ -77,26 +79,26 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(message);
+            return Updated(examSlot);
         }
 
-        // POST: odata/Messages
-        public async Task<IHttpActionResult> Post(Message message)
+        // POST: odata/ExamSlots
+        public async Task<IHttpActionResult> Post(ExamSlot examSlot)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Messages.Add(message);
+            db.ExamSlots.Add(examSlot);
             await db.SaveChangesAsync();
 
-            return Created(message);
+            return Created(examSlot);
         }
 
-        // PATCH: odata/Messages(5)
+        // PATCH: odata/ExamSlots(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<Message> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<ExamSlot> patch)
         {
             Validate(patch.GetEntity());
 
@@ -105,13 +107,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            Message message = await db.Messages.FindAsync(key);
-            if (message == null)
+            ExamSlot examSlot = await db.ExamSlots.FindAsync(key);
+            if (examSlot == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(message);
+            patch.Patch(examSlot);
 
             try
             {
@@ -119,7 +121,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MessageExists(key))
+                if (!ExamSlotExists(key))
                 {
                     return NotFound();
                 }
@@ -129,22 +131,36 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(message);
+            return Updated(examSlot);
         }
 
-        // DELETE: odata/Messages(5)
+        // DELETE: odata/ExamSlots(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] short key)
         {
-            Message message = await db.Messages.FindAsync(key);
-            if (message == null)
+            ExamSlot examSlot = await db.ExamSlots.FindAsync(key);
+            if (examSlot == null)
             {
                 return NotFound();
             }
 
-            db.Messages.Remove(message);
+            db.ExamSlots.Remove(examSlot);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // GET: odata/ExamSlots(5)/Exam
+        [EnableQuery]
+        public SingleResult<Exam> GetExam([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.ExamSlots.Where(m => m.ExamSlotId == key).Select(m => m.Exam));
+        }
+
+        // GET: odata/ExamSlots(5)/SlotAndClassSubjects
+        [EnableQuery]
+        public IQueryable<SlotAndClassSubject> GetSlotAndClassSubjects([FromODataUri] short key)
+        {
+            return db.ExamSlots.Where(m => m.ExamSlotId == key).SelectMany(m => m.SlotAndClassSubjects);
         }
 
         protected override void Dispose(bool disposing)
@@ -156,9 +172,9 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool MessageExists(short key)
+        private bool ExamSlotExists(short key)
         {
-            return db.Messages.Count(e => e.MessageId == key) > 0;
+            return db.ExamSlots.Count(e => e.ExamSlotId == key) > 0;
         }
     }
 }

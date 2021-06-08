@@ -27,7 +27,7 @@ namespace schools.Controllers
     */
     public class TaskConfigurationsController : ODataController
     {
-        private StpaulsEntities db = new StpaulsEntities();
+        private TTPEntities db = new TTPEntities();
 
         // GET: odata/TaskConfigurations
         [EnableQuery]

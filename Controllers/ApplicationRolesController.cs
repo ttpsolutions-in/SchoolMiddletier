@@ -16,41 +16,40 @@ using System.Web.Http.OData;
 using System.Web.Http.OData.Routing;
 using schools.Models;
 
-namespace StPauls.Controllers
+namespace schools.Controllers
 {
     /*
     The WebApiConfig class may require additional changes to add a route for this controller. Merge these statements into the Register method of the WebApiConfig class as applicable. Note that OData URLs are case sensitive.
 
     using System.Web.Http.OData.Builder;
     using System.Web.Http.OData.Extensions;
-    using StPauls.Models;
+    using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Page>("Pages");
-    builder.EntitySet<PageGroup>("PageGroups"); 
-    builder.EntitySet<PageHistory>("PageHistories"); 
+    builder.EntitySet<ApplicationRole>("ApplicationRoles");
+    builder.EntitySet<MasterData>("MasterDatas"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class PagesController : ODataController
+    public class ApplicationRolesController : ODataController
     {
         string errorPath = ConfigurationManager.AppSettings["dev"];
         private TTPEntities db = new TTPEntities();
 
-        // GET: odata/Pages
+        // GET: odata/ApplicationRoles
         [EnableQuery]
-        public IQueryable<Page> GetPages()
+        public IQueryable<ApplicationRole> GetApplicationRoles()
         {
-            return db.Pages;
+            return db.ApplicationRoles;
         }
 
-        // GET: odata/Pages(5)
+        // GET: odata/ApplicationRoles(5)
         [EnableQuery]
-        public SingleResult<Page> GetPage([FromODataUri] short key)
+        public SingleResult<ApplicationRole> GetApplicationRole([FromODataUri] short key)
         {
-            return SingleResult.Create(db.Pages.Where(page => page.PageId == key));
+            return SingleResult.Create(db.ApplicationRoles.Where(applicationRole => applicationRole.ApplicationRoleId == key));
         }
 
-        // PUT: odata/Pages(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<Page> patch)
+        // PUT: odata/ApplicationRoles(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<ApplicationRole> patch)
         {
             Validate(patch.GetEntity());
 
@@ -59,13 +58,13 @@ namespace StPauls.Controllers
                 return BadRequest(ModelState);
             }
 
-            Page page = await db.Pages.FindAsync(key);
-            if (page == null)
+            ApplicationRole applicationRole = await db.ApplicationRoles.FindAsync(key);
+            if (applicationRole == null)
             {
                 return NotFound();
             }
 
-            patch.Put(page);
+            patch.Put(applicationRole);
 
             try
             {
@@ -73,7 +72,7 @@ namespace StPauls.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PageExists(key))
+                if (!ApplicationRoleExists(key))
                 {
                     return NotFound();
                 }
@@ -83,26 +82,26 @@ namespace StPauls.Controllers
                 }
             }
 
-            return Updated(page);
+            return Updated(applicationRole);
         }
 
-        // POST: odata/Pages
-        public async Task<IHttpActionResult> Post(Page page)
+        // POST: odata/ApplicationRoles
+        public async Task<IHttpActionResult> Post(ApplicationRole applicationRole)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Pages.Add(page);
+            db.ApplicationRoles.Add(applicationRole);
             await db.SaveChangesAsync();
 
-            return Created(page);
+            return Created(applicationRole);
         }
 
-        // PATCH: odata/Pages(5)
+        // PATCH: odata/ApplicationRoles(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<Page> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<ApplicationRole> patch)
         {
             Validate(patch.GetEntity());
 
@@ -111,13 +110,13 @@ namespace StPauls.Controllers
                 return BadRequest(ModelState);
             }
 
-            Page page = await db.Pages.FindAsync(key);
-            if (page == null)
+            ApplicationRole applicationRole = await db.ApplicationRoles.FindAsync(key);
+            if (applicationRole == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(page);
+            patch.Patch(applicationRole);
 
             try
             {
@@ -129,7 +128,7 @@ namespace StPauls.Controllers
                 foreach (var eve in e.EntityValidationErrors)
                 {
                     error += $"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors:";
-                    
+
                     //Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
                     //    eve.Entry.Entity.GetType().Name, eve.Entry.State);
                     foreach (var ve in eve.ValidationErrors)
@@ -142,7 +141,7 @@ namespace StPauls.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PageExists(key))
+                if (!ApplicationRoleExists(key))
                 {
                     return NotFound();
                 }
@@ -152,29 +151,29 @@ namespace StPauls.Controllers
                 }
             }
 
-            return Updated(page);
+            return Updated(applicationRole);
         }
 
-        // DELETE: odata/Pages(5)
+        // DELETE: odata/ApplicationRoles(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] short key)
         {
-            Page page = await db.Pages.FindAsync(key);
-            if (page == null)
+            ApplicationRole applicationRole = await db.ApplicationRoles.FindAsync(key);
+            if (applicationRole == null)
             {
                 return NotFound();
             }
 
-            db.Pages.Remove(page);
+            db.ApplicationRoles.Remove(applicationRole);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/Pages(5)/PageHistories
+        // GET: odata/ApplicationRoles(5)/MasterData
         [EnableQuery]
-        public IQueryable<PageHistory> GetPageHistories([FromODataUri] short key)
+        public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
         {
-            return db.Pages.Where(m => m.PageId == key).SelectMany(m => m.PageHistories);
+            return SingleResult.Create(db.ApplicationRoles.Where(m => m.ApplicationRoleId == key).Select(m => m.MasterData));
         }
 
         protected override void Dispose(bool disposing)
@@ -186,9 +185,9 @@ namespace StPauls.Controllers
             base.Dispose(disposing);
         }
 
-        private bool PageExists(short key)
+        private bool ApplicationRoleExists(short key)
         {
-            return db.Pages.Count(e => e.PageId == key) > 0;
+            return db.ApplicationRoles.Count(e => e.ApplicationRoleId == key) > 0;
         }
     }
 }

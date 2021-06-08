@@ -29,7 +29,7 @@ namespace schools.Controllers
     */
     public class ClassFeesController : ODataController
     {
-        private StpaulsEntities db = new StpaulsEntities();
+        private TTPEntities db = new TTPEntities();
 
         // GET: odata/ClassFees
         [EnableQuery]

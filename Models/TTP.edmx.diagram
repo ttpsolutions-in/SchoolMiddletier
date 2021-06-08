@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="75f3e545d6fb41bc9c5c9e55ee93b03d" Name="Diagram1">
+        <EntityTypeShape EntityType="TTPModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.Album" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.ApplicationDetail" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.ApplicationRole" Width="1.5" PointX="3" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.AppUser" Width="1.5" PointX="3" PointY="29.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.Attendance" Width="1.5" PointX="13.25" PointY="49.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.ClassFee" Width="1.5" PointX="3" PointY="35.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.ClassSubject" Width="1.5" PointX="3" PointY="39.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.Exam" Width="1.5" PointX="3" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.ExamSlot" Width="1.5" PointX="5.25" PointY="44.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.ExamStudentClass" Width="1.5" PointX="10.25" PointY="40.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.ExamStudentSubject" Width="1.5" PointX="13.5" PointY="45.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.FilesNPhoto" Width="1.5" PointX="3" PointY="47.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.MasterData" Width="1.5" PointX="0.75" PointY="39.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.Message" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.Organization" Width="1.5" PointX="6" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.PageHistory" Width="1.5" PointX="5.25" PointY="53.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.Page" Width="1.5" PointX="3" PointY="52.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.PaymentDetail" Width="1.5" PointX="5.25" PointY="33.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.PhotoGallery" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.RoleUser" Width="1.5" PointX="5.25" PointY="37.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.SlotAndClassSubject" Width="1.5" PointX="7.5" PointY="41.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.StudentActivity" Width="1.5" PointX="15.25" PointY="39.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.StudentClass" Width="1.5" PointX="11" PointY="45.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.StudentClassSubject" Width="1.5" PointX="8.25" PointY="45.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.StudentDocument" Width="1.5" PointX="18.25" PointY="40.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.StudentFeePayment" Width="1.5" PointX="8.25" PointY="34.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.StudentFeeReceipt" Width="1.5" PointX="18.25" PointY="35.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.Student" Width="1.5" PointX="13" PointY="31.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.TaskConfiguration" Width="1.5" PointX="3" PointY="64.875" IsExpanded="true" />
+        <AssociationConnector Association="TTPModel.FK_PhotoGallery_Albums" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_ApplicationRoleUsers_MasterApplication" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_AppUsers_MasterDataOrg" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_RoleUser_AppUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_Attendance_OrganizationId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_Attendance_StudentClassId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_FeeMaster_ClassMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_FeeMaster_FeeNameMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_FeeMaster_LocationMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_PaymentDetails_ClassFee" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentFeePayment_ClassFee" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_ClassSubject_MasterDataClassId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_ClassSubject_MasterDataSubjectId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_ClassSubject_MasterDataSubjectTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_SlotAndClassSubject_ClassSubjectId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentClassSubject_ClassSubjectId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_Exams_MasterDataBatchId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_Exams_MasterDataExamNameId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_ExamSlot_ExamsExamId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_ExamStudentClass_ExamsId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_SlotAndClassSubject_ExamSlot" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_ExamStudentClass_ExamStudentClassId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_ExamStudentClass_MasterDataGrade" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_ExamStudentClass_MasterDataStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_ExamStudentClassId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_MasterDataStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_StudentClassSubjectId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_FilesNPhotos_MasterData" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_Pages_MasterData" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_RoleUser_MasterDataOrgId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_RoleUser_MasterDataRoleId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentClass_Class" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentClass_Feetype" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentClassSubject_MasterDataBatchId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentClassSubject_MasterDataSubjectTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentDocuments_MasterData" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_Students_Bloodgroup" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_Students_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_Students_City" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_Students_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_Students_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_Students_LocationMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_Students_ReasonForLeaving" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_Students_Religion" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_Students_State" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_TaskConfiguration_MasterData" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_SlotAndClassSubject_Organization" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentActivity_OrganizationId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentClass_OrganizationOrgId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentClassSubject_OrganizationOrgId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentDocuments_OrganizationId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentFeePayment_OrganizationId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentFeeReceipt_OrganizationOrgId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_Students_OrganizationOrgId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_PageHistory_Pages" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_PaymentDetails_FeePayment" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_PaymentDetails_StudentFeeReceipt" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentActivity_StudentClassId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentActivity_StudentId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentClass_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentClassSubject_StudentClassId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentDocuments_StudentClass" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentFeePayment_StudentFeePayment" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentFeeReceipt_StudentClass" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentPhoto_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentFeePayment_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_StudentFeeReceipt_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_ClassSubject_Organization" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

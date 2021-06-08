@@ -22,30 +22,31 @@ namespace schools.Controllers
     using System.Web.Http.OData.Extensions;
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<ApplicationRoleUser>("ApplicationRoleUsers");
-    builder.EntitySet<AppUser>("AppUsers"); 
+    builder.EntitySet<Attendance>("Attendances");
+    builder.EntitySet<Organization>("Organizations"); 
+    builder.EntitySet<StudentClass>("StudentClasses"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class ApplicationRoleUsersController : ODataController
+    public class AttendancesController : ODataController
     {
-        private StpaulsEntities db = new StpaulsEntities();
+        private TTPEntities db = new TTPEntities();
 
-        // GET: odata/ApplicationRoleUsers
+        // GET: odata/Attendances
         [EnableQuery]
-        public IQueryable<ApplicationRoleUser> GetApplicationRoleUsers()
+        public IQueryable<Attendance> GetAttendances()
         {
-            return db.ApplicationRoleUsers;
+            return db.Attendances;
         }
 
-        // GET: odata/ApplicationRoleUsers(5)
+        // GET: odata/Attendances(5)
         [EnableQuery]
-        public SingleResult<ApplicationRoleUser> GetApplicationRoleUser([FromODataUri] short key)
+        public SingleResult<Attendance> GetAttendance([FromODataUri] int key)
         {
-            return SingleResult.Create(db.ApplicationRoleUsers.Where(applicationRoleUser => applicationRoleUser.ApplicationRoleUserId == key));
+            return SingleResult.Create(db.Attendances.Where(attendance => attendance.AttendanceId == key));
         }
 
-        // PUT: odata/ApplicationRoleUsers(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<ApplicationRoleUser> patch)
+        // PUT: odata/Attendances(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<Attendance> patch)
         {
             Validate(patch.GetEntity());
 
@@ -54,13 +55,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            ApplicationRoleUser applicationRoleUser = await db.ApplicationRoleUsers.FindAsync(key);
-            if (applicationRoleUser == null)
+            Attendance attendance = await db.Attendances.FindAsync(key);
+            if (attendance == null)
             {
                 return NotFound();
             }
 
-            patch.Put(applicationRoleUser);
+            patch.Put(attendance);
 
             try
             {
@@ -68,7 +69,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ApplicationRoleUserExists(key))
+                if (!AttendanceExists(key))
                 {
                     return NotFound();
                 }
@@ -78,26 +79,26 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(applicationRoleUser);
+            return Updated(attendance);
         }
 
-        // POST: odata/ApplicationRoleUsers
-        public async Task<IHttpActionResult> Post(ApplicationRoleUser applicationRoleUser)
+        // POST: odata/Attendances
+        public async Task<IHttpActionResult> Post(Attendance attendance)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.ApplicationRoleUsers.Add(applicationRoleUser);
+            db.Attendances.Add(attendance);
             await db.SaveChangesAsync();
 
-            return Created(applicationRoleUser);
+            return Created(attendance);
         }
 
-        // PATCH: odata/ApplicationRoleUsers(5)
+        // PATCH: odata/Attendances(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<ApplicationRoleUser> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<Attendance> patch)
         {
             Validate(patch.GetEntity());
 
@@ -106,13 +107,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            ApplicationRoleUser applicationRoleUser = await db.ApplicationRoleUsers.FindAsync(key);
-            if (applicationRoleUser == null)
+            Attendance attendance = await db.Attendances.FindAsync(key);
+            if (attendance == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(applicationRoleUser);
+            patch.Patch(attendance);
 
             try
             {
@@ -120,7 +121,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ApplicationRoleUserExists(key))
+                if (!AttendanceExists(key))
                 {
                     return NotFound();
                 }
@@ -130,29 +131,36 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(applicationRoleUser);
+            return Updated(attendance);
         }
 
-        // DELETE: odata/ApplicationRoleUsers(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] short key)
+        // DELETE: odata/Attendances(5)
+        public async Task<IHttpActionResult> Delete([FromODataUri] int key)
         {
-            ApplicationRoleUser applicationRoleUser = await db.ApplicationRoleUsers.FindAsync(key);
-            if (applicationRoleUser == null)
+            Attendance attendance = await db.Attendances.FindAsync(key);
+            if (attendance == null)
             {
                 return NotFound();
             }
 
-            db.ApplicationRoleUsers.Remove(applicationRoleUser);
+            db.Attendances.Remove(attendance);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/ApplicationRoleUsers(5)/AppUser
+        // GET: odata/Attendances(5)/Organization
         [EnableQuery]
-        public SingleResult<AppUser> GetAppUser([FromODataUri] short key)
+        public SingleResult<Organization> GetOrganization([FromODataUri] int key)
         {
-            return SingleResult.Create(db.ApplicationRoleUsers.Where(m => m.ApplicationRoleUserId == key).Select(m => m.AppUser));
+            return SingleResult.Create(db.Attendances.Where(m => m.AttendanceId == key).Select(m => m.Organization));
+        }
+
+        // GET: odata/Attendances(5)/StudentClass
+        [EnableQuery]
+        public SingleResult<StudentClass> GetStudentClass([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.Attendances.Where(m => m.AttendanceId == key).Select(m => m.StudentClass));
         }
 
         protected override void Dispose(bool disposing)
@@ -164,9 +172,9 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ApplicationRoleUserExists(short key)
+        private bool AttendanceExists(int key)
         {
-            return db.ApplicationRoleUsers.Count(e => e.ApplicationRoleUserId == key) > 0;
+            return db.Attendances.Count(e => e.AttendanceId == key) > 0;
         }
     }
 }

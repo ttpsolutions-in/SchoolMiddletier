@@ -17,6 +17,7 @@ namespace schools.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
+            this.StudentActivities = new HashSet<StudentActivity>();
             this.StudentClasses = new HashSet<StudentClass>();
             this.StudentDocuments = new HashSet<StudentDocument>();
             this.StudentFeePayments = new HashSet<StudentFeePayment>();
@@ -65,6 +66,7 @@ namespace schools.Models
         public Nullable<byte> ParentDeclaration { get; set; }
         public Nullable<short> LocationId { get; set; }
         public Nullable<short> ReasonForLeavingId { get; set; }
+        public Nullable<short> OrgId { get; set; }
     
         public virtual MasterData MasterData { get; set; }
         public virtual MasterData MasterData1 { get; set; }
@@ -75,6 +77,9 @@ namespace schools.Models
         public virtual MasterData MasterData6 { get; set; }
         public virtual MasterData MasterData7 { get; set; }
         public virtual MasterData MasterData8 { get; set; }
+        public virtual Organization Organization { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentActivity> StudentActivities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentClass> StudentClasses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

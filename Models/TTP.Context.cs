@@ -13,10 +13,10 @@ namespace schools.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class StpaulsEntities : DbContext
+    public partial class TTPEntities : DbContext
     {
-        public StpaulsEntities()
-            : base("name=StpaulsEntities")
+        public TTPEntities()
+            : base("name=TTPEntities")
         {
         }
     
@@ -27,26 +27,37 @@ namespace schools.Models
     
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Album> Albums { get; set; }
+        public virtual DbSet<ApplicationDetail> ApplicationDetails { get; set; }
+        public virtual DbSet<ApplicationRole> ApplicationRoles { get; set; }
+        public virtual DbSet<AppUser> AppUsers { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<ClassFee> ClassFees { get; set; }
+        public virtual DbSet<ClassSubject> ClassSubjects { get; set; }
+        public virtual DbSet<Exam> Exams { get; set; }
+        public virtual DbSet<ExamSlot> ExamSlots { get; set; }
+        public virtual DbSet<ExamStudentClass> ExamStudentClasses { get; set; }
+        public virtual DbSet<ExamStudentSubject> ExamStudentSubjects { get; set; }
         public virtual DbSet<FilesNPhoto> FilesNPhotos { get; set; }
         public virtual DbSet<MasterData> MasterDatas { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<Organization> Organizations { get; set; }
         public virtual DbSet<PageHistory> PageHistories { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<PaymentDetail> PaymentDetails { get; set; }
         public virtual DbSet<PhotoGallery> PhotoGalleries { get; set; }
+        public virtual DbSet<RoleUser> RoleUsers { get; set; }
+        public virtual DbSet<SlotAndClassSubject> SlotAndClassSubjects { get; set; }
+        public virtual DbSet<StudentActivity> StudentActivities { get; set; }
         public virtual DbSet<StudentClass> StudentClasses { get; set; }
+        public virtual DbSet<StudentClassSubject> StudentClassSubjects { get; set; }
         public virtual DbSet<StudentDocument> StudentDocuments { get; set; }
         public virtual DbSet<StudentFeePayment> StudentFeePayments { get; set; }
         public virtual DbSet<StudentFeeReceipt> StudentFeeReceipts { get; set; }
         public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<ApplicationDetail> ApplicationDetails { get; set; }
-        public virtual DbSet<AppUser> AppUsers { get; set; }
         public virtual DbSet<TaskConfiguration> TaskConfigurations { get; set; }
-        public virtual DbSet<ApplicationRoleUser> ApplicationRoleUsers { get; set; }
     }
 }

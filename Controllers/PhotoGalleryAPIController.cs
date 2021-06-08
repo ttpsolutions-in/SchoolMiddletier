@@ -56,7 +56,7 @@ namespace StPauls.Controllers
             ////IImageData imageData ;
             //dynamic obj = Request.Content.ReadAsAsync<JObject>();
             //var y = obj.Result;
-            StpaulsEntities db = new StpaulsEntities();
+            TTPEntities db = new TTPEntities();
             //byte[] bytes = Encoding.ASCII.GetBytes(y.filebytes.Value);
             ////string path = @"~/Uploads/Stpauls/" + y.album.Value + "/" + y.filename.Value + ".png";
             //string path = @"D:\projects\stpauls\Uploads\" + y.album.Value + "\\" + y.filename.Value;
@@ -82,7 +82,7 @@ namespace StPauls.Controllers
         [HttpPost]
         public HttpResponseMessage CropAndSaveImage(string moduleName, string fileName, int x, int y, int w, int h)
         {
-            StpaulsEntities db = new StpaulsEntities();
+            TTPEntities db = new TTPEntities();
             //Create the Directory.
             string path = HttpContext.Current.Server.MapPath("~/Uploads/" + moduleName + "/");
             if (!Directory.Exists(path))

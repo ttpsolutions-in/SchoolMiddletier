@@ -22,31 +22,32 @@ namespace schools.Controllers
     using System.Web.Http.OData.Extensions;
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<StudentDocument>("StudentDocuments");
+    builder.EntitySet<StudentActivity>("StudentActivities");
+    builder.EntitySet<Organization>("Organizations"); 
+    builder.EntitySet<StudentClass>("StudentClasses"); 
     builder.EntitySet<Student>("Students"); 
-    builder.EntitySet<MasterData>("MasterDatas"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class StudentDocumentsController : ODataController
+    public class StudentActivitiesController : ODataController
     {
         private TTPEntities db = new TTPEntities();
 
-        // GET: odata/StudentDocuments
+        // GET: odata/StudentActivities
         [EnableQuery]
-        public IQueryable<StudentDocument> GetStudentDocuments()
+        public IQueryable<StudentActivity> GetStudentActivities()
         {
-            return db.StudentDocuments;
+            return db.StudentActivities;
         }
 
-        // GET: odata/StudentDocuments(5)
+        // GET: odata/StudentActivities(5)
         [EnableQuery]
-        public SingleResult<StudentDocument> GetStudentDocument([FromODataUri] short key)
+        public SingleResult<StudentActivity> GetStudentActivity([FromODataUri] short key)
         {
-            return SingleResult.Create(db.StudentDocuments.Where(studentDocument => studentDocument.StudentDocId == key));
+            return SingleResult.Create(db.StudentActivities.Where(studentActivity => studentActivity.StudentActivityId == key));
         }
 
-        // PUT: odata/StudentDocuments(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<StudentDocument> patch)
+        // PUT: odata/StudentActivities(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<StudentActivity> patch)
         {
             Validate(patch.GetEntity());
 
@@ -55,13 +56,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            StudentDocument studentDocument = await db.StudentDocuments.FindAsync(key);
-            if (studentDocument == null)
+            StudentActivity studentActivity = await db.StudentActivities.FindAsync(key);
+            if (studentActivity == null)
             {
                 return NotFound();
             }
 
-            patch.Put(studentDocument);
+            patch.Put(studentActivity);
 
             try
             {
@@ -69,7 +70,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StudentDocumentExists(key))
+                if (!StudentActivityExists(key))
                 {
                     return NotFound();
                 }
@@ -79,26 +80,26 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(studentDocument);
+            return Updated(studentActivity);
         }
 
-        // POST: odata/StudentDocuments
-        public async Task<IHttpActionResult> Post(StudentDocument studentDocument)
+        // POST: odata/StudentActivities
+        public async Task<IHttpActionResult> Post(StudentActivity studentActivity)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.StudentDocuments.Add(studentDocument);
+            db.StudentActivities.Add(studentActivity);
             await db.SaveChangesAsync();
 
-            return Created(studentDocument);
+            return Created(studentActivity);
         }
 
-        // PATCH: odata/StudentDocuments(5)
+        // PATCH: odata/StudentActivities(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<StudentDocument> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<StudentActivity> patch)
         {
             Validate(patch.GetEntity());
 
@@ -107,13 +108,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            StudentDocument studentDocument = await db.StudentDocuments.FindAsync(key);
-            if (studentDocument == null)
+            StudentActivity studentActivity = await db.StudentActivities.FindAsync(key);
+            if (studentActivity == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(studentDocument);
+            patch.Patch(studentActivity);
 
             try
             {
@@ -121,7 +122,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StudentDocumentExists(key))
+                if (!StudentActivityExists(key))
                 {
                     return NotFound();
                 }
@@ -131,36 +132,43 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(studentDocument);
+            return Updated(studentActivity);
         }
 
-        // DELETE: odata/StudentDocuments(5)
+        // DELETE: odata/StudentActivities(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] short key)
         {
-            StudentDocument studentDocument = await db.StudentDocuments.FindAsync(key);
-            if (studentDocument == null)
+            StudentActivity studentActivity = await db.StudentActivities.FindAsync(key);
+            if (studentActivity == null)
             {
                 return NotFound();
             }
 
-            db.StudentDocuments.Remove(studentDocument);
+            db.StudentActivities.Remove(studentActivity);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/StudentDocuments(5)/Student
+        // GET: odata/StudentActivities(5)/Organization
+        [EnableQuery]
+        public SingleResult<Organization> GetOrganization([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.StudentActivities.Where(m => m.StudentActivityId == key).Select(m => m.Organization));
+        }
+
+        // GET: odata/StudentActivities(5)/StudentClass
+        [EnableQuery]
+        public SingleResult<StudentClass> GetStudentClass([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.StudentActivities.Where(m => m.StudentActivityId == key).Select(m => m.StudentClass));
+        }
+
+        // GET: odata/StudentActivities(5)/Student
         [EnableQuery]
         public SingleResult<Student> GetStudent([FromODataUri] short key)
         {
-            return SingleResult.Create(db.StudentDocuments.Where(m => m.StudentDocId == key).Select(m => m.Student));
-        }
-
-        // GET: odata/StudentDocuments(5)/MasterData
-        [EnableQuery]
-        public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
-        {
-            return SingleResult.Create(db.StudentDocuments.Where(m => m.StudentDocId == key).Select(m => m.MasterData));
+            return SingleResult.Create(db.StudentActivities.Where(m => m.StudentActivityId == key).Select(m => m.Student));
         }
 
         protected override void Dispose(bool disposing)
@@ -172,9 +180,9 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool StudentDocumentExists(short key)
+        private bool StudentActivityExists(short key)
         {
-            return db.StudentDocuments.Count(e => e.StudentDocId == key) > 0;
+            return db.StudentActivities.Count(e => e.StudentActivityId == key) > 0;
         }
     }
 }

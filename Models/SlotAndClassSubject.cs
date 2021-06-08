@@ -12,20 +12,16 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StudentDocument
+    public partial class SlotAndClassSubject
     {
-        public short StudentDocId { get; set; }
-        public string DocName { get; set; }
-        public System.DateTime UploadDate { get; set; }
-        public int StudentId { get; set; }
-        public int StudentClassId { get; set; }
-        public short DocTypeId { get; set; }
+        public short SlotClassSubjectId { get; set; }
+        public short SlotId { get; set; }
+        public short ClassSubjectId { get; set; }
+        public short OrgId { get; set; }
         public byte Active { get; set; }
-        public Nullable<short> OrgId { get; set; }
     
-        public virtual MasterData MasterData { get; set; }
+        public virtual ClassSubject ClassSubject { get; set; }
+        public virtual ExamSlot ExamSlot { get; set; }
         public virtual Organization Organization { get; set; }
-        public virtual StudentClass StudentClass { get; set; }
-        public virtual Student Student { get; set; }
     }
 }

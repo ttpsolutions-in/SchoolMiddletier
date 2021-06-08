@@ -33,8 +33,10 @@ namespace schools.Models
         public short Batch { get; set; }
         public string Remarks { get; set; }
         public Nullable<byte> Active { get; set; }
+        public Nullable<short> OrgId { get; set; }
     
         public virtual ClassFee ClassFee { get; set; }
+        public virtual Organization Organization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaymentDetail> PaymentDetails { get; set; }
         public virtual StudentClass StudentClass { get; set; }

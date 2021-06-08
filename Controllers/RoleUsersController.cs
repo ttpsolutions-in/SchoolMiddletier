@@ -22,29 +22,31 @@ namespace schools.Controllers
     using System.Web.Http.OData.Extensions;
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Message>("Messages");
+    builder.EntitySet<RoleUser>("RoleUsers");
+    builder.EntitySet<AppUser>("AppUsers"); 
+    builder.EntitySet<MasterData>("MasterDatas"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class MessagesController : ODataController
+    public class RoleUsersController : ODataController
     {
         private TTPEntities db = new TTPEntities();
 
-        // GET: odata/Messages
+        // GET: odata/RoleUsers
         [EnableQuery]
-        public IQueryable<Message> GetMessages()
+        public IQueryable<RoleUser> GetRoleUsers()
         {
-            return db.Messages;
+            return db.RoleUsers;
         }
 
-        // GET: odata/Messages(5)
+        // GET: odata/RoleUsers(5)
         [EnableQuery]
-        public SingleResult<Message> GetMessage([FromODataUri] short key)
+        public SingleResult<RoleUser> GetRoleUser([FromODataUri] short key)
         {
-            return SingleResult.Create(db.Messages.Where(message => message.MessageId == key));
+            return SingleResult.Create(db.RoleUsers.Where(roleUser => roleUser.RoleUserId == key));
         }
 
-        // PUT: odata/Messages(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<Message> patch)
+        // PUT: odata/RoleUsers(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<RoleUser> patch)
         {
             Validate(patch.GetEntity());
 
@@ -53,13 +55,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            Message message = await db.Messages.FindAsync(key);
-            if (message == null)
+            RoleUser roleUser = await db.RoleUsers.FindAsync(key);
+            if (roleUser == null)
             {
                 return NotFound();
             }
 
-            patch.Put(message);
+            patch.Put(roleUser);
 
             try
             {
@@ -67,7 +69,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MessageExists(key))
+                if (!RoleUserExists(key))
                 {
                     return NotFound();
                 }
@@ -77,26 +79,26 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(message);
+            return Updated(roleUser);
         }
 
-        // POST: odata/Messages
-        public async Task<IHttpActionResult> Post(Message message)
+        // POST: odata/RoleUsers
+        public async Task<IHttpActionResult> Post(RoleUser roleUser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Messages.Add(message);
+            db.RoleUsers.Add(roleUser);
             await db.SaveChangesAsync();
 
-            return Created(message);
+            return Created(roleUser);
         }
 
-        // PATCH: odata/Messages(5)
+        // PATCH: odata/RoleUsers(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<Message> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<RoleUser> patch)
         {
             Validate(patch.GetEntity());
 
@@ -105,13 +107,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            Message message = await db.Messages.FindAsync(key);
-            if (message == null)
+            RoleUser roleUser = await db.RoleUsers.FindAsync(key);
+            if (roleUser == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(message);
+            patch.Patch(roleUser);
 
             try
             {
@@ -119,7 +121,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MessageExists(key))
+                if (!RoleUserExists(key))
                 {
                     return NotFound();
                 }
@@ -129,22 +131,43 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(message);
+            return Updated(roleUser);
         }
 
-        // DELETE: odata/Messages(5)
+        // DELETE: odata/RoleUsers(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] short key)
         {
-            Message message = await db.Messages.FindAsync(key);
-            if (message == null)
+            RoleUser roleUser = await db.RoleUsers.FindAsync(key);
+            if (roleUser == null)
             {
                 return NotFound();
             }
 
-            db.Messages.Remove(message);
+            db.RoleUsers.Remove(roleUser);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // GET: odata/RoleUsers(5)/AppUser
+        [EnableQuery]
+        public SingleResult<AppUser> GetAppUser([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.RoleUsers.Where(m => m.RoleUserId == key).Select(m => m.AppUser));
+        }
+
+        // GET: odata/RoleUsers(5)/MasterData
+        [EnableQuery]
+        public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.RoleUsers.Where(m => m.RoleUserId == key).Select(m => m.MasterData));
+        }
+
+        // GET: odata/RoleUsers(5)/MasterData1
+        [EnableQuery]
+        public SingleResult<MasterData> GetMasterData1([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.RoleUsers.Where(m => m.RoleUserId == key).Select(m => m.MasterData1));
         }
 
         protected override void Dispose(bool disposing)
@@ -156,9 +179,9 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool MessageExists(short key)
+        private bool RoleUserExists(short key)
         {
-            return db.Messages.Count(e => e.MessageId == key) > 0;
+            return db.RoleUsers.Count(e => e.RoleUserId == key) > 0;
         }
     }
 }

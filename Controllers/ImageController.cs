@@ -20,6 +20,7 @@ namespace StPauls.Controllers
         public HttpResponseMessage UploadImage()
         {
             int parentId = 0;
+            string response = "";
             string imageName = null;
             StringBuilder sb = new StringBuilder();
             var httpRequest = HttpContext.Current.Request;
@@ -45,7 +46,7 @@ namespace StPauls.Controllers
                 parentId = Convert.ToInt16(httpRequest["parentId"]);
 
             FilesNPhoto fileNPhoto = null;
-            using (StpaulsEntities db = new StpaulsEntities())
+            using (TTPEntities db = new TTPEntities())
             {
                 if (parentId == 0)
                 {
@@ -75,10 +76,11 @@ namespace StPauls.Controllers
             {
                 imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(20).ToArray()).Replace(" ", "-");
                 imageName = imageName + DateTime.Now.ToString("yymmssfff")+ Path.GetExtension(postedFile.FileName);
+                response = imageName;
                 var filepath = fileDir + "/" + imageName;
                 postedFile.SaveAs(filepath);
                 //browsePath = photoPath + "/" + imageName;
-                using (StpaulsEntities db = new StpaulsEntities())
+                using (TTPEntities db = new TTPEntities())
                 {
                     //StudentId = Convert.ToInt32(StudentId);
                     if (StudentId > 0)
@@ -124,7 +126,7 @@ namespace StPauls.Controllers
                 throw e;
             }
             //}
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(response);
         }
 
         [HttpPost]
@@ -148,7 +150,7 @@ namespace StPauls.Controllers
             try
             {
                 FilesNPhoto fileNPhoto = null;
-                using (StpaulsEntities db = new StpaulsEntities())
+                using (TTPEntities db = new TTPEntities())
                 {
                     if (parentId == 0)
                     {
@@ -173,7 +175,7 @@ namespace StPauls.Controllers
                 {
                     Directory.CreateDirectory(fileDir);
                 }
-                using (StpaulsEntities db = new StpaulsEntities())
+                using (TTPEntities db = new TTPEntities())
                 {
                     foreach (string fName in httpRequest.Files)
                     {

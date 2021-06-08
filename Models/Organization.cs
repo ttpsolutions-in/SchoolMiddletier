@@ -12,50 +12,53 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StudentClass
+    public partial class Organization
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public StudentClass()
+        public Organization()
         {
             this.Attendances = new HashSet<Attendance>();
-            this.ExamStudentClasses = new HashSet<ExamStudentClass>();
+            this.SlotAndClassSubjects = new HashSet<SlotAndClassSubject>();
             this.StudentActivities = new HashSet<StudentActivity>();
+            this.StudentClasses = new HashSet<StudentClass>();
             this.StudentClassSubjects = new HashSet<StudentClassSubject>();
             this.StudentDocuments = new HashSet<StudentDocument>();
             this.StudentFeePayments = new HashSet<StudentFeePayment>();
-            this.StudentFeeReceipts = new HashSet<StudentFeeReceipt>();
+            this.Students = new HashSet<Student>();
+            this.ClassSubjects = new HashSet<ClassSubject>();
         }
     
-        public int StudentClassId { get; set; }
-        public int StudentId { get; set; }
-        public short ClassId { get; set; }
-        public string RollNo { get; set; }
-        public short Section { get; set; }
-        public short Batch { get; set; }
-        public short FeeTypeId { get; set; }
-        public Nullable<short> LanguageSubject { get; set; }
-        public string Remarks { get; set; }
-        public byte Active { get; set; }
-        public Nullable<System.DateTime> AdmissionDate { get; set; }
-        public Nullable<short> OrgId { get; set; }
+        public short OrganizationId { get; set; }
+        public string Organization1 { get; set; }
+        public string LogoPath { get; set; }
+        public string Address { get; set; }
+        public Nullable<short> City { get; set; }
+        public Nullable<short> State { get; set; }
+        public Nullable<short> Country { get; set; }
+        public string Contact { get; set; }
+        public Nullable<System.DateTime> ValidFrom { get; set; }
+        public Nullable<System.DateTime> ValidTo { get; set; }
+        public Nullable<byte> Active { get; set; }
+        public Nullable<short> PlanId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExamStudentClass> ExamStudentClasses { get; set; }
-        public virtual MasterData MasterData { get; set; }
-        public virtual MasterData MasterData1 { get; set; }
-        public virtual Organization Organization { get; set; }
+        public virtual ICollection<SlotAndClassSubject> SlotAndClassSubjects { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentActivity> StudentActivities { get; set; }
-        public virtual Student Student { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentClass> StudentClasses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentClassSubject> StudentClassSubjects { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentDocument> StudentDocuments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentFeePayment> StudentFeePayments { get; set; }
+        public virtual StudentFeeReceipt StudentFeeReceipt { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentFeeReceipt> StudentFeeReceipts { get; set; }
+        public virtual ICollection<Student> Students { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClassSubject> ClassSubjects { get; set; }
     }
 }

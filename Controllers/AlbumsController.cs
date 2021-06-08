@@ -27,7 +27,7 @@ namespace StPauls.Controllers
     */
     public class AlbumsController : ODataController
     {
-        private StpaulsEntities db = new StpaulsEntities();
+        private TTPEntities db = new TTPEntities();
 
         // GET: odata/Albums
         [EnableQuery]

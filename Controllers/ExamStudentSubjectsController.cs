@@ -22,31 +22,32 @@ namespace schools.Controllers
     using System.Web.Http.OData.Extensions;
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<StudentDocument>("StudentDocuments");
-    builder.EntitySet<Student>("Students"); 
+    builder.EntitySet<ExamStudentSubject>("ExamStudentSubjects");
+    builder.EntitySet<ExamStudentClass>("ExamStudentClasses"); 
     builder.EntitySet<MasterData>("MasterDatas"); 
+    builder.EntitySet<StudentClassSubject>("StudentClassSubjects"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class StudentDocumentsController : ODataController
+    public class ExamStudentSubjectsController : ODataController
     {
         private TTPEntities db = new TTPEntities();
 
-        // GET: odata/StudentDocuments
+        // GET: odata/ExamStudentSubjects
         [EnableQuery]
-        public IQueryable<StudentDocument> GetStudentDocuments()
+        public IQueryable<ExamStudentSubject> GetExamStudentSubjects()
         {
-            return db.StudentDocuments;
+            return db.ExamStudentSubjects;
         }
 
-        // GET: odata/StudentDocuments(5)
+        // GET: odata/ExamStudentSubjects(5)
         [EnableQuery]
-        public SingleResult<StudentDocument> GetStudentDocument([FromODataUri] short key)
+        public SingleResult<ExamStudentSubject> GetExamStudentSubject([FromODataUri] short key)
         {
-            return SingleResult.Create(db.StudentDocuments.Where(studentDocument => studentDocument.StudentDocId == key));
+            return SingleResult.Create(db.ExamStudentSubjects.Where(examStudentSubject => examStudentSubject.ExamStudentSubjectId == key));
         }
 
-        // PUT: odata/StudentDocuments(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<StudentDocument> patch)
+        // PUT: odata/ExamStudentSubjects(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<ExamStudentSubject> patch)
         {
             Validate(patch.GetEntity());
 
@@ -55,13 +56,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            StudentDocument studentDocument = await db.StudentDocuments.FindAsync(key);
-            if (studentDocument == null)
+            ExamStudentSubject examStudentSubject = await db.ExamStudentSubjects.FindAsync(key);
+            if (examStudentSubject == null)
             {
                 return NotFound();
             }
 
-            patch.Put(studentDocument);
+            patch.Put(examStudentSubject);
 
             try
             {
@@ -69,7 +70,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StudentDocumentExists(key))
+                if (!ExamStudentSubjectExists(key))
                 {
                     return NotFound();
                 }
@@ -79,26 +80,26 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(studentDocument);
+            return Updated(examStudentSubject);
         }
 
-        // POST: odata/StudentDocuments
-        public async Task<IHttpActionResult> Post(StudentDocument studentDocument)
+        // POST: odata/ExamStudentSubjects
+        public async Task<IHttpActionResult> Post(ExamStudentSubject examStudentSubject)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.StudentDocuments.Add(studentDocument);
+            db.ExamStudentSubjects.Add(examStudentSubject);
             await db.SaveChangesAsync();
 
-            return Created(studentDocument);
+            return Created(examStudentSubject);
         }
 
-        // PATCH: odata/StudentDocuments(5)
+        // PATCH: odata/ExamStudentSubjects(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<StudentDocument> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<ExamStudentSubject> patch)
         {
             Validate(patch.GetEntity());
 
@@ -107,13 +108,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            StudentDocument studentDocument = await db.StudentDocuments.FindAsync(key);
-            if (studentDocument == null)
+            ExamStudentSubject examStudentSubject = await db.ExamStudentSubjects.FindAsync(key);
+            if (examStudentSubject == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(studentDocument);
+            patch.Patch(examStudentSubject);
 
             try
             {
@@ -121,7 +122,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StudentDocumentExists(key))
+                if (!ExamStudentSubjectExists(key))
                 {
                     return NotFound();
                 }
@@ -131,36 +132,43 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(studentDocument);
+            return Updated(examStudentSubject);
         }
 
-        // DELETE: odata/StudentDocuments(5)
+        // DELETE: odata/ExamStudentSubjects(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] short key)
         {
-            StudentDocument studentDocument = await db.StudentDocuments.FindAsync(key);
-            if (studentDocument == null)
+            ExamStudentSubject examStudentSubject = await db.ExamStudentSubjects.FindAsync(key);
+            if (examStudentSubject == null)
             {
                 return NotFound();
             }
 
-            db.StudentDocuments.Remove(studentDocument);
+            db.ExamStudentSubjects.Remove(examStudentSubject);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/StudentDocuments(5)/Student
+        // GET: odata/ExamStudentSubjects(5)/ExamStudentClass
         [EnableQuery]
-        public SingleResult<Student> GetStudent([FromODataUri] short key)
+        public SingleResult<ExamStudentClass> GetExamStudentClass([FromODataUri] short key)
         {
-            return SingleResult.Create(db.StudentDocuments.Where(m => m.StudentDocId == key).Select(m => m.Student));
+            return SingleResult.Create(db.ExamStudentSubjects.Where(m => m.ExamStudentSubjectId == key).Select(m => m.ExamStudentClass));
         }
 
-        // GET: odata/StudentDocuments(5)/MasterData
+        // GET: odata/ExamStudentSubjects(5)/MasterData
         [EnableQuery]
         public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
         {
-            return SingleResult.Create(db.StudentDocuments.Where(m => m.StudentDocId == key).Select(m => m.MasterData));
+            return SingleResult.Create(db.ExamStudentSubjects.Where(m => m.ExamStudentSubjectId == key).Select(m => m.MasterData));
+        }
+
+        // GET: odata/ExamStudentSubjects(5)/StudentClassSubject
+        [EnableQuery]
+        public SingleResult<StudentClassSubject> GetStudentClassSubject([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.ExamStudentSubjects.Where(m => m.ExamStudentSubjectId == key).Select(m => m.StudentClassSubject));
         }
 
         protected override void Dispose(bool disposing)
@@ -172,9 +180,9 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool StudentDocumentExists(short key)
+        private bool ExamStudentSubjectExists(short key)
         {
-            return db.StudentDocuments.Count(e => e.StudentDocId == key) > 0;
+            return db.ExamStudentSubjects.Count(e => e.ExamStudentSubjectId == key) > 0;
         }
     }
 }
