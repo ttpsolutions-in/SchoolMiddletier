@@ -12,25 +12,25 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PaymentDetail
+    public partial class ClassSubjectMarkComponent
     {
-        public int PaymentId { get; set; }
-        public Nullable<decimal> PaymentAmt { get; set; }
-        public Nullable<System.DateTime> PaymentDate { get; set; }
-        public string ReceivedBy { get; set; }
-        public Nullable<int> ParentId { get; set; }
-        public Nullable<short> ReceiptNo { get; set; }
-        public Nullable<short> ClassFeeId { get; set; }
-        public Nullable<byte> Active { get; set; }
+        public short ClassSubjectComponentId { get; set; }
+        public short SubjectId { get; set; }
+        public short SubjectComponentId { get; set; }
+        public short ApplyToClass { get; set; }
+        public short FullMark { get; set; }
+        public short PassMark { get; set; }
+        public byte Active { get; set; }
         public short OrgId { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
+        public short BatchId { get; set; }
     
-        public virtual ClassFee ClassFee { get; set; }
+        public virtual MasterData MasterData { get; set; }
+        public virtual MasterData MasterData1 { get; set; }
+        public virtual MasterData MasterData2 { get; set; }
         public virtual Organization Organization { get; set; }
-        public virtual StudentFeePayment StudentFeePayment { get; set; }
-        public virtual StudentFeeReceipt StudentFeeReceipt { get; set; }
     }
 }

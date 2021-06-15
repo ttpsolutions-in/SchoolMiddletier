@@ -22,29 +22,29 @@ namespace schools.Controllers
     using System.Web.Http.OData.Extensions;
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<ApplicationDetail>("ApplicationDetails");
+    builder.EntitySet<Application>("Applications");
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class ApplicationDetailsController : ODataController
+    public class ApplicationsController : ODataController
     {
         private TTPEntities db = new TTPEntities();
 
-        // GET: odata/ApplicationDetails
+        // GET: odata/Applications
         [EnableQuery]
-        public IQueryable<ApplicationDetail> GetApplicationDetails()
+        public IQueryable<Application> GetApplications()
         {
-            return db.ApplicationDetails;
+            return db.Applications;
         }
 
-        // GET: odata/ApplicationDetails(5)
+        // GET: odata/Applications(5)
         [EnableQuery]
-        public SingleResult<ApplicationDetail> GetApplicationDetail([FromODataUri] short key)
+        public SingleResult<Application> GetApplication([FromODataUri] short key)
         {
-            return SingleResult.Create(db.ApplicationDetails.Where(applicationDetail => applicationDetail.ApplicationDetailId == key));
+            return SingleResult.Create(db.Applications.Where(application => application.ApplicationId == key));
         }
 
-        // PUT: odata/ApplicationDetails(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<ApplicationDetail> patch)
+        // PUT: odata/Applications(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<Application> patch)
         {
             Validate(patch.GetEntity());
 
@@ -53,13 +53,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            ApplicationDetail applicationDetail = await db.ApplicationDetails.FindAsync(key);
-            if (applicationDetail == null)
+            Application application = await db.Applications.FindAsync(key);
+            if (application == null)
             {
                 return NotFound();
             }
 
-            patch.Put(applicationDetail);
+            patch.Put(application);
 
             try
             {
@@ -67,7 +67,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ApplicationDetailExists(key))
+                if (!ApplicationExists(key))
                 {
                     return NotFound();
                 }
@@ -77,26 +77,26 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(applicationDetail);
+            return Updated(application);
         }
 
-        // POST: odata/ApplicationDetails
-        public async Task<IHttpActionResult> Post(ApplicationDetail applicationDetail)
+        // POST: odata/Applications
+        public async Task<IHttpActionResult> Post(Application application)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.ApplicationDetails.Add(applicationDetail);
+            db.Applications.Add(application);
             await db.SaveChangesAsync();
 
-            return Created(applicationDetail);
+            return Created(application);
         }
 
-        // PATCH: odata/ApplicationDetails(5)
+        // PATCH: odata/Applications(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<ApplicationDetail> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<Application> patch)
         {
             Validate(patch.GetEntity());
 
@@ -105,13 +105,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            ApplicationDetail applicationDetail = await db.ApplicationDetails.FindAsync(key);
-            if (applicationDetail == null)
+            Application application = await db.Applications.FindAsync(key);
+            if (application == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(applicationDetail);
+            patch.Patch(application);
 
             try
             {
@@ -119,7 +119,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ApplicationDetailExists(key))
+                if (!ApplicationExists(key))
                 {
                     return NotFound();
                 }
@@ -129,19 +129,19 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(applicationDetail);
+            return Updated(application);
         }
 
-        // DELETE: odata/ApplicationDetails(5)
+        // DELETE: odata/Applications(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] short key)
         {
-            ApplicationDetail applicationDetail = await db.ApplicationDetails.FindAsync(key);
-            if (applicationDetail == null)
+            Application application = await db.Applications.FindAsync(key);
+            if (application == null)
             {
                 return NotFound();
             }
 
-            db.ApplicationDetails.Remove(applicationDetail);
+            db.Applications.Remove(application);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -156,9 +156,9 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ApplicationDetailExists(short key)
+        private bool ApplicationExists(short key)
         {
-            return db.ApplicationDetails.Count(e => e.ApplicationDetailId == key) > 0;
+            return db.Applications.Count(e => e.ApplicationId == key) > 0;
         }
     }
 }

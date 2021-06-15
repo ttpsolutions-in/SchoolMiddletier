@@ -12,30 +12,27 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StudentClassSubject
+    public partial class SubjectType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public StudentClassSubject()
+        public SubjectType()
         {
-            this.ExamStudentSubjects = new HashSet<ExamStudentSubject>();
+            this.ClassSubjects = new HashSet<ClassSubject>();
         }
     
-        public short StudentClassSubjectId { get; set; }
-        public short ClassSubjectId { get; set; }
-        public int StudentClassId { get; set; }
-        public byte Active { get; set; }
-        public short OrgId { get; set; }
-        public short BatchId { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public short SubjectTypeId { get; set; }
+        public string SubjectTypeName { get; set; }
+        public Nullable<short> SelectHowMany { get; set; }
+        public Nullable<short> BatchId { get; set; }
+        public Nullable<byte> Active { get; set; }
+        public Nullable<short> OrgId { get; set; }
         public Nullable<short> CreatedBy { get; set; }
-        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
     
-        public virtual ClassSubject ClassSubject { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExamStudentSubject> ExamStudentSubjects { get; set; }
+        public virtual ICollection<ClassSubject> ClassSubjects { get; set; }
         public virtual MasterData MasterData { get; set; }
-        public virtual Organization Organization { get; set; }
-        public virtual StudentClass StudentClass { get; set; }
     }
 }

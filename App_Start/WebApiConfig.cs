@@ -59,7 +59,7 @@ namespace schools
             builder.EntitySet<StudentDocument>("StudentDocuments");
             builder.EntitySet<TaskConfiguration>("TaskConfigurations");
             builder.EntitySet<AppUser>("AppUsers");
-            builder.EntitySet<ApplicationDetail>("ApplicationDetails");
+            builder.EntitySet<Application>("Applications");
             builder.EntitySet<ApplicationRole>("ApplicationRoles");
             builder.EntitySet<RoleUser>("RoleUsers");
             builder.EntitySet<Attendance>("Attendances");
@@ -71,6 +71,9 @@ namespace schools
             builder.EntitySet<SlotAndClassSubject>("SlotAndClassSubjects");
             builder.EntitySet<ExamStudentSubject>("ExamStudentSubjects");
             builder.EntitySet<StudentClassSubject>("StudentClassSubjects");
+            builder.EntitySet<StudentActivity>("StudentActivities");
+            builder.EntitySet<SubjectType>("SubjectTypes");
+            builder.EntitySet<ClassSubjectMarkComponent>("ClassSubjectMarkComponents");
 
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 

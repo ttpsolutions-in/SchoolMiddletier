@@ -24,7 +24,12 @@ namespace schools.Controllers
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<Student>("Students");
     builder.EntitySet<MasterData>("MasterDatas"); 
+    builder.EntitySet<Organization>("Organizations"); 
+    builder.EntitySet<StudentActivity>("StudentActivities"); 
     builder.EntitySet<StudentClass>("StudentClasses"); 
+    builder.EntitySet<StudentDocument>("StudentDocuments"); 
+    builder.EntitySet<StudentFeePayment>("StudentFeePayments"); 
+    builder.EntitySet<StudentFeeReceipt>("StudentFeeReceipts"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class StudentsController : ODataController
@@ -205,11 +210,53 @@ namespace schools.Controllers
             return SingleResult.Create(db.Students.Where(m => m.StudentId == key).Select(m => m.MasterData7));
         }
 
+        // GET: odata/Students(5)/MasterData8
+        [EnableQuery]
+        public SingleResult<MasterData> GetMasterData8([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.Students.Where(m => m.StudentId == key).Select(m => m.MasterData8));
+        }
+
+        // GET: odata/Students(5)/Organization
+        [EnableQuery]
+        public SingleResult<Organization> GetOrganization([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.Students.Where(m => m.StudentId == key).Select(m => m.Organization));
+        }
+
+        // GET: odata/Students(5)/StudentActivities
+        [EnableQuery]
+        public IQueryable<StudentActivity> GetStudentActivities([FromODataUri] int key)
+        {
+            return db.Students.Where(m => m.StudentId == key).SelectMany(m => m.StudentActivities);
+        }
+
         // GET: odata/Students(5)/StudentClasses
         [EnableQuery]
         public IQueryable<StudentClass> GetStudentClasses([FromODataUri] int key)
         {
             return db.Students.Where(m => m.StudentId == key).SelectMany(m => m.StudentClasses);
+        }
+
+        // GET: odata/Students(5)/StudentDocuments
+        [EnableQuery]
+        public IQueryable<StudentDocument> GetStudentDocuments([FromODataUri] int key)
+        {
+            return db.Students.Where(m => m.StudentId == key).SelectMany(m => m.StudentDocuments);
+        }
+
+        // GET: odata/Students(5)/StudentFeePayments
+        [EnableQuery]
+        public IQueryable<StudentFeePayment> GetStudentFeePayments([FromODataUri] int key)
+        {
+            return db.Students.Where(m => m.StudentId == key).SelectMany(m => m.StudentFeePayments);
+        }
+
+        // GET: odata/Students(5)/StudentFeeReceipts
+        [EnableQuery]
+        public IQueryable<StudentFeeReceipt> GetStudentFeeReceipts([FromODataUri] int key)
+        {
+            return db.Students.Where(m => m.StudentId == key).SelectMany(m => m.StudentFeeReceipts);
         }
 
         protected override void Dispose(bool disposing)

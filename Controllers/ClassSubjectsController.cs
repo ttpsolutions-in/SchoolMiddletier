@@ -24,7 +24,11 @@ namespace schools.Controllers
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<ClassSubject>("ClassSubjects");
     builder.EntitySet<MasterData>("MasterDatas"); 
+    builder.EntitySet<Organization>("Organizations"); 
+    builder.EntitySet<SubjectType>("SubjectTypes"); 
+    builder.EntitySet<ClassSubjectMarkComponent>("ClassSubjectMarkComponents"); 
     builder.EntitySet<SlotAndClassSubject>("SlotAndClassSubjects"); 
+    builder.EntitySet<StudentClassSubject>("StudentClassSubjects"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class ClassSubjectsController : ODataController
@@ -163,18 +167,39 @@ namespace schools.Controllers
             return SingleResult.Create(db.ClassSubjects.Where(m => m.ClassSubjectId == key).Select(m => m.MasterData1));
         }
 
-        // GET: odata/ClassSubjects(5)/MasterData2
+        // GET: odata/ClassSubjects(5)/Organization
         [EnableQuery]
-        public SingleResult<MasterData> GetMasterData2([FromODataUri] short key)
+        public SingleResult<Organization> GetOrganization([FromODataUri] short key)
         {
-            return SingleResult.Create(db.ClassSubjects.Where(m => m.ClassSubjectId == key).Select(m => m.MasterData2));
+            return SingleResult.Create(db.ClassSubjects.Where(m => m.ClassSubjectId == key).Select(m => m.Organization));
         }
+
+        // GET: odata/ClassSubjects(5)/SubjectType
+        [EnableQuery]
+        public SingleResult<SubjectType> GetSubjectType([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.ClassSubjects.Where(m => m.ClassSubjectId == key).Select(m => m.SubjectType));
+        }
+
+        //// GET: odata/ClassSubjects(5)/ClassSubjectMarkComponents
+        //[EnableQuery]
+        //public IQueryable<ClassSubjectMarkComponent> GetClassSubjectMarkComponents([FromODataUri] short key)
+        //{
+        //    return db.ClassSubjects.Where(m => m.ClassSubjectId == key).SelectMany(m => m.ClassSubjectMarkComponents);
+        //}
 
         // GET: odata/ClassSubjects(5)/SlotAndClassSubjects
         [EnableQuery]
         public IQueryable<SlotAndClassSubject> GetSlotAndClassSubjects([FromODataUri] short key)
         {
             return db.ClassSubjects.Where(m => m.ClassSubjectId == key).SelectMany(m => m.SlotAndClassSubjects);
+        }
+
+        // GET: odata/ClassSubjects(5)/StudentClassSubjects
+        [EnableQuery]
+        public IQueryable<StudentClassSubject> GetStudentClassSubjects([FromODataUri] short key)
+        {
+            return db.ClassSubjects.Where(m => m.ClassSubjectId == key).SelectMany(m => m.StudentClassSubjects);
         }
 
         protected override void Dispose(bool disposing)

@@ -38,7 +38,7 @@ namespace schools.Models
         public Nullable<short> DepartmentId { get; set; }
         public Nullable<short> LocationId { get; set; }
     
-        public virtual MasterData MasterData { get; set; }
+        public virtual Organization Organization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoleUser> RoleUsers { get; set; }
     }

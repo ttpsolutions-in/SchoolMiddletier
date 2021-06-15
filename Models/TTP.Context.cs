@@ -27,8 +27,8 @@ namespace schools.Models
     
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Album> Albums { get; set; }
-        public virtual DbSet<ApplicationDetail> ApplicationDetails { get; set; }
         public virtual DbSet<ApplicationRole> ApplicationRoles { get; set; }
+        public virtual DbSet<Application> Applications { get; set; }
         public virtual DbSet<AppUser> AppUsers { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
@@ -37,6 +37,7 @@ namespace schools.Models
         public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<ClassFee> ClassFees { get; set; }
         public virtual DbSet<ClassSubject> ClassSubjects { get; set; }
+        public virtual DbSet<ClassSubjectMarkComponent> ClassSubjectMarkComponents { get; set; }
         public virtual DbSet<Exam> Exams { get; set; }
         public virtual DbSet<ExamSlot> ExamSlots { get; set; }
         public virtual DbSet<ExamStudentClass> ExamStudentClasses { get; set; }
@@ -58,6 +59,7 @@ namespace schools.Models
         public virtual DbSet<StudentFeePayment> StudentFeePayments { get; set; }
         public virtual DbSet<StudentFeeReceipt> StudentFeeReceipts { get; set; }
         public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<SubjectType> SubjectTypes { get; set; }
         public virtual DbSet<TaskConfiguration> TaskConfigurations { get; set; }
     }
 }

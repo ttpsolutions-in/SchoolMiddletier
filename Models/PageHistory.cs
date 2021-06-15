@@ -25,7 +25,9 @@ namespace schools.Models
         public System.DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
+        public Nullable<short> OrgId { get; set; }
     
+        public virtual Organization Organization { get; set; }
         public virtual Page Page { get; set; }
     }
 }

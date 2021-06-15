@@ -26,20 +26,20 @@ namespace schools.Models
         public short SubjectId { get; set; }
         public short SubjectTypeId { get; set; }
         public byte Active { get; set; }
-        public short TheoryFullMark { get; set; }
-        public short TheoryPassMark { get; set; }
-        public Nullable<short> PracticalFullMark { get; set; }
-        public Nullable<short> PracticalPassMark { get; set; }
-        public Nullable<short> OrgId { get; set; }
-        public Nullable<short> BatchId { get; set; }
+        public short OrgId { get; set; }
+        public short BatchId { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<short> CreatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<short> UpdatedBy { get; set; }
     
         public virtual MasterData MasterData { get; set; }
         public virtual MasterData MasterData1 { get; set; }
-        public virtual MasterData MasterData2 { get; set; }
+        public virtual Organization Organization { get; set; }
+        public virtual SubjectType SubjectType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SlotAndClassSubject> SlotAndClassSubjects { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentClassSubject> StudentClassSubjects { get; set; }
-        public virtual Organization Organization { get; set; }
     }
 }

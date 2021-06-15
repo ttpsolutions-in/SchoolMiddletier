@@ -22,32 +22,31 @@ namespace schools.Controllers
     using System.Web.Http.OData.Extensions;
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<RoleUser>("RoleUsers");
-    builder.EntitySet<AppUser>("AppUsers"); 
+    builder.EntitySet<SubjectType>("SubjectTypes");
+    builder.EntitySet<ClassSubject>("ClassSubjects"); 
     builder.EntitySet<MasterData>("MasterDatas"); 
-    builder.EntitySet<Organization>("Organizations"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class RoleUsersController : ODataController
+    public class SubjectTypesController : ODataController
     {
         private TTPEntities db = new TTPEntities();
 
-        // GET: odata/RoleUsers
+        // GET: odata/SubjectTypes
         [EnableQuery]
-        public IQueryable<RoleUser> GetRoleUsers()
+        public IQueryable<SubjectType> GetSubjectTypes()
         {
-            return db.RoleUsers;
+            return db.SubjectTypes;
         }
 
-        // GET: odata/RoleUsers(5)
+        // GET: odata/SubjectTypes(5)
         [EnableQuery]
-        public SingleResult<RoleUser> GetRoleUser([FromODataUri] short key)
+        public SingleResult<SubjectType> GetSubjectType([FromODataUri] short key)
         {
-            return SingleResult.Create(db.RoleUsers.Where(roleUser => roleUser.RoleUserId == key));
+            return SingleResult.Create(db.SubjectTypes.Where(subjectType => subjectType.SubjectTypeId == key));
         }
 
-        // PUT: odata/RoleUsers(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<RoleUser> patch)
+        // PUT: odata/SubjectTypes(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<SubjectType> patch)
         {
             Validate(patch.GetEntity());
 
@@ -56,13 +55,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            RoleUser roleUser = await db.RoleUsers.FindAsync(key);
-            if (roleUser == null)
+            SubjectType subjectType = await db.SubjectTypes.FindAsync(key);
+            if (subjectType == null)
             {
                 return NotFound();
             }
 
-            patch.Put(roleUser);
+            patch.Put(subjectType);
 
             try
             {
@@ -70,7 +69,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RoleUserExists(key))
+                if (!SubjectTypeExists(key))
                 {
                     return NotFound();
                 }
@@ -80,26 +79,26 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(roleUser);
+            return Updated(subjectType);
         }
 
-        // POST: odata/RoleUsers
-        public async Task<IHttpActionResult> Post(RoleUser roleUser)
+        // POST: odata/SubjectTypes
+        public async Task<IHttpActionResult> Post(SubjectType subjectType)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.RoleUsers.Add(roleUser);
+            db.SubjectTypes.Add(subjectType);
             await db.SaveChangesAsync();
 
-            return Created(roleUser);
+            return Created(subjectType);
         }
 
-        // PATCH: odata/RoleUsers(5)
+        // PATCH: odata/SubjectTypes(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<RoleUser> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<SubjectType> patch)
         {
             Validate(patch.GetEntity());
 
@@ -108,13 +107,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            RoleUser roleUser = await db.RoleUsers.FindAsync(key);
-            if (roleUser == null)
+            SubjectType subjectType = await db.SubjectTypes.FindAsync(key);
+            if (subjectType == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(roleUser);
+            patch.Patch(subjectType);
 
             try
             {
@@ -122,7 +121,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RoleUserExists(key))
+                if (!SubjectTypeExists(key))
                 {
                     return NotFound();
                 }
@@ -132,43 +131,36 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(roleUser);
+            return Updated(subjectType);
         }
 
-        // DELETE: odata/RoleUsers(5)
+        // DELETE: odata/SubjectTypes(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] short key)
         {
-            RoleUser roleUser = await db.RoleUsers.FindAsync(key);
-            if (roleUser == null)
+            SubjectType subjectType = await db.SubjectTypes.FindAsync(key);
+            if (subjectType == null)
             {
                 return NotFound();
             }
 
-            db.RoleUsers.Remove(roleUser);
+            db.SubjectTypes.Remove(subjectType);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/RoleUsers(5)/AppUser
+        // GET: odata/SubjectTypes(5)/ClassSubjects
         [EnableQuery]
-        public SingleResult<AppUser> GetAppUser([FromODataUri] short key)
+        public IQueryable<ClassSubject> GetClassSubjects([FromODataUri] short key)
         {
-            return SingleResult.Create(db.RoleUsers.Where(m => m.RoleUserId == key).Select(m => m.AppUser));
+            return db.SubjectTypes.Where(m => m.SubjectTypeId == key).SelectMany(m => m.ClassSubjects);
         }
 
-        // GET: odata/RoleUsers(5)/MasterData
+        // GET: odata/SubjectTypes(5)/MasterData
         [EnableQuery]
         public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
         {
-            return SingleResult.Create(db.RoleUsers.Where(m => m.RoleUserId == key).Select(m => m.MasterData));
-        }
-
-        // GET: odata/RoleUsers(5)/Organization
-        [EnableQuery]
-        public SingleResult<Organization> GetOrganization([FromODataUri] short key)
-        {
-            return SingleResult.Create(db.RoleUsers.Where(m => m.RoleUserId == key).Select(m => m.Organization));
+            return SingleResult.Create(db.SubjectTypes.Where(m => m.SubjectTypeId == key).Select(m => m.MasterData));
         }
 
         protected override void Dispose(bool disposing)
@@ -180,9 +172,9 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool RoleUserExists(short key)
+        private bool SubjectTypeExists(short key)
         {
-            return db.RoleUsers.Count(e => e.RoleUserId == key) > 0;
+            return db.SubjectTypes.Count(e => e.SubjectTypeId == key) > 0;
         }
     }
 }

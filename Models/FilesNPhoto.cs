@@ -30,7 +30,9 @@ namespace schools.Models
         public Nullable<short> DocTypeId { get; set; }
         public string Parent { get; set; }
         public Nullable<short> Batch { get; set; }
+        public Nullable<short> OrgId { get; set; }
     
         public virtual MasterData MasterData { get; set; }
+        public virtual Organization Organization { get; set; }
     }
 }

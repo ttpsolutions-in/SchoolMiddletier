@@ -19,6 +19,11 @@ namespace schools.Models
         public short ClassSubjectId { get; set; }
         public short OrgId { get; set; }
         public byte Active { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<short> CreatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<short> UpdatedBy { get; set; }
+        public short BatchId { get; set; }
     
         public virtual ClassSubject ClassSubject { get; set; }
         public virtual ExamSlot ExamSlot { get; set; }

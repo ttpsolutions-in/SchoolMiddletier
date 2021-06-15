@@ -21,7 +21,13 @@ namespace schools.Models
         public Nullable<byte> Active { get; set; }
         public Nullable<short> AlbumId { get; set; }
         public Nullable<byte> PhotoOrFile { get; set; }
+        public short OrgId { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<short> CreatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<short> UpdatedBy { get; set; }
     
         public virtual Album Album { get; set; }
+        public virtual Organization Organization { get; set; }
     }
 }

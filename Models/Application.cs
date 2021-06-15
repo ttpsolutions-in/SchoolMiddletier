@@ -12,21 +12,16 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Attendance
+    public partial class Application
     {
-        public int AttendanceId { get; set; }
-        public Nullable<int> StudentClassId { get; set; }
-        public Nullable<short> TeacherId { get; set; }
-        public Nullable<short> AttendanceStatus { get; set; }
-        public Nullable<System.DateTime> AttendanceDate { get; set; }
-        public string Remarks { get; set; }
-        public Nullable<short> OrgId { get; set; }
+        public short ApplicationId { get; set; }
+        public string ApplicationName { get; set; }
+        public byte Active { get; set; }
+        public string Version { get; set; }
+        public Nullable<System.DateTime> ReleaseDate { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
-    
-        public virtual Organization Organization { get; set; }
-        public virtual StudentClass StudentClass { get; set; }
     }
 }

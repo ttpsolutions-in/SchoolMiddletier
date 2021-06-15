@@ -21,10 +21,16 @@ namespace schools.Models
         public Nullable<short> Practical { get; set; }
         public Nullable<short> InternalAssessment { get; set; }
         public Nullable<short> Total { get; set; }
-        public Nullable<short> Status { get; set; }
+        public short ExamStatus { get; set; }
+        public short OrgId { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<short> CreatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<short> UpdatedBy { get; set; }
     
         public virtual ExamStudentClass ExamStudentClass { get; set; }
         public virtual MasterData MasterData { get; set; }
+        public virtual Organization Organization { get; set; }
         public virtual StudentClassSubject StudentClassSubject { get; set; }
     }
 }

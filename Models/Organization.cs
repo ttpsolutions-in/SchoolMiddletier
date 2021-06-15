@@ -17,7 +17,23 @@ namespace schools.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Organization()
         {
+            this.AppUsers = new HashSet<AppUser>();
             this.Attendances = new HashSet<Attendance>();
+            this.ClassFees = new HashSet<ClassFee>();
+            this.ClassSubjects = new HashSet<ClassSubject>();
+            this.ClassSubjectMarkComponents = new HashSet<ClassSubjectMarkComponent>();
+            this.Exams = new HashSet<Exam>();
+            this.ExamSlots = new HashSet<ExamSlot>();
+            this.ExamStudentClasses = new HashSet<ExamStudentClass>();
+            this.ExamStudentSubjects = new HashSet<ExamStudentSubject>();
+            this.FilesNPhotos = new HashSet<FilesNPhoto>();
+            this.MasterDatas = new HashSet<MasterData>();
+            this.Messages = new HashSet<Message>();
+            this.PageHistories = new HashSet<PageHistory>();
+            this.Pages = new HashSet<Page>();
+            this.PaymentDetails = new HashSet<PaymentDetail>();
+            this.PhotoGalleries = new HashSet<PhotoGallery>();
+            this.RoleUsers = new HashSet<RoleUser>();
             this.SlotAndClassSubjects = new HashSet<SlotAndClassSubject>();
             this.StudentActivities = new HashSet<StudentActivity>();
             this.StudentClasses = new HashSet<StudentClass>();
@@ -25,11 +41,11 @@ namespace schools.Models
             this.StudentDocuments = new HashSet<StudentDocument>();
             this.StudentFeePayments = new HashSet<StudentFeePayment>();
             this.Students = new HashSet<Student>();
-            this.ClassSubjects = new HashSet<ClassSubject>();
+            this.TaskConfigurations = new HashSet<TaskConfiguration>();
         }
     
         public short OrganizationId { get; set; }
-        public string Organization1 { get; set; }
+        public string OrganizationName { get; set; }
         public string LogoPath { get; set; }
         public string Address { get; set; }
         public Nullable<short> City { get; set; }
@@ -40,9 +56,45 @@ namespace schools.Models
         public Nullable<System.DateTime> ValidTo { get; set; }
         public Nullable<byte> Active { get; set; }
         public Nullable<short> PlanId { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<short> CreatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<short> UpdatedBy { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AppUser> AppUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClassFee> ClassFees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClassSubject> ClassSubjects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClassSubjectMarkComponent> ClassSubjectMarkComponents { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Exam> Exams { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ExamSlot> ExamSlots { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ExamStudentClass> ExamStudentClasses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ExamStudentSubject> ExamStudentSubjects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FilesNPhoto> FilesNPhotos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MasterData> MasterDatas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Message> Messages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PageHistory> PageHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Page> Pages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PaymentDetail> PaymentDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PhotoGallery> PhotoGalleries { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RoleUser> RoleUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SlotAndClassSubject> SlotAndClassSubjects { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -59,6 +111,6 @@ namespace schools.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClassSubject> ClassSubjects { get; set; }
+        public virtual ICollection<TaskConfiguration> TaskConfigurations { get; set; }
     }
 }

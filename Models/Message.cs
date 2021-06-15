@@ -21,5 +21,8 @@ namespace schools.Models
         public string MessageBody { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public byte Active { get; set; }
+        public short OrgId { get; set; }
+    
+        public virtual Organization Organization { get; set; }
     }
 }

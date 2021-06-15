@@ -67,6 +67,10 @@ namespace schools.Models
         public Nullable<short> LocationId { get; set; }
         public Nullable<short> ReasonForLeavingId { get; set; }
         public Nullable<short> OrgId { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<short> CreatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<short> UpdatedBy { get; set; }
     
         public virtual MasterData MasterData { get; set; }
         public virtual MasterData MasterData1 { get; set; }
@@ -88,5 +92,7 @@ namespace schools.Models
         public virtual ICollection<StudentFeePayment> StudentFeePayments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentFeeReceipt> StudentFeeReceipts { get; set; }
+        public virtual Student Students1 { get; set; }
+        public virtual Student Student1 { get; set; }
     }
 }
