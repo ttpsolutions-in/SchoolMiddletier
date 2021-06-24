@@ -23,8 +23,8 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<SubjectType>("SubjectTypes");
+    builder.EntitySet<Batch>("Batches"); 
     builder.EntitySet<ClassSubject>("ClassSubjects"); 
-    builder.EntitySet<MasterData>("MasterDatas"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class SubjectTypesController : ODataController
@@ -149,18 +149,18 @@ namespace schools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // GET: odata/SubjectTypes(5)/Batch
+        [EnableQuery]
+        public SingleResult<Batch> GetBatch([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.SubjectTypes.Where(m => m.SubjectTypeId == key).Select(m => m.Batch));
+        }
+
         // GET: odata/SubjectTypes(5)/ClassSubjects
         [EnableQuery]
         public IQueryable<ClassSubject> GetClassSubjects([FromODataUri] short key)
         {
             return db.SubjectTypes.Where(m => m.SubjectTypeId == key).SelectMany(m => m.ClassSubjects);
-        }
-
-        // GET: odata/SubjectTypes(5)/MasterData
-        [EnableQuery]
-        public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
-        {
-            return SingleResult.Create(db.SubjectTypes.Where(m => m.SubjectTypeId == key).Select(m => m.MasterData));
         }
 
         protected override void Dispose(bool disposing)

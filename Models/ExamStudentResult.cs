@@ -12,35 +12,35 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ExamStudentClass
+    public partial class ExamStudentResult
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ExamStudentClass()
+        public ExamStudentResult()
         {
-            this.ExamStudentSubjects = new HashSet<ExamStudentSubject>();
+            this.ExamStudentSubjectResults = new HashSet<ExamStudentSubjectResult>();
         }
     
-        public short ExamStudentClassId { get; set; }
+        public short ExamStudentResultId { get; set; }
         public short ExamId { get; set; }
         public int StudentClassId { get; set; }
-        public Nullable<short> TotalFullMark { get; set; }
-        public Nullable<short> TotalPassMark { get; set; }
         public Nullable<short> TotalMarks { get; set; }
         public Nullable<short> Grade { get; set; }
         public Nullable<short> Rank { get; set; }
         public short ExamStatus { get; set; }
         public short OrgId { get; set; }
+        public short BatchId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
     
+        public virtual Batch Batch { get; set; }
         public virtual Exam Exam { get; set; }
         public virtual StudentClass StudentClass { get; set; }
         public virtual MasterData MasterData { get; set; }
         public virtual MasterData MasterData1 { get; set; }
         public virtual Organization Organization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExamStudentSubject> ExamStudentSubjects { get; set; }
+        public virtual ICollection<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
     }
 }

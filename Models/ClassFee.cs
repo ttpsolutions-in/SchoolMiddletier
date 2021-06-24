@@ -25,7 +25,7 @@ namespace schools.Models
         public short FeeNameId { get; set; }
         public short ClassId { get; set; }
         public decimal Amount { get; set; }
-        public short Batch { get; set; }
+        public short BatchId { get; set; }
         public byte Active { get; set; }
         public Nullable<short> LocationId { get; set; }
         public Nullable<byte> PaymentOrder { get; set; }
@@ -35,6 +35,7 @@ namespace schools.Models
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
     
+        public virtual Batch Batch { get; set; }
         public virtual Organization Organization { get; set; }
         public virtual MasterData MasterData { get; set; }
         public virtual MasterData MasterData1 { get; set; }

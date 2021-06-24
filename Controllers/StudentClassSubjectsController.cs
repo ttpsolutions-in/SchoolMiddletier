@@ -23,9 +23,9 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<StudentClassSubject>("StudentClassSubjects");
+    builder.EntitySet<Batch>("Batches"); 
     builder.EntitySet<ClassSubject>("ClassSubjects"); 
-    builder.EntitySet<ExamStudentSubject>("ExamStudentSubjects"); 
-    builder.EntitySet<MasterData>("MasterDatas"); 
+    builder.EntitySet<ExamStudentSubjectResult>("ExamStudentSubjectResults"); 
     builder.EntitySet<Organization>("Organizations"); 
     builder.EntitySet<StudentClass>("StudentClasses"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
@@ -152,6 +152,13 @@ namespace schools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // GET: odata/StudentClassSubjects(5)/Batch
+        [EnableQuery]
+        public SingleResult<Batch> GetBatch([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.StudentClassSubjects.Where(m => m.StudentClassSubjectId == key).Select(m => m.Batch));
+        }
+
         // GET: odata/StudentClassSubjects(5)/ClassSubject
         [EnableQuery]
         public SingleResult<ClassSubject> GetClassSubject([FromODataUri] short key)
@@ -159,18 +166,11 @@ namespace schools.Controllers
             return SingleResult.Create(db.StudentClassSubjects.Where(m => m.StudentClassSubjectId == key).Select(m => m.ClassSubject));
         }
 
-        // GET: odata/StudentClassSubjects(5)/ExamStudentSubjects
+        // GET: odata/StudentClassSubjects(5)/ExamStudentSubjectResults
         [EnableQuery]
-        public IQueryable<ExamStudentSubject> GetExamStudentSubjects([FromODataUri] short key)
+        public IQueryable<ExamStudentSubjectResult> GetExamStudentSubjectResults([FromODataUri] short key)
         {
-            return db.StudentClassSubjects.Where(m => m.StudentClassSubjectId == key).SelectMany(m => m.ExamStudentSubjects);
-        }
-
-        // GET: odata/StudentClassSubjects(5)/MasterData
-        [EnableQuery]
-        public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
-        {
-            return SingleResult.Create(db.StudentClassSubjects.Where(m => m.StudentClassSubjectId == key).Select(m => m.MasterData));
+            return db.StudentClassSubjects.Where(m => m.StudentClassSubjectId == key).SelectMany(m => m.ExamStudentSubjectResults);
         }
 
         // GET: odata/StudentClassSubjects(5)/Organization

@@ -17,7 +17,7 @@ namespace schools.Models
         public int AttendanceId { get; set; }
         public Nullable<int> StudentClassId { get; set; }
         public Nullable<short> TeacherId { get; set; }
-        public Nullable<short> AttendanceStatus { get; set; }
+        public Nullable<byte> AttendanceStatus { get; set; }
         public Nullable<System.DateTime> AttendanceDate { get; set; }
         public string Remarks { get; set; }
         public Nullable<short> OrgId { get; set; }
@@ -25,7 +25,9 @@ namespace schools.Models
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
+        public Nullable<short> BatchId { get; set; }
     
+        public virtual Batch Batch { get; set; }
         public virtual Organization Organization { get; set; }
         public virtual StudentClass StudentClass { get; set; }
     }

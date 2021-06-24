@@ -12,25 +12,22 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ExamStudentSubject
+    public partial class StudentCertificate
     {
-        public short ExamStudentSubjectId { get; set; }
-        public short ExamStudentClassId { get; set; }
-        public short StudentClassSubjectId { get; set; }
-        public Nullable<short> Theory { get; set; }
-        public Nullable<short> Practical { get; set; }
-        public Nullable<short> InternalAssessment { get; set; }
-        public Nullable<short> Total { get; set; }
-        public short ExamStatus { get; set; }
+        public short StudentCertificateId { get; set; }
+        public short CertificateTypeId { get; set; }
+        public System.DateTime IssuedDate { get; set; }
+        public int StudentClassId { get; set; }
         public short OrgId { get; set; }
+        public short BatchId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
+        public byte Active { get; set; }
     
-        public virtual ExamStudentClass ExamStudentClass { get; set; }
-        public virtual MasterData MasterData { get; set; }
+        public virtual Batch Batch { get; set; }
         public virtual Organization Organization { get; set; }
-        public virtual StudentClassSubject StudentClassSubject { get; set; }
+        public virtual StudentClass StudentClass { get; set; }
     }
 }

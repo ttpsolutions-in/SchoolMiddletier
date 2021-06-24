@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TTPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TTPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -136,10 +136,25 @@
           <Property Name="AttendanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StudentClassId" Type="int" />
           <Property Name="TeacherId" Type="smallint" />
-          <Property Name="AttendanceStatus" Type="smallint" />
+          <Property Name="AttendanceStatus" Type="tinyint" />
           <Property Name="AttendanceDate" Type="datetime" />
           <Property Name="Remarks" Type="varchar" MaxLength="250" />
           <Property Name="OrgId" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="BatchId" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Batches">
+          <Key>
+            <PropertyRef Name="BatchId" />
+          </Key>
+          <Property Name="BatchId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CurrentBatch" Type="tinyint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
@@ -153,7 +168,7 @@
           <Property Name="FeeNameId" Type="smallint" Nullable="false" />
           <Property Name="ClassId" Type="smallint" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Batch" Type="smallint" Nullable="false" />
+          <Property Name="BatchId" Type="smallint" Nullable="false" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
           <Property Name="LocationId" Type="smallint" />
           <Property Name="PaymentOrder" Type="tinyint" />
@@ -181,12 +196,11 @@
         </EntityType>
         <EntityType Name="ClassSubjectMarkComponents">
           <Key>
-            <PropertyRef Name="ClassSubjectComponentId" />
+            <PropertyRef Name="ClassSubjectMarkComponentId" />
           </Key>
-          <Property Name="ClassSubjectComponentId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SubjectId" Type="smallint" Nullable="false" />
+          <Property Name="ClassSubjectMarkComponentId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassSubjectId" Type="smallint" Nullable="false" />
           <Property Name="SubjectComponentId" Type="smallint" Nullable="false" />
-          <Property Name="ApplyToClass" Type="smallint" Nullable="false" />
           <Property Name="FullMark" Type="smallint" Nullable="false" />
           <Property Name="PassMark" Type="smallint" Nullable="false" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
@@ -231,42 +245,41 @@
           <Property Name="CreatedBy" Type="smallint" Nullable="false" />
           <Property Name="UpdatedBy" Type="smallint" Nullable="false" />
         </EntityType>
-        <EntityType Name="ExamStudentClass">
+        <EntityType Name="ExamStudentResult">
           <Key>
-            <PropertyRef Name="ExamStudentClassId" />
+            <PropertyRef Name="ExamStudentResultId" />
           </Key>
-          <Property Name="ExamStudentClassId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamStudentResultId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ExamId" Type="smallint" Nullable="false" />
           <Property Name="StudentClassId" Type="int" Nullable="false" />
-          <Property Name="TotalFullMark" Type="smallint" />
-          <Property Name="TotalPassMark" Type="smallint" />
           <Property Name="TotalMarks" Type="smallint" />
           <Property Name="Grade" Type="smallint" />
           <Property Name="Rank" Type="smallint" />
           <Property Name="ExamStatus" Type="smallint" Nullable="false" />
           <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="BatchId" Type="smallint" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
         </EntityType>
-        <EntityType Name="ExamStudentSubject">
+        <EntityType Name="ExamStudentSubjectResult">
           <Key>
-            <PropertyRef Name="ExamStudentSubjectId" />
+            <PropertyRef Name="ExamStudentSubjectResultId" />
           </Key>
-          <Property Name="ExamStudentSubjectId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ExamStudentClassId" Type="smallint" Nullable="false" />
+          <Property Name="ExamStudentSubjectResultId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamStudentResultId" Type="smallint" Nullable="false" />
           <Property Name="StudentClassSubjectId" Type="smallint" Nullable="false" />
-          <Property Name="Theory" Type="smallint" />
-          <Property Name="Practical" Type="smallint" />
-          <Property Name="InternalAssessment" Type="smallint" />
-          <Property Name="Total" Type="smallint" />
+          <Property Name="ClassSubjectMarkComponentId" Type="smallint" Nullable="false" />
+          <Property Name="Marks" Type="smallint" Nullable="false" />
           <Property Name="ExamStatus" Type="smallint" Nullable="false" />
           <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="BatchId" Type="smallint" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="Active" Type="tinyint" />
         </EntityType>
         <EntityType Name="FilesNPhotos">
           <Key>
@@ -305,6 +318,21 @@
           <Property Name="LocationId" Type="smallint" />
           <Property Name="ApplicationId" Type="smallint" />
           <Property Name="Active" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="MasterRolePermission">
+          <Key>
+            <PropertyRef Name="MasterRolePermissionId" />
+          </Key>
+          <Property Name="MasterRolePermissionId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasterDataId" Type="smallint" Nullable="false" />
+          <Property Name="RoleId" Type="smallint" Nullable="false" />
+          <Property Name="PermissionId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Messages">
           <Key>
@@ -402,6 +430,7 @@
           <Property Name="CreatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="BatchId" Type="smallint" />
         </EntityType>
         <EntityType Name="PhotoGallery">
           <Key>
@@ -430,6 +459,7 @@
           <Property Name="OrgId" Type="smallint" Nullable="false" />
           <Property Name="DepartmentId" Type="smallint" />
           <Property Name="LocationId" Type="smallint" />
+          <Property Name="BatchId" Type="smallint" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="smallint" />
@@ -469,6 +499,22 @@
           <Property Name="CreatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
+        </EntityType>
+        <EntityType Name="StudentCertificate">
+          <Key>
+            <PropertyRef Name="StudentCertificateId" />
+          </Key>
+          <Property Name="StudentCertificateId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CertificateTypeId" Type="smallint" Nullable="false" />
+          <Property Name="IssuedDate" Type="datetime" Nullable="false" />
+          <Property Name="StudentClassId" Type="int" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="BatchId" Type="smallint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="StudentClass">
           <Key>
@@ -518,6 +564,7 @@
           <Property Name="DocTypeId" Type="smallint" Nullable="false" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
           <Property Name="OrgId" Type="smallint" />
+          <Property Name="BatchId" Type="smallint" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
@@ -564,6 +611,7 @@
           <Property Name="CreatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="BatchId" Type="smallint" />
         </EntityType>
         <EntityType Name="Students">
           <Key>
@@ -679,6 +727,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Attendance_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="0..1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Attendance_OrganizationId">
           <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
           <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
@@ -703,6 +763,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Batches_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="Batches" Type="Self.Batches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="Batches">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassFee_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="ClassFee" Type="Self.ClassFee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="ClassFee">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ClassFee_OrganizationId">
           <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
           <End Role="ClassFee" Type="Self.ClassFee" Multiplicity="*" />
@@ -712,6 +796,18 @@
             </Principal>
             <Dependent Role="ClassFee">
               <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassSubject_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="ClassSubject">
+              <PropertyRef Name="BatchId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -763,15 +859,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ClassSubjectMarkComponents_MasterDataClassApplyTo">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+        <Association Name="FK_ClassSubjectMarkComponents_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
           <End Role="ClassSubjectMarkComponents" Type="Self.ClassSubjectMarkComponents" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
             </Principal>
             <Dependent Role="ClassSubjectMarkComponents">
-              <PropertyRef Name="ApplyToClass" />
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassSubjectMarkComponents_ClassSubjectId">
+          <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="1" />
+          <End Role="ClassSubjectMarkComponents" Type="Self.ClassSubjectMarkComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassSubject">
+              <PropertyRef Name="ClassSubjectId" />
+            </Principal>
+            <Dependent Role="ClassSubjectMarkComponents">
+              <PropertyRef Name="ClassSubjectId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -784,18 +892,6 @@
             </Principal>
             <Dependent Role="ClassSubjectMarkComponents">
               <PropertyRef Name="SubjectComponentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClassSubjectMarkComponents_MasterDataSubjectId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="ClassSubjectMarkComponents" Type="Self.ClassSubjectMarkComponents" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="ClassSubjectMarkComponents">
-              <PropertyRef Name="SubjectId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -867,12 +963,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Exams_MasterDataBatchId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+        <Association Name="FK_Exams_BatchesBatchId">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="0..1" />
           <End Role="Exams" Type="Self.Exams" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
             </Principal>
             <Dependent Role="Exams">
               <PropertyRef Name="BatchId" />
@@ -903,6 +999,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ExamSlot_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="ExamSlot" Type="Self.ExamSlot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="ExamSlot">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ExamSlot_ExamsExamId">
           <End Role="Exams" Type="Self.Exams" Multiplicity="1" />
           <End Role="ExamSlot" Type="Self.ExamSlot" Multiplicity="*" />
@@ -929,109 +1037,145 @@
         </Association>
         <Association Name="FK_ExamStudentClass_ExamsId">
           <End Role="Exams" Type="Self.Exams" Multiplicity="1" />
-          <End Role="ExamStudentClass" Type="Self.ExamStudentClass" Multiplicity="*" />
+          <End Role="ExamStudentResult" Type="Self.ExamStudentResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Exams">
               <PropertyRef Name="ExamId" />
             </Principal>
-            <Dependent Role="ExamStudentClass">
+            <Dependent Role="ExamStudentResult">
               <PropertyRef Name="ExamId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExamStudentClass_ExamStudentClassId">
           <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="1" />
-          <End Role="ExamStudentClass" Type="Self.ExamStudentClass" Multiplicity="*" />
+          <End Role="ExamStudentResult" Type="Self.ExamStudentResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StudentClass">
               <PropertyRef Name="StudentClassId" />
             </Principal>
-            <Dependent Role="ExamStudentClass">
+            <Dependent Role="ExamStudentResult">
               <PropertyRef Name="StudentClassId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExamStudentClass_MasterDataGrade">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
-          <End Role="ExamStudentClass" Type="Self.ExamStudentClass" Multiplicity="*" />
+          <End Role="ExamStudentResult" Type="Self.ExamStudentResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MasterData">
               <PropertyRef Name="MasterDataId" />
             </Principal>
-            <Dependent Role="ExamStudentClass">
+            <Dependent Role="ExamStudentResult">
               <PropertyRef Name="Grade" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExamStudentClass_MasterDataStatus">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="ExamStudentClass" Type="Self.ExamStudentClass" Multiplicity="*" />
+          <End Role="ExamStudentResult" Type="Self.ExamStudentResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MasterData">
               <PropertyRef Name="MasterDataId" />
             </Principal>
-            <Dependent Role="ExamStudentClass">
+            <Dependent Role="ExamStudentResult">
               <PropertyRef Name="ExamStatus" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExamStudentClass_OrganizationId">
           <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
-          <End Role="ExamStudentClass" Type="Self.ExamStudentClass" Multiplicity="*" />
+          <End Role="ExamStudentResult" Type="Self.ExamStudentResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organization">
               <PropertyRef Name="OrganizationId" />
             </Principal>
-            <Dependent Role="ExamStudentClass">
+            <Dependent Role="ExamStudentResult">
               <PropertyRef Name="OrgId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ExamStudentSubject_ExamStudentClassId">
-          <End Role="ExamStudentClass" Type="Self.ExamStudentClass" Multiplicity="1" />
-          <End Role="ExamStudentSubject" Type="Self.ExamStudentSubject" Multiplicity="*" />
+        <Association Name="FK_ExamStudentResult_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="ExamStudentResult" Type="Self.ExamStudentResult" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ExamStudentClass">
-              <PropertyRef Name="ExamStudentClassId" />
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
             </Principal>
-            <Dependent Role="ExamStudentSubject">
-              <PropertyRef Name="ExamStudentClassId" />
+            <Dependent Role="ExamStudentResult">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamStudentSubject_ClassSubjectMarkComponentId">
+          <End Role="ClassSubjectMarkComponents" Type="Self.ClassSubjectMarkComponents" Multiplicity="1" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassSubjectMarkComponents">
+              <PropertyRef Name="ClassSubjectMarkComponentId" />
+            </Principal>
+            <Dependent Role="ExamStudentSubjectResult">
+              <PropertyRef Name="ClassSubjectMarkComponentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExamStudentSubject_MasterDataStatus">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="ExamStudentSubject" Type="Self.ExamStudentSubject" Multiplicity="*" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MasterData">
               <PropertyRef Name="MasterDataId" />
             </Principal>
-            <Dependent Role="ExamStudentSubject">
+            <Dependent Role="ExamStudentSubjectResult">
               <PropertyRef Name="ExamStatus" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExamStudentSubject_Organization">
           <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
-          <End Role="ExamStudentSubject" Type="Self.ExamStudentSubject" Multiplicity="*" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organization">
               <PropertyRef Name="OrganizationId" />
             </Principal>
-            <Dependent Role="ExamStudentSubject">
+            <Dependent Role="ExamStudentSubjectResult">
               <PropertyRef Name="OrgId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExamStudentSubject_StudentClassSubjectId">
           <End Role="StudentClassSubject" Type="Self.StudentClassSubject" Multiplicity="1" />
-          <End Role="ExamStudentSubject" Type="Self.ExamStudentSubject" Multiplicity="*" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StudentClassSubject">
               <PropertyRef Name="StudentClassSubjectId" />
             </Principal>
-            <Dependent Role="ExamStudentSubject">
+            <Dependent Role="ExamStudentSubjectResult">
               <PropertyRef Name="StudentClassSubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamStudentSubjectResult_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="ExamStudentSubjectResult">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamStudentSubjectResult_ExamStudentResult">
+          <End Role="ExamStudentResult" Type="Self.ExamStudentResult" Multiplicity="1" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExamStudentResult">
+              <PropertyRef Name="ExamStudentResultId" />
+            </Principal>
+            <Dependent Role="ExamStudentSubjectResult">
+              <PropertyRef Name="ExamStudentResultId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1107,6 +1251,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MasterRolePermission_MasterDataId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="MasterRolePermission" Type="Self.MasterRolePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="MasterRolePermission">
+              <PropertyRef Name="MasterDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Messages_Organization">
           <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
           <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
@@ -1164,6 +1320,18 @@
             </Principal>
             <Dependent Role="Pages">
               <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDetails_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="0..1" />
+          <End Role="PaymentDetails" Type="Self.PaymentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="PaymentDetails">
+              <PropertyRef Name="BatchId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1251,6 +1419,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RoleUser_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="0..1" />
+          <End Role="RoleUser" Type="Self.RoleUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="RoleUser">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RoleUser_MasterDataRoleId">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
           <End Role="RoleUser" Type="Self.RoleUser" Multiplicity="*" />
@@ -1272,6 +1452,18 @@
             </Principal>
             <Dependent Role="RoleUser">
               <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SlotAndClassSubject_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="SlotAndClassSubject" Type="Self.SlotAndClassSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="SlotAndClassSubject">
+              <PropertyRef Name="BatchId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1311,6 +1503,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StudentActivity_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="0..1" />
+          <End Role="StudentActivity" Type="Self.StudentActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudentActivity">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StudentActivity_OrganizationId">
           <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
           <End Role="StudentActivity" Type="Self.StudentActivity" Multiplicity="*" />
@@ -1344,6 +1548,54 @@
             </Principal>
             <Dependent Role="StudentActivity">
               <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCertificate_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="StudentCertificate" Type="Self.StudentCertificate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudentCertificate">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCertificate_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="StudentCertificate" Type="Self.StudentCertificate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="StudentCertificate">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCertificate_StudentClass">
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="1" />
+          <End Role="StudentCertificate" Type="Self.StudentCertificate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentClass">
+              <PropertyRef Name="StudentClassId" />
+            </Principal>
+            <Dependent Role="StudentCertificate">
+              <PropertyRef Name="StudentClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentClass_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudentClass">
+              <PropertyRef Name="Batch" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1395,6 +1647,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StudentClassSubject_BatchesBatchId">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="StudentClassSubject" Type="Self.StudentClassSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudentClassSubject">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StudentClassSubject_ClassSubjectId">
           <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="1" />
           <End Role="StudentClassSubject" Type="Self.StudentClassSubject" Multiplicity="*" />
@@ -1404,18 +1668,6 @@
             </Principal>
             <Dependent Role="StudentClassSubject">
               <PropertyRef Name="ClassSubjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentClassSubject_MasterDataBatchId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="StudentClassSubject" Type="Self.StudentClassSubject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="StudentClassSubject">
-              <PropertyRef Name="BatchId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1443,7 +1695,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentDocuments_MasterData">
+        <Association Name="FK_StudentDocuments_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="0..1" />
+          <End Role="StudentDocuments" Type="Self.StudentDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudentDocuments">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDocuments_MasterDataDocTypeId">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
           <End Role="StudentDocuments" Type="Self.StudentDocuments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1476,6 +1740,18 @@
             </Principal>
             <Dependent Role="StudentDocuments">
               <PropertyRef Name="StudentClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeePayment_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudentFeePayment">
+              <PropertyRef Name="Batch" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1524,6 +1800,18 @@
             </Principal>
             <Dependent Role="StudentFeePayment">
               <PropertyRef Name="StudentClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeeReceipt_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="0..1" />
+          <End Role="StudentFeeReceipt" Type="Self.StudentFeeReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudentFeeReceipt">
+              <PropertyRef Name="BatchId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1707,12 +1995,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SubjectTypes_MasterDataBatchId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+        <Association Name="FK_SubjectTypes_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="0..1" />
           <End Role="SubjectTypes" Type="Self.SubjectTypes" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
             </Principal>
             <Dependent Role="SubjectTypes">
               <PropertyRef Name="BatchId" />
@@ -1743,15 +2031,17 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Batches" EntityType="Self.Batches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassFee" EntityType="Self.ClassFee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSubject" EntityType="Self.ClassSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSubjectMarkComponents" EntityType="Self.ClassSubjectMarkComponents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Exams" EntityType="Self.Exams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExamSlot" EntityType="Self.ExamSlot" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ExamStudentClass" EntityType="Self.ExamStudentClass" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ExamStudentSubject" EntityType="Self.ExamStudentSubject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExamStudentResult" EntityType="Self.ExamStudentResult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExamStudentSubjectResult" EntityType="Self.ExamStudentSubjectResult" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FilesNPhotos" EntityType="Self.FilesNPhotos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MasterData" EntityType="Self.MasterData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MasterRolePermission" EntityType="Self.MasterRolePermission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PageHistory" EntityType="Self.PageHistory" Schema="dbo" store:Type="Tables" />
@@ -1761,6 +2051,7 @@
           <EntitySet Name="RoleUser" EntityType="Self.RoleUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SlotAndClassSubject" EntityType="Self.SlotAndClassSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentActivity" EntityType="Self.StudentActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentCertificate" EntityType="Self.StudentCertificate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentClass" EntityType="Self.StudentClass" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentClassSubject" EntityType="Self.StudentClassSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentDocuments" EntityType="Self.StudentDocuments" Schema="dbo" store:Type="Tables" />
@@ -1777,6 +2068,10 @@
             <End Role="Organization" EntitySet="Organization" />
             <End Role="AppUsers" EntitySet="AppUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_Attendance_Batches" Association="Self.FK_Attendance_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
           <AssociationSet Name="FK_Attendance_OrganizationId" Association="Self.FK_Attendance_OrganizationId">
             <End Role="Organization" EntitySet="Organization" />
             <End Role="Attendance" EntitySet="Attendance" />
@@ -1785,9 +2080,21 @@
             <End Role="StudentClass" EntitySet="StudentClass" />
             <End Role="Attendance" EntitySet="Attendance" />
           </AssociationSet>
+          <AssociationSet Name="FK_Batches_Organization" Association="Self.FK_Batches_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="Batches" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassFee_Batches" Association="Self.FK_ClassFee_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="ClassFee" EntitySet="ClassFee" />
+          </AssociationSet>
           <AssociationSet Name="FK_ClassFee_OrganizationId" Association="Self.FK_ClassFee_OrganizationId">
             <End Role="Organization" EntitySet="Organization" />
             <End Role="ClassFee" EntitySet="ClassFee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassSubject_Batches" Association="Self.FK_ClassSubject_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="ClassSubject" EntitySet="ClassSubject" />
           </AssociationSet>
           <AssociationSet Name="FK_ClassSubject_MasterDataClassId" Association="Self.FK_ClassSubject_MasterDataClassId">
             <End Role="MasterData" EntitySet="MasterData" />
@@ -1805,15 +2112,15 @@
             <End Role="SubjectTypes" EntitySet="SubjectTypes" />
             <End Role="ClassSubject" EntitySet="ClassSubject" />
           </AssociationSet>
-          <AssociationSet Name="FK_ClassSubjectMarkComponents_MasterDataClassApplyTo" Association="Self.FK_ClassSubjectMarkComponents_MasterDataClassApplyTo">
-            <End Role="MasterData" EntitySet="MasterData" />
+          <AssociationSet Name="FK_ClassSubjectMarkComponents_Batches" Association="Self.FK_ClassSubjectMarkComponents_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassSubjectMarkComponents_ClassSubjectId" Association="Self.FK_ClassSubjectMarkComponents_ClassSubjectId">
+            <End Role="ClassSubject" EntitySet="ClassSubject" />
             <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
           </AssociationSet>
           <AssociationSet Name="FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" Association="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClassSubjectMarkComponents_MasterDataSubjectId" Association="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectId">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
           </AssociationSet>
@@ -1837,8 +2144,8 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Exams_MasterDataBatchId" Association="Self.FK_Exams_MasterDataBatchId">
-            <End Role="MasterData" EntitySet="MasterData" />
+          <AssociationSet Name="FK_Exams_BatchesBatchId" Association="Self.FK_Exams_BatchesBatchId">
+            <End Role="Batches" EntitySet="Batches" />
             <End Role="Exams" EntitySet="Exams" />
           </AssociationSet>
           <AssociationSet Name="FK_Exams_MasterDataExamNameId" Association="Self.FK_Exams_MasterDataExamNameId">
@@ -1848,6 +2155,10 @@
           <AssociationSet Name="FK_Exams_OrganizationId" Association="Self.FK_Exams_OrganizationId">
             <End Role="Organization" EntitySet="Organization" />
             <End Role="Exams" EntitySet="Exams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamSlot_Batches" Association="Self.FK_ExamSlot_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="ExamSlot" EntitySet="ExamSlot" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamSlot_ExamsExamId" Association="Self.FK_ExamSlot_ExamsExamId">
             <End Role="Exams" EntitySet="Exams" />
@@ -1859,39 +2170,51 @@
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentClass_ExamsId" Association="Self.FK_ExamStudentClass_ExamsId">
             <End Role="Exams" EntitySet="Exams" />
-            <End Role="ExamStudentClass" EntitySet="ExamStudentClass" />
+            <End Role="ExamStudentResult" EntitySet="ExamStudentResult" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentClass_ExamStudentClassId" Association="Self.FK_ExamStudentClass_ExamStudentClassId">
             <End Role="StudentClass" EntitySet="StudentClass" />
-            <End Role="ExamStudentClass" EntitySet="ExamStudentClass" />
+            <End Role="ExamStudentResult" EntitySet="ExamStudentResult" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentClass_MasterDataGrade" Association="Self.FK_ExamStudentClass_MasterDataGrade">
             <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="ExamStudentClass" EntitySet="ExamStudentClass" />
+            <End Role="ExamStudentResult" EntitySet="ExamStudentResult" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentClass_MasterDataStatus" Association="Self.FK_ExamStudentClass_MasterDataStatus">
             <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="ExamStudentClass" EntitySet="ExamStudentClass" />
+            <End Role="ExamStudentResult" EntitySet="ExamStudentResult" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentClass_OrganizationId" Association="Self.FK_ExamStudentClass_OrganizationId">
             <End Role="Organization" EntitySet="Organization" />
-            <End Role="ExamStudentClass" EntitySet="ExamStudentClass" />
+            <End Role="ExamStudentResult" EntitySet="ExamStudentResult" />
           </AssociationSet>
-          <AssociationSet Name="FK_ExamStudentSubject_ExamStudentClassId" Association="Self.FK_ExamStudentSubject_ExamStudentClassId">
-            <End Role="ExamStudentClass" EntitySet="ExamStudentClass" />
-            <End Role="ExamStudentSubject" EntitySet="ExamStudentSubject" />
+          <AssociationSet Name="FK_ExamStudentResult_Batches" Association="Self.FK_ExamStudentResult_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="ExamStudentResult" EntitySet="ExamStudentResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamStudentSubject_ClassSubjectMarkComponentId" Association="Self.FK_ExamStudentSubject_ClassSubjectMarkComponentId">
+            <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResult" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentSubject_MasterDataStatus" Association="Self.FK_ExamStudentSubject_MasterDataStatus">
             <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="ExamStudentSubject" EntitySet="ExamStudentSubject" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResult" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentSubject_Organization" Association="Self.FK_ExamStudentSubject_Organization">
             <End Role="Organization" EntitySet="Organization" />
-            <End Role="ExamStudentSubject" EntitySet="ExamStudentSubject" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResult" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentSubject_StudentClassSubjectId" Association="Self.FK_ExamStudentSubject_StudentClassSubjectId">
             <End Role="StudentClassSubject" EntitySet="StudentClassSubject" />
-            <End Role="ExamStudentSubject" EntitySet="ExamStudentSubject" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamStudentSubjectResult_Batches" Association="Self.FK_ExamStudentSubjectResult_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamStudentSubjectResult_ExamStudentResult" Association="Self.FK_ExamStudentSubjectResult_ExamStudentResult">
+            <End Role="ExamStudentResult" EntitySet="ExamStudentResult" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResult" />
           </AssociationSet>
           <AssociationSet Name="FK_FeeMaster_ClassMaster" Association="Self.FK_FeeMaster_ClassMaster">
             <End Role="MasterData" EntitySet="MasterData" />
@@ -1917,6 +2240,10 @@
             <End Role="Organization" EntitySet="Organization" />
             <End Role="MasterData" EntitySet="MasterData" />
           </AssociationSet>
+          <AssociationSet Name="FK_MasterRolePermission_MasterDataId" Association="Self.FK_MasterRolePermission_MasterDataId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="MasterRolePermission" EntitySet="MasterRolePermission" />
+          </AssociationSet>
           <AssociationSet Name="FK_Messages_Organization" Association="Self.FK_Messages_Organization">
             <End Role="Organization" EntitySet="Organization" />
             <End Role="Messages" EntitySet="Messages" />
@@ -1936,6 +2263,10 @@
           <AssociationSet Name="FK_Pages_Organization" Association="Self.FK_Pages_Organization">
             <End Role="Organization" EntitySet="Organization" />
             <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDetails_Batches" Association="Self.FK_PaymentDetails_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="PaymentDetails" EntitySet="PaymentDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_PaymentDetails_ClassFee" Association="Self.FK_PaymentDetails_ClassFee">
             <End Role="ClassFee" EntitySet="ClassFee" />
@@ -1965,6 +2296,10 @@
             <End Role="AppUsers" EntitySet="AppUsers" />
             <End Role="RoleUser" EntitySet="RoleUser" />
           </AssociationSet>
+          <AssociationSet Name="FK_RoleUser_Batches" Association="Self.FK_RoleUser_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="RoleUser" EntitySet="RoleUser" />
+          </AssociationSet>
           <AssociationSet Name="FK_RoleUser_MasterDataRoleId" Association="Self.FK_RoleUser_MasterDataRoleId">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="RoleUser" EntitySet="RoleUser" />
@@ -1972,6 +2307,10 @@
           <AssociationSet Name="FK_RoleUser_OrganizationId" Association="Self.FK_RoleUser_OrganizationId">
             <End Role="Organization" EntitySet="Organization" />
             <End Role="RoleUser" EntitySet="RoleUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SlotAndClassSubject_Batches" Association="Self.FK_SlotAndClassSubject_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="SlotAndClassSubject" EntitySet="SlotAndClassSubject" />
           </AssociationSet>
           <AssociationSet Name="FK_SlotAndClassSubject_ClassSubjectId" Association="Self.FK_SlotAndClassSubject_ClassSubjectId">
             <End Role="ClassSubject" EntitySet="ClassSubject" />
@@ -1985,6 +2324,10 @@
             <End Role="Organization" EntitySet="Organization" />
             <End Role="SlotAndClassSubject" EntitySet="SlotAndClassSubject" />
           </AssociationSet>
+          <AssociationSet Name="FK_StudentActivity_Batches" Association="Self.FK_StudentActivity_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="StudentActivity" EntitySet="StudentActivity" />
+          </AssociationSet>
           <AssociationSet Name="FK_StudentActivity_OrganizationId" Association="Self.FK_StudentActivity_OrganizationId">
             <End Role="Organization" EntitySet="Organization" />
             <End Role="StudentActivity" EntitySet="StudentActivity" />
@@ -1996,6 +2339,22 @@
           <AssociationSet Name="FK_StudentActivity_StudentId" Association="Self.FK_StudentActivity_StudentId">
             <End Role="Students" EntitySet="Students" />
             <End Role="StudentActivity" EntitySet="StudentActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCertificate_Batches" Association="Self.FK_StudentCertificate_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="StudentCertificate" EntitySet="StudentCertificate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCertificate_Organization" Association="Self.FK_StudentCertificate_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="StudentCertificate" EntitySet="StudentCertificate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCertificate_StudentClass" Association="Self.FK_StudentCertificate_StudentClass">
+            <End Role="StudentClass" EntitySet="StudentClass" />
+            <End Role="StudentCertificate" EntitySet="StudentCertificate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentClass_Batches" Association="Self.FK_StudentClass_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="StudentClass" EntitySet="StudentClass" />
           </AssociationSet>
           <AssociationSet Name="FK_StudentClass_Class" Association="Self.FK_StudentClass_Class">
             <End Role="MasterData" EntitySet="MasterData" />
@@ -2013,12 +2372,12 @@
             <End Role="Students" EntitySet="Students" />
             <End Role="StudentClass" EntitySet="StudentClass" />
           </AssociationSet>
-          <AssociationSet Name="FK_StudentClassSubject_ClassSubjectId" Association="Self.FK_StudentClassSubject_ClassSubjectId">
-            <End Role="ClassSubject" EntitySet="ClassSubject" />
+          <AssociationSet Name="FK_StudentClassSubject_BatchesBatchId" Association="Self.FK_StudentClassSubject_BatchesBatchId">
+            <End Role="Batches" EntitySet="Batches" />
             <End Role="StudentClassSubject" EntitySet="StudentClassSubject" />
           </AssociationSet>
-          <AssociationSet Name="FK_StudentClassSubject_MasterDataBatchId" Association="Self.FK_StudentClassSubject_MasterDataBatchId">
-            <End Role="MasterData" EntitySet="MasterData" />
+          <AssociationSet Name="FK_StudentClassSubject_ClassSubjectId" Association="Self.FK_StudentClassSubject_ClassSubjectId">
+            <End Role="ClassSubject" EntitySet="ClassSubject" />
             <End Role="StudentClassSubject" EntitySet="StudentClassSubject" />
           </AssociationSet>
           <AssociationSet Name="FK_StudentClassSubject_OrganizationOrgId" Association="Self.FK_StudentClassSubject_OrganizationOrgId">
@@ -2029,7 +2388,11 @@
             <End Role="StudentClass" EntitySet="StudentClass" />
             <End Role="StudentClassSubject" EntitySet="StudentClassSubject" />
           </AssociationSet>
-          <AssociationSet Name="FK_StudentDocuments_MasterData" Association="Self.FK_StudentDocuments_MasterData">
+          <AssociationSet Name="FK_StudentDocuments_Batches" Association="Self.FK_StudentDocuments_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="StudentDocuments" EntitySet="StudentDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDocuments_MasterDataDocTypeId" Association="Self.FK_StudentDocuments_MasterDataDocTypeId">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="StudentDocuments" EntitySet="StudentDocuments" />
           </AssociationSet>
@@ -2040,6 +2403,10 @@
           <AssociationSet Name="FK_StudentDocuments_StudentClass" Association="Self.FK_StudentDocuments_StudentClass">
             <End Role="StudentClass" EntitySet="StudentClass" />
             <End Role="StudentDocuments" EntitySet="StudentDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeePayment_Batches" Association="Self.FK_StudentFeePayment_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="StudentFeePayment" EntitySet="StudentFeePayment" />
           </AssociationSet>
           <AssociationSet Name="FK_StudentFeePayment_ClassFee" Association="Self.FK_StudentFeePayment_ClassFee">
             <End Role="ClassFee" EntitySet="ClassFee" />
@@ -2056,6 +2423,10 @@
           <AssociationSet Name="FK_StudentFeePayment_StudentFeePayment" Association="Self.FK_StudentFeePayment_StudentFeePayment">
             <End Role="StudentClass" EntitySet="StudentClass" />
             <End Role="StudentFeePayment" EntitySet="StudentFeePayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeeReceipt_Batches" Association="Self.FK_StudentFeeReceipt_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="StudentFeeReceipt" EntitySet="StudentFeeReceipt" />
           </AssociationSet>
           <AssociationSet Name="FK_StudentFeeReceipt_OrganizationOrgId" Association="Self.FK_StudentFeeReceipt_OrganizationOrgId">
             <End Role="Organization" EntitySet="Organization" />
@@ -2117,8 +2488,8 @@
             <End Role="Students" EntitySet="Students" />
             <End Role="Students1" EntitySet="Students" />
           </AssociationSet>
-          <AssociationSet Name="FK_SubjectTypes_MasterDataBatchId" Association="Self.FK_SubjectTypes_MasterDataBatchId">
-            <End Role="MasterData" EntitySet="MasterData" />
+          <AssociationSet Name="FK_SubjectTypes_Batches" Association="Self.FK_SubjectTypes_Batches">
+            <End Role="Batches" EntitySet="Batches" />
             <End Role="SubjectTypes" EntitySet="SubjectTypes" />
           </AssociationSet>
           <AssociationSet Name="FK_TaskConfiguration_OrganizationId" Association="Self.FK_TaskConfiguration_OrganizationId">
@@ -2126,7 +2497,8 @@
             <End Role="TaskConfiguration" EntitySet="TaskConfiguration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TTPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2263,7 +2635,7 @@
           <Property Name="AttendanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentClassId" Type="Int32" />
           <Property Name="TeacherId" Type="Int16" />
-          <Property Name="AttendanceStatus" Type="Int16" />
+          <Property Name="AttendanceStatus" Type="Byte" />
           <Property Name="AttendanceDate" Type="DateTime" Precision="3" />
           <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="OrgId" Type="Int16" />
@@ -2271,8 +2643,44 @@
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="BatchId" Type="Int16" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_Attendance_Batches" FromRole="Attendance" ToRole="Batches" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_Attendance_OrganizationId" FromRole="Attendance" ToRole="Organization" />
           <NavigationProperty Name="StudentClass" Relationship="Self.FK_Attendance_StudentClassId" FromRole="Attendance" ToRole="StudentClass" />
+        </EntityType>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="BatchId" />
+          </Key>
+          <Property Name="BatchId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CurrentBatch" Type="Byte" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_Batches" FromRole="Batches" ToRole="Attendance" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_Batches_Organization" FromRole="Batches" ToRole="Organization" />
+          <NavigationProperty Name="ClassFees" Relationship="Self.FK_ClassFee_Batches" FromRole="Batches" ToRole="ClassFee" />
+          <NavigationProperty Name="ClassSubjects" Relationship="Self.FK_ClassSubject_Batches" FromRole="Batches" ToRole="ClassSubject" />
+          <NavigationProperty Name="ClassSubjectMarkComponents" Relationship="Self.FK_ClassSubjectMarkComponents_Batches" FromRole="Batches" ToRole="ClassSubjectMarkComponents" />
+          <NavigationProperty Name="Exams" Relationship="Self.FK_Exams_BatchesBatchId" FromRole="Batches" ToRole="Exams" />
+          <NavigationProperty Name="ExamSlots" Relationship="Self.FK_ExamSlot_Batches" FromRole="Batches" ToRole="ExamSlot" />
+          <NavigationProperty Name="ExamStudentResults" Relationship="Self.FK_ExamStudentResult_Batches" FromRole="Batches" ToRole="ExamStudentResult" />
+          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubjectResult_Batches" FromRole="Batches" ToRole="ExamStudentSubjectResult" />
+          <NavigationProperty Name="PaymentDetails" Relationship="Self.FK_PaymentDetails_Batches" FromRole="Batches" ToRole="PaymentDetails" />
+          <NavigationProperty Name="RoleUsers" Relationship="Self.FK_RoleUser_Batches" FromRole="Batches" ToRole="RoleUser" />
+          <NavigationProperty Name="SlotAndClassSubjects" Relationship="Self.FK_SlotAndClassSubject_Batches" FromRole="Batches" ToRole="SlotAndClassSubject" />
+          <NavigationProperty Name="StudentActivities" Relationship="Self.FK_StudentActivity_Batches" FromRole="Batches" ToRole="StudentActivity" />
+          <NavigationProperty Name="StudentCertificates" Relationship="Self.FK_StudentCertificate_Batches" FromRole="Batches" ToRole="StudentCertificate" />
+          <NavigationProperty Name="StudentClasses" Relationship="Self.FK_StudentClass_Batches" FromRole="Batches" ToRole="StudentClass" />
+          <NavigationProperty Name="StudentClassSubjects" Relationship="Self.FK_StudentClassSubject_BatchesBatchId" FromRole="Batches" ToRole="StudentClassSubject" />
+          <NavigationProperty Name="StudentDocuments" Relationship="Self.FK_StudentDocuments_Batches" FromRole="Batches" ToRole="StudentDocuments" />
+          <NavigationProperty Name="StudentFeePayments" Relationship="Self.FK_StudentFeePayment_Batches" FromRole="Batches" ToRole="StudentFeePayment" />
+          <NavigationProperty Name="StudentFeeReceipts" Relationship="Self.FK_StudentFeeReceipt_Batches" FromRole="Batches" ToRole="StudentFeeReceipt" />
+          <NavigationProperty Name="SubjectTypes" Relationship="Self.FK_SubjectTypes_Batches" FromRole="Batches" ToRole="SubjectTypes" />
         </EntityType>
         <EntityType Name="ClassFee">
           <Key>
@@ -2282,7 +2690,7 @@
           <Property Name="FeeNameId" Type="Int16" Nullable="false" />
           <Property Name="ClassId" Type="Int16" Nullable="false" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Batch" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
           <Property Name="Active" Type="Byte" Nullable="false" />
           <Property Name="LocationId" Type="Int16" />
           <Property Name="PaymentOrder" Type="Byte" />
@@ -2291,6 +2699,7 @@
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_ClassFee_Batches" FromRole="ClassFee" ToRole="Batches" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_ClassFee_OrganizationId" FromRole="ClassFee" ToRole="Organization" />
           <NavigationProperty Name="MasterData" Relationship="Self.FK_FeeMaster_ClassMaster" FromRole="ClassFee" ToRole="MasterData" />
           <NavigationProperty Name="MasterData1" Relationship="Self.FK_FeeMaster_FeeNameMaster" FromRole="ClassFee" ToRole="MasterData" />
@@ -2313,34 +2722,36 @@
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_ClassSubject_Batches" FromRole="ClassSubject" ToRole="Batches" />
           <NavigationProperty Name="MasterData" Relationship="Self.FK_ClassSubject_MasterDataClassId" FromRole="ClassSubject" ToRole="MasterData" />
           <NavigationProperty Name="MasterData1" Relationship="Self.FK_ClassSubject_MasterDataSubjectsId" FromRole="ClassSubject" ToRole="MasterData" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_ClassSubject_OrganizationId" FromRole="ClassSubject" ToRole="Organization" />
           <NavigationProperty Name="SubjectType" Relationship="Self.FK_ClassSubject_SubjectTypesId" FromRole="ClassSubject" ToRole="SubjectTypes" />
+          <NavigationProperty Name="ClassSubjectMarkComponents" Relationship="Self.FK_ClassSubjectMarkComponents_ClassSubjectId" FromRole="ClassSubject" ToRole="ClassSubjectMarkComponents" />
           <NavigationProperty Name="SlotAndClassSubjects" Relationship="Self.FK_SlotAndClassSubject_ClassSubjectId" FromRole="ClassSubject" ToRole="SlotAndClassSubject" />
           <NavigationProperty Name="StudentClassSubjects" Relationship="Self.FK_StudentClassSubject_ClassSubjectId" FromRole="ClassSubject" ToRole="StudentClassSubject" />
         </EntityType>
         <EntityType Name="ClassSubjectMarkComponent">
           <Key>
-            <PropertyRef Name="ClassSubjectComponentId" />
+            <PropertyRef Name="ClassSubjectMarkComponentId" />
           </Key>
-          <Property Name="ClassSubjectComponentId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SubjectId" Type="Int16" Nullable="false" />
+          <Property Name="ClassSubjectMarkComponentId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassSubjectId" Type="Int16" Nullable="false" />
           <Property Name="SubjectComponentId" Type="Int16" Nullable="false" />
-          <Property Name="ApplyToClass" Type="Int16" Nullable="false" />
           <Property Name="FullMark" Type="Int16" Nullable="false" />
           <Property Name="PassMark" Type="Int16" Nullable="false" />
-          <Property Name="Active" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
-          <NavigationProperty Name="MasterData" Relationship="Self.FK_ClassSubjectMarkComponents_MasterDataClassApplyTo" FromRole="ClassSubjectMarkComponents" ToRole="MasterData" />
-          <NavigationProperty Name="MasterData1" Relationship="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" FromRole="ClassSubjectMarkComponents" ToRole="MasterData" />
-          <NavigationProperty Name="MasterData2" Relationship="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectId" FromRole="ClassSubjectMarkComponents" ToRole="MasterData" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_ClassSubjectMarkComponents_Batches" FromRole="ClassSubjectMarkComponents" ToRole="Batches" />
+          <NavigationProperty Name="ClassSubject" Relationship="Self.FK_ClassSubjectMarkComponents_ClassSubjectId" FromRole="ClassSubjectMarkComponents" ToRole="ClassSubject" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" FromRole="ClassSubjectMarkComponents" ToRole="MasterData" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_ClassSubjectMarkComponents_OrganizationId" FromRole="ClassSubjectMarkComponents" ToRole="Organization" />
-          <Property Name="BatchId" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubject_ClassSubjectMarkComponentId" FromRole="ClassSubjectMarkComponents" ToRole="ExamStudentSubjectResult" />
         </EntityType>
         <EntityType Name="Exam">
           <Key>
@@ -2357,11 +2768,11 @@
           <Property Name="OrgId" Type="Int16" Nullable="false" />
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedBy" Type="Int16" />
-          <NavigationProperty Name="MasterData" Relationship="Self.FK_Exams_MasterDataBatchId" FromRole="Exams" ToRole="MasterData" />
-          <NavigationProperty Name="MasterData1" Relationship="Self.FK_Exams_MasterDataExamNameId" FromRole="Exams" ToRole="MasterData" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_Exams_BatchesBatchId" FromRole="Exams" ToRole="Batches" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_Exams_MasterDataExamNameId" FromRole="Exams" ToRole="MasterData" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_Exams_OrganizationId" FromRole="Exams" ToRole="Organization" />
           <NavigationProperty Name="ExamSlots" Relationship="Self.FK_ExamSlot_ExamsExamId" FromRole="Exams" ToRole="ExamSlot" />
-          <NavigationProperty Name="ExamStudentClasses" Relationship="Self.FK_ExamStudentClass_ExamsId" FromRole="Exams" ToRole="ExamStudentClass" />
+          <NavigationProperty Name="ExamStudentResults" Relationship="Self.FK_ExamStudentClass_ExamsId" FromRole="Exams" ToRole="ExamStudentResult" />
         </EntityType>
         <EntityType Name="ExamSlot">
           <Key>
@@ -2373,63 +2784,66 @@
           <Property Name="SlotNameId" Type="Int16" Nullable="false" />
           <Property Name="StartTime" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EndTime" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int16" Nullable="false" />
           <Property Name="UpdatedBy" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_ExamSlot_Batches" FromRole="ExamSlot" ToRole="Batches" />
           <NavigationProperty Name="Exam" Relationship="Self.FK_ExamSlot_ExamsExamId" FromRole="ExamSlot" ToRole="Exams" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_ExamSlot_OrganizationId" FromRole="ExamSlot" ToRole="Organization" />
           <NavigationProperty Name="SlotAndClassSubjects" Relationship="Self.FK_SlotAndClassSubject_ExamSlot" FromRole="ExamSlot" ToRole="SlotAndClassSubject" />
-          <Property Name="Active" Type="Byte" Nullable="false" />
-          <Property Name="BatchId" Type="Int16" Nullable="false" />
         </EntityType>
-        <EntityType Name="ExamStudentClass">
+        <EntityType Name="ExamStudentResult">
           <Key>
-            <PropertyRef Name="ExamStudentClassId" />
+            <PropertyRef Name="ExamStudentResultId" />
           </Key>
-          <Property Name="ExamStudentClassId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamStudentResultId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ExamId" Type="Int16" Nullable="false" />
           <Property Name="StudentClassId" Type="Int32" Nullable="false" />
-          <Property Name="TotalFullMark" Type="Int16" />
-          <Property Name="TotalPassMark" Type="Int16" />
           <Property Name="TotalMarks" Type="Int16" />
           <Property Name="Grade" Type="Int16" />
           <Property Name="Rank" Type="Int16" />
           <Property Name="ExamStatus" Type="Int16" Nullable="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
-          <NavigationProperty Name="Exam" Relationship="Self.FK_ExamStudentClass_ExamsId" FromRole="ExamStudentClass" ToRole="Exams" />
-          <NavigationProperty Name="StudentClass" Relationship="Self.FK_ExamStudentClass_ExamStudentClassId" FromRole="ExamStudentClass" ToRole="StudentClass" />
-          <NavigationProperty Name="MasterData" Relationship="Self.FK_ExamStudentClass_MasterDataGrade" FromRole="ExamStudentClass" ToRole="MasterData" />
-          <NavigationProperty Name="MasterData1" Relationship="Self.FK_ExamStudentClass_MasterDataStatus" FromRole="ExamStudentClass" ToRole="MasterData" />
-          <NavigationProperty Name="Organization" Relationship="Self.FK_ExamStudentClass_OrganizationId" FromRole="ExamStudentClass" ToRole="Organization" />
-          <NavigationProperty Name="ExamStudentSubjects" Relationship="Self.FK_ExamStudentSubject_ExamStudentClassId" FromRole="ExamStudentClass" ToRole="ExamStudentSubject" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_ExamStudentResult_Batches" FromRole="ExamStudentResult" ToRole="Batches" />
+          <NavigationProperty Name="Exam" Relationship="Self.FK_ExamStudentClass_ExamsId" FromRole="ExamStudentResult" ToRole="Exams" />
+          <NavigationProperty Name="StudentClass" Relationship="Self.FK_ExamStudentClass_ExamStudentClassId" FromRole="ExamStudentResult" ToRole="StudentClass" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_ExamStudentClass_MasterDataGrade" FromRole="ExamStudentResult" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="Self.FK_ExamStudentClass_MasterDataStatus" FromRole="ExamStudentResult" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_ExamStudentClass_OrganizationId" FromRole="ExamStudentResult" ToRole="Organization" />
+          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubjectResult_ExamStudentResult" FromRole="ExamStudentResult" ToRole="ExamStudentSubjectResult" />
         </EntityType>
-        <EntityType Name="ExamStudentSubject">
+        <EntityType Name="ExamStudentSubjectResult">
           <Key>
-            <PropertyRef Name="ExamStudentSubjectId" />
+            <PropertyRef Name="ExamStudentSubjectResultId" />
           </Key>
-          <Property Name="ExamStudentSubjectId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ExamStudentClassId" Type="Int16" Nullable="false" />
+          <Property Name="ExamStudentSubjectResultId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamStudentResultId" Type="Int16" Nullable="false" />
           <Property Name="StudentClassSubjectId" Type="Int16" Nullable="false" />
-          <Property Name="Theory" Type="Int16" />
-          <Property Name="Practical" Type="Int16" />
-          <Property Name="InternalAssessment" Type="Int16" />
-          <Property Name="Total" Type="Int16" />
+          <Property Name="ClassSubjectMarkComponentId" Type="Int16" Nullable="false" />
+          <Property Name="Marks" Type="Int16" Nullable="false" />
           <Property Name="ExamStatus" Type="Int16" Nullable="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
-          <NavigationProperty Name="ExamStudentClass" Relationship="Self.FK_ExamStudentSubject_ExamStudentClassId" FromRole="ExamStudentSubject" ToRole="ExamStudentClass" />
-          <NavigationProperty Name="MasterData" Relationship="Self.FK_ExamStudentSubject_MasterDataStatus" FromRole="ExamStudentSubject" ToRole="MasterData" />
-          <NavigationProperty Name="Organization" Relationship="Self.FK_ExamStudentSubject_Organization" FromRole="ExamStudentSubject" ToRole="Organization" />
-          <NavigationProperty Name="StudentClassSubject" Relationship="Self.FK_ExamStudentSubject_StudentClassSubjectId" FromRole="ExamStudentSubject" ToRole="StudentClassSubject" />
+          <Property Name="Active" Type="Byte" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_ExamStudentSubjectResult_Batches" FromRole="ExamStudentSubjectResult" ToRole="Batches" />
+          <NavigationProperty Name="ClassSubjectMarkComponent" Relationship="Self.FK_ExamStudentSubject_ClassSubjectMarkComponentId" FromRole="ExamStudentSubjectResult" ToRole="ClassSubjectMarkComponents" />
+          <NavigationProperty Name="ExamStudentResult" Relationship="Self.FK_ExamStudentSubjectResult_ExamStudentResult" FromRole="ExamStudentSubjectResult" ToRole="ExamStudentResult" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_ExamStudentSubject_MasterDataStatus" FromRole="ExamStudentSubjectResult" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_ExamStudentSubject_Organization" FromRole="ExamStudentSubjectResult" ToRole="Organization" />
+          <NavigationProperty Name="StudentClassSubject" Relationship="Self.FK_ExamStudentSubject_StudentClassSubjectId" FromRole="ExamStudentSubjectResult" ToRole="StudentClassSubject" />
         </EntityType>
         <EntityType Name="FilesNPhoto">
           <Key>
@@ -2476,22 +2890,19 @@
           <NavigationProperty Name="ClassFees2" Relationship="Self.FK_FeeMaster_LocationMaster" FromRole="MasterData" ToRole="ClassFee" />
           <NavigationProperty Name="ClassSubjects" Relationship="Self.FK_ClassSubject_MasterDataClassId" FromRole="MasterData" ToRole="ClassSubject" />
           <NavigationProperty Name="ClassSubjects1" Relationship="Self.FK_ClassSubject_MasterDataSubjectsId" FromRole="MasterData" ToRole="ClassSubject" />
-          <NavigationProperty Name="ClassSubjectMarkComponents" Relationship="Self.FK_ClassSubjectMarkComponents_MasterDataClassApplyTo" FromRole="MasterData" ToRole="ClassSubjectMarkComponents" />
-          <NavigationProperty Name="ClassSubjectMarkComponents1" Relationship="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" FromRole="MasterData" ToRole="ClassSubjectMarkComponents" />
-          <NavigationProperty Name="ClassSubjectMarkComponents2" Relationship="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectId" FromRole="MasterData" ToRole="ClassSubjectMarkComponents" />
-          <NavigationProperty Name="Exams" Relationship="Self.FK_Exams_MasterDataBatchId" FromRole="MasterData" ToRole="Exams" />
-          <NavigationProperty Name="Exams1" Relationship="Self.FK_Exams_MasterDataExamNameId" FromRole="MasterData" ToRole="Exams" />
-          <NavigationProperty Name="ExamStudentClasses" Relationship="Self.FK_ExamStudentClass_MasterDataGrade" FromRole="MasterData" ToRole="ExamStudentClass" />
-          <NavigationProperty Name="ExamStudentClasses1" Relationship="Self.FK_ExamStudentClass_MasterDataStatus" FromRole="MasterData" ToRole="ExamStudentClass" />
-          <NavigationProperty Name="ExamStudentSubjects" Relationship="Self.FK_ExamStudentSubject_MasterDataStatus" FromRole="MasterData" ToRole="ExamStudentSubject" />
+          <NavigationProperty Name="ClassSubjectMarkComponents" Relationship="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" FromRole="MasterData" ToRole="ClassSubjectMarkComponents" />
+          <NavigationProperty Name="Exams" Relationship="Self.FK_Exams_MasterDataExamNameId" FromRole="MasterData" ToRole="Exams" />
+          <NavigationProperty Name="ExamStudentResults" Relationship="Self.FK_ExamStudentClass_MasterDataGrade" FromRole="MasterData" ToRole="ExamStudentResult" />
+          <NavigationProperty Name="ExamStudentResults1" Relationship="Self.FK_ExamStudentClass_MasterDataStatus" FromRole="MasterData" ToRole="ExamStudentResult" />
+          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubject_MasterDataStatus" FromRole="MasterData" ToRole="ExamStudentSubjectResult" />
           <NavigationProperty Name="FilesNPhotos" Relationship="Self.FK_FilesNPhotos_MasterData" FromRole="MasterData" ToRole="FilesNPhotos" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_MasterData_Organization" FromRole="MasterData" ToRole="Organization" />
+          <NavigationProperty Name="MasterRolePermissions" Relationship="Self.FK_MasterRolePermission_MasterDataId" FromRole="MasterData" ToRole="MasterRolePermission" />
           <NavigationProperty Name="Pages" Relationship="Self.FK_Pages_MasterData" FromRole="MasterData" ToRole="Pages" />
           <NavigationProperty Name="RoleUsers" Relationship="Self.FK_RoleUser_MasterDataRoleId" FromRole="MasterData" ToRole="RoleUser" />
           <NavigationProperty Name="StudentClasses" Relationship="Self.FK_StudentClass_Class" FromRole="MasterData" ToRole="StudentClass" />
           <NavigationProperty Name="StudentClasses1" Relationship="Self.FK_StudentClass_Feetype" FromRole="MasterData" ToRole="StudentClass" />
-          <NavigationProperty Name="StudentClassSubjects" Relationship="Self.FK_StudentClassSubject_MasterDataBatchId" FromRole="MasterData" ToRole="StudentClassSubject" />
-          <NavigationProperty Name="StudentDocuments" Relationship="Self.FK_StudentDocuments_MasterData" FromRole="MasterData" ToRole="StudentDocuments" />
+          <NavigationProperty Name="StudentDocuments" Relationship="Self.FK_StudentDocuments_MasterDataDocTypeId" FromRole="MasterData" ToRole="StudentDocuments" />
           <NavigationProperty Name="Students" Relationship="Self.FK_Students_Bloodgroup" FromRole="MasterData" ToRole="Students" />
           <NavigationProperty Name="Students1" Relationship="Self.FK_Students_Category" FromRole="MasterData" ToRole="Students" />
           <NavigationProperty Name="Students2" Relationship="Self.FK_Students_City" FromRole="MasterData" ToRole="Students" />
@@ -2501,7 +2912,22 @@
           <NavigationProperty Name="Students6" Relationship="Self.FK_Students_ReasonForLeaving" FromRole="MasterData" ToRole="Students" />
           <NavigationProperty Name="Students7" Relationship="Self.FK_Students_Religion" FromRole="MasterData" ToRole="Students" />
           <NavigationProperty Name="Students8" Relationship="Self.FK_Students_State" FromRole="MasterData" ToRole="Students" />
-          <NavigationProperty Name="SubjectTypes" Relationship="Self.FK_SubjectTypes_MasterDataBatchId" FromRole="MasterData" ToRole="SubjectTypes" />
+        </EntityType>
+        <EntityType Name="MasterRolePermission">
+          <Key>
+            <PropertyRef Name="MasterRolePermissionId" />
+          </Key>
+          <Property Name="MasterRolePermissionId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasterDataId" Type="Int16" Nullable="false" />
+          <Property Name="RoleId" Type="Int16" Nullable="false" />
+          <Property Name="PermissionId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_MasterRolePermission_MasterDataId" FromRole="MasterRolePermission" ToRole="MasterData" />
         </EntityType>
         <EntityType Name="Message">
           <Key>
@@ -2539,13 +2965,14 @@
           <Property Name="UpdatedBy" Type="Int16" />
           <NavigationProperty Name="AppUsers" Relationship="Self.FK_AppUsers_OrganizationOrgId" FromRole="Organization" ToRole="AppUsers" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_OrganizationId" FromRole="Organization" ToRole="Attendance" />
+          <NavigationProperty Name="Batches" Relationship="Self.FK_Batches_Organization" FromRole="Organization" ToRole="Batches" />
           <NavigationProperty Name="ClassFees" Relationship="Self.FK_ClassFee_OrganizationId" FromRole="Organization" ToRole="ClassFee" />
           <NavigationProperty Name="ClassSubjects" Relationship="Self.FK_ClassSubject_OrganizationId" FromRole="Organization" ToRole="ClassSubject" />
           <NavigationProperty Name="ClassSubjectMarkComponents" Relationship="Self.FK_ClassSubjectMarkComponents_OrganizationId" FromRole="Organization" ToRole="ClassSubjectMarkComponents" />
           <NavigationProperty Name="Exams" Relationship="Self.FK_Exams_OrganizationId" FromRole="Organization" ToRole="Exams" />
           <NavigationProperty Name="ExamSlots" Relationship="Self.FK_ExamSlot_OrganizationId" FromRole="Organization" ToRole="ExamSlot" />
-          <NavigationProperty Name="ExamStudentClasses" Relationship="Self.FK_ExamStudentClass_OrganizationId" FromRole="Organization" ToRole="ExamStudentClass" />
-          <NavigationProperty Name="ExamStudentSubjects" Relationship="Self.FK_ExamStudentSubject_Organization" FromRole="Organization" ToRole="ExamStudentSubject" />
+          <NavigationProperty Name="ExamStudentResults" Relationship="Self.FK_ExamStudentClass_OrganizationId" FromRole="Organization" ToRole="ExamStudentResult" />
+          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubject_Organization" FromRole="Organization" ToRole="ExamStudentSubjectResult" />
           <NavigationProperty Name="FilesNPhotos" Relationship="Self.FK_FilesNPhotos_Organization" FromRole="Organization" ToRole="FilesNPhotos" />
           <NavigationProperty Name="MasterDatas" Relationship="Self.FK_MasterData_Organization" FromRole="Organization" ToRole="MasterData" />
           <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_Organization" FromRole="Organization" ToRole="Messages" />
@@ -2556,6 +2983,7 @@
           <NavigationProperty Name="RoleUsers" Relationship="Self.FK_RoleUser_OrganizationId" FromRole="Organization" ToRole="RoleUser" />
           <NavigationProperty Name="SlotAndClassSubjects" Relationship="Self.FK_SlotAndClassSubject_Organization" FromRole="Organization" ToRole="SlotAndClassSubject" />
           <NavigationProperty Name="StudentActivities" Relationship="Self.FK_StudentActivity_OrganizationId" FromRole="Organization" ToRole="StudentActivity" />
+          <NavigationProperty Name="StudentCertificates" Relationship="Self.FK_StudentCertificate_Organization" FromRole="Organization" ToRole="StudentCertificate" />
           <NavigationProperty Name="StudentClasses" Relationship="Self.FK_StudentClass_OrganizationOrgId" FromRole="Organization" ToRole="StudentClass" />
           <NavigationProperty Name="StudentClassSubjects" Relationship="Self.FK_StudentClassSubject_OrganizationOrgId" FromRole="Organization" ToRole="StudentClassSubject" />
           <NavigationProperty Name="StudentDocuments" Relationship="Self.FK_StudentDocuments_OrganizationId" FromRole="Organization" ToRole="StudentDocuments" />
@@ -2631,6 +3059,8 @@
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="BatchId" Type="Int16" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_PaymentDetails_Batches" FromRole="PaymentDetails" ToRole="Batches" />
           <NavigationProperty Name="ClassFee" Relationship="Self.FK_PaymentDetails_ClassFee" FromRole="PaymentDetails" ToRole="ClassFee" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_PaymentDetails_Organization" FromRole="PaymentDetails" ToRole="Organization" />
           <NavigationProperty Name="StudentFeePayment" Relationship="Self.FK_PaymentDetails_FeePayment" FromRole="PaymentDetails" ToRole="StudentFeePayment" />
@@ -2665,12 +3095,14 @@
           <Property Name="OrgId" Type="Int16" Nullable="false" />
           <Property Name="DepartmentId" Type="Int16" />
           <Property Name="LocationId" Type="Int16" />
+          <Property Name="BatchId" Type="Int16" />
           <Property Name="Active" Type="Byte" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
           <NavigationProperty Name="AppUser" Relationship="Self.FK_RoleUser_AppUsers" FromRole="RoleUser" ToRole="AppUsers" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_RoleUser_Batches" FromRole="RoleUser" ToRole="Batches" />
           <NavigationProperty Name="MasterData" Relationship="Self.FK_RoleUser_MasterDataRoleId" FromRole="RoleUser" ToRole="MasterData" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_RoleUser_OrganizationId" FromRole="RoleUser" ToRole="Organization" />
         </EntityType>
@@ -2682,15 +3114,16 @@
           <Property Name="SlotId" Type="Int16" Nullable="false" />
           <Property Name="ClassSubjectId" Type="Int16" Nullable="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
           <Property Name="Active" Type="Byte" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_SlotAndClassSubject_Batches" FromRole="SlotAndClassSubject" ToRole="Batches" />
           <NavigationProperty Name="ClassSubject" Relationship="Self.FK_SlotAndClassSubject_ClassSubjectId" FromRole="SlotAndClassSubject" ToRole="ClassSubject" />
           <NavigationProperty Name="ExamSlot" Relationship="Self.FK_SlotAndClassSubject_ExamSlot" FromRole="SlotAndClassSubject" ToRole="ExamSlot" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_SlotAndClassSubject_Organization" FromRole="SlotAndClassSubject" ToRole="Organization" />
-          <Property Name="BatchId" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="StudentActivity">
           <Key>
@@ -2710,9 +3143,29 @@
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_StudentActivity_Batches" FromRole="StudentActivity" ToRole="Batches" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_StudentActivity_OrganizationId" FromRole="StudentActivity" ToRole="Organization" />
           <NavigationProperty Name="StudentClass" Relationship="Self.FK_StudentActivity_StudentClassId" FromRole="StudentActivity" ToRole="StudentClass" />
           <NavigationProperty Name="Student" Relationship="Self.FK_StudentActivity_StudentId" FromRole="StudentActivity" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="StudentCertificate">
+          <Key>
+            <PropertyRef Name="StudentCertificateId" />
+          </Key>
+          <Property Name="StudentCertificateId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CertificateTypeId" Type="Int16" Nullable="false" />
+          <Property Name="IssuedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StudentClassId" Type="Int32" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_StudentCertificate_Batches" FromRole="StudentCertificate" ToRole="Batches" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_StudentCertificate_Organization" FromRole="StudentCertificate" ToRole="Organization" />
+          <NavigationProperty Name="StudentClass" Relationship="Self.FK_StudentCertificate_StudentClass" FromRole="StudentCertificate" ToRole="StudentClass" />
         </EntityType>
         <EntityType Name="StudentClass">
           <Key>
@@ -2735,11 +3188,13 @@
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_StudentClassId" FromRole="StudentClass" ToRole="Attendance" />
-          <NavigationProperty Name="ExamStudentClasses" Relationship="Self.FK_ExamStudentClass_ExamStudentClassId" FromRole="StudentClass" ToRole="ExamStudentClass" />
+          <NavigationProperty Name="Batch1" Relationship="Self.FK_StudentClass_Batches" FromRole="StudentClass" ToRole="Batches" />
+          <NavigationProperty Name="ExamStudentResults" Relationship="Self.FK_ExamStudentClass_ExamStudentClassId" FromRole="StudentClass" ToRole="ExamStudentResult" />
           <NavigationProperty Name="MasterData" Relationship="Self.FK_StudentClass_Class" FromRole="StudentClass" ToRole="MasterData" />
           <NavigationProperty Name="MasterData1" Relationship="Self.FK_StudentClass_Feetype" FromRole="StudentClass" ToRole="MasterData" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_StudentClass_OrganizationOrgId" FromRole="StudentClass" ToRole="Organization" />
           <NavigationProperty Name="StudentActivities" Relationship="Self.FK_StudentActivity_StudentClassId" FromRole="StudentClass" ToRole="StudentActivity" />
+          <NavigationProperty Name="StudentCertificates" Relationship="Self.FK_StudentCertificate_StudentClass" FromRole="StudentClass" ToRole="StudentCertificate" />
           <NavigationProperty Name="Student" Relationship="Self.FK_StudentClass_Student" FromRole="StudentClass" ToRole="Students" />
           <NavigationProperty Name="StudentClassSubjects" Relationship="Self.FK_StudentClassSubject_StudentClassId" FromRole="StudentClass" ToRole="StudentClassSubject" />
           <NavigationProperty Name="StudentDocuments" Relationship="Self.FK_StudentDocuments_StudentClass" FromRole="StudentClass" ToRole="StudentDocuments" />
@@ -2760,9 +3215,9 @@
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_StudentClassSubject_BatchesBatchId" FromRole="StudentClassSubject" ToRole="Batches" />
           <NavigationProperty Name="ClassSubject" Relationship="Self.FK_StudentClassSubject_ClassSubjectId" FromRole="StudentClassSubject" ToRole="ClassSubject" />
-          <NavigationProperty Name="ExamStudentSubjects" Relationship="Self.FK_ExamStudentSubject_StudentClassSubjectId" FromRole="StudentClassSubject" ToRole="ExamStudentSubject" />
-          <NavigationProperty Name="MasterData" Relationship="Self.FK_StudentClassSubject_MasterDataBatchId" FromRole="StudentClassSubject" ToRole="MasterData" />
+          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubject_StudentClassSubjectId" FromRole="StudentClassSubject" ToRole="ExamStudentSubjectResult" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_StudentClassSubject_OrganizationOrgId" FromRole="StudentClassSubject" ToRole="Organization" />
           <NavigationProperty Name="StudentClass" Relationship="Self.FK_StudentClassSubject_StudentClassId" FromRole="StudentClassSubject" ToRole="StudentClass" />
         </EntityType>
@@ -2778,11 +3233,13 @@
           <Property Name="DocTypeId" Type="Int16" Nullable="false" />
           <Property Name="Active" Type="Byte" Nullable="false" />
           <Property Name="OrgId" Type="Int16" />
+          <Property Name="BatchId" Type="Int16" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
-          <NavigationProperty Name="MasterData" Relationship="Self.FK_StudentDocuments_MasterData" FromRole="StudentDocuments" ToRole="MasterData" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_StudentDocuments_Batches" FromRole="StudentDocuments" ToRole="Batches" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_StudentDocuments_MasterDataDocTypeId" FromRole="StudentDocuments" ToRole="MasterData" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_StudentDocuments_OrganizationId" FromRole="StudentDocuments" ToRole="Organization" />
           <NavigationProperty Name="StudentClass" Relationship="Self.FK_StudentDocuments_StudentClass" FromRole="StudentDocuments" ToRole="StudentClass" />
           <NavigationProperty Name="Student" Relationship="Self.FK_StudentPhoto_Students" FromRole="StudentDocuments" ToRole="Students" />
@@ -2809,6 +3266,7 @@
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
+          <NavigationProperty Name="Batch1" Relationship="Self.FK_StudentFeePayment_Batches" FromRole="StudentFeePayment" ToRole="Batches" />
           <NavigationProperty Name="ClassFee" Relationship="Self.FK_StudentFeePayment_ClassFee" FromRole="StudentFeePayment" ToRole="ClassFee" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_StudentFeePayment_OrganizationId" FromRole="StudentFeePayment" ToRole="Organization" />
           <NavigationProperty Name="PaymentDetails" Relationship="Self.FK_PaymentDetails_FeePayment" FromRole="StudentFeePayment" ToRole="PaymentDetails" />
@@ -2833,6 +3291,8 @@
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="BatchId" Type="Int16" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_StudentFeeReceipt_Batches" FromRole="StudentFeeReceipt" ToRole="Batches" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_StudentFeeReceipt_OrganizationOrgId" FromRole="StudentFeeReceipt" ToRole="Organization" />
           <NavigationProperty Name="PaymentDetails" Relationship="Self.FK_PaymentDetails_StudentFeeReceipt" FromRole="StudentFeeReceipt" ToRole="PaymentDetails" />
           <NavigationProperty Name="StudentClass" Relationship="Self.FK_StudentFeeReceipt_StudentClass" FromRole="StudentFeeReceipt" ToRole="StudentClass" />
@@ -2921,8 +3381,8 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_SubjectTypes_Batches" FromRole="SubjectTypes" ToRole="Batches" />
           <NavigationProperty Name="ClassSubjects" Relationship="Self.FK_ClassSubject_SubjectTypesId" FromRole="SubjectTypes" ToRole="ClassSubject" />
-          <NavigationProperty Name="MasterData" Relationship="Self.FK_SubjectTypes_MasterDataBatchId" FromRole="SubjectTypes" ToRole="MasterData" />
         </EntityType>
         <EntityType Name="TaskConfiguration">
           <Key>
@@ -3024,6 +3484,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Attendance_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="0..1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Attendance_OrganizationId">
           <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
           <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
@@ -3045,6 +3517,234 @@
             </Principal>
             <Dependent Role="Attendance">
               <PropertyRef Name="StudentClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batches_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="Batches" Type="Self.Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="Batches">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassFee_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
+          <End Role="ClassFee" Type="Self.ClassFee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="ClassFee">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassSubject_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
+          <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="ClassSubject">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassSubjectMarkComponents_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
+          <End Role="ClassSubjectMarkComponents" Type="Self.ClassSubjectMarkComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="ClassSubjectMarkComponents">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exams_BatchesBatchId">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="0..1" />
+          <End Role="Exams" Type="Self.Exam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="Exams">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamSlot_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
+          <End Role="ExamSlot" Type="Self.ExamSlot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="ExamSlot">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamStudentResult_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
+          <End Role="ExamStudentResult" Type="Self.ExamStudentResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="ExamStudentResult">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamStudentSubjectResult_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="ExamStudentSubjectResult">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDetails_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="0..1" />
+          <End Role="PaymentDetails" Type="Self.PaymentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="PaymentDetails">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleUser_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="0..1" />
+          <End Role="RoleUser" Type="Self.RoleUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="RoleUser">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SlotAndClassSubject_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
+          <End Role="SlotAndClassSubject" Type="Self.SlotAndClassSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="SlotAndClassSubject">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentActivity_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="0..1" />
+          <End Role="StudentActivity" Type="Self.StudentActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudentActivity">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCertificate_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
+          <End Role="StudentCertificate" Type="Self.StudentCertificate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudentCertificate">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentClass_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudentClass">
+              <PropertyRef Name="Batch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentClassSubject_BatchesBatchId">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
+          <End Role="StudentClassSubject" Type="Self.StudentClassSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudentClassSubject">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDocuments_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="0..1" />
+          <End Role="StudentDocuments" Type="Self.StudentDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudentDocuments">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeePayment_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
+          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudentFeePayment">
+              <PropertyRef Name="Batch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeeReceipt_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="0..1" />
+          <End Role="StudentFeeReceipt" Type="Self.StudentFeeReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudentFeeReceipt">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectTypes_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="0..1" />
+          <End Role="SubjectTypes" Type="Self.SubjectType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="SubjectTypes">
+              <PropertyRef Name="BatchId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3168,6 +3868,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ClassSubjectMarkComponents_ClassSubjectId">
+          <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="1" />
+          <End Role="ClassSubjectMarkComponents" Type="Self.ClassSubjectMarkComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassSubject">
+              <PropertyRef Name="ClassSubjectId" />
+            </Principal>
+            <Dependent Role="ClassSubjectMarkComponents">
+              <PropertyRef Name="ClassSubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SlotAndClassSubject_ClassSubjectId">
           <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="1" />
           <End Role="SlotAndClassSubject" Type="Self.SlotAndClassSubject" Multiplicity="*" />
@@ -3192,18 +3904,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ClassSubjectMarkComponents_MasterDataClassApplyTo">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="ClassSubjectMarkComponents" Type="Self.ClassSubjectMarkComponent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="ClassSubjectMarkComponents">
-              <PropertyRef Name="ApplyToClass" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
           <End Role="ClassSubjectMarkComponents" Type="Self.ClassSubjectMarkComponent" Multiplicity="*" />
@@ -3213,18 +3913,6 @@
             </Principal>
             <Dependent Role="ClassSubjectMarkComponents">
               <PropertyRef Name="SubjectComponentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClassSubjectMarkComponents_MasterDataSubjectId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="ClassSubjectMarkComponents" Type="Self.ClassSubjectMarkComponent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="ClassSubjectMarkComponents">
-              <PropertyRef Name="SubjectId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3240,15 +3928,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Exams_MasterDataBatchId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
-          <End Role="Exams" Type="Self.Exam" Multiplicity="*" />
+        <Association Name="FK_ExamStudentSubject_ClassSubjectMarkComponentId">
+          <End Role="ClassSubjectMarkComponents" Type="Self.ClassSubjectMarkComponent" Multiplicity="1" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
+            <Principal Role="ClassSubjectMarkComponents">
+              <PropertyRef Name="ClassSubjectMarkComponentId" />
             </Principal>
-            <Dependent Role="Exams">
-              <PropertyRef Name="BatchId" />
+            <Dependent Role="ExamStudentSubjectResult">
+              <PropertyRef Name="ClassSubjectMarkComponentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3290,12 +3978,12 @@
         </Association>
         <Association Name="FK_ExamStudentClass_ExamsId">
           <End Role="Exams" Type="Self.Exam" Multiplicity="1" />
-          <End Role="ExamStudentClass" Type="Self.ExamStudentClass" Multiplicity="*" />
+          <End Role="ExamStudentResult" Type="Self.ExamStudentResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Exams">
               <PropertyRef Name="ExamId" />
             </Principal>
-            <Dependent Role="ExamStudentClass">
+            <Dependent Role="ExamStudentResult">
               <PropertyRef Name="ExamId" />
             </Dependent>
           </ReferentialConstraint>
@@ -3326,96 +4014,96 @@
         </Association>
         <Association Name="FK_ExamStudentClass_ExamStudentClassId">
           <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="1" />
-          <End Role="ExamStudentClass" Type="Self.ExamStudentClass" Multiplicity="*" />
+          <End Role="ExamStudentResult" Type="Self.ExamStudentResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StudentClass">
               <PropertyRef Name="StudentClassId" />
             </Principal>
-            <Dependent Role="ExamStudentClass">
+            <Dependent Role="ExamStudentResult">
               <PropertyRef Name="StudentClassId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExamStudentClass_MasterDataGrade">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
-          <End Role="ExamStudentClass" Type="Self.ExamStudentClass" Multiplicity="*" />
+          <End Role="ExamStudentResult" Type="Self.ExamStudentResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MasterData">
               <PropertyRef Name="MasterDataId" />
             </Principal>
-            <Dependent Role="ExamStudentClass">
+            <Dependent Role="ExamStudentResult">
               <PropertyRef Name="Grade" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExamStudentClass_MasterDataStatus">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="ExamStudentClass" Type="Self.ExamStudentClass" Multiplicity="*" />
+          <End Role="ExamStudentResult" Type="Self.ExamStudentResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MasterData">
               <PropertyRef Name="MasterDataId" />
             </Principal>
-            <Dependent Role="ExamStudentClass">
+            <Dependent Role="ExamStudentResult">
               <PropertyRef Name="ExamStatus" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExamStudentClass_OrganizationId">
           <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
-          <End Role="ExamStudentClass" Type="Self.ExamStudentClass" Multiplicity="*" />
+          <End Role="ExamStudentResult" Type="Self.ExamStudentResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organization">
               <PropertyRef Name="OrganizationId" />
             </Principal>
-            <Dependent Role="ExamStudentClass">
+            <Dependent Role="ExamStudentResult">
               <PropertyRef Name="OrgId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ExamStudentSubject_ExamStudentClassId">
-          <End Role="ExamStudentClass" Type="Self.ExamStudentClass" Multiplicity="1" />
-          <End Role="ExamStudentSubject" Type="Self.ExamStudentSubject" Multiplicity="*" />
+        <Association Name="FK_ExamStudentSubjectResult_ExamStudentResult">
+          <End Role="ExamStudentResult" Type="Self.ExamStudentResult" Multiplicity="1" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ExamStudentClass">
-              <PropertyRef Name="ExamStudentClassId" />
+            <Principal Role="ExamStudentResult">
+              <PropertyRef Name="ExamStudentResultId" />
             </Principal>
-            <Dependent Role="ExamStudentSubject">
-              <PropertyRef Name="ExamStudentClassId" />
+            <Dependent Role="ExamStudentSubjectResult">
+              <PropertyRef Name="ExamStudentResultId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExamStudentSubject_MasterDataStatus">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="ExamStudentSubject" Type="Self.ExamStudentSubject" Multiplicity="*" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MasterData">
               <PropertyRef Name="MasterDataId" />
             </Principal>
-            <Dependent Role="ExamStudentSubject">
+            <Dependent Role="ExamStudentSubjectResult">
               <PropertyRef Name="ExamStatus" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExamStudentSubject_Organization">
           <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
-          <End Role="ExamStudentSubject" Type="Self.ExamStudentSubject" Multiplicity="*" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organization">
               <PropertyRef Name="OrganizationId" />
             </Principal>
-            <Dependent Role="ExamStudentSubject">
+            <Dependent Role="ExamStudentSubjectResult">
               <PropertyRef Name="OrgId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExamStudentSubject_StudentClassSubjectId">
           <End Role="StudentClassSubject" Type="Self.StudentClassSubject" Multiplicity="1" />
-          <End Role="ExamStudentSubject" Type="Self.ExamStudentSubject" Multiplicity="*" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StudentClassSubject">
               <PropertyRef Name="StudentClassSubjectId" />
             </Principal>
-            <Dependent Role="ExamStudentSubject">
+            <Dependent Role="ExamStudentSubjectResult">
               <PropertyRef Name="StudentClassSubjectId" />
             </Dependent>
           </ReferentialConstraint>
@@ -3453,6 +4141,18 @@
             </Principal>
             <Dependent Role="MasterData">
               <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MasterRolePermission_MasterDataId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="MasterRolePermission" Type="Self.MasterRolePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="MasterRolePermission">
+              <PropertyRef Name="MasterDataId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3504,19 +4204,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentClassSubject_MasterDataBatchId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="StudentClassSubject" Type="Self.StudentClassSubject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="StudentClassSubject">
-              <PropertyRef Name="BatchId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentDocuments_MasterData">
+        <Association Name="FK_StudentDocuments_MasterDataDocTypeId">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
           <End Role="StudentDocuments" Type="Self.StudentDocument" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3636,18 +4324,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SubjectTypes_MasterDataBatchId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
-          <End Role="SubjectTypes" Type="Self.SubjectType" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="SubjectTypes">
-              <PropertyRef Name="BatchId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Messages_Organization">
           <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
           <End Role="Messages" Type="Self.Message" Multiplicity="*" />
@@ -3740,6 +4416,18 @@
               <PropertyRef Name="OrganizationId" />
             </Principal>
             <Dependent Role="StudentActivity">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCertificate_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="StudentCertificate" Type="Self.StudentCertificate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="StudentCertificate">
               <PropertyRef Name="OrgId" />
             </Dependent>
           </ReferentialConstraint>
@@ -3888,6 +4576,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StudentCertificate_StudentClass">
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="1" />
+          <End Role="StudentCertificate" Type="Self.StudentCertificate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentClass">
+              <PropertyRef Name="StudentClassId" />
+            </Principal>
+            <Dependent Role="StudentCertificate">
+              <PropertyRef Name="StudentClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StudentClass_Student">
           <End Role="Students" Type="Self.Student" Multiplicity="1" />
           <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
@@ -4011,15 +4711,17 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
           <EntitySet Name="Attendances" EntityType="Self.Attendance" />
+          <EntitySet Name="Batches" EntityType="Self.Batch" />
           <EntitySet Name="ClassFees" EntityType="Self.ClassFee" />
           <EntitySet Name="ClassSubjects" EntityType="Self.ClassSubject" />
           <EntitySet Name="ClassSubjectMarkComponents" EntityType="Self.ClassSubjectMarkComponent" />
           <EntitySet Name="Exams" EntityType="Self.Exam" />
           <EntitySet Name="ExamSlots" EntityType="Self.ExamSlot" />
-          <EntitySet Name="ExamStudentClasses" EntityType="Self.ExamStudentClass" />
-          <EntitySet Name="ExamStudentSubjects" EntityType="Self.ExamStudentSubject" />
+          <EntitySet Name="ExamStudentResults" EntityType="Self.ExamStudentResult" />
+          <EntitySet Name="ExamStudentSubjectResults" EntityType="Self.ExamStudentSubjectResult" />
           <EntitySet Name="FilesNPhotos" EntityType="Self.FilesNPhoto" />
           <EntitySet Name="MasterDatas" EntityType="Self.MasterData" />
+          <EntitySet Name="MasterRolePermissions" EntityType="Self.MasterRolePermission" />
           <EntitySet Name="Messages" EntityType="Self.Message" />
           <EntitySet Name="Organizations" EntityType="Self.Organization" />
           <EntitySet Name="PageHistories" EntityType="Self.PageHistory" />
@@ -4029,6 +4731,7 @@
           <EntitySet Name="RoleUsers" EntityType="Self.RoleUser" />
           <EntitySet Name="SlotAndClassSubjects" EntityType="Self.SlotAndClassSubject" />
           <EntitySet Name="StudentActivities" EntityType="Self.StudentActivity" />
+          <EntitySet Name="StudentCertificates" EntityType="Self.StudentCertificate" />
           <EntitySet Name="StudentClasses" EntityType="Self.StudentClass" />
           <EntitySet Name="StudentClassSubjects" EntityType="Self.StudentClassSubject" />
           <EntitySet Name="StudentDocuments" EntityType="Self.StudentDocument" />
@@ -4061,6 +4764,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <AssociationSet Name="FK_Attendance_Batches" Association="Self.FK_Attendance_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
           <AssociationSet Name="FK_Attendance_OrganizationId" Association="Self.FK_Attendance_OrganizationId">
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="Attendance" EntitySet="Attendances" />
@@ -4068,6 +4775,82 @@
           <AssociationSet Name="FK_Attendance_StudentClassId" Association="Self.FK_Attendance_StudentClassId">
             <End Role="StudentClass" EntitySet="StudentClasses" />
             <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batches_Organization" Association="Self.FK_Batches_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="Batches" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassFee_Batches" Association="Self.FK_ClassFee_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="ClassFee" EntitySet="ClassFees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassSubject_Batches" Association="Self.FK_ClassSubject_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="ClassSubject" EntitySet="ClassSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassSubjectMarkComponents_Batches" Association="Self.FK_ClassSubjectMarkComponents_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exams_BatchesBatchId" Association="Self.FK_Exams_BatchesBatchId">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="Exams" EntitySet="Exams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamSlot_Batches" Association="Self.FK_ExamSlot_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="ExamSlot" EntitySet="ExamSlots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamStudentResult_Batches" Association="Self.FK_ExamStudentResult_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="ExamStudentResult" EntitySet="ExamStudentResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamStudentSubjectResult_Batches" Association="Self.FK_ExamStudentSubjectResult_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDetails_Batches" Association="Self.FK_PaymentDetails_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleUser_Batches" Association="Self.FK_RoleUser_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="RoleUser" EntitySet="RoleUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SlotAndClassSubject_Batches" Association="Self.FK_SlotAndClassSubject_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="SlotAndClassSubject" EntitySet="SlotAndClassSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentActivity_Batches" Association="Self.FK_StudentActivity_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="StudentActivity" EntitySet="StudentActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCertificate_Batches" Association="Self.FK_StudentCertificate_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="StudentCertificate" EntitySet="StudentCertificates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentClass_Batches" Association="Self.FK_StudentClass_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="StudentClass" EntitySet="StudentClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentClassSubject_BatchesBatchId" Association="Self.FK_StudentClassSubject_BatchesBatchId">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="StudentClassSubject" EntitySet="StudentClassSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDocuments_Batches" Association="Self.FK_StudentDocuments_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="StudentDocuments" EntitySet="StudentDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeePayment_Batches" Association="Self.FK_StudentFeePayment_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="StudentFeePayment" EntitySet="StudentFeePayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeeReceipt_Batches" Association="Self.FK_StudentFeeReceipt_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="StudentFeeReceipt" EntitySet="StudentFeeReceipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectTypes_Batches" Association="Self.FK_SubjectTypes_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="SubjectTypes" EntitySet="SubjectTypes" />
           </AssociationSet>
           <AssociationSet Name="FK_ClassFee_OrganizationId" Association="Self.FK_ClassFee_OrganizationId">
             <End Role="Organization" EntitySet="Organizations" />
@@ -4109,6 +4892,10 @@
             <End Role="SubjectTypes" EntitySet="SubjectTypes" />
             <End Role="ClassSubject" EntitySet="ClassSubjects" />
           </AssociationSet>
+          <AssociationSet Name="FK_ClassSubjectMarkComponents_ClassSubjectId" Association="Self.FK_ClassSubjectMarkComponents_ClassSubjectId">
+            <End Role="ClassSubject" EntitySet="ClassSubjects" />
+            <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
+          </AssociationSet>
           <AssociationSet Name="FK_SlotAndClassSubject_ClassSubjectId" Association="Self.FK_SlotAndClassSubject_ClassSubjectId">
             <End Role="ClassSubject" EntitySet="ClassSubjects" />
             <End Role="SlotAndClassSubject" EntitySet="SlotAndClassSubjects" />
@@ -4117,15 +4904,7 @@
             <End Role="ClassSubject" EntitySet="ClassSubjects" />
             <End Role="StudentClassSubject" EntitySet="StudentClassSubjects" />
           </AssociationSet>
-          <AssociationSet Name="FK_ClassSubjectMarkComponents_MasterDataClassApplyTo" Association="Self.FK_ClassSubjectMarkComponents_MasterDataClassApplyTo">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
-          </AssociationSet>
           <AssociationSet Name="FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" Association="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClassSubjectMarkComponents_MasterDataSubjectId" Association="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectId">
             <End Role="MasterData" EntitySet="MasterDatas" />
             <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
           </AssociationSet>
@@ -4133,9 +4912,9 @@
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
           </AssociationSet>
-          <AssociationSet Name="FK_Exams_MasterDataBatchId" Association="Self.FK_Exams_MasterDataBatchId">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="Exams" EntitySet="Exams" />
+          <AssociationSet Name="FK_ExamStudentSubject_ClassSubjectMarkComponentId" Association="Self.FK_ExamStudentSubject_ClassSubjectMarkComponentId">
+            <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
           </AssociationSet>
           <AssociationSet Name="FK_Exams_MasterDataExamNameId" Association="Self.FK_Exams_MasterDataExamNameId">
             <End Role="MasterData" EntitySet="MasterDatas" />
@@ -4151,7 +4930,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentClass_ExamsId" Association="Self.FK_ExamStudentClass_ExamsId">
             <End Role="Exams" EntitySet="Exams" />
-            <End Role="ExamStudentClass" EntitySet="ExamStudentClasses" />
+            <End Role="ExamStudentResult" EntitySet="ExamStudentResults" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamSlot_OrganizationId" Association="Self.FK_ExamSlot_OrganizationId">
             <End Role="Organization" EntitySet="Organizations" />
@@ -4163,35 +4942,35 @@
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentClass_ExamStudentClassId" Association="Self.FK_ExamStudentClass_ExamStudentClassId">
             <End Role="StudentClass" EntitySet="StudentClasses" />
-            <End Role="ExamStudentClass" EntitySet="ExamStudentClasses" />
+            <End Role="ExamStudentResult" EntitySet="ExamStudentResults" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentClass_MasterDataGrade" Association="Self.FK_ExamStudentClass_MasterDataGrade">
             <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="ExamStudentClass" EntitySet="ExamStudentClasses" />
+            <End Role="ExamStudentResult" EntitySet="ExamStudentResults" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentClass_MasterDataStatus" Association="Self.FK_ExamStudentClass_MasterDataStatus">
             <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="ExamStudentClass" EntitySet="ExamStudentClasses" />
+            <End Role="ExamStudentResult" EntitySet="ExamStudentResults" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentClass_OrganizationId" Association="Self.FK_ExamStudentClass_OrganizationId">
             <End Role="Organization" EntitySet="Organizations" />
-            <End Role="ExamStudentClass" EntitySet="ExamStudentClasses" />
+            <End Role="ExamStudentResult" EntitySet="ExamStudentResults" />
           </AssociationSet>
-          <AssociationSet Name="FK_ExamStudentSubject_ExamStudentClassId" Association="Self.FK_ExamStudentSubject_ExamStudentClassId">
-            <End Role="ExamStudentClass" EntitySet="ExamStudentClasses" />
-            <End Role="ExamStudentSubject" EntitySet="ExamStudentSubjects" />
+          <AssociationSet Name="FK_ExamStudentSubjectResult_ExamStudentResult" Association="Self.FK_ExamStudentSubjectResult_ExamStudentResult">
+            <End Role="ExamStudentResult" EntitySet="ExamStudentResults" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentSubject_MasterDataStatus" Association="Self.FK_ExamStudentSubject_MasterDataStatus">
             <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="ExamStudentSubject" EntitySet="ExamStudentSubjects" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentSubject_Organization" Association="Self.FK_ExamStudentSubject_Organization">
             <End Role="Organization" EntitySet="Organizations" />
-            <End Role="ExamStudentSubject" EntitySet="ExamStudentSubjects" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamStudentSubject_StudentClassSubjectId" Association="Self.FK_ExamStudentSubject_StudentClassSubjectId">
             <End Role="StudentClassSubject" EntitySet="StudentClassSubjects" />
-            <End Role="ExamStudentSubject" EntitySet="ExamStudentSubjects" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
           </AssociationSet>
           <AssociationSet Name="FK_FilesNPhotos_MasterData" Association="Self.FK_FilesNPhotos_MasterData">
             <End Role="MasterData" EntitySet="MasterDatas" />
@@ -4204,6 +4983,10 @@
           <AssociationSet Name="FK_MasterData_Organization" Association="Self.FK_MasterData_Organization">
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="MasterData" EntitySet="MasterDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MasterRolePermission_MasterDataId" Association="Self.FK_MasterRolePermission_MasterDataId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="MasterRolePermission" EntitySet="MasterRolePermissions" />
           </AssociationSet>
           <AssociationSet Name="FK_Pages_MasterData" Association="Self.FK_Pages_MasterData">
             <End Role="MasterData" EntitySet="MasterDatas" />
@@ -4221,11 +5004,7 @@
             <End Role="MasterData" EntitySet="MasterDatas" />
             <End Role="StudentClass" EntitySet="StudentClasses" />
           </AssociationSet>
-          <AssociationSet Name="FK_StudentClassSubject_MasterDataBatchId" Association="Self.FK_StudentClassSubject_MasterDataBatchId">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="StudentClassSubject" EntitySet="StudentClassSubjects" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentDocuments_MasterData" Association="Self.FK_StudentDocuments_MasterData">
+          <AssociationSet Name="FK_StudentDocuments_MasterDataDocTypeId" Association="Self.FK_StudentDocuments_MasterDataDocTypeId">
             <End Role="MasterData" EntitySet="MasterDatas" />
             <End Role="StudentDocuments" EntitySet="StudentDocuments" />
           </AssociationSet>
@@ -4265,10 +5044,6 @@
             <End Role="MasterData" EntitySet="MasterDatas" />
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
-          <AssociationSet Name="FK_SubjectTypes_MasterDataBatchId" Association="Self.FK_SubjectTypes_MasterDataBatchId">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="SubjectTypes" EntitySet="SubjectTypes" />
-          </AssociationSet>
           <AssociationSet Name="FK_Messages_Organization" Association="Self.FK_Messages_Organization">
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="Messages" EntitySet="Messages" />
@@ -4300,6 +5075,10 @@
           <AssociationSet Name="FK_StudentActivity_OrganizationId" Association="Self.FK_StudentActivity_OrganizationId">
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="StudentActivity" EntitySet="StudentActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCertificate_Organization" Association="Self.FK_StudentCertificate_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="StudentCertificate" EntitySet="StudentCertificates" />
           </AssociationSet>
           <AssociationSet Name="FK_StudentClass_OrganizationOrgId" Association="Self.FK_StudentClass_OrganizationOrgId">
             <End Role="Organization" EntitySet="Organizations" />
@@ -4348,6 +5127,10 @@
           <AssociationSet Name="FK_StudentActivity_StudentId" Association="Self.FK_StudentActivity_StudentId">
             <End Role="Students" EntitySet="Students" />
             <End Role="StudentActivity" EntitySet="StudentActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCertificate_StudentClass" Association="Self.FK_StudentCertificate_StudentClass">
+            <End Role="StudentClass" EntitySet="StudentClasses" />
+            <End Role="StudentCertificate" EntitySet="StudentCertificates" />
           </AssociationSet>
           <AssociationSet Name="FK_StudentClass_Student" Association="Self.FK_StudentClass_Student">
             <End Role="Students" EntitySet="Students" />
@@ -4532,6 +5315,22 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Batches">
+            <EntityTypeMapping TypeName="TTPModel.Batch">
+              <MappingFragment StoreEntitySet="Batches">
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="BatchName" ColumnName="BatchName" />
+                <ScalarProperty Name="CurrentBatch" ColumnName="CurrentBatch" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4542,7 +5341,7 @@
                 <ScalarProperty Name="FeeNameId" ColumnName="FeeNameId" />
                 <ScalarProperty Name="ClassId" ColumnName="ClassId" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Batch" ColumnName="Batch" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="LocationId" ColumnName="LocationId" />
                 <ScalarProperty Name="PaymentOrder" ColumnName="PaymentOrder" />
@@ -4574,15 +5373,14 @@
           <EntitySetMapping Name="ClassSubjectMarkComponents">
             <EntityTypeMapping TypeName="TTPModel.ClassSubjectMarkComponent">
               <MappingFragment StoreEntitySet="ClassSubjectMarkComponents">
-                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
-                <ScalarProperty Name="ClassSubjectComponentId" ColumnName="ClassSubjectComponentId" />
-                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="ClassSubjectMarkComponentId" ColumnName="ClassSubjectMarkComponentId" />
+                <ScalarProperty Name="ClassSubjectId" ColumnName="ClassSubjectId" />
                 <ScalarProperty Name="SubjectComponentId" ColumnName="SubjectComponentId" />
-                <ScalarProperty Name="ApplyToClass" ColumnName="ApplyToClass" />
                 <ScalarProperty Name="FullMark" ColumnName="FullMark" />
                 <ScalarProperty Name="PassMark" ColumnName="PassMark" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
@@ -4610,15 +5408,15 @@
           <EntitySetMapping Name="ExamSlots">
             <EntityTypeMapping TypeName="TTPModel.ExamSlot">
               <MappingFragment StoreEntitySet="ExamSlot">
-                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="ExamSlotId" ColumnName="ExamSlotId" />
                 <ScalarProperty Name="ExamId" ColumnName="ExamId" />
                 <ScalarProperty Name="ExamDate" ColumnName="ExamDate" />
                 <ScalarProperty Name="SlotNameId" ColumnName="SlotNameId" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -4626,19 +5424,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ExamStudentClasses">
-            <EntityTypeMapping TypeName="TTPModel.ExamStudentClass">
-              <MappingFragment StoreEntitySet="ExamStudentClass">
-                <ScalarProperty Name="ExamStudentClassId" ColumnName="ExamStudentClassId" />
+          <EntitySetMapping Name="ExamStudentResults">
+            <EntityTypeMapping TypeName="TTPModel.ExamStudentResult">
+              <MappingFragment StoreEntitySet="ExamStudentResult">
+                <ScalarProperty Name="ExamStudentResultId" ColumnName="ExamStudentResultId" />
                 <ScalarProperty Name="ExamId" ColumnName="ExamId" />
                 <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
-                <ScalarProperty Name="TotalFullMark" ColumnName="TotalFullMark" />
-                <ScalarProperty Name="TotalPassMark" ColumnName="TotalPassMark" />
                 <ScalarProperty Name="TotalMarks" ColumnName="TotalMarks" />
                 <ScalarProperty Name="Grade" ColumnName="Grade" />
                 <ScalarProperty Name="Rank" ColumnName="Rank" />
                 <ScalarProperty Name="ExamStatus" ColumnName="ExamStatus" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
@@ -4646,22 +5443,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ExamStudentSubjects">
-            <EntityTypeMapping TypeName="TTPModel.ExamStudentSubject">
-              <MappingFragment StoreEntitySet="ExamStudentSubject">
-                <ScalarProperty Name="ExamStudentSubjectId" ColumnName="ExamStudentSubjectId" />
-                <ScalarProperty Name="ExamStudentClassId" ColumnName="ExamStudentClassId" />
+          <EntitySetMapping Name="ExamStudentSubjectResults">
+            <EntityTypeMapping TypeName="TTPModel.ExamStudentSubjectResult">
+              <MappingFragment StoreEntitySet="ExamStudentSubjectResult">
+                <ScalarProperty Name="ExamStudentSubjectResultId" ColumnName="ExamStudentSubjectResultId" />
+                <ScalarProperty Name="ExamStudentResultId" ColumnName="ExamStudentResultId" />
                 <ScalarProperty Name="StudentClassSubjectId" ColumnName="StudentClassSubjectId" />
-                <ScalarProperty Name="Theory" ColumnName="Theory" />
-                <ScalarProperty Name="Practical" ColumnName="Practical" />
-                <ScalarProperty Name="InternalAssessment" ColumnName="InternalAssessment" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ClassSubjectMarkComponentId" ColumnName="ClassSubjectMarkComponentId" />
+                <ScalarProperty Name="Marks" ColumnName="Marks" />
                 <ScalarProperty Name="ExamStatus" ColumnName="ExamStatus" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4702,6 +5499,22 @@
                 <ScalarProperty Name="LocationId" ColumnName="LocationId" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MasterRolePermissions">
+            <EntityTypeMapping TypeName="TTPModel.MasterRolePermission">
+              <MappingFragment StoreEntitySet="MasterRolePermission">
+                <ScalarProperty Name="MasterRolePermissionId" ColumnName="MasterRolePermissionId" />
+                <ScalarProperty Name="MasterDataId" ColumnName="MasterDataId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4804,6 +5617,7 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4834,6 +5648,7 @@
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -4845,11 +5660,11 @@
           <EntitySetMapping Name="SlotAndClassSubjects">
             <EntityTypeMapping TypeName="TTPModel.SlotAndClassSubject">
               <MappingFragment StoreEntitySet="SlotAndClassSubject">
-                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="SlotClassSubjectId" ColumnName="SlotClassSubjectId" />
                 <ScalarProperty Name="SlotId" ColumnName="SlotId" />
                 <ScalarProperty Name="ClassSubjectId" ColumnName="ClassSubjectId" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -4875,6 +5690,23 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentCertificates">
+            <EntityTypeMapping TypeName="TTPModel.StudentCertificate">
+              <MappingFragment StoreEntitySet="StudentCertificate">
+                <ScalarProperty Name="StudentCertificateId" ColumnName="StudentCertificateId" />
+                <ScalarProperty Name="CertificateTypeId" ColumnName="CertificateTypeId" />
+                <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4927,6 +5759,7 @@
                 <ScalarProperty Name="DocTypeId" ColumnName="DocTypeId" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
@@ -4975,6 +5808,7 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

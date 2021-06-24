@@ -67,13 +67,15 @@ namespace schools
             builder.EntitySet<ClassSubject>("ClassSubjects");
             builder.EntitySet<Exam>("Exams");            
             builder.EntitySet<ExamSlot>("ExamSlots");
-            builder.EntitySet<ExamStudentClass>("ExamStudentClasses");
             builder.EntitySet<SlotAndClassSubject>("SlotAndClassSubjects");
-            builder.EntitySet<ExamStudentSubject>("ExamStudentSubjects");
+            //builder.EntitySet<ExamStudentSubject>("ExamStudentSubjects");
             builder.EntitySet<StudentClassSubject>("StudentClassSubjects");
             builder.EntitySet<StudentActivity>("StudentActivities");
             builder.EntitySet<SubjectType>("SubjectTypes");
             builder.EntitySet<ClassSubjectMarkComponent>("ClassSubjectMarkComponents");
+            builder.EntitySet<ExamStudentResult>("ExamStudentResults");
+            builder.EntitySet<ExamStudentSubjectResult>("ExamStudentSubjectResults");
+            builder.EntitySet<Batch>("Batches");
 
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 

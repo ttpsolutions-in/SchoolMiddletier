@@ -370,13 +370,14 @@
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\AppUsersController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
+    <Compile Include="Controllers\BatchesController.cs" />
     <Compile Include="Controllers\ClassFeesController.cs" />
     <Compile Include="Controllers\ClassSubjectMarkComponentsController.cs" />
     <Compile Include="Controllers\ClassSubjectsController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
     <Compile Include="Controllers\ExamSlotsController.cs" />
-    <Compile Include="Controllers\ExamStudentClassesController.cs" />
-    <Compile Include="Controllers\ExamStudentSubjectsController.cs" />
+    <Compile Include="Controllers\ExamStudentResultsController.cs" />
+    <Compile Include="Controllers\ExamStudentSubjectResultsController.cs" />
     <Compile Include="Controllers\FilesNPhotoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
@@ -433,6 +434,9 @@
     <Compile Include="Models\Attendance.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Batch.cs">
+      <DependentUpon>TTP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ClassFee.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
@@ -451,10 +455,10 @@
     <Compile Include="Models\ExamSlot.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ExamStudentClass.cs">
+    <Compile Include="Models\ExamStudentResult.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ExamStudentSubject.cs">
+    <Compile Include="Models\ExamStudentSubjectResult.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FilesNPhoto.cs">
@@ -462,6 +466,9 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MasterData.cs">
+      <DependentUpon>TTP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MasterRolePermission.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Message.cs">
@@ -492,6 +499,9 @@
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentActivity.cs">
+      <DependentUpon>TTP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StudentCertificate.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentClass.cs">

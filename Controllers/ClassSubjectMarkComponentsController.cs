@@ -23,8 +23,10 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<ClassSubjectMarkComponent>("ClassSubjectMarkComponents");
+    builder.EntitySet<ClassSubject>("ClassSubjects"); 
     builder.EntitySet<MasterData>("MasterDatas"); 
     builder.EntitySet<Organization>("Organizations"); 
+    builder.EntitySet<ExamStudentSubjectResult>("ExamStudentSubjectResults"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class ClassSubjectMarkComponentsController : ODataController
@@ -42,7 +44,7 @@ namespace schools.Controllers
         [EnableQuery]
         public SingleResult<ClassSubjectMarkComponent> GetClassSubjectMarkComponent([FromODataUri] short key)
         {
-            return SingleResult.Create(db.ClassSubjectMarkComponents.Where(classSubjectMarkComponent => classSubjectMarkComponent.ClassSubjectComponentId == key));
+            return SingleResult.Create(db.ClassSubjectMarkComponents.Where(classSubjectMarkComponent => classSubjectMarkComponent.ClassSubjectMarkComponentId == key));
         }
 
         // PUT: odata/ClassSubjectMarkComponents(5)
@@ -91,22 +93,7 @@ namespace schools.Controllers
             }
 
             db.ClassSubjectMarkComponents.Add(classSubjectMarkComponent);
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (ClassSubjectMarkComponentExists(classSubjectMarkComponent.ClassSubjectComponentId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await db.SaveChangesAsync();
 
             return Created(classSubjectMarkComponent);
         }
@@ -164,32 +151,32 @@ namespace schools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // GET: odata/ClassSubjectMarkComponents(5)/ClassSubject
+        [EnableQuery]
+        public SingleResult<ClassSubject> GetClassSubject([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.ClassSubjectMarkComponents.Where(m => m.ClassSubjectMarkComponentId == key).Select(m => m.ClassSubject));
+        }
+
         // GET: odata/ClassSubjectMarkComponents(5)/MasterData
         [EnableQuery]
         public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
         {
-            return SingleResult.Create(db.ClassSubjectMarkComponents.Where(m => m.ClassSubjectComponentId == key).Select(m => m.MasterData));
-        }
-
-        // GET: odata/ClassSubjectMarkComponents(5)/MasterData1
-        [EnableQuery]
-        public SingleResult<MasterData> GetMasterData1([FromODataUri] short key)
-        {
-            return SingleResult.Create(db.ClassSubjectMarkComponents.Where(m => m.ClassSubjectComponentId == key).Select(m => m.MasterData1));
-        }
-
-        // GET: odata/ClassSubjectMarkComponents(5)/MasterData2
-        [EnableQuery]
-        public SingleResult<MasterData> GetMasterData2([FromODataUri] short key)
-        {
-            return SingleResult.Create(db.ClassSubjectMarkComponents.Where(m => m.ClassSubjectComponentId == key).Select(m => m.MasterData2));
+            return SingleResult.Create(db.ClassSubjectMarkComponents.Where(m => m.ClassSubjectMarkComponentId == key).Select(m => m.MasterData));
         }
 
         // GET: odata/ClassSubjectMarkComponents(5)/Organization
         [EnableQuery]
         public SingleResult<Organization> GetOrganization([FromODataUri] short key)
         {
-            return SingleResult.Create(db.ClassSubjectMarkComponents.Where(m => m.ClassSubjectComponentId == key).Select(m => m.Organization));
+            return SingleResult.Create(db.ClassSubjectMarkComponents.Where(m => m.ClassSubjectMarkComponentId == key).Select(m => m.Organization));
+        }
+
+        // GET: odata/ClassSubjectMarkComponents(5)/ExamStudentSubjectResults
+        [EnableQuery]
+        public IQueryable<ExamStudentSubjectResult> GetExamStudentSubjectResults([FromODataUri] short key)
+        {
+            return db.ClassSubjectMarkComponents.Where(m => m.ClassSubjectMarkComponentId == key).SelectMany(m => m.ExamStudentSubjectResults);
         }
 
         protected override void Dispose(bool disposing)
@@ -203,7 +190,7 @@ namespace schools.Controllers
 
         private bool ClassSubjectMarkComponentExists(short key)
         {
-            return db.ClassSubjectMarkComponents.Count(e => e.ClassSubjectComponentId == key) > 0;
+            return db.ClassSubjectMarkComponents.Count(e => e.ClassSubjectMarkComponentId == key) > 0;
         }
     }
 }

@@ -22,11 +22,13 @@ namespace schools.Models
         public short DocTypeId { get; set; }
         public byte Active { get; set; }
         public Nullable<short> OrgId { get; set; }
+        public Nullable<short> BatchId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
     
+        public virtual Batch Batch { get; set; }
         public virtual MasterData MasterData { get; set; }
         public virtual Organization Organization { get; set; }
         public virtual StudentClass StudentClass { get; set; }

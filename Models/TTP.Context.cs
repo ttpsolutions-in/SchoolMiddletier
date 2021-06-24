@@ -35,15 +35,17 @@ namespace schools.Models
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
+        public virtual DbSet<Batch> Batches { get; set; }
         public virtual DbSet<ClassFee> ClassFees { get; set; }
         public virtual DbSet<ClassSubject> ClassSubjects { get; set; }
         public virtual DbSet<ClassSubjectMarkComponent> ClassSubjectMarkComponents { get; set; }
         public virtual DbSet<Exam> Exams { get; set; }
         public virtual DbSet<ExamSlot> ExamSlots { get; set; }
-        public virtual DbSet<ExamStudentClass> ExamStudentClasses { get; set; }
-        public virtual DbSet<ExamStudentSubject> ExamStudentSubjects { get; set; }
+        public virtual DbSet<ExamStudentResult> ExamStudentResults { get; set; }
+        public virtual DbSet<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
         public virtual DbSet<FilesNPhoto> FilesNPhotos { get; set; }
         public virtual DbSet<MasterData> MasterDatas { get; set; }
+        public virtual DbSet<MasterRolePermission> MasterRolePermissions { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Organization> Organizations { get; set; }
         public virtual DbSet<PageHistory> PageHistories { get; set; }
@@ -53,6 +55,7 @@ namespace schools.Models
         public virtual DbSet<RoleUser> RoleUsers { get; set; }
         public virtual DbSet<SlotAndClassSubject> SlotAndClassSubjects { get; set; }
         public virtual DbSet<StudentActivity> StudentActivities { get; set; }
+        public virtual DbSet<StudentCertificate> StudentCertificates { get; set; }
         public virtual DbSet<StudentClass> StudentClasses { get; set; }
         public virtual DbSet<StudentClassSubject> StudentClassSubjects { get; set; }
         public virtual DbSet<StudentDocument> StudentDocuments { get; set; }

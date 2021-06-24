@@ -23,9 +23,11 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<Exam>("Exams");
+    builder.EntitySet<Batch>("Batches"); 
     builder.EntitySet<MasterData>("MasterDatas"); 
+    builder.EntitySet<Organization>("Organizations"); 
     builder.EntitySet<ExamSlot>("ExamSlots"); 
-    builder.EntitySet<ExamStudentClass>("ExamStudentClasses"); 
+    builder.EntitySet<ExamStudentResult>("ExamStudentResults"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class ExamsController : ODataController
@@ -150,6 +152,13 @@ namespace schools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // GET: odata/Exams(5)/Batch
+        [EnableQuery]
+        public SingleResult<Batch> GetBatch([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.Exams.Where(m => m.ExamId == key).Select(m => m.Batch));
+        }
+
         // GET: odata/Exams(5)/MasterData
         [EnableQuery]
         public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
@@ -157,11 +166,11 @@ namespace schools.Controllers
             return SingleResult.Create(db.Exams.Where(m => m.ExamId == key).Select(m => m.MasterData));
         }
 
-        // GET: odata/Exams(5)/MasterData1
+        // GET: odata/Exams(5)/Organization
         [EnableQuery]
-        public SingleResult<MasterData> GetMasterData1([FromODataUri] short key)
+        public SingleResult<Organization> GetOrganization([FromODataUri] short key)
         {
-            return SingleResult.Create(db.Exams.Where(m => m.ExamId == key).Select(m => m.MasterData1));
+            return SingleResult.Create(db.Exams.Where(m => m.ExamId == key).Select(m => m.Organization));
         }
 
         // GET: odata/Exams(5)/ExamSlots
@@ -171,11 +180,11 @@ namespace schools.Controllers
             return db.Exams.Where(m => m.ExamId == key).SelectMany(m => m.ExamSlots);
         }
 
-        // GET: odata/Exams(5)/ExamStudentClasses
+        // GET: odata/Exams(5)/ExamStudentResults
         [EnableQuery]
-        public IQueryable<ExamStudentClass> GetExamStudentClasses([FromODataUri] short key)
+        public IQueryable<ExamStudentResult> GetExamStudentResults([FromODataUri] short key)
         {
-            return db.Exams.Where(m => m.ExamId == key).SelectMany(m => m.ExamStudentClasses);
+            return db.Exams.Where(m => m.ExamId == key).SelectMany(m => m.ExamStudentResults);
         }
 
         protected override void Dispose(bool disposing)

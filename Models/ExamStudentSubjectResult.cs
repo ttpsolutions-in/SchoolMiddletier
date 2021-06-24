@@ -12,27 +12,27 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PaymentDetail
+    public partial class ExamStudentSubjectResult
     {
-        public int PaymentId { get; set; }
-        public Nullable<decimal> PaymentAmt { get; set; }
-        public Nullable<System.DateTime> PaymentDate { get; set; }
-        public string ReceivedBy { get; set; }
-        public Nullable<int> ParentId { get; set; }
-        public Nullable<short> ReceiptNo { get; set; }
-        public Nullable<short> ClassFeeId { get; set; }
-        public Nullable<byte> Active { get; set; }
+        public short ExamStudentSubjectResultId { get; set; }
+        public short ExamStudentResultId { get; set; }
+        public short StudentClassSubjectId { get; set; }
+        public short ClassSubjectMarkComponentId { get; set; }
+        public short Marks { get; set; }
+        public short ExamStatus { get; set; }
         public short OrgId { get; set; }
+        public short BatchId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
-        public Nullable<short> BatchId { get; set; }
+        public Nullable<byte> Active { get; set; }
     
         public virtual Batch Batch { get; set; }
-        public virtual ClassFee ClassFee { get; set; }
+        public virtual ClassSubjectMarkComponent ClassSubjectMarkComponent { get; set; }
+        public virtual ExamStudentResult ExamStudentResult { get; set; }
+        public virtual MasterData MasterData { get; set; }
         public virtual Organization Organization { get; set; }
-        public virtual StudentFeePayment StudentFeePayment { get; set; }
-        public virtual StudentFeeReceipt StudentFeeReceipt { get; set; }
+        public virtual StudentClassSubject StudentClassSubject { get; set; }
     }
 }

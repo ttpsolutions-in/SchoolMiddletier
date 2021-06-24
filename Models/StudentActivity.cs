@@ -29,6 +29,7 @@ namespace schools.Models
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
     
+        public virtual Batch Batch { get; set; }
         public virtual Organization Organization { get; set; }
         public virtual StudentClass StudentClass { get; set; }
         public virtual Student Student { get; set; }

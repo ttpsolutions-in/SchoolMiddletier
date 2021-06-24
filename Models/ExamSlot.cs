@@ -26,14 +26,15 @@ namespace schools.Models
         public short SlotNameId { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }
+        public byte Active { get; set; }
         public short OrgId { get; set; }
+        public short BatchId { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime UpdatedDate { get; set; }
         public short CreatedBy { get; set; }
         public short UpdatedBy { get; set; }
-        public byte Active { get; set; }
-        public short BatchId { get; set; }
     
+        public virtual Batch Batch { get; set; }
         public virtual Exam Exam { get; set; }
         public virtual Organization Organization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
