@@ -59,8 +59,6 @@ namespace schools
             builder.EntitySet<StudentDocument>("StudentDocuments");
             builder.EntitySet<TaskConfiguration>("TaskConfigurations");
             builder.EntitySet<AppUser>("AppUsers");
-            builder.EntitySet<Application>("Applications");
-            builder.EntitySet<ApplicationRole>("ApplicationRoles");
             builder.EntitySet<RoleUser>("RoleUsers");
             builder.EntitySet<Attendance>("Attendances");
             builder.EntitySet<Organization>("Organizations");            
@@ -68,7 +66,6 @@ namespace schools
             builder.EntitySet<Exam>("Exams");            
             builder.EntitySet<ExamSlot>("ExamSlots");
             builder.EntitySet<SlotAndClassSubject>("SlotAndClassSubjects");
-            //builder.EntitySet<ExamStudentSubject>("ExamStudentSubjects");
             builder.EntitySet<StudentClassSubject>("StudentClassSubjects");
             builder.EntitySet<StudentActivity>("StudentActivities");
             builder.EntitySet<SubjectType>("SubjectTypes");
@@ -76,7 +73,10 @@ namespace schools
             builder.EntitySet<ExamStudentResult>("ExamStudentResults");
             builder.EntitySet<ExamStudentSubjectResult>("ExamStudentSubjectResults");
             builder.EntitySet<Batch>("Batches");
-
+            builder.EntitySet<StudentCertificate>("StudentCertificates");
+            builder.EntitySet<ApplicationFeature>("ApplicationFeatures");
+            builder.EntitySet<ApplicationFeatureRolesPerm>("ApplicationFeatureRolesPerms");
+            
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 
 

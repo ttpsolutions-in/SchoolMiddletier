@@ -12,10 +12,10 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ApplicationRole
+    public partial class ApplicationFeatureRolesPerm
     {
-        public short ApplicationRoleId { get; set; }
-        public short ApplicationId { get; set; }
+        public short ApplicationFeatureRoleId { get; set; }
+        public short ApplicationFeatureId { get; set; }
         public short RoleId { get; set; }
         public Nullable<short> PermissionId { get; set; }
         public Nullable<short> OrgId { get; set; }
@@ -27,6 +27,6 @@ namespace schools.Models
         public System.DateTime UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
     
-        public virtual MasterData MasterData { get; set; }
+        public virtual ApplicationFeature ApplicationFeature { get; set; }
     }
 }

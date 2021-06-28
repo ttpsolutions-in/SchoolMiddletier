@@ -24,7 +24,7 @@ namespace StPauls.Controllers
             string imageName = null;
             StringBuilder sb = new StringBuilder();
             var httpRequest = HttpContext.Current.Request;
-            var batch = httpRequest["batch"]==null?"0": httpRequest["batch"];
+            var batch = httpRequest["BatchId"]==null?"0": httpRequest["BatchId"];
             var folderName = httpRequest["folderName"];
             var fileOrPhoto = httpRequest["fileOrPhoto"];
             var description = httpRequest["description"];
@@ -105,7 +105,7 @@ namespace StPauls.Controllers
                             UpdatedFileFolderName = imageName,
                             FileOrPhoto = Convert.ToByte(fileOrPhoto),
                             FileOrFolder = 0,
-                            Batch = Convert.ToInt16(batch),
+                            BatchId = Convert.ToInt16(batch),
                             StudentClassId = Convert.ToInt32(StudentClassId),
                             DocTypeId = Convert.ToInt16(DocTypeId),
                             Active = 1,

@@ -32,7 +32,7 @@ namespace schools.Models
         public short ClassId { get; set; }
         public string RollNo { get; set; }
         public short Section { get; set; }
-        public short Batch { get; set; }
+        public short BatchId { get; set; }
         public short FeeTypeId { get; set; }
         public Nullable<short> LanguageSubject { get; set; }
         public string Remarks { get; set; }
@@ -46,7 +46,7 @@ namespace schools.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
-        public virtual Batch Batch1 { get; set; }
+        public virtual Batch Batch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExamStudentResult> ExamStudentResults { get; set; }
         public virtual MasterData MasterData { get; set; }

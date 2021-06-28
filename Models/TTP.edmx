@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TTPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TTPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -25,12 +25,12 @@
           <Property Name="Active" Type="tinyint" />
           <Property Name="UpdateDate" Type="datetime" />
         </EntityType>
-        <EntityType Name="ApplicationRoles">
+        <EntityType Name="ApplicationFeatureRolesPerm">
           <Key>
-            <PropertyRef Name="ApplicationRoleId" />
+            <PropertyRef Name="ApplicationFeatureRoleId" />
           </Key>
-          <Property Name="ApplicationRoleId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ApplicationId" Type="smallint" Nullable="false" />
+          <Property Name="ApplicationFeatureRoleId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationFeatureId" Type="smallint" Nullable="false" />
           <Property Name="RoleId" Type="smallint" Nullable="false" />
           <Property Name="PermissionId" Type="smallint" />
           <Property Name="OrgId" Type="smallint" />
@@ -42,19 +42,14 @@
           <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
           <Property Name="UpdatedBy" Type="smallint" />
         </EntityType>
-        <EntityType Name="Applications">
+        <EntityType Name="ApplicationFeatures">
           <Key>
-            <PropertyRef Name="ApplicationId" />
+            <PropertyRef Name="ApplicationFeatureId" />
           </Key>
-          <Property Name="ApplicationId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ApplicationName" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Active" Type="tinyint" Nullable="false" />
-          <Property Name="Version" Type="varchar" MaxLength="50" />
-          <Property Name="ReleaseDate" Type="datetime" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="CreatedBy" Type="smallint" />
-          <Property Name="UpdatedDate" Type="datetime" />
-          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="ApplicationFeatureId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FeatureName" Type="varchar" MaxLength="250" />
+          <Property Name="ApplicationId" Type="smallint" />
+          <Property Name="Active" Type="tinyint" />
         </EntityType>
         <EntityType Name="AppUsers">
           <Key>
@@ -300,7 +295,7 @@
           <Property Name="StudentClassId" Type="int" />
           <Property Name="DocTypeId" Type="smallint" />
           <Property Name="Parent" Type="varchar" MaxLength="250" />
-          <Property Name="Batch" Type="smallint" />
+          <Property Name="BatchId" Type="smallint" />
           <Property Name="OrgId" Type="smallint" />
         </EntityType>
         <EntityType Name="MasterData">
@@ -525,7 +520,7 @@
           <Property Name="ClassId" Type="smallint" Nullable="false" />
           <Property Name="RollNo" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Section" Type="smallint" Nullable="false" />
-          <Property Name="Batch" Type="smallint" Nullable="false" />
+          <Property Name="BatchId" Type="smallint" Nullable="false" />
           <Property Name="FeeTypeId" Type="smallint" Nullable="false" />
           <Property Name="LanguageSubject" Type="smallint" />
           <Property Name="Remarks" Type="varchar" MaxLength="250" />
@@ -584,7 +579,7 @@
           <Property Name="PaidAmt" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="BalanceAmt" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="PaymentDate" Type="datetime" Nullable="false" />
-          <Property Name="Batch" Type="smallint" Nullable="false" />
+          <Property Name="BatchId" Type="smallint" Nullable="false" />
           <Property Name="Remarks" Type="varchar" MaxLength="250" />
           <Property Name="Active" Type="tinyint" />
           <Property Name="OrgId" Type="smallint" />
@@ -703,15 +698,27 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
         </EntityType>
-        <Association Name="FK_ApplicationRoleUsers_MasterApplication">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="ApplicationRoles" Type="Self.ApplicationRoles" Multiplicity="*" />
+        <Association Name="FK_ApplicationFeatures_MasterDataApplicationId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="ApplicationFeatures" Type="Self.ApplicationFeatures" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MasterData">
               <PropertyRef Name="MasterDataId" />
             </Principal>
-            <Dependent Role="ApplicationRoles">
+            <Dependent Role="ApplicationFeatures">
               <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationRoleUsers_ApplicationFeatureId">
+          <End Role="ApplicationFeatures" Type="Self.ApplicationFeatures" Multiplicity="1" />
+          <End Role="ApplicationFeatureRolesPerm" Type="Self.ApplicationFeatureRolesPerm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationFeatures">
+              <PropertyRef Name="ApplicationFeatureId" />
+            </Principal>
+            <Dependent Role="ApplicationFeatureRolesPerm">
+              <PropertyRef Name="ApplicationFeatureId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1595,7 +1602,7 @@
               <PropertyRef Name="BatchId" />
             </Principal>
             <Dependent Role="StudentClass">
-              <PropertyRef Name="Batch" />
+              <PropertyRef Name="BatchId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1751,7 +1758,7 @@
               <PropertyRef Name="BatchId" />
             </Principal>
             <Dependent Role="StudentFeePayment">
-              <PropertyRef Name="Batch" />
+              <PropertyRef Name="BatchId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2022,8 +2029,8 @@
         <EntityContainer Name="TTPModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ApplicationRoles" EntityType="Self.ApplicationRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationFeatureRolesPerm" EntityType="Self.ApplicationFeatureRolesPerm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationFeatures" EntityType="Self.ApplicationFeatures" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppUsers" EntityType="Self.AppUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -2060,9 +2067,13 @@
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubjectTypes" EntityType="Self.SubjectTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaskConfiguration" EntityType="Self.TaskConfiguration" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ApplicationRoleUsers_MasterApplication" Association="Self.FK_ApplicationRoleUsers_MasterApplication">
+          <AssociationSet Name="FK_ApplicationFeatures_MasterDataApplicationId" Association="Self.FK_ApplicationFeatures_MasterDataApplicationId">
             <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="ApplicationRoles" EntitySet="ApplicationRoles" />
+            <End Role="ApplicationFeatures" EntitySet="ApplicationFeatures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationRoleUsers_ApplicationFeatureId" Association="Self.FK_ApplicationRoleUsers_ApplicationFeatureId">
+            <End Role="ApplicationFeatures" EntitySet="ApplicationFeatures" />
+            <End Role="ApplicationFeatureRolesPerm" EntitySet="ApplicationFeatureRolesPerm" />
           </AssociationSet>
           <AssociationSet Name="FK_AppUsers_OrganizationOrgId" Association="Self.FK_AppUsers_OrganizationOrgId">
             <End Role="Organization" EntitySet="Organization" />
@@ -2497,8 +2508,7 @@
             <End Role="TaskConfiguration" EntitySet="TaskConfiguration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TTPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2523,12 +2533,12 @@
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="PhotoGalleries" Relationship="Self.FK_PhotoGallery_Albums" FromRole="Albums" ToRole="PhotoGallery" />
         </EntityType>
-        <EntityType Name="ApplicationRole">
+        <EntityType Name="ApplicationFeatureRolesPerm">
           <Key>
-            <PropertyRef Name="ApplicationRoleId" />
+            <PropertyRef Name="ApplicationFeatureRoleId" />
           </Key>
-          <Property Name="ApplicationRoleId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ApplicationId" Type="Int16" Nullable="false" />
+          <Property Name="ApplicationFeatureRoleId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationFeatureId" Type="Int16" Nullable="false" />
           <Property Name="RoleId" Type="Int16" Nullable="false" />
           <Property Name="PermissionId" Type="Int16" />
           <Property Name="OrgId" Type="Int16" />
@@ -2539,21 +2549,18 @@
           <Property Name="CreatedBy" Type="Int16" Nullable="false" />
           <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
-          <NavigationProperty Name="MasterData" Relationship="Self.FK_ApplicationRoleUsers_MasterApplication" FromRole="ApplicationRoles" ToRole="MasterData" />
+          <NavigationProperty Name="ApplicationFeature" Relationship="Self.FK_ApplicationRoleUsers_ApplicationFeatureId" FromRole="ApplicationFeatureRolesPerm" ToRole="ApplicationFeatures" />
         </EntityType>
-        <EntityType Name="Application">
+        <EntityType Name="ApplicationFeature">
           <Key>
-            <PropertyRef Name="ApplicationId" />
+            <PropertyRef Name="ApplicationFeatureId" />
           </Key>
-          <Property Name="ApplicationId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ApplicationName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Active" Type="Byte" Nullable="false" />
-          <Property Name="Version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ReleaseDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int16" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="ApplicationFeatureId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FeatureName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ApplicationId" Type="Int16" />
+          <Property Name="Active" Type="Byte" />
+          <NavigationProperty Name="ApplicationFeatureRolesPerms" Relationship="Self.FK_ApplicationRoleUsers_ApplicationFeatureId" FromRole="ApplicationFeatures" ToRole="ApplicationFeatureRolesPerm" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_ApplicationFeatures_MasterDataApplicationId" FromRole="ApplicationFeatures" ToRole="MasterData" />
         </EntityType>
         <EntityType Name="AppUser">
           <Key>
@@ -2845,30 +2852,6 @@
           <NavigationProperty Name="Organization" Relationship="Self.FK_ExamStudentSubject_Organization" FromRole="ExamStudentSubjectResult" ToRole="Organization" />
           <NavigationProperty Name="StudentClassSubject" Relationship="Self.FK_ExamStudentSubject_StudentClassSubjectId" FromRole="ExamStudentSubjectResult" ToRole="StudentClassSubject" />
         </EntityType>
-        <EntityType Name="FilesNPhoto">
-          <Key>
-            <PropertyRef Name="FileId" />
-          </Key>
-          <Property Name="FileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FileName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedFileFolderName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="ParentId" Type="Int32" />
-          <Property Name="FileOrFolder" Type="Byte" />
-          <Property Name="FileOrPhoto" Type="Byte" />
-          <Property Name="Active" Type="Byte" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UploadDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="StudentClassId" Type="Int32" />
-          <Property Name="DocTypeId" Type="Int16" />
-          <Property Name="Parent" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Batch" Type="Int16" />
-          <Property Name="OrgId" Type="Int16" />
-          <NavigationProperty Name="MasterData" Relationship="Self.FK_FilesNPhotos_MasterData" FromRole="FilesNPhotos" ToRole="MasterData" />
-          <NavigationProperty Name="Organization" Relationship="Self.FK_FilesNPhotos_Organization" FromRole="FilesNPhotos" ToRole="Organization" />
-        </EntityType>
         <EntityType Name="MasterData">
           <Key>
             <PropertyRef Name="MasterDataId" />
@@ -2884,7 +2867,7 @@
           <Property Name="LocationId" Type="Int16" />
           <Property Name="ApplicationId" Type="Int16" />
           <Property Name="Active" Type="Byte" />
-          <NavigationProperty Name="ApplicationRoles" Relationship="Self.FK_ApplicationRoleUsers_MasterApplication" FromRole="MasterData" ToRole="ApplicationRoles" />
+          <NavigationProperty Name="ApplicationFeatures" Relationship="Self.FK_ApplicationFeatures_MasterDataApplicationId" FromRole="MasterData" ToRole="ApplicationFeatures" />
           <NavigationProperty Name="ClassFees" Relationship="Self.FK_FeeMaster_ClassMaster" FromRole="MasterData" ToRole="ClassFee" />
           <NavigationProperty Name="ClassFees1" Relationship="Self.FK_FeeMaster_FeeNameMaster" FromRole="MasterData" ToRole="ClassFee" />
           <NavigationProperty Name="ClassFees2" Relationship="Self.FK_FeeMaster_LocationMaster" FromRole="MasterData" ToRole="ClassFee" />
@@ -2895,7 +2878,6 @@
           <NavigationProperty Name="ExamStudentResults" Relationship="Self.FK_ExamStudentClass_MasterDataGrade" FromRole="MasterData" ToRole="ExamStudentResult" />
           <NavigationProperty Name="ExamStudentResults1" Relationship="Self.FK_ExamStudentClass_MasterDataStatus" FromRole="MasterData" ToRole="ExamStudentResult" />
           <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubject_MasterDataStatus" FromRole="MasterData" ToRole="ExamStudentSubjectResult" />
-          <NavigationProperty Name="FilesNPhotos" Relationship="Self.FK_FilesNPhotos_MasterData" FromRole="MasterData" ToRole="FilesNPhotos" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_MasterData_Organization" FromRole="MasterData" ToRole="Organization" />
           <NavigationProperty Name="MasterRolePermissions" Relationship="Self.FK_MasterRolePermission_MasterDataId" FromRole="MasterData" ToRole="MasterRolePermission" />
           <NavigationProperty Name="Pages" Relationship="Self.FK_Pages_MasterData" FromRole="MasterData" ToRole="Pages" />
@@ -2912,6 +2894,7 @@
           <NavigationProperty Name="Students6" Relationship="Self.FK_Students_ReasonForLeaving" FromRole="MasterData" ToRole="Students" />
           <NavigationProperty Name="Students7" Relationship="Self.FK_Students_Religion" FromRole="MasterData" ToRole="Students" />
           <NavigationProperty Name="Students8" Relationship="Self.FK_Students_State" FromRole="MasterData" ToRole="Students" />
+          <NavigationProperty Name="FilesNPhotos" Relationship="TTPModel.FK_FilesNPhotos_MasterData" FromRole="MasterData" ToRole="FilesNPhoto" />
         </EntityType>
         <EntityType Name="MasterRolePermission">
           <Key>
@@ -2973,7 +2956,6 @@
           <NavigationProperty Name="ExamSlots" Relationship="Self.FK_ExamSlot_OrganizationId" FromRole="Organization" ToRole="ExamSlot" />
           <NavigationProperty Name="ExamStudentResults" Relationship="Self.FK_ExamStudentClass_OrganizationId" FromRole="Organization" ToRole="ExamStudentResult" />
           <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubject_Organization" FromRole="Organization" ToRole="ExamStudentSubjectResult" />
-          <NavigationProperty Name="FilesNPhotos" Relationship="Self.FK_FilesNPhotos_Organization" FromRole="Organization" ToRole="FilesNPhotos" />
           <NavigationProperty Name="MasterDatas" Relationship="Self.FK_MasterData_Organization" FromRole="Organization" ToRole="MasterData" />
           <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_Organization" FromRole="Organization" ToRole="Messages" />
           <NavigationProperty Name="PageHistories" Relationship="Self.FK_PageHistory_Organization" FromRole="Organization" ToRole="PageHistory" />
@@ -2991,6 +2973,7 @@
           <NavigationProperty Name="StudentFeeReceipt" Relationship="Self.FK_StudentFeeReceipt_OrganizationOrgId" FromRole="Organization" ToRole="StudentFeeReceipt" />
           <NavigationProperty Name="Students" Relationship="Self.FK_Students_OrganizationOrgId" FromRole="Organization" ToRole="Students" />
           <NavigationProperty Name="TaskConfigurations" Relationship="Self.FK_TaskConfiguration_OrganizationId" FromRole="Organization" ToRole="TaskConfiguration" />
+          <NavigationProperty Name="FilesNPhotos" Relationship="TTPModel.FK_FilesNPhotos_Organization" FromRole="Organization" ToRole="FilesNPhoto" />
         </EntityType>
         <EntityType Name="PageHistory">
           <Key>
@@ -3176,7 +3159,7 @@
           <Property Name="ClassId" Type="Int16" Nullable="false" />
           <Property Name="RollNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Section" Type="Int16" Nullable="false" />
-          <Property Name="Batch" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
           <Property Name="FeeTypeId" Type="Int16" Nullable="false" />
           <Property Name="LanguageSubject" Type="Int16" />
           <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
@@ -3188,7 +3171,7 @@
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_StudentClassId" FromRole="StudentClass" ToRole="Attendance" />
-          <NavigationProperty Name="Batch1" Relationship="Self.FK_StudentClass_Batches" FromRole="StudentClass" ToRole="Batches" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_StudentClass_Batches" FromRole="StudentClass" ToRole="Batches" />
           <NavigationProperty Name="ExamStudentResults" Relationship="Self.FK_ExamStudentClass_ExamStudentClassId" FromRole="StudentClass" ToRole="ExamStudentResult" />
           <NavigationProperty Name="MasterData" Relationship="Self.FK_StudentClass_Class" FromRole="StudentClass" ToRole="MasterData" />
           <NavigationProperty Name="MasterData1" Relationship="Self.FK_StudentClass_Feetype" FromRole="StudentClass" ToRole="MasterData" />
@@ -3258,7 +3241,7 @@
           <Property Name="PaidAmt" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="BalanceAmt" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Batch" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
           <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Active" Type="Byte" />
           <Property Name="OrgId" Type="Int16" />
@@ -3266,7 +3249,7 @@
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
-          <NavigationProperty Name="Batch1" Relationship="Self.FK_StudentFeePayment_Batches" FromRole="StudentFeePayment" ToRole="Batches" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_StudentFeePayment_Batches" FromRole="StudentFeePayment" ToRole="Batches" />
           <NavigationProperty Name="ClassFee" Relationship="Self.FK_StudentFeePayment_ClassFee" FromRole="StudentFeePayment" ToRole="ClassFee" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_StudentFeePayment_OrganizationId" FromRole="StudentFeePayment" ToRole="Organization" />
           <NavigationProperty Name="PaymentDetails" Relationship="Self.FK_PaymentDetails_FeePayment" FromRole="StudentFeePayment" ToRole="PaymentDetails" />
@@ -3420,14 +3403,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ApplicationRoleUsers_MasterApplication">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="ApplicationRoles" Type="Self.ApplicationRole" Multiplicity="*" />
+        <Association Name="FK_ApplicationRoleUsers_ApplicationFeatureId">
+          <End Role="ApplicationFeatures" Type="Self.ApplicationFeature" Multiplicity="1" />
+          <End Role="ApplicationFeatureRolesPerm" Type="Self.ApplicationFeatureRolesPerm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationFeatures">
+              <PropertyRef Name="ApplicationFeatureId" />
+            </Principal>
+            <Dependent Role="ApplicationFeatureRolesPerm">
+              <PropertyRef Name="ApplicationFeatureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationFeatures_MasterDataApplicationId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="ApplicationFeatures" Type="Self.ApplicationFeature" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MasterData">
               <PropertyRef Name="MasterDataId" />
             </Principal>
-            <Dependent Role="ApplicationRoles">
+            <Dependent Role="ApplicationFeatures">
               <PropertyRef Name="ApplicationId" />
             </Dependent>
           </ReferentialConstraint>
@@ -3684,7 +3679,7 @@
               <PropertyRef Name="BatchId" />
             </Principal>
             <Dependent Role="StudentClass">
-              <PropertyRef Name="Batch" />
+              <PropertyRef Name="BatchId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3720,7 +3715,7 @@
               <PropertyRef Name="BatchId" />
             </Principal>
             <Dependent Role="StudentFeePayment">
-              <PropertyRef Name="Batch" />
+              <PropertyRef Name="BatchId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4105,30 +4100,6 @@
             </Principal>
             <Dependent Role="ExamStudentSubjectResult">
               <PropertyRef Name="StudentClassSubjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FilesNPhotos_MasterData">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
-          <End Role="FilesNPhotos" Type="Self.FilesNPhoto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="FilesNPhotos">
-              <PropertyRef Name="DocTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FilesNPhotos_Organization">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
-          <End Role="FilesNPhotos" Type="Self.FilesNPhoto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="FilesNPhotos">
-              <PropertyRef Name="OrgId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4703,8 +4674,8 @@
         <EntityContainer Name="TTPEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="Albums" EntityType="Self.Album" />
-          <EntitySet Name="ApplicationRoles" EntityType="Self.ApplicationRole" />
-          <EntitySet Name="Applications" EntityType="Self.Application" />
+          <EntitySet Name="ApplicationFeatureRolesPerms" EntityType="Self.ApplicationFeatureRolesPerm" />
+          <EntitySet Name="ApplicationFeatures" EntityType="Self.ApplicationFeature" />
           <EntitySet Name="AppUsers" EntityType="Self.AppUser" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
@@ -4719,7 +4690,6 @@
           <EntitySet Name="ExamSlots" EntityType="Self.ExamSlot" />
           <EntitySet Name="ExamStudentResults" EntityType="Self.ExamStudentResult" />
           <EntitySet Name="ExamStudentSubjectResults" EntityType="Self.ExamStudentSubjectResult" />
-          <EntitySet Name="FilesNPhotos" EntityType="Self.FilesNPhoto" />
           <EntitySet Name="MasterDatas" EntityType="Self.MasterData" />
           <EntitySet Name="MasterRolePermissions" EntityType="Self.MasterRolePermission" />
           <EntitySet Name="Messages" EntityType="Self.Message" />
@@ -4744,9 +4714,13 @@
             <End Role="Albums" EntitySet="Albums" />
             <End Role="PhotoGallery" EntitySet="PhotoGalleries" />
           </AssociationSet>
-          <AssociationSet Name="FK_ApplicationRoleUsers_MasterApplication" Association="Self.FK_ApplicationRoleUsers_MasterApplication">
+          <AssociationSet Name="FK_ApplicationRoleUsers_ApplicationFeatureId" Association="Self.FK_ApplicationRoleUsers_ApplicationFeatureId">
+            <End Role="ApplicationFeatures" EntitySet="ApplicationFeatures" />
+            <End Role="ApplicationFeatureRolesPerm" EntitySet="ApplicationFeatureRolesPerms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationFeatures_MasterDataApplicationId" Association="Self.FK_ApplicationFeatures_MasterDataApplicationId">
             <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="ApplicationRoles" EntitySet="ApplicationRoles" />
+            <End Role="ApplicationFeatures" EntitySet="ApplicationFeatures" />
           </AssociationSet>
           <AssociationSet Name="FK_AppUsers_OrganizationOrgId" Association="Self.FK_AppUsers_OrganizationOrgId">
             <End Role="Organization" EntitySet="Organizations" />
@@ -4972,14 +4946,6 @@
             <End Role="StudentClassSubject" EntitySet="StudentClassSubjects" />
             <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
           </AssociationSet>
-          <AssociationSet Name="FK_FilesNPhotos_MasterData" Association="Self.FK_FilesNPhotos_MasterData">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="FilesNPhotos" EntitySet="FilesNPhotos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FilesNPhotos_Organization" Association="Self.FK_FilesNPhotos_Organization">
-            <End Role="Organization" EntitySet="Organizations" />
-            <End Role="FilesNPhotos" EntitySet="FilesNPhotos" />
-          </AssociationSet>
           <AssociationSet Name="FK_MasterData_Organization" Association="Self.FK_MasterData_Organization">
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="MasterData" EntitySet="MasterDatas" />
@@ -5172,7 +5138,64 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="FilesNPhotos" EntityType="TTPModel.FilesNPhoto" />
+          <AssociationSet Name="FK_FilesNPhotos_MasterData" Association="TTPModel.FK_FilesNPhotos_MasterData">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="FilesNPhoto" EntitySet="FilesNPhotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilesNPhotos_Organization" Association="TTPModel.FK_FilesNPhotos_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="FilesNPhoto" EntitySet="FilesNPhotos" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="FilesNPhoto">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedFileFolderName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="FileOrFolder" Type="Byte" />
+          <Property Name="FileOrPhoto" Type="Byte" />
+          <Property Name="Active" Type="Byte" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UploadDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StudentClassId" Type="Int32" />
+          <Property Name="DocTypeId" Type="Int16" />
+          <Property Name="Parent" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="BatchId" Type="Int16" />
+          <Property Name="OrgId" Type="Int16" />
+          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_FilesNPhotos_MasterData" FromRole="FilesNPhoto" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_FilesNPhotos_Organization" FromRole="FilesNPhoto" ToRole="Organization" />
+        </EntityType>
+        <Association Name="FK_FilesNPhotos_MasterData">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="0..1" />
+          <End Type="TTPModel.FilesNPhoto" Role="FilesNPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="FilesNPhoto">
+              <PropertyRef Name="DocTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilesNPhotos_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="0..1" />
+          <End Type="TTPModel.FilesNPhoto" Role="FilesNPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="FilesNPhoto">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5200,11 +5223,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ApplicationRoles">
-            <EntityTypeMapping TypeName="TTPModel.ApplicationRole">
-              <MappingFragment StoreEntitySet="ApplicationRoles">
-                <ScalarProperty Name="ApplicationRoleId" ColumnName="ApplicationRoleId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <EntitySetMapping Name="ApplicationFeatureRolesPerms">
+            <EntityTypeMapping TypeName="TTPModel.ApplicationFeatureRolesPerm">
+              <MappingFragment StoreEntitySet="ApplicationFeatureRolesPerm">
+                <ScalarProperty Name="ApplicationFeatureRoleId" ColumnName="ApplicationFeatureRoleId" />
+                <ScalarProperty Name="ApplicationFeatureId" ColumnName="ApplicationFeatureId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
@@ -5218,18 +5241,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Applications">
-            <EntityTypeMapping TypeName="TTPModel.Application">
-              <MappingFragment StoreEntitySet="Applications">
+          <EntitySetMapping Name="ApplicationFeatures">
+            <EntityTypeMapping TypeName="TTPModel.ApplicationFeature">
+              <MappingFragment StoreEntitySet="ApplicationFeatures">
+                <ScalarProperty Name="ApplicationFeatureId" ColumnName="ApplicationFeatureId" />
+                <ScalarProperty Name="FeatureName" ColumnName="FeatureName" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5459,29 +5477,6 @@
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FilesNPhotos">
-            <EntityTypeMapping TypeName="TTPModel.FilesNPhoto">
-              <MappingFragment StoreEntitySet="FilesNPhotos">
-                <ScalarProperty Name="FileId" ColumnName="FileId" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="UpdatedFileFolderName" ColumnName="UpdatedFileFolderName" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="FileOrFolder" ColumnName="FileOrFolder" />
-                <ScalarProperty Name="FileOrPhoto" ColumnName="FileOrPhoto" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
-                <ScalarProperty Name="DocTypeId" ColumnName="DocTypeId" />
-                <ScalarProperty Name="Parent" ColumnName="Parent" />
-                <ScalarProperty Name="Batch" ColumnName="Batch" />
-                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5718,7 +5713,7 @@
                 <ScalarProperty Name="ClassId" ColumnName="ClassId" />
                 <ScalarProperty Name="RollNo" ColumnName="RollNo" />
                 <ScalarProperty Name="Section" ColumnName="Section" />
-                <ScalarProperty Name="Batch" ColumnName="Batch" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="FeeTypeId" ColumnName="FeeTypeId" />
                 <ScalarProperty Name="LanguageSubject" ColumnName="LanguageSubject" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
@@ -5780,7 +5775,7 @@
                 <ScalarProperty Name="PaidAmt" ColumnName="PaidAmt" />
                 <ScalarProperty Name="BalanceAmt" ColumnName="BalanceAmt" />
                 <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
-                <ScalarProperty Name="Batch" ColumnName="Batch" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
@@ -5913,6 +5908,29 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="FilesNPhotos">
+            <EntityTypeMapping TypeName="TTPModel.FilesNPhoto">
+              <MappingFragment StoreEntitySet="FilesNPhotos">
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="DocTypeId" ColumnName="DocTypeId" />
+                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="FileOrPhoto" ColumnName="FileOrPhoto" />
+                <ScalarProperty Name="FileOrFolder" ColumnName="FileOrFolder" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="UpdatedFileFolderName" ColumnName="UpdatedFileFolderName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

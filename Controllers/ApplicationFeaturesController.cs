@@ -22,29 +22,30 @@ namespace schools.Controllers
     using System.Web.Http.OData.Extensions;
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Application>("Applications");
+    builder.EntitySet<ApplicationFeature>("ApplicationFeatures");
+    builder.EntitySet<MasterData>("MasterDatas"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class ApplicationsController : ODataController
+    public class ApplicationFeaturesController : ODataController
     {
         private TTPEntities db = new TTPEntities();
 
-        // GET: odata/Applications
+        // GET: odata/ApplicationFeatures
         [EnableQuery]
-        public IQueryable<Application> GetApplications()
+        public IQueryable<ApplicationFeature> GetApplicationFeatures()
         {
-            return db.Applications;
+            return db.ApplicationFeatures;
         }
 
-        // GET: odata/Applications(5)
+        // GET: odata/ApplicationFeatures(5)
         [EnableQuery]
-        public SingleResult<Application> GetApplication([FromODataUri] short key)
+        public SingleResult<ApplicationFeature> GetApplicationFeature([FromODataUri] short key)
         {
-            return SingleResult.Create(db.Applications.Where(application => application.ApplicationId == key));
+            return SingleResult.Create(db.ApplicationFeatures.Where(applicationFeature => applicationFeature.ApplicationFeatureId == key));
         }
 
-        // PUT: odata/Applications(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<Application> patch)
+        // PUT: odata/ApplicationFeatures(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<ApplicationFeature> patch)
         {
             Validate(patch.GetEntity());
 
@@ -53,13 +54,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            Application application = await db.Applications.FindAsync(key);
-            if (application == null)
+            ApplicationFeature applicationFeature = await db.ApplicationFeatures.FindAsync(key);
+            if (applicationFeature == null)
             {
                 return NotFound();
             }
 
-            patch.Put(application);
+            patch.Put(applicationFeature);
 
             try
             {
@@ -67,7 +68,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ApplicationExists(key))
+                if (!ApplicationFeatureExists(key))
                 {
                     return NotFound();
                 }
@@ -77,26 +78,26 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(application);
+            return Updated(applicationFeature);
         }
 
-        // POST: odata/Applications
-        public async Task<IHttpActionResult> Post(Application application)
+        // POST: odata/ApplicationFeatures
+        public async Task<IHttpActionResult> Post(ApplicationFeature applicationFeature)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Applications.Add(application);
+            db.ApplicationFeatures.Add(applicationFeature);
             await db.SaveChangesAsync();
 
-            return Created(application);
+            return Created(applicationFeature);
         }
 
-        // PATCH: odata/Applications(5)
+        // PATCH: odata/ApplicationFeatures(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<Application> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<ApplicationFeature> patch)
         {
             Validate(patch.GetEntity());
 
@@ -105,13 +106,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            Application application = await db.Applications.FindAsync(key);
-            if (application == null)
+            ApplicationFeature applicationFeature = await db.ApplicationFeatures.FindAsync(key);
+            if (applicationFeature == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(application);
+            patch.Patch(applicationFeature);
 
             try
             {
@@ -119,7 +120,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ApplicationExists(key))
+                if (!ApplicationFeatureExists(key))
                 {
                     return NotFound();
                 }
@@ -129,22 +130,29 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(application);
+            return Updated(applicationFeature);
         }
 
-        // DELETE: odata/Applications(5)
+        // DELETE: odata/ApplicationFeatures(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] short key)
         {
-            Application application = await db.Applications.FindAsync(key);
-            if (application == null)
+            ApplicationFeature applicationFeature = await db.ApplicationFeatures.FindAsync(key);
+            if (applicationFeature == null)
             {
                 return NotFound();
             }
 
-            db.Applications.Remove(application);
+            db.ApplicationFeatures.Remove(applicationFeature);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // GET: odata/ApplicationFeatures(5)/MasterData
+        [EnableQuery]
+        public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.ApplicationFeatures.Where(m => m.ApplicationFeatureId == key).Select(m => m.MasterData));
         }
 
         protected override void Dispose(bool disposing)
@@ -156,9 +164,9 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ApplicationExists(short key)
+        private bool ApplicationFeatureExists(short key)
         {
-            return db.Applications.Count(e => e.ApplicationId == key) > 0;
+            return db.ApplicationFeatures.Count(e => e.ApplicationFeatureId == key) > 0;
         }
     }
 }

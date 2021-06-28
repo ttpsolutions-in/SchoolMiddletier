@@ -30,7 +30,7 @@ namespace schools.Models
         public decimal PaidAmt { get; set; }
         public decimal BalanceAmt { get; set; }
         public System.DateTime PaymentDate { get; set; }
-        public short Batch { get; set; }
+        public short BatchId { get; set; }
         public string Remarks { get; set; }
         public Nullable<byte> Active { get; set; }
         public Nullable<short> OrgId { get; set; }
@@ -39,7 +39,7 @@ namespace schools.Models
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
     
-        public virtual Batch Batch1 { get; set; }
+        public virtual Batch Batch { get; set; }
         public virtual ClassFee ClassFee { get; set; }
         public virtual Organization Organization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

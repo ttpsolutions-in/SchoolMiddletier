@@ -366,8 +366,8 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlbumsController.cs" />
-    <Compile Include="Controllers\ApplicationRolesController.cs" />
-    <Compile Include="Controllers\ApplicationsController.cs" />
+    <Compile Include="Controllers\ApplicationFeatureRolesPermsController.cs" />
+    <Compile Include="Controllers\ApplicationFeaturesController.cs" />
     <Compile Include="Controllers\AppUsersController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\BatchesController.cs" />
@@ -393,6 +393,7 @@
     <Compile Include="Controllers\RoleUsersController.cs" />
     <Compile Include="Controllers\SlotAndClassSubjectsController.cs" />
     <Compile Include="Controllers\StudentActivitiesController.cs" />
+    <Compile Include="Controllers\StudentCertificatesController.cs" />
     <Compile Include="Controllers\StudentClassesController.cs" />
     <Compile Include="Controllers\StudentClassSubjectsController.cs" />
     <Compile Include="Controllers\StudentDocumentsController.cs" />
@@ -410,10 +411,10 @@
     <Compile Include="Models\Album.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Application.cs">
+    <Compile Include="Models\ApplicationFeature.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ApplicationRole.cs">
+    <Compile Include="Models\ApplicationFeatureRolesPerm.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AppUser.cs">

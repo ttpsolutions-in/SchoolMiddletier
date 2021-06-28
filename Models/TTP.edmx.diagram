@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c94b57ae4ba34df796d13c1bf9986bc2" Name="Diagram1">
+      <Diagram DiagramId="2b4926c7e87841ff8f81d6054c9246aa" Name="Diagram1">
         <EntityTypeShape EntityType="TTPModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Album" Width="1.5" PointX="0.75" PointY="72" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.ApplicationRole" Width="1.5" PointX="5.25" PointY="74.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.Application" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.ApplicationFeatureRolesPerm" Width="1.5" PointX="7.5" PointY="74.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.ApplicationFeature" Width="1.5" PointX="5.25" PointY="75.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.AppUser" Width="1.5" PointX="3" PointY="51" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
@@ -16,36 +16,36 @@
         <EntityTypeShape EntityType="TTPModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Attendance" Width="1.5" PointX="8.25" PointY="64" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Batch" Width="1.5" PointX="3" PointY="61.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.ClassFee" Width="1.5" PointX="8.25" PointY="69.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.ClassSubject" Width="1.5" PointX="7.5" PointY="77.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.ClassSubjectMarkComponent" Width="1.5" PointX="18.75" PointY="61.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.Exam" Width="1.5" PointX="11.25" PointY="68.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.ExamSlot" Width="1.5" PointX="13.5" PointY="63.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.ExamStudentResult" Width="1.5" PointX="16.5" PointY="69.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.ExamStudentSubjectResult" Width="1.5" PointX="24.75" PointY="68.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.FilesNPhoto" Width="1.5" PointX="11.25" PointY="62.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.ClassFee" Width="1.5" PointX="10.25" PointY="69.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.ClassSubject" Width="1.5" PointX="7.5" PointY="78.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.ClassSubjectMarkComponent" Width="1.5" PointX="12.75" PointY="76.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.Exam" Width="1.5" PointX="5.25" PointY="69.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.ExamSlot" Width="1.5" PointX="7.5" PointY="69.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.ExamStudentResult" Width="1.5" PointX="18.5" PointY="75.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.ExamStudentSubjectResult" Width="1.5" PointX="23.75" PointY="71.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.MasterData" Width="1.5" PointX="3" PointY="73.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.MasterRolePermission" Width="1.5" PointX="5.25" PointY="78.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Message" Width="1.5" PointX="3" PointY="83.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Organization" Width="1.5" PointX="0.75" PointY="61.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.PageHistory" Width="1.5" PointX="16.5" PointY="58.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.Page" Width="1.5" PointX="14.25" PointY="68.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.PaymentDetail" Width="1.5" PointX="16.5" PointY="63.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.PageHistory" Width="1.5" PointX="21.5" PointY="60.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.Page" Width="1.5" PointX="13.25" PointY="68.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.PaymentDetail" Width="1.5" PointX="23.75" PointY="65.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.PhotoGallery" Width="1.5" PointX="3" PointY="69.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.RoleUser" Width="1.5" PointX="5.25" PointY="64.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.SlotAndClassSubject" Width="1.5" PointX="21.75" PointY="68.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.SlotAndClassSubject" Width="1.5" PointX="13.75" PointY="64.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.StudentActivity" Width="1.5" PointX="5.25" PointY="58.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.StudentCertificate" Width="1.5" PointX="8.25" PointY="59.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.StudentClass" Width="1.5" PointX="11.25" PointY="74.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.StudentClassSubject" Width="1.5" PointX="21.5" PointY="61.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.StudentDocument" Width="1.5" PointX="19.5" PointY="73.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.StudentFeePayment" Width="1.5" PointX="16.5" PointY="75.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.StudentFeeReceipt" Width="1.5" PointX="19.5" PointY="66.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.Student" Width="1.5" PointX="14.25" PointY="76.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.StudentClass" Width="1.5" PointX="11.25" PointY="61.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.StudentClassSubject" Width="1.5" PointX="21.5" PointY="71.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.StudentDocument" Width="1.5" PointX="18.5" PointY="69.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.StudentFeePayment" Width="1.5" PointX="18.5" PointY="63" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.StudentFeeReceipt" Width="1.5" PointX="21.5" PointY="65.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.Student" Width="1.5" PointX="16.25" PointY="65.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.SubjectType" Width="1.5" PointX="5.25" PointY="95.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.TaskConfiguration" Width="1.5" PointX="3" PointY="91.125" IsExpanded="true" />
         <AssociationConnector Association="TTPModel.FK_PhotoGallery_Albums" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ApplicationRoleUsers_MasterApplication" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_ApplicationRoleUsers_ApplicationFeatureId" ManuallyRouted="false" />
+        <AssociationConnector Association="TTPModel.FK_ApplicationFeatures_MasterDataApplicationId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_AppUsers_OrganizationOrgId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_RoleUser_AppUsers" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
@@ -102,8 +102,6 @@
         <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_MasterDataStatus" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_Organization" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_StudentClassSubjectId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_FilesNPhotos_MasterData" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_FilesNPhotos_Organization" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_MasterData_Organization" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_MasterRolePermission_MasterDataId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_Pages_MasterData" ManuallyRouted="false" />
@@ -152,6 +150,9 @@
         <AssociationConnector Association="TTPModel.FK_StudentFeeReceipt_Students" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_Students_Students" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TTPModel.FilesNPhoto" Width="1.5" PointX="10.25" PointY="75.5" />
+        <AssociationConnector Association="TTPModel.FK_FilesNPhotos_MasterData" />
+        <AssociationConnector Association="TTPModel.FK_FilesNPhotos_Organization" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
