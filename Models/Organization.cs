@@ -26,7 +26,6 @@ namespace schools.Models
             this.Exams = new HashSet<Exam>();
             this.ExamSlots = new HashSet<ExamSlot>();
             this.ExamStudentResults = new HashSet<ExamStudentResult>();
-            this.ExamStudentSubjectResults = new HashSet<ExamStudentSubjectResult>();
             this.MasterDatas = new HashSet<MasterData>();
             this.Messages = new HashSet<Message>();
             this.PageHistories = new HashSet<PageHistory>();
@@ -44,6 +43,7 @@ namespace schools.Models
             this.Students = new HashSet<Student>();
             this.TaskConfigurations = new HashSet<TaskConfiguration>();
             this.FilesNPhotos = new HashSet<FilesNPhoto>();
+            this.ExamStudentSubjectResults = new HashSet<ExamStudentSubjectResult>();
         }
     
         public short OrganizationId { get; set; }
@@ -82,8 +82,6 @@ namespace schools.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExamStudentResult> ExamStudentResults { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MasterData> MasterDatas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Message> Messages { get; set; }
@@ -118,5 +116,7 @@ namespace schools.Models
         public virtual ICollection<TaskConfiguration> TaskConfigurations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FilesNPhoto> FilesNPhotos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
     }
 }

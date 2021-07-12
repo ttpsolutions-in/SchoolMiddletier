@@ -27,7 +27,6 @@ namespace schools.Models
             this.Exams = new HashSet<Exam>();
             this.ExamStudentResults = new HashSet<ExamStudentResult>();
             this.ExamStudentResults1 = new HashSet<ExamStudentResult>();
-            this.ExamStudentSubjectResults = new HashSet<ExamStudentSubjectResult>();
             this.MasterRolePermissions = new HashSet<MasterRolePermission>();
             this.Pages = new HashSet<Page>();
             this.RoleUsers = new HashSet<RoleUser>();
@@ -44,6 +43,7 @@ namespace schools.Models
             this.Students7 = new HashSet<Student>();
             this.Students8 = new HashSet<Student>();
             this.FilesNPhotos = new HashSet<FilesNPhoto>();
+            this.ExamStudentSubjectResults = new HashSet<ExamStudentSubjectResult>();
         }
     
         public short MasterDataId { get; set; }
@@ -78,8 +78,6 @@ namespace schools.Models
         public virtual ICollection<ExamStudentResult> ExamStudentResults { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExamStudentResult> ExamStudentResults1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
         public virtual Organization Organization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MasterRolePermission> MasterRolePermissions { get; set; }
@@ -113,5 +111,7 @@ namespace schools.Models
         public virtual ICollection<Student> Students8 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FilesNPhoto> FilesNPhotos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace schools.Models
     public partial class ExamStudentSubjectResult
     {
         public short ExamStudentSubjectResultId { get; set; }
-        public short ExamStudentResultId { get; set; }
+        public short ExamId { get; set; }
         public short StudentClassSubjectId { get; set; }
         public short ClassSubjectMarkComponentId { get; set; }
         public short Marks { get; set; }
@@ -30,7 +30,7 @@ namespace schools.Models
     
         public virtual Batch Batch { get; set; }
         public virtual ClassSubjectMarkComponent ClassSubjectMarkComponent { get; set; }
-        public virtual ExamStudentResult ExamStudentResult { get; set; }
+        public virtual Exam Exam { get; set; }
         public virtual MasterData MasterData { get; set; }
         public virtual Organization Organization { get; set; }
         public virtual StudentClassSubject StudentClassSubject { get; set; }

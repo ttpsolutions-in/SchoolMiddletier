@@ -86,15 +86,21 @@ namespace schools.Controllers
         // POST: odata/MasterDatas
         public async Task<IHttpActionResult> Post(MasterData masterData)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                db.MasterDatas.Add(masterData);
+                await db.SaveChangesAsync();
+                return Created(masterData);
             }
-
-            db.MasterDatas.Add(masterData);
-            await db.SaveChangesAsync();
-
-            return Created(masterData);
+            catch(Exception ex)
+            {
+                throw ex;
+            }            
         }
 
         // PATCH: odata/MasterDatas(5)

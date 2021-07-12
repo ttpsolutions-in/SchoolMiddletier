@@ -22,7 +22,6 @@
         <EntityTypeShape EntityType="TTPModel.Exam" Width="1.5" PointX="5.25" PointY="69.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.ExamSlot" Width="1.5" PointX="7.5" PointY="69.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.ExamStudentResult" Width="1.5" PointX="18.5" PointY="75.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.ExamStudentSubjectResult" Width="1.5" PointX="23.75" PointY="71.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.MasterData" Width="1.5" PointX="3" PointY="73.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.MasterRolePermission" Width="1.5" PointX="5.25" PointY="78.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Message" Width="1.5" PointX="3" PointY="83.125" IsExpanded="true" />
@@ -60,7 +59,6 @@
         <AssociationConnector Association="TTPModel.FK_Exams_BatchesBatchId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ExamSlot_Batches" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ExamStudentResult_Batches" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ExamStudentSubjectResult_Batches" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_PaymentDetails_Batches" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_RoleUser_Batches" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_SlotAndClassSubject_Batches" ManuallyRouted="false" />
@@ -87,7 +85,6 @@
         <AssociationConnector Association="TTPModel.FK_StudentClassSubject_ClassSubjectId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ClassSubjectMarkComponents_OrganizationId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_ClassSubjectMarkComponentId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_Exams_MasterDataExamNameId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_Exams_OrganizationId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ExamSlot_ExamsExamId" ManuallyRouted="false" />
@@ -98,10 +95,6 @@
         <AssociationConnector Association="TTPModel.FK_ExamStudentClass_MasterDataGrade" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ExamStudentClass_MasterDataStatus" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ExamStudentClass_OrganizationId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ExamStudentSubjectResult_ExamStudentResult" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_MasterDataStatus" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_Organization" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_StudentClassSubjectId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_MasterData_Organization" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_MasterRolePermission_MasterDataId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_Pages_MasterData" ManuallyRouted="false" />
@@ -153,6 +146,13 @@
         <EntityTypeShape EntityType="TTPModel.FilesNPhoto" Width="1.5" PointX="10.25" PointY="75.5" />
         <AssociationConnector Association="TTPModel.FK_FilesNPhotos_MasterData" />
         <AssociationConnector Association="TTPModel.FK_FilesNPhotos_Organization" />
+        <EntityTypeShape EntityType="TTPModel.ExamStudentSubjectResult" Width="1.5" PointX="23.75" PointY="71.375" />
+        <AssociationConnector Association="TTPModel.FK_ExamStudentSubjectResult_Batches" />
+        <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_ClassSubjectMarkComponentId" />
+        <AssociationConnector Association="TTPModel.FK_ExamStudentSubjectResult_ExamId" />
+        <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_MasterDataStatus" />
+        <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_Organization" />
+        <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_StudentClassSubjectId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

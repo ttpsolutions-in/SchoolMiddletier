@@ -24,7 +24,6 @@ namespace schools.Models
             this.Exams = new HashSet<Exam>();
             this.ExamSlots = new HashSet<ExamSlot>();
             this.ExamStudentResults = new HashSet<ExamStudentResult>();
-            this.ExamStudentSubjectResults = new HashSet<ExamStudentSubjectResult>();
             this.PaymentDetails = new HashSet<PaymentDetail>();
             this.RoleUsers = new HashSet<RoleUser>();
             this.SlotAndClassSubjects = new HashSet<SlotAndClassSubject>();
@@ -36,6 +35,7 @@ namespace schools.Models
             this.StudentFeePayments = new HashSet<StudentFeePayment>();
             this.StudentFeeReceipts = new HashSet<StudentFeeReceipt>();
             this.SubjectTypes = new HashSet<SubjectType>();
+            this.ExamStudentSubjectResults = new HashSet<ExamStudentSubjectResult>();
         }
     
         public short BatchId { get; set; }
@@ -64,8 +64,6 @@ namespace schools.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExamStudentResult> ExamStudentResults { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaymentDetail> PaymentDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoleUser> RoleUsers { get; set; }
@@ -87,5 +85,7 @@ namespace schools.Models
         public virtual ICollection<StudentFeeReceipt> StudentFeeReceipts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubjectType> SubjectTypes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
     }
 }

@@ -195,12 +195,12 @@ namespace schools.Controllers
             return SingleResult.Create(db.ExamStudentResults.Where(m => m.ExamStudentResultId == key).Select(m => m.Organization));
         }
 
-        // GET: odata/ExamStudentResults(5)/ExamStudentSubjectResults
-        [EnableQuery]
-        public IQueryable<ExamStudentSubjectResult> GetExamStudentSubjectResults([FromODataUri] short key)
-        {
-            return db.ExamStudentResults.Where(m => m.ExamStudentResultId == key).SelectMany(m => m.ExamStudentSubjectResults);
-        }
+        //// GET: odata/ExamStudentResults(5)/ExamStudentSubjectResults
+        //[EnableQuery]
+        //public IQueryable<ExamStudentSubjectResult> GetExamStudentSubjectResults([FromODataUri] short key)
+        //{
+        //    return db.ExamStudentResults.Where(m => m.ExamStudentResultId == key).SelectMany(m => m.ExamStudentSubjectResults);
+        //}
 
         protected override void Dispose(bool disposing)
         {

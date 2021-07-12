@@ -19,6 +19,7 @@ namespace schools.Models
         {
             this.ExamSlots = new HashSet<ExamSlot>();
             this.ExamStudentResults = new HashSet<ExamStudentResult>();
+            this.ExamStudentSubjectResults = new HashSet<ExamStudentSubjectResult>();
         }
     
         public short ExamId { get; set; }
@@ -40,5 +41,7 @@ namespace schools.Models
         public virtual ICollection<ExamSlot> ExamSlots { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExamStudentResult> ExamStudentResults { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
     }
 }

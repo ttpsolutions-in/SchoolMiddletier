@@ -33,9 +33,9 @@ namespace schools.Models
     
         public virtual Batch Batch { get; set; }
         public virtual ClassSubject ClassSubject { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
         public virtual Organization Organization { get; set; }
         public virtual StudentClass StudentClass { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
     }
 }

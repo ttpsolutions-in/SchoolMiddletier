@@ -42,7 +42,6 @@ namespace schools.Models
         public virtual DbSet<Exam> Exams { get; set; }
         public virtual DbSet<ExamSlot> ExamSlots { get; set; }
         public virtual DbSet<ExamStudentResult> ExamStudentResults { get; set; }
-        public virtual DbSet<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
         public virtual DbSet<MasterData> MasterDatas { get; set; }
         public virtual DbSet<MasterRolePermission> MasterRolePermissions { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
@@ -64,5 +63,6 @@ namespace schools.Models
         public virtual DbSet<SubjectType> SubjectTypes { get; set; }
         public virtual DbSet<TaskConfiguration> TaskConfigurations { get; set; }
         public virtual DbSet<FilesNPhoto> FilesNPhotos { get; set; }
+        public virtual DbSet<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
     }
 }

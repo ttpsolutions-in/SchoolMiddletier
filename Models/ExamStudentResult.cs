@@ -14,12 +14,6 @@ namespace schools.Models
     
     public partial class ExamStudentResult
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ExamStudentResult()
-        {
-            this.ExamStudentSubjectResults = new HashSet<ExamStudentSubjectResult>();
-        }
-    
         public short ExamStudentResultId { get; set; }
         public short ExamId { get; set; }
         public int StudentClassId { get; set; }
@@ -40,7 +34,5 @@ namespace schools.Models
         public virtual MasterData MasterData { get; set; }
         public virtual MasterData MasterData1 { get; set; }
         public virtual Organization Organization { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
     }
 }
