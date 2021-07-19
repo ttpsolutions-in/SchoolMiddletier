@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TTPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TTPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -205,6 +205,190 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
+        </EntityType>
+        <EntityType Name="EmpEmployeeGradeSalHistory">
+          <Key>
+            <PropertyRef Name="EmployeeGradeHistoryId" />
+          </Key>
+          <Property Name="EmployeeGradeHistoryId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpGradeId" Type="smallint" Nullable="false" />
+          <Property Name="EmployeeId" Type="smallint" Nullable="false" />
+          <Property Name="DepartmentId" Type="smallint" Nullable="false" />
+          <Property Name="CTC" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Gratuity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Gross" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FromDate" Type="datetime" Nullable="false" />
+          <Property Name="ToDate" Type="datetime" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="Remarks" Type="varchar" MaxLength="250" />
+          <Property Name="ApprovedBy" Type="smallint" />
+          <Property Name="WorkAccountId" Type="smallint" />
+          <Property Name="JobTitleId" Type="smallint" />
+          <Property Name="DesignationId" Type="smallint" />
+        </EntityType>
+        <EntityType Name="EmpEmployees">
+          <Key>
+            <PropertyRef Name="EmpEmployeeId" />
+          </Key>
+          <Property Name="EmpEmployeeId" Type="smallint" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="30" />
+          <Property Name="FatherName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="MotherName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Gender" Type="smallint" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CityId" Type="smallint" />
+          <Property Name="pincode" Type="varchar" MaxLength="20" />
+          <Property Name="StateId" Type="smallint" />
+          <Property Name="CountryId" Type="smallint" />
+          <Property Name="DOB" Type="datetime" Nullable="false" />
+          <Property Name="Bloodgroup" Type="varchar" MaxLength="5" />
+          <Property Name="CategoryId" Type="nchar" MaxLength="10" />
+          <Property Name="BankAccountNo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IFSCcode" Type="varchar" MaxLength="10" />
+          <Property Name="MICRNo" Type="varchar" MaxLength="20" />
+          <Property Name="AdhaarNo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="PhotoPath" Type="varchar" MaxLength="50" />
+          <Property Name="ReligionId" Type="smallint" />
+          <Property Name="DOJ" Type="datetime" Nullable="false" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="10" />
+          <Property Name="AlternateContactNo" Type="varchar" MaxLength="10" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="30" />
+          <Property Name="EmploymentTypeId" Type="smallint" />
+          <Property Name="EmployeeGradeId" Type="smallint" />
+          <Property Name="ReportTo" Type="smallint" />
+          <Property Name="DepartmentId" Type="smallint" Nullable="false" />
+          <Property Name="LocationId" Type="smallint" />
+          <Property Name="DesignationId" Type="smallint" Nullable="false" />
+          <Property Name="EmployeeTerm" Type="smallint" />
+          <Property Name="EmploymentStatus" Type="smallint" />
+          <Property Name="ConfirmationDate" Type="datetime" />
+          <Property Name="NoticePeriodDays" Type="smallint" />
+          <Property Name="ProbationPeriodDays" Type="smallint" />
+          <Property Name="PAN" Type="varchar" MaxLength="12" />
+          <Property Name="MaritalStatus" Type="smallint" />
+          <Property Name="MarriedDate" Type="datetime" />
+          <Property Name="SpouseName" Type="varchar" MaxLength="30" />
+          <Property Name="PassportNo" Type="varchar" MaxLength="12" />
+          <Property Name="PFAccountNo" Type="varchar" MaxLength="20" />
+          <Property Name="OrgId" Type="smallint" />
+          <Property Name="Active" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="EmpEmployeeSalaryComponents">
+          <Key>
+            <PropertyRef Name="EmployeeSalaryComponentId" />
+          </Key>
+          <Property Name="EmployeeSalaryComponentId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="smallint" Nullable="false" />
+          <Property Name="EmpGradeComponentId" Type="smallint" Nullable="false" />
+          <Property Name="EmpployeeCompPCorAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmpEmployeeSkills">
+          <Key>
+            <PropertyRef Name="EmpEmployeeSkillId" />
+          </Key>
+          <Property Name="EmpEmployeeSkillId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SkillId" Type="smallint" Nullable="false" />
+          <Property Name="EmployeeId" Type="smallint" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="ExperienceInMonths" Type="smallint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmpGradeComponents">
+          <Key>
+            <PropertyRef Name="EmpGradeSalaryComponentId" />
+          </Key>
+          <Property Name="EmpGradeSalaryComponentId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpGradeId" Type="smallint" Nullable="false" />
+          <Property Name="SalaryComponentId" Type="smallint" Nullable="false" />
+          <Property Name="PercentOfBasicOrAmount" Type="smallint" Nullable="false" />
+          <Property Name="ComponentTypeId" Type="smallint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+        </EntityType>
+        <EntityType Name="EmployeeEducationHistory">
+          <Key>
+            <PropertyRef Name="EmployeeEducationHistoryId" />
+          </Key>
+          <Property Name="EmployeeEducationHistoryId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FromYear" Type="smallint" Nullable="false" />
+          <Property Name="ToYear" Type="smallint" Nullable="false" />
+          <Property Name="PercentageObtained" Type="smallint" Nullable="false" />
+          <Property Name="BoardName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="EmployeeId" Type="smallint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeFamily">
+          <Key>
+            <PropertyRef Name="EmployeeFamilyId" />
+          </Key>
+          <Property Name="EmployeeFamilyId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="smallint" Nullable="false" />
+          <Property Name="FamilyRelationShipId" Type="smallint" Nullable="false" />
+          <Property Name="FirstName" Type="smallint" Nullable="false" />
+          <Property Name="LastName" Type="smallint" Nullable="false" />
+          <Property Name="Age" Type="smallint" Nullable="false" />
+          <Property Name="Gender" Type="smallint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeGradeLeaves">
+          <Key>
+            <PropertyRef Name="EmployeeGradeLeaveId" />
+          </Key>
+          <Property Name="EmployeeGradeLeaveId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeGradeId" Type="smallint" Nullable="false" />
+          <Property Name="LeaveTypeId" Type="smallint" Nullable="false" />
+          <Property Name="NoOfDays" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpadatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="UpdatedBy" Type="smallint" />
+        </EntityType>
+        <EntityType Name="EmployeeLeaves">
+          <Key>
+            <PropertyRef Name="EmployeeLeaveId" />
+          </Key>
+          <Property Name="EmployeeLeaveId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="smallint" Nullable="false" />
+          <Property Name="LeaveTypeId" Type="smallint" Nullable="false" />
+          <Property Name="LeaveFrom" Type="datetime" Nullable="false" />
+          <Property Name="LeaveTo" Type="datetime" Nullable="false" />
+          <Property Name="NoOfLeaves" Type="smallint" Nullable="false" />
+          <Property Name="ApplyDate" Type="datetime" />
+          <Property Name="LeaveStatus" Type="smallint" />
+          <Property Name="ApprovedRejectedDate" Type="datetime" />
+          <Property Name="ApprovedBy" Type="smallint" />
+          <Property Name="Reamarks" Type="varchar" MaxLength="250" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeMonthlySalary">
+          <Key>
+            <PropertyRef Name="EmployeeMonthlySalaryId" />
+          </Key>
+          <Property Name="EmployeeMonthlySalaryId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalaryMonth" Type="datetime" Nullable="false" />
+          <Property Name="Gross" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Deduction" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NetSalary" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PresentDays" Type="smallint" Nullable="false" />
+          <Property Name="EmployeeId" Type="smallint" Nullable="false" />
+          <Property Name="Released" Type="tinyint" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="OrgId" Type="smallint" />
         </EntityType>
         <EntityType Name="Exams">
           <Key>
@@ -967,6 +1151,330 @@
             </Principal>
             <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeGradeSalHistory_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployees" Multiplicity="1" />
+          <End Role="EmpEmployeeGradeSalHistory" Type="Self.EmpEmployeeGradeSalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeGradeSalHistory">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeGradeSalHistory_MasterDataGradeId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmpEmployeeGradeSalHistory" Type="Self.EmpEmployeeGradeSalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeGradeSalHistory">
+              <PropertyRef Name="EmpGradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeGradeSalHistory_MasterDataOrganizationId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmpEmployeeGradeSalHistory" Type="Self.EmpEmployeeGradeSalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeGradeSalHistory">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeGradeSalHistory_MasterDataWorkAccountId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="EmpEmployeeGradeSalHistory" Type="Self.EmpEmployeeGradeSalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeGradeSalHistory">
+              <PropertyRef Name="WorkAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeSalaryComponents_EmpGradeComponents">
+          <End Role="EmpGradeComponents" Type="Self.EmpGradeComponents" Multiplicity="1" />
+          <End Role="EmpEmployeeSalaryComponents" Type="Self.EmpEmployeeSalaryComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpGradeComponents">
+              <PropertyRef Name="EmpGradeSalaryComponentId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeSalaryComponents">
+              <PropertyRef Name="EmpGradeComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeSkills_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployees" Multiplicity="1" />
+          <End Role="EmpEmployeeSkills" Type="Self.EmpEmployeeSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeSkills">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeSkills_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="EmpEmployeeSkills" Type="Self.EmpEmployeeSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeSkills">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpGradeComponents_MasterDataComponentTypeId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmpGradeComponents" Type="Self.EmpGradeComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmpGradeComponents">
+              <PropertyRef Name="ComponentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpGradeComponents_MasterDataGradeId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmpGradeComponents" Type="Self.EmpGradeComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmpGradeComponents">
+              <PropertyRef Name="EmpGradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpGradeComponents_MasterDataSalaryComponentId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmpGradeComponents" Type="Self.EmpGradeComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmpGradeComponents">
+              <PropertyRef Name="SalaryComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpGradeComponents_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="EmpGradeComponents" Type="Self.EmpGradeComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmpGradeComponents">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeEducationHistory_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployees" Multiplicity="1" />
+          <End Role="EmployeeEducationHistory" Type="Self.EmployeeEducationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeEducationHistory">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeEducationHistory_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="EmployeeEducationHistory" Type="Self.EmployeeEducationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmployeeEducationHistory">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeFamily_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployees" Multiplicity="1" />
+          <End Role="EmployeeFamily" Type="Self.EmployeeFamily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeFamily">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeFamily_MasterDataGenderId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmployeeFamily" Type="Self.EmployeeFamily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmployeeFamily">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeFamily_MasterDataRelationshipId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmployeeFamily" Type="Self.EmployeeFamily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmployeeFamily">
+              <PropertyRef Name="FamilyRelationShipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeFamily_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="EmployeeFamily" Type="Self.EmployeeFamily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmployeeFamily">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeGradeLeaves_MasterDataLeaveTypeId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmployeeGradeLeaves" Type="Self.EmployeeGradeLeaves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmployeeGradeLeaves">
+              <PropertyRef Name="LeaveTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeGradeLeaves_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="EmployeeGradeLeaves" Type="Self.EmployeeGradeLeaves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmployeeGradeLeaves">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeLeaves_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployees" Multiplicity="1" />
+          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeLeaves">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeLeaves_MasterDataLeaveStatus">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmployeeLeaves">
+              <PropertyRef Name="LeaveStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeLeaves_MasterDataLeaveTypeId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmployeeLeaves">
+              <PropertyRef Name="LeaveTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeLeaves_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmployeeLeaves">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMonthlySalary_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployees" Multiplicity="1" />
+          <End Role="EmployeeMonthlySalary" Type="Self.EmployeeMonthlySalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeMonthlySalary">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMonthlySalary_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+          <End Role="EmployeeMonthlySalary" Type="Self.EmployeeMonthlySalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmployeeMonthlySalary">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeSalaryComponents_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployees" Multiplicity="1" />
+          <End Role="EmpEmployeeSalaryComponents" Type="Self.EmpEmployeeSalaryComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeSalaryComponents">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeSalaryComponents_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="EmpEmployeeSalaryComponents" Type="Self.EmpEmployeeSalaryComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeSalaryComponents">
+              <PropertyRef Name="OrgId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2042,6 +2550,16 @@
           <EntitySet Name="ClassFee" EntityType="Self.ClassFee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSubject" EntityType="Self.ClassSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSubjectMarkComponents" EntityType="Self.ClassSubjectMarkComponents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpEmployeeGradeSalHistory" EntityType="Self.EmpEmployeeGradeSalHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpEmployees" EntityType="Self.EmpEmployees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpEmployeeSalaryComponents" EntityType="Self.EmpEmployeeSalaryComponents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpEmployeeSkills" EntityType="Self.EmpEmployeeSkills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpGradeComponents" EntityType="Self.EmpGradeComponents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeEducationHistory" EntityType="Self.EmployeeEducationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeFamily" EntityType="Self.EmployeeFamily" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeGradeLeaves" EntityType="Self.EmployeeGradeLeaves" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeLeaves" EntityType="Self.EmployeeLeaves" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeMonthlySalary" EntityType="Self.EmployeeMonthlySalary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Exams" EntityType="Self.Exams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExamSlot" EntityType="Self.ExamSlot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExamStudentResult" EntityType="Self.ExamStudentResult" Schema="dbo" store:Type="Tables" />
@@ -2154,6 +2672,114 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_EmpEmployees" Association="Self.FK_EmpEmployeeGradeSalHistory_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_MasterDataGradeId" Association="Self.FK_EmpEmployeeGradeSalHistory_MasterDataGradeId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_MasterDataOrganizationId" Association="Self.FK_EmpEmployeeGradeSalHistory_MasterDataOrganizationId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_MasterDataWorkAccountId" Association="Self.FK_EmpEmployeeGradeSalHistory_MasterDataWorkAccountId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeSalaryComponents_EmpGradeComponents" Association="Self.FK_EmpEmployeeSalaryComponents_EmpGradeComponents">
+            <End Role="EmpGradeComponents" EntitySet="EmpGradeComponents" />
+            <End Role="EmpEmployeeSalaryComponents" EntitySet="EmpEmployeeSalaryComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeSkills_EmpEmployees" Association="Self.FK_EmpEmployeeSkills_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="EmpEmployeeSkills" EntitySet="EmpEmployeeSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeSkills_Organization" Association="Self.FK_EmpEmployeeSkills_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="EmpEmployeeSkills" EntitySet="EmpEmployeeSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpGradeComponents_MasterDataComponentTypeId" Association="Self.FK_EmpGradeComponents_MasterDataComponentTypeId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="EmpGradeComponents" EntitySet="EmpGradeComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpGradeComponents_MasterDataGradeId" Association="Self.FK_EmpGradeComponents_MasterDataGradeId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="EmpGradeComponents" EntitySet="EmpGradeComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpGradeComponents_MasterDataSalaryComponentId" Association="Self.FK_EmpGradeComponents_MasterDataSalaryComponentId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="EmpGradeComponents" EntitySet="EmpGradeComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpGradeComponents_Organization" Association="Self.FK_EmpGradeComponents_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="EmpGradeComponents" EntitySet="EmpGradeComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeEducationHistory_EmpEmployees" Association="Self.FK_EmployeeEducationHistory_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="EmployeeEducationHistory" EntitySet="EmployeeEducationHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeEducationHistory_Organization" Association="Self.FK_EmployeeEducationHistory_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="EmployeeEducationHistory" EntitySet="EmployeeEducationHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeFamily_EmpEmployees" Association="Self.FK_EmployeeFamily_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="EmployeeFamily" EntitySet="EmployeeFamily" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeFamily_MasterDataGenderId" Association="Self.FK_EmployeeFamily_MasterDataGenderId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="EmployeeFamily" EntitySet="EmployeeFamily" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeFamily_MasterDataRelationshipId" Association="Self.FK_EmployeeFamily_MasterDataRelationshipId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="EmployeeFamily" EntitySet="EmployeeFamily" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeFamily_Organization" Association="Self.FK_EmployeeFamily_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="EmployeeFamily" EntitySet="EmployeeFamily" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeGradeLeaves_MasterDataLeaveTypeId" Association="Self.FK_EmployeeGradeLeaves_MasterDataLeaveTypeId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="EmployeeGradeLeaves" EntitySet="EmployeeGradeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeGradeLeaves_Organization" Association="Self.FK_EmployeeGradeLeaves_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="EmployeeGradeLeaves" EntitySet="EmployeeGradeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeLeaves_EmpEmployees" Association="Self.FK_EmployeeLeaves_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeLeaves_MasterDataLeaveStatus" Association="Self.FK_EmployeeLeaves_MasterDataLeaveStatus">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeLeaves_MasterDataLeaveTypeId" Association="Self.FK_EmployeeLeaves_MasterDataLeaveTypeId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeLeaves_Organization" Association="Self.FK_EmployeeLeaves_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMonthlySalary_EmpEmployees" Association="Self.FK_EmployeeMonthlySalary_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="EmployeeMonthlySalary" EntitySet="EmployeeMonthlySalary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMonthlySalary_Organization" Association="Self.FK_EmployeeMonthlySalary_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="EmployeeMonthlySalary" EntitySet="EmployeeMonthlySalary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeSalaryComponents_EmpEmployees" Association="Self.FK_EmployeeSalaryComponents_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="EmpEmployeeSalaryComponents" EntitySet="EmpEmployeeSalaryComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeSalaryComponents_Organization" Association="Self.FK_EmployeeSalaryComponents_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="EmpEmployeeSalaryComponents" EntitySet="EmpEmployeeSalaryComponents" />
           </AssociationSet>
           <AssociationSet Name="FK_Exams_BatchesBatchId" Association="Self.FK_Exams_BatchesBatchId">
             <End Role="Batches" EntitySet="Batches" />
@@ -2508,7 +3134,8 @@
             <End Role="TaskConfiguration" EntitySet="TaskConfiguration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TTPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2676,6 +3303,7 @@
           <NavigationProperty Name="Exams" Relationship="Self.FK_Exams_BatchesBatchId" FromRole="Batches" ToRole="Exams" />
           <NavigationProperty Name="ExamSlots" Relationship="Self.FK_ExamSlot_Batches" FromRole="Batches" ToRole="ExamSlot" />
           <NavigationProperty Name="ExamStudentResults" Relationship="Self.FK_ExamStudentResult_Batches" FromRole="Batches" ToRole="ExamStudentResult" />
+          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubjectResult_Batches" FromRole="Batches" ToRole="ExamStudentSubjectResult" />
           <NavigationProperty Name="PaymentDetails" Relationship="Self.FK_PaymentDetails_Batches" FromRole="Batches" ToRole="PaymentDetails" />
           <NavigationProperty Name="RoleUsers" Relationship="Self.FK_RoleUser_Batches" FromRole="Batches" ToRole="RoleUser" />
           <NavigationProperty Name="SlotAndClassSubjects" Relationship="Self.FK_SlotAndClassSubject_Batches" FromRole="Batches" ToRole="SlotAndClassSubject" />
@@ -2687,7 +3315,6 @@
           <NavigationProperty Name="StudentFeePayments" Relationship="Self.FK_StudentFeePayment_Batches" FromRole="Batches" ToRole="StudentFeePayment" />
           <NavigationProperty Name="StudentFeeReceipts" Relationship="Self.FK_StudentFeeReceipt_Batches" FromRole="Batches" ToRole="StudentFeeReceipt" />
           <NavigationProperty Name="SubjectTypes" Relationship="Self.FK_SubjectTypes_Batches" FromRole="Batches" ToRole="SubjectTypes" />
-          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="TTPModel.FK_ExamStudentSubjectResult_Batches" FromRole="Batch" ToRole="ExamStudentSubjectResult" />
         </EntityType>
         <EntityType Name="ClassFee">
           <Key>
@@ -2758,7 +3385,226 @@
           <NavigationProperty Name="ClassSubject" Relationship="Self.FK_ClassSubjectMarkComponents_ClassSubjectId" FromRole="ClassSubjectMarkComponents" ToRole="ClassSubject" />
           <NavigationProperty Name="MasterData" Relationship="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" FromRole="ClassSubjectMarkComponents" ToRole="MasterData" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_ClassSubjectMarkComponents_OrganizationId" FromRole="ClassSubjectMarkComponents" ToRole="Organization" />
-          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="TTPModel.FK_ExamStudentSubject_ClassSubjectMarkComponentId" FromRole="ClassSubjectMarkComponent" ToRole="ExamStudentSubjectResult" />
+          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubject_ClassSubjectMarkComponentId" FromRole="ClassSubjectMarkComponents" ToRole="ExamStudentSubjectResult" />
+        </EntityType>
+        <EntityType Name="EmpEmployeeGradeSalHistory">
+          <Key>
+            <PropertyRef Name="EmployeeGradeHistoryId" />
+          </Key>
+          <Property Name="EmployeeGradeHistoryId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpGradeId" Type="Int16" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int16" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int16" Nullable="false" />
+          <Property Name="CTC" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Gratuity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Gross" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ApprovedBy" Type="Int16" />
+          <Property Name="WorkAccountId" Type="Int16" />
+          <Property Name="JobTitleId" Type="Int16" />
+          <Property Name="DesignationId" Type="Int16" />
+          <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmpEmployeeGradeSalHistory_EmpEmployees" FromRole="EmpEmployeeGradeSalHistory" ToRole="EmpEmployees" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_EmpEmployeeGradeSalHistory_MasterDataGradeId" FromRole="EmpEmployeeGradeSalHistory" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="Self.FK_EmpEmployeeGradeSalHistory_MasterDataOrganizationId" FromRole="EmpEmployeeGradeSalHistory" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData2" Relationship="Self.FK_EmpEmployeeGradeSalHistory_MasterDataWorkAccountId" FromRole="EmpEmployeeGradeSalHistory" ToRole="MasterData" />
+        </EntityType>
+        <EntityType Name="EmpEmployee">
+          <Key>
+            <PropertyRef Name="EmpEmployeeId" />
+          </Key>
+          <Property Name="EmpEmployeeId" Type="Int16" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FatherName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MotherName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="Int16" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CityId" Type="Int16" />
+          <Property Name="pincode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="StateId" Type="Int16" />
+          <Property Name="CountryId" Type="Int16" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Bloodgroup" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="BankAccountNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IFSCcode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MICRNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AdhaarNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhotoPath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReligionId" Type="Int16" />
+          <Property Name="DOJ" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AlternateContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EmploymentTypeId" Type="Int16" />
+          <Property Name="EmployeeGradeId" Type="Int16" />
+          <Property Name="ReportTo" Type="Int16" />
+          <Property Name="DepartmentId" Type="Int16" Nullable="false" />
+          <Property Name="LocationId" Type="Int16" />
+          <Property Name="DesignationId" Type="Int16" Nullable="false" />
+          <Property Name="EmployeeTerm" Type="Int16" />
+          <Property Name="EmploymentStatus" Type="Int16" />
+          <Property Name="ConfirmationDate" Type="DateTime" Precision="3" />
+          <Property Name="NoticePeriodDays" Type="Int16" />
+          <Property Name="ProbationPeriodDays" Type="Int16" />
+          <Property Name="PAN" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="MaritalStatus" Type="Int16" />
+          <Property Name="MarriedDate" Type="DateTime" Precision="3" />
+          <Property Name="SpouseName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PassportNo" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="PFAccountNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OrgId" Type="Int16" />
+          <Property Name="Active" Type="Byte" />
+          <NavigationProperty Name="EmpEmployeeGradeSalHistories" Relationship="Self.FK_EmpEmployeeGradeSalHistory_EmpEmployees" FromRole="EmpEmployees" ToRole="EmpEmployeeGradeSalHistory" />
+          <NavigationProperty Name="EmpEmployeeSkills" Relationship="Self.FK_EmpEmployeeSkills_EmpEmployees" FromRole="EmpEmployees" ToRole="EmpEmployeeSkills" />
+          <NavigationProperty Name="EmployeeEducationHistories" Relationship="Self.FK_EmployeeEducationHistory_EmpEmployees" FromRole="EmpEmployees" ToRole="EmployeeEducationHistory" />
+          <NavigationProperty Name="EmployeeFamilies" Relationship="Self.FK_EmployeeFamily_EmpEmployees" FromRole="EmpEmployees" ToRole="EmployeeFamily" />
+          <NavigationProperty Name="EmployeeLeaves" Relationship="Self.FK_EmployeeLeaves_EmpEmployees" FromRole="EmpEmployees" ToRole="EmployeeLeaves" />
+          <NavigationProperty Name="EmployeeMonthlySalaries" Relationship="Self.FK_EmployeeMonthlySalary_EmpEmployees" FromRole="EmpEmployees" ToRole="EmployeeMonthlySalary" />
+          <NavigationProperty Name="EmpEmployeeSalaryComponents" Relationship="Self.FK_EmployeeSalaryComponents_EmpEmployees" FromRole="EmpEmployees" ToRole="EmpEmployeeSalaryComponents" />
+        </EntityType>
+        <EntityType Name="EmpEmployeeSalaryComponent">
+          <Key>
+            <PropertyRef Name="EmployeeSalaryComponentId" />
+          </Key>
+          <Property Name="EmployeeSalaryComponentId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int16" Nullable="false" />
+          <Property Name="EmpGradeComponentId" Type="Int16" Nullable="false" />
+          <Property Name="EmpployeeCompPCorAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmployeeSalaryComponents_EmpEmployees" FromRole="EmpEmployeeSalaryComponents" ToRole="EmpEmployees" />
+          <NavigationProperty Name="EmpGradeComponent" Relationship="Self.FK_EmpEmployeeSalaryComponents_EmpGradeComponents" FromRole="EmpEmployeeSalaryComponents" ToRole="EmpGradeComponents" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_EmployeeSalaryComponents_Organization" FromRole="EmpEmployeeSalaryComponents" ToRole="Organization" />
+        </EntityType>
+        <EntityType Name="EmpEmployeeSkill">
+          <Key>
+            <PropertyRef Name="EmpEmployeeSkillId" />
+          </Key>
+          <Property Name="EmpEmployeeSkillId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SkillId" Type="Int16" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int16" Nullable="false" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <Property Name="ExperienceInMonths" Type="Int16" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmpEmployeeSkills_EmpEmployees" FromRole="EmpEmployeeSkills" ToRole="EmpEmployees" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_EmpEmployeeSkills_Organization" FromRole="EmpEmployeeSkills" ToRole="Organization" />
+        </EntityType>
+        <EntityType Name="EmpGradeComponent">
+          <Key>
+            <PropertyRef Name="EmpGradeSalaryComponentId" />
+          </Key>
+          <Property Name="EmpGradeSalaryComponentId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpGradeId" Type="Int16" Nullable="false" />
+          <Property Name="SalaryComponentId" Type="Int16" Nullable="false" />
+          <Property Name="PercentOfBasicOrAmount" Type="Int16" Nullable="false" />
+          <Property Name="ComponentTypeId" Type="Int16" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <NavigationProperty Name="EmpEmployeeSalaryComponents" Relationship="Self.FK_EmpEmployeeSalaryComponents_EmpGradeComponents" FromRole="EmpGradeComponents" ToRole="EmpEmployeeSalaryComponents" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_EmpGradeComponents_MasterDataComponentTypeId" FromRole="EmpGradeComponents" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="Self.FK_EmpGradeComponents_MasterDataGradeId" FromRole="EmpGradeComponents" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData2" Relationship="Self.FK_EmpGradeComponents_MasterDataSalaryComponentId" FromRole="EmpGradeComponents" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_EmpGradeComponents_Organization" FromRole="EmpGradeComponents" ToRole="Organization" />
+        </EntityType>
+        <EntityType Name="EmployeeEducationHistory">
+          <Key>
+            <PropertyRef Name="EmployeeEducationHistoryId" />
+          </Key>
+          <Property Name="EmployeeEducationHistoryId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FromYear" Type="Int16" Nullable="false" />
+          <Property Name="ToYear" Type="Int16" Nullable="false" />
+          <Property Name="PercentageObtained" Type="Int16" Nullable="false" />
+          <Property Name="BoardName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int16" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmployeeEducationHistory_EmpEmployees" FromRole="EmployeeEducationHistory" ToRole="EmpEmployees" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_EmployeeEducationHistory_Organization" FromRole="EmployeeEducationHistory" ToRole="Organization" />
+        </EntityType>
+        <EntityType Name="EmployeeFamily">
+          <Key>
+            <PropertyRef Name="EmployeeFamilyId" />
+          </Key>
+          <Property Name="EmployeeFamilyId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int16" Nullable="false" />
+          <Property Name="FamilyRelationShipId" Type="Int16" Nullable="false" />
+          <Property Name="FirstName" Type="Int16" Nullable="false" />
+          <Property Name="LastName" Type="Int16" Nullable="false" />
+          <Property Name="Age" Type="Int16" Nullable="false" />
+          <Property Name="Gender" Type="Int16" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmployeeFamily_EmpEmployees" FromRole="EmployeeFamily" ToRole="EmpEmployees" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_EmployeeFamily_MasterDataGenderId" FromRole="EmployeeFamily" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="Self.FK_EmployeeFamily_MasterDataRelationshipId" FromRole="EmployeeFamily" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_EmployeeFamily_Organization" FromRole="EmployeeFamily" ToRole="Organization" />
+        </EntityType>
+        <EntityType Name="EmployeeGradeLeaf">
+          <Key>
+            <PropertyRef Name="EmployeeGradeLeaveId" />
+          </Key>
+          <Property Name="EmployeeGradeLeaveId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeGradeId" Type="Int16" Nullable="false" />
+          <Property Name="LeaveTypeId" Type="Int16" Nullable="false" />
+          <Property Name="NoOfDays" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpadatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_EmployeeGradeLeaves_MasterDataLeaveTypeId" FromRole="EmployeeGradeLeaves" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_EmployeeGradeLeaves_Organization" FromRole="EmployeeGradeLeaves" ToRole="Organization" />
+        </EntityType>
+        <EntityType Name="EmployeeLeaf">
+          <Key>
+            <PropertyRef Name="EmployeeLeaveId" />
+          </Key>
+          <Property Name="EmployeeLeaveId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int16" Nullable="false" />
+          <Property Name="LeaveTypeId" Type="Int16" Nullable="false" />
+          <Property Name="LeaveFrom" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LeaveTo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NoOfLeaves" Type="Int16" Nullable="false" />
+          <Property Name="ApplyDate" Type="DateTime" Precision="3" />
+          <Property Name="LeaveStatus" Type="Int16" />
+          <Property Name="ApprovedRejectedDate" Type="DateTime" Precision="3" />
+          <Property Name="ApprovedBy" Type="Int16" />
+          <Property Name="Reamarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmployeeLeaves_EmpEmployees" FromRole="EmployeeLeaves" ToRole="EmpEmployees" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_EmployeeLeaves_MasterDataLeaveStatus" FromRole="EmployeeLeaves" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="Self.FK_EmployeeLeaves_MasterDataLeaveTypeId" FromRole="EmployeeLeaves" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_EmployeeLeaves_Organization" FromRole="EmployeeLeaves" ToRole="Organization" />
+        </EntityType>
+        <EntityType Name="EmployeeMonthlySalary">
+          <Key>
+            <PropertyRef Name="EmployeeMonthlySalaryId" />
+          </Key>
+          <Property Name="EmployeeMonthlySalaryId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalaryMonth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Gross" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Deduction" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NetSalary" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PresentDays" Type="Int16" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int16" Nullable="false" />
+          <Property Name="Released" Type="Byte" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="OrgId" Type="Int16" />
+          <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmployeeMonthlySalary_EmpEmployees" FromRole="EmployeeMonthlySalary" ToRole="EmpEmployees" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_EmployeeMonthlySalary_Organization" FromRole="EmployeeMonthlySalary" ToRole="Organization" />
         </EntityType>
         <EntityType Name="Exam">
           <Key>
@@ -2780,7 +3626,7 @@
           <NavigationProperty Name="Organization" Relationship="Self.FK_Exams_OrganizationId" FromRole="Exams" ToRole="Organization" />
           <NavigationProperty Name="ExamSlots" Relationship="Self.FK_ExamSlot_ExamsExamId" FromRole="Exams" ToRole="ExamSlot" />
           <NavigationProperty Name="ExamStudentResults" Relationship="Self.FK_ExamStudentClass_ExamsId" FromRole="Exams" ToRole="ExamStudentResult" />
-          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="TTPModel.FK_ExamStudentSubjectResult_ExamId" FromRole="Exam" ToRole="ExamStudentSubjectResult" />
+          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubjectResult_ExamId" FromRole="Exams" ToRole="ExamStudentSubjectResult" />
         </EntityType>
         <EntityType Name="ExamSlot">
           <Key>
@@ -2828,6 +3674,54 @@
           <NavigationProperty Name="MasterData1" Relationship="Self.FK_ExamStudentClass_MasterDataStatus" FromRole="ExamStudentResult" ToRole="MasterData" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_ExamStudentClass_OrganizationId" FromRole="ExamStudentResult" ToRole="Organization" />
         </EntityType>
+        <EntityType Name="ExamStudentSubjectResult">
+          <Key>
+            <PropertyRef Name="ExamStudentSubjectResultId" />
+          </Key>
+          <Property Name="ExamStudentSubjectResultId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamId" Type="Int16" Nullable="false" />
+          <Property Name="StudentClassSubjectId" Type="Int16" Nullable="false" />
+          <Property Name="ClassSubjectMarkComponentId" Type="Int16" Nullable="false" />
+          <Property Name="Marks" Type="Int16" Nullable="false" />
+          <Property Name="ExamStatus" Type="Int16" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="Active" Type="Byte" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_ExamStudentSubjectResult_Batches" FromRole="ExamStudentSubjectResult" ToRole="Batches" />
+          <NavigationProperty Name="ClassSubjectMarkComponent" Relationship="Self.FK_ExamStudentSubject_ClassSubjectMarkComponentId" FromRole="ExamStudentSubjectResult" ToRole="ClassSubjectMarkComponents" />
+          <NavigationProperty Name="Exam" Relationship="Self.FK_ExamStudentSubjectResult_ExamId" FromRole="ExamStudentSubjectResult" ToRole="Exams" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_ExamStudentSubject_MasterDataStatus" FromRole="ExamStudentSubjectResult" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_ExamStudentSubject_Organization" FromRole="ExamStudentSubjectResult" ToRole="Organization" />
+          <NavigationProperty Name="StudentClassSubject" Relationship="Self.FK_ExamStudentSubject_StudentClassSubjectId" FromRole="ExamStudentSubjectResult" ToRole="StudentClassSubject" />
+        </EntityType>
+        <EntityType Name="FilesNPhoto">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedFileFolderName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="FileOrFolder" Type="Byte" />
+          <Property Name="FileOrPhoto" Type="Byte" />
+          <Property Name="Active" Type="Byte" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UploadDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StudentClassId" Type="Int32" />
+          <Property Name="DocTypeId" Type="Int16" />
+          <Property Name="Parent" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="BatchId" Type="Int16" />
+          <Property Name="OrgId" Type="Int16" />
+          <NavigationProperty Name="MasterData" Relationship="Self.FK_FilesNPhotos_MasterData" FromRole="FilesNPhotos" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_FilesNPhotos_Organization" FromRole="FilesNPhotos" ToRole="Organization" />
+        </EntityType>
         <EntityType Name="MasterData">
           <Key>
             <PropertyRef Name="MasterDataId" />
@@ -2850,9 +3744,22 @@
           <NavigationProperty Name="ClassSubjects" Relationship="Self.FK_ClassSubject_MasterDataClassId" FromRole="MasterData" ToRole="ClassSubject" />
           <NavigationProperty Name="ClassSubjects1" Relationship="Self.FK_ClassSubject_MasterDataSubjectsId" FromRole="MasterData" ToRole="ClassSubject" />
           <NavigationProperty Name="ClassSubjectMarkComponents" Relationship="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" FromRole="MasterData" ToRole="ClassSubjectMarkComponents" />
+          <NavigationProperty Name="EmpEmployeeGradeSalHistories" Relationship="Self.FK_EmpEmployeeGradeSalHistory_MasterDataGradeId" FromRole="MasterData" ToRole="EmpEmployeeGradeSalHistory" />
+          <NavigationProperty Name="EmpEmployeeGradeSalHistories1" Relationship="Self.FK_EmpEmployeeGradeSalHistory_MasterDataOrganizationId" FromRole="MasterData" ToRole="EmpEmployeeGradeSalHistory" />
+          <NavigationProperty Name="EmpEmployeeGradeSalHistories2" Relationship="Self.FK_EmpEmployeeGradeSalHistory_MasterDataWorkAccountId" FromRole="MasterData" ToRole="EmpEmployeeGradeSalHistory" />
+          <NavigationProperty Name="EmpGradeComponents" Relationship="Self.FK_EmpGradeComponents_MasterDataComponentTypeId" FromRole="MasterData" ToRole="EmpGradeComponents" />
+          <NavigationProperty Name="EmpGradeComponents1" Relationship="Self.FK_EmpGradeComponents_MasterDataGradeId" FromRole="MasterData" ToRole="EmpGradeComponents" />
+          <NavigationProperty Name="EmpGradeComponents2" Relationship="Self.FK_EmpGradeComponents_MasterDataSalaryComponentId" FromRole="MasterData" ToRole="EmpGradeComponents" />
+          <NavigationProperty Name="EmployeeFamilies" Relationship="Self.FK_EmployeeFamily_MasterDataGenderId" FromRole="MasterData" ToRole="EmployeeFamily" />
+          <NavigationProperty Name="EmployeeFamilies1" Relationship="Self.FK_EmployeeFamily_MasterDataRelationshipId" FromRole="MasterData" ToRole="EmployeeFamily" />
+          <NavigationProperty Name="EmployeeGradeLeaves" Relationship="Self.FK_EmployeeGradeLeaves_MasterDataLeaveTypeId" FromRole="MasterData" ToRole="EmployeeGradeLeaves" />
+          <NavigationProperty Name="EmployeeLeaves" Relationship="Self.FK_EmployeeLeaves_MasterDataLeaveStatus" FromRole="MasterData" ToRole="EmployeeLeaves" />
+          <NavigationProperty Name="EmployeeLeaves1" Relationship="Self.FK_EmployeeLeaves_MasterDataLeaveTypeId" FromRole="MasterData" ToRole="EmployeeLeaves" />
           <NavigationProperty Name="Exams" Relationship="Self.FK_Exams_MasterDataExamNameId" FromRole="MasterData" ToRole="Exams" />
           <NavigationProperty Name="ExamStudentResults" Relationship="Self.FK_ExamStudentClass_MasterDataGrade" FromRole="MasterData" ToRole="ExamStudentResult" />
           <NavigationProperty Name="ExamStudentResults1" Relationship="Self.FK_ExamStudentClass_MasterDataStatus" FromRole="MasterData" ToRole="ExamStudentResult" />
+          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubject_MasterDataStatus" FromRole="MasterData" ToRole="ExamStudentSubjectResult" />
+          <NavigationProperty Name="FilesNPhotos" Relationship="Self.FK_FilesNPhotos_MasterData" FromRole="MasterData" ToRole="FilesNPhotos" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_MasterData_Organization" FromRole="MasterData" ToRole="Organization" />
           <NavigationProperty Name="MasterRolePermissions" Relationship="Self.FK_MasterRolePermission_MasterDataId" FromRole="MasterData" ToRole="MasterRolePermission" />
           <NavigationProperty Name="Pages" Relationship="Self.FK_Pages_MasterData" FromRole="MasterData" ToRole="Pages" />
@@ -2869,8 +3776,6 @@
           <NavigationProperty Name="Students6" Relationship="Self.FK_Students_ReasonForLeaving" FromRole="MasterData" ToRole="Students" />
           <NavigationProperty Name="Students7" Relationship="Self.FK_Students_Religion" FromRole="MasterData" ToRole="Students" />
           <NavigationProperty Name="Students8" Relationship="Self.FK_Students_State" FromRole="MasterData" ToRole="Students" />
-          <NavigationProperty Name="FilesNPhotos" Relationship="TTPModel.FK_FilesNPhotos_MasterData" FromRole="MasterData" ToRole="FilesNPhoto" />
-          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="TTPModel.FK_ExamStudentSubject_MasterDataStatus" FromRole="MasterData" ToRole="ExamStudentSubjectResult" />
         </EntityType>
         <EntityType Name="MasterRolePermission">
           <Key>
@@ -2928,9 +3833,19 @@
           <NavigationProperty Name="ClassFees" Relationship="Self.FK_ClassFee_OrganizationId" FromRole="Organization" ToRole="ClassFee" />
           <NavigationProperty Name="ClassSubjects" Relationship="Self.FK_ClassSubject_OrganizationId" FromRole="Organization" ToRole="ClassSubject" />
           <NavigationProperty Name="ClassSubjectMarkComponents" Relationship="Self.FK_ClassSubjectMarkComponents_OrganizationId" FromRole="Organization" ToRole="ClassSubjectMarkComponents" />
+          <NavigationProperty Name="EmpEmployeeSalaryComponents" Relationship="Self.FK_EmployeeSalaryComponents_Organization" FromRole="Organization" ToRole="EmpEmployeeSalaryComponents" />
+          <NavigationProperty Name="EmpEmployeeSkills" Relationship="Self.FK_EmpEmployeeSkills_Organization" FromRole="Organization" ToRole="EmpEmployeeSkills" />
+          <NavigationProperty Name="EmpGradeComponents" Relationship="Self.FK_EmpGradeComponents_Organization" FromRole="Organization" ToRole="EmpGradeComponents" />
+          <NavigationProperty Name="EmployeeEducationHistories" Relationship="Self.FK_EmployeeEducationHistory_Organization" FromRole="Organization" ToRole="EmployeeEducationHistory" />
+          <NavigationProperty Name="EmployeeFamilies" Relationship="Self.FK_EmployeeFamily_Organization" FromRole="Organization" ToRole="EmployeeFamily" />
+          <NavigationProperty Name="EmployeeGradeLeaves" Relationship="Self.FK_EmployeeGradeLeaves_Organization" FromRole="Organization" ToRole="EmployeeGradeLeaves" />
+          <NavigationProperty Name="EmployeeLeaves" Relationship="Self.FK_EmployeeLeaves_Organization" FromRole="Organization" ToRole="EmployeeLeaves" />
+          <NavigationProperty Name="EmployeeMonthlySalaries" Relationship="Self.FK_EmployeeMonthlySalary_Organization" FromRole="Organization" ToRole="EmployeeMonthlySalary" />
           <NavigationProperty Name="Exams" Relationship="Self.FK_Exams_OrganizationId" FromRole="Organization" ToRole="Exams" />
           <NavigationProperty Name="ExamSlots" Relationship="Self.FK_ExamSlot_OrganizationId" FromRole="Organization" ToRole="ExamSlot" />
           <NavigationProperty Name="ExamStudentResults" Relationship="Self.FK_ExamStudentClass_OrganizationId" FromRole="Organization" ToRole="ExamStudentResult" />
+          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubject_Organization" FromRole="Organization" ToRole="ExamStudentSubjectResult" />
+          <NavigationProperty Name="FilesNPhotos" Relationship="Self.FK_FilesNPhotos_Organization" FromRole="Organization" ToRole="FilesNPhotos" />
           <NavigationProperty Name="MasterDatas" Relationship="Self.FK_MasterData_Organization" FromRole="Organization" ToRole="MasterData" />
           <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_Organization" FromRole="Organization" ToRole="Messages" />
           <NavigationProperty Name="PageHistories" Relationship="Self.FK_PageHistory_Organization" FromRole="Organization" ToRole="PageHistory" />
@@ -2948,8 +3863,6 @@
           <NavigationProperty Name="StudentFeeReceipt" Relationship="Self.FK_StudentFeeReceipt_OrganizationOrgId" FromRole="Organization" ToRole="StudentFeeReceipt" />
           <NavigationProperty Name="Students" Relationship="Self.FK_Students_OrganizationOrgId" FromRole="Organization" ToRole="Students" />
           <NavigationProperty Name="TaskConfigurations" Relationship="Self.FK_TaskConfiguration_OrganizationId" FromRole="Organization" ToRole="TaskConfiguration" />
-          <NavigationProperty Name="FilesNPhotos" Relationship="TTPModel.FK_FilesNPhotos_Organization" FromRole="Organization" ToRole="FilesNPhoto" />
-          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="TTPModel.FK_ExamStudentSubject_Organization" FromRole="Organization" ToRole="ExamStudentSubjectResult" />
         </EntityType>
         <EntityType Name="PageHistory">
           <Key>
@@ -3134,6 +4047,7 @@
           <Property Name="StudentId" Type="Int32" Nullable="false" />
           <Property Name="ClassId" Type="Int16" Nullable="false" />
           <Property Name="RollNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SectionId" Type="Int16" Nullable="false" />
           <Property Name="BatchId" Type="Int16" Nullable="false" />
           <Property Name="FeeTypeId" Type="Int16" Nullable="false" />
           <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
@@ -3144,6 +4058,7 @@
           <Property Name="CreatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="Promoted" Type="Byte" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_StudentClassId" FromRole="StudentClass" ToRole="Attendance" />
           <NavigationProperty Name="Batch" Relationship="Self.FK_StudentClass_Batches" FromRole="StudentClass" ToRole="Batches" />
           <NavigationProperty Name="ExamStudentResults" Relationship="Self.FK_ExamStudentClass_ExamStudentClassId" FromRole="StudentClass" ToRole="ExamStudentResult" />
@@ -3157,8 +4072,6 @@
           <NavigationProperty Name="StudentDocuments" Relationship="Self.FK_StudentDocuments_StudentClass" FromRole="StudentClass" ToRole="StudentDocuments" />
           <NavigationProperty Name="StudentFeePayments" Relationship="Self.FK_StudentFeePayment_StudentFeePayment" FromRole="StudentClass" ToRole="StudentFeePayment" />
           <NavigationProperty Name="StudentFeeReceipts" Relationship="Self.FK_StudentFeeReceipt_StudentClass" FromRole="StudentClass" ToRole="StudentFeeReceipt" />
-          <Property Name="SectionId" Type="Int16" Nullable="false" />
-          <Property Name="Promoted" Type="Byte" />
         </EntityType>
         <EntityType Name="StudentClassSubject">
           <Key>
@@ -3176,9 +4089,9 @@
           <Property Name="UpdatedBy" Type="Int16" />
           <NavigationProperty Name="Batch" Relationship="Self.FK_StudentClassSubject_BatchesBatchId" FromRole="StudentClassSubject" ToRole="Batches" />
           <NavigationProperty Name="ClassSubject" Relationship="Self.FK_StudentClassSubject_ClassSubjectId" FromRole="StudentClassSubject" ToRole="ClassSubject" />
+          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubject_StudentClassSubjectId" FromRole="StudentClassSubject" ToRole="ExamStudentSubjectResult" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_StudentClassSubject_OrganizationOrgId" FromRole="StudentClassSubject" ToRole="Organization" />
           <NavigationProperty Name="StudentClass" Relationship="Self.FK_StudentClassSubject_StudentClassId" FromRole="StudentClassSubject" ToRole="StudentClass" />
-          <NavigationProperty Name="ExamStudentSubjectResults" Relationship="TTPModel.FK_ExamStudentSubject_StudentClassSubjectId" FromRole="StudentClassSubject" ToRole="ExamStudentSubjectResult" />
         </EntityType>
         <EntityType Name="StudentDocument">
           <Key>
@@ -3575,6 +4488,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ExamStudentSubjectResult_Batches">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="ExamStudentSubjectResult">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PaymentDetails_Batches">
           <End Role="Batches" Type="Self.Batch" Multiplicity="0..1" />
           <End Role="PaymentDetails" Type="Self.PaymentDetail" Multiplicity="*" />
@@ -3887,6 +4812,342 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ExamStudentSubject_ClassSubjectMarkComponentId">
+          <End Role="ClassSubjectMarkComponents" Type="Self.ClassSubjectMarkComponent" Multiplicity="1" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassSubjectMarkComponents">
+              <PropertyRef Name="ClassSubjectMarkComponentId" />
+            </Principal>
+            <Dependent Role="ExamStudentSubjectResult">
+              <PropertyRef Name="ClassSubjectMarkComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeGradeSalHistory_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
+          <End Role="EmpEmployeeGradeSalHistory" Type="Self.EmpEmployeeGradeSalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeGradeSalHistory">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeGradeSalHistory_MasterDataGradeId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmpEmployeeGradeSalHistory" Type="Self.EmpEmployeeGradeSalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeGradeSalHistory">
+              <PropertyRef Name="EmpGradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeGradeSalHistory_MasterDataOrganizationId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmpEmployeeGradeSalHistory" Type="Self.EmpEmployeeGradeSalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeGradeSalHistory">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeGradeSalHistory_MasterDataWorkAccountId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="EmpEmployeeGradeSalHistory" Type="Self.EmpEmployeeGradeSalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeGradeSalHistory">
+              <PropertyRef Name="WorkAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeSkills_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
+          <End Role="EmpEmployeeSkills" Type="Self.EmpEmployeeSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeSkills">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeEducationHistory_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
+          <End Role="EmployeeEducationHistory" Type="Self.EmployeeEducationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeEducationHistory">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeFamily_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
+          <End Role="EmployeeFamily" Type="Self.EmployeeFamily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeFamily">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeLeaves_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
+          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeLeaves">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMonthlySalary_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
+          <End Role="EmployeeMonthlySalary" Type="Self.EmployeeMonthlySalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeMonthlySalary">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeSalaryComponents_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
+          <End Role="EmpEmployeeSalaryComponents" Type="Self.EmpEmployeeSalaryComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeSalaryComponents">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeSalaryComponents_EmpGradeComponents">
+          <End Role="EmpGradeComponents" Type="Self.EmpGradeComponent" Multiplicity="1" />
+          <End Role="EmpEmployeeSalaryComponents" Type="Self.EmpEmployeeSalaryComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpGradeComponents">
+              <PropertyRef Name="EmpGradeSalaryComponentId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeSalaryComponents">
+              <PropertyRef Name="EmpGradeComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeSalaryComponents_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="EmpEmployeeSalaryComponents" Type="Self.EmpEmployeeSalaryComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeSalaryComponents">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeSkills_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="EmpEmployeeSkills" Type="Self.EmpEmployeeSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeSkills">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpGradeComponents_MasterDataComponentTypeId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmpGradeComponents" Type="Self.EmpGradeComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmpGradeComponents">
+              <PropertyRef Name="ComponentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpGradeComponents_MasterDataGradeId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmpGradeComponents" Type="Self.EmpGradeComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmpGradeComponents">
+              <PropertyRef Name="EmpGradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpGradeComponents_MasterDataSalaryComponentId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmpGradeComponents" Type="Self.EmpGradeComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmpGradeComponents">
+              <PropertyRef Name="SalaryComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpGradeComponents_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="EmpGradeComponents" Type="Self.EmpGradeComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmpGradeComponents">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeEducationHistory_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="EmployeeEducationHistory" Type="Self.EmployeeEducationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmployeeEducationHistory">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeFamily_MasterDataGenderId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmployeeFamily" Type="Self.EmployeeFamily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmployeeFamily">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeFamily_MasterDataRelationshipId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmployeeFamily" Type="Self.EmployeeFamily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmployeeFamily">
+              <PropertyRef Name="FamilyRelationShipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeFamily_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="EmployeeFamily" Type="Self.EmployeeFamily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmployeeFamily">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeGradeLeaves_MasterDataLeaveTypeId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmployeeGradeLeaves" Type="Self.EmployeeGradeLeaf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmployeeGradeLeaves">
+              <PropertyRef Name="LeaveTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeGradeLeaves_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="EmployeeGradeLeaves" Type="Self.EmployeeGradeLeaf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmployeeGradeLeaves">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeLeaves_MasterDataLeaveStatus">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmployeeLeaves">
+              <PropertyRef Name="LeaveStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeLeaves_MasterDataLeaveTypeId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmployeeLeaves">
+              <PropertyRef Name="LeaveTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeLeaves_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmployeeLeaves">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMonthlySalary_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+          <End Role="EmployeeMonthlySalary" Type="Self.EmployeeMonthlySalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmployeeMonthlySalary">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Exams_MasterDataExamNameId">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
           <End Role="Exams" Type="Self.Exam" Multiplicity="*" />
@@ -3931,6 +5192,18 @@
               <PropertyRef Name="ExamId" />
             </Principal>
             <Dependent Role="ExamStudentResult">
+              <PropertyRef Name="ExamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamStudentSubjectResult_ExamId">
+          <End Role="Exams" Type="Self.Exam" Multiplicity="1" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exams">
+              <PropertyRef Name="ExamId" />
+            </Principal>
+            <Dependent Role="ExamStudentSubjectResult">
               <PropertyRef Name="ExamId" />
             </Dependent>
           </ReferentialConstraint>
@@ -4003,6 +5276,66 @@
               <PropertyRef Name="OrganizationId" />
             </Principal>
             <Dependent Role="ExamStudentResult">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamStudentSubject_MasterDataStatus">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="ExamStudentSubjectResult">
+              <PropertyRef Name="ExamStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamStudentSubject_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="ExamStudentSubjectResult">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamStudentSubject_StudentClassSubjectId">
+          <End Role="StudentClassSubject" Type="Self.StudentClassSubject" Multiplicity="1" />
+          <End Role="ExamStudentSubjectResult" Type="Self.ExamStudentSubjectResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentClassSubject">
+              <PropertyRef Name="StudentClassSubjectId" />
+            </Principal>
+            <Dependent Role="ExamStudentSubjectResult">
+              <PropertyRef Name="StudentClassSubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilesNPhotos_MasterData">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="FilesNPhotos" Type="Self.FilesNPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="FilesNPhotos">
+              <PropertyRef Name="DocTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilesNPhotos_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+          <End Role="FilesNPhotos" Type="Self.FilesNPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="FilesNPhotos">
               <PropertyRef Name="OrgId" />
             </Dependent>
           </ReferentialConstraint>
@@ -4590,9 +5923,21 @@
           <EntitySet Name="ClassFees" EntityType="Self.ClassFee" />
           <EntitySet Name="ClassSubjects" EntityType="Self.ClassSubject" />
           <EntitySet Name="ClassSubjectMarkComponents" EntityType="Self.ClassSubjectMarkComponent" />
+          <EntitySet Name="EmpEmployeeGradeSalHistories" EntityType="Self.EmpEmployeeGradeSalHistory" />
+          <EntitySet Name="EmpEmployees" EntityType="Self.EmpEmployee" />
+          <EntitySet Name="EmpEmployeeSalaryComponents" EntityType="Self.EmpEmployeeSalaryComponent" />
+          <EntitySet Name="EmpEmployeeSkills" EntityType="Self.EmpEmployeeSkill" />
+          <EntitySet Name="EmpGradeComponents" EntityType="Self.EmpGradeComponent" />
+          <EntitySet Name="EmployeeEducationHistories" EntityType="Self.EmployeeEducationHistory" />
+          <EntitySet Name="EmployeeFamilies" EntityType="Self.EmployeeFamily" />
+          <EntitySet Name="EmployeeGradeLeaves" EntityType="Self.EmployeeGradeLeaf" />
+          <EntitySet Name="EmployeeLeaves" EntityType="Self.EmployeeLeaf" />
+          <EntitySet Name="EmployeeMonthlySalaries" EntityType="Self.EmployeeMonthlySalary" />
           <EntitySet Name="Exams" EntityType="Self.Exam" />
           <EntitySet Name="ExamSlots" EntityType="Self.ExamSlot" />
           <EntitySet Name="ExamStudentResults" EntityType="Self.ExamStudentResult" />
+          <EntitySet Name="ExamStudentSubjectResults" EntityType="Self.ExamStudentSubjectResult" />
+          <EntitySet Name="FilesNPhotos" EntityType="Self.FilesNPhoto" />
           <EntitySet Name="MasterDatas" EntityType="Self.MasterData" />
           <EntitySet Name="MasterRolePermissions" EntityType="Self.MasterRolePermission" />
           <EntitySet Name="Messages" EntityType="Self.Message" />
@@ -4680,6 +6025,10 @@
           <AssociationSet Name="FK_ExamStudentResult_Batches" Association="Self.FK_ExamStudentResult_Batches">
             <End Role="Batches" EntitySet="Batches" />
             <End Role="ExamStudentResult" EntitySet="ExamStudentResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamStudentSubjectResult_Batches" Association="Self.FK_ExamStudentSubjectResult_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
           </AssociationSet>
           <AssociationSet Name="FK_PaymentDetails_Batches" Association="Self.FK_PaymentDetails_Batches">
             <End Role="Batches" EntitySet="Batches" />
@@ -4785,6 +6134,118 @@
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
           </AssociationSet>
+          <AssociationSet Name="FK_ExamStudentSubject_ClassSubjectMarkComponentId" Association="Self.FK_ExamStudentSubject_ClassSubjectMarkComponentId">
+            <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_EmpEmployees" Association="Self.FK_EmpEmployeeGradeSalHistory_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_MasterDataGradeId" Association="Self.FK_EmpEmployeeGradeSalHistory_MasterDataGradeId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_MasterDataOrganizationId" Association="Self.FK_EmpEmployeeGradeSalHistory_MasterDataOrganizationId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_MasterDataWorkAccountId" Association="Self.FK_EmpEmployeeGradeSalHistory_MasterDataWorkAccountId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeSkills_EmpEmployees" Association="Self.FK_EmpEmployeeSkills_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="EmpEmployeeSkills" EntitySet="EmpEmployeeSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeEducationHistory_EmpEmployees" Association="Self.FK_EmployeeEducationHistory_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="EmployeeEducationHistory" EntitySet="EmployeeEducationHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeFamily_EmpEmployees" Association="Self.FK_EmployeeFamily_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="EmployeeFamily" EntitySet="EmployeeFamilies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeLeaves_EmpEmployees" Association="Self.FK_EmployeeLeaves_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMonthlySalary_EmpEmployees" Association="Self.FK_EmployeeMonthlySalary_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="EmployeeMonthlySalary" EntitySet="EmployeeMonthlySalaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeSalaryComponents_EmpEmployees" Association="Self.FK_EmployeeSalaryComponents_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="EmpEmployeeSalaryComponents" EntitySet="EmpEmployeeSalaryComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeSalaryComponents_EmpGradeComponents" Association="Self.FK_EmpEmployeeSalaryComponents_EmpGradeComponents">
+            <End Role="EmpGradeComponents" EntitySet="EmpGradeComponents" />
+            <End Role="EmpEmployeeSalaryComponents" EntitySet="EmpEmployeeSalaryComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeSalaryComponents_Organization" Association="Self.FK_EmployeeSalaryComponents_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="EmpEmployeeSalaryComponents" EntitySet="EmpEmployeeSalaryComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeSkills_Organization" Association="Self.FK_EmpEmployeeSkills_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="EmpEmployeeSkills" EntitySet="EmpEmployeeSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpGradeComponents_MasterDataComponentTypeId" Association="Self.FK_EmpGradeComponents_MasterDataComponentTypeId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="EmpGradeComponents" EntitySet="EmpGradeComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpGradeComponents_MasterDataGradeId" Association="Self.FK_EmpGradeComponents_MasterDataGradeId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="EmpGradeComponents" EntitySet="EmpGradeComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpGradeComponents_MasterDataSalaryComponentId" Association="Self.FK_EmpGradeComponents_MasterDataSalaryComponentId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="EmpGradeComponents" EntitySet="EmpGradeComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpGradeComponents_Organization" Association="Self.FK_EmpGradeComponents_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="EmpGradeComponents" EntitySet="EmpGradeComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeEducationHistory_Organization" Association="Self.FK_EmployeeEducationHistory_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="EmployeeEducationHistory" EntitySet="EmployeeEducationHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeFamily_MasterDataGenderId" Association="Self.FK_EmployeeFamily_MasterDataGenderId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="EmployeeFamily" EntitySet="EmployeeFamilies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeFamily_MasterDataRelationshipId" Association="Self.FK_EmployeeFamily_MasterDataRelationshipId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="EmployeeFamily" EntitySet="EmployeeFamilies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeFamily_Organization" Association="Self.FK_EmployeeFamily_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="EmployeeFamily" EntitySet="EmployeeFamilies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeGradeLeaves_MasterDataLeaveTypeId" Association="Self.FK_EmployeeGradeLeaves_MasterDataLeaveTypeId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="EmployeeGradeLeaves" EntitySet="EmployeeGradeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeGradeLeaves_Organization" Association="Self.FK_EmployeeGradeLeaves_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="EmployeeGradeLeaves" EntitySet="EmployeeGradeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeLeaves_MasterDataLeaveStatus" Association="Self.FK_EmployeeLeaves_MasterDataLeaveStatus">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeLeaves_MasterDataLeaveTypeId" Association="Self.FK_EmployeeLeaves_MasterDataLeaveTypeId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeLeaves_Organization" Association="Self.FK_EmployeeLeaves_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMonthlySalary_Organization" Association="Self.FK_EmployeeMonthlySalary_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="EmployeeMonthlySalary" EntitySet="EmployeeMonthlySalaries" />
+          </AssociationSet>
           <AssociationSet Name="FK_Exams_MasterDataExamNameId" Association="Self.FK_Exams_MasterDataExamNameId">
             <End Role="MasterData" EntitySet="MasterDatas" />
             <End Role="Exams" EntitySet="Exams" />
@@ -4800,6 +6261,10 @@
           <AssociationSet Name="FK_ExamStudentClass_ExamsId" Association="Self.FK_ExamStudentClass_ExamsId">
             <End Role="Exams" EntitySet="Exams" />
             <End Role="ExamStudentResult" EntitySet="ExamStudentResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamStudentSubjectResult_ExamId" Association="Self.FK_ExamStudentSubjectResult_ExamId">
+            <End Role="Exams" EntitySet="Exams" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamSlot_OrganizationId" Association="Self.FK_ExamSlot_OrganizationId">
             <End Role="Organization" EntitySet="Organizations" />
@@ -4824,6 +6289,26 @@
           <AssociationSet Name="FK_ExamStudentClass_OrganizationId" Association="Self.FK_ExamStudentClass_OrganizationId">
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="ExamStudentResult" EntitySet="ExamStudentResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamStudentSubject_MasterDataStatus" Association="Self.FK_ExamStudentSubject_MasterDataStatus">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamStudentSubject_Organization" Association="Self.FK_ExamStudentSubject_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamStudentSubject_StudentClassSubjectId" Association="Self.FK_ExamStudentSubject_StudentClassSubjectId">
+            <End Role="StudentClassSubject" EntitySet="StudentClassSubjects" />
+            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilesNPhotos_MasterData" Association="Self.FK_FilesNPhotos_MasterData">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="FilesNPhotos" EntitySet="FilesNPhotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilesNPhotos_Organization" Association="Self.FK_FilesNPhotos_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="FilesNPhotos" EntitySet="FilesNPhotos" />
           </AssociationSet>
           <AssociationSet Name="FK_MasterData_Organization" Association="Self.FK_MasterData_Organization">
             <End Role="Organization" EntitySet="Organizations" />
@@ -5017,185 +6502,7 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="FilesNPhotos" EntityType="TTPModel.FilesNPhoto" />
-          <AssociationSet Name="FK_FilesNPhotos_MasterData" Association="TTPModel.FK_FilesNPhotos_MasterData">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="FilesNPhoto" EntitySet="FilesNPhotos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FilesNPhotos_Organization" Association="TTPModel.FK_FilesNPhotos_Organization">
-            <End Role="Organization" EntitySet="Organizations" />
-            <End Role="FilesNPhoto" EntitySet="FilesNPhotos" />
-          </AssociationSet>
-          <EntitySet Name="ExamStudentSubjectResults" EntityType="TTPModel.ExamStudentSubjectResult" />
-          <AssociationSet Name="FK_ExamStudentSubjectResult_Batches" Association="TTPModel.FK_ExamStudentSubjectResult_Batches">
-            <End Role="Batch" EntitySet="Batches" />
-            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExamStudentSubject_ClassSubjectMarkComponentId" Association="TTPModel.FK_ExamStudentSubject_ClassSubjectMarkComponentId">
-            <End Role="ClassSubjectMarkComponent" EntitySet="ClassSubjectMarkComponents" />
-            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExamStudentSubjectResult_ExamId" Association="TTPModel.FK_ExamStudentSubjectResult_ExamId">
-            <End Role="Exam" EntitySet="Exams" />
-            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExamStudentSubject_MasterDataStatus" Association="TTPModel.FK_ExamStudentSubject_MasterDataStatus">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExamStudentSubject_Organization" Association="TTPModel.FK_ExamStudentSubject_Organization">
-            <End Role="Organization" EntitySet="Organizations" />
-            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExamStudentSubject_StudentClassSubjectId" Association="TTPModel.FK_ExamStudentSubject_StudentClassSubjectId">
-            <End Role="StudentClassSubject" EntitySet="StudentClassSubjects" />
-            <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="FilesNPhoto">
-          <Key>
-            <PropertyRef Name="FileId" />
-          </Key>
-          <Property Name="FileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FileName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedFileFolderName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="ParentId" Type="Int32" />
-          <Property Name="FileOrFolder" Type="Byte" />
-          <Property Name="FileOrPhoto" Type="Byte" />
-          <Property Name="Active" Type="Byte" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UploadDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="StudentClassId" Type="Int32" />
-          <Property Name="DocTypeId" Type="Int16" />
-          <Property Name="Parent" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="BatchId" Type="Int16" />
-          <Property Name="OrgId" Type="Int16" />
-          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_FilesNPhotos_MasterData" FromRole="FilesNPhoto" ToRole="MasterData" />
-          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_FilesNPhotos_Organization" FromRole="FilesNPhoto" ToRole="Organization" />
-        </EntityType>
-        <Association Name="FK_FilesNPhotos_MasterData">
-          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="0..1" />
-          <End Type="TTPModel.FilesNPhoto" Role="FilesNPhoto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="FilesNPhoto">
-              <PropertyRef Name="DocTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FilesNPhotos_Organization">
-          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="0..1" />
-          <End Type="TTPModel.FilesNPhoto" Role="FilesNPhoto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="FilesNPhoto">
-              <PropertyRef Name="OrgId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ExamStudentSubjectResult">
-          <Key>
-            <PropertyRef Name="ExamStudentSubjectResultId" />
-          </Key>
-          <Property Name="ExamStudentSubjectResultId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ExamId" Type="Int16" Nullable="false" />
-          <Property Name="StudentClassSubjectId" Type="Int16" Nullable="false" />
-          <Property Name="ClassSubjectMarkComponentId" Type="Int16" Nullable="false" />
-          <Property Name="Marks" Type="Int16" Nullable="false" />
-          <Property Name="ExamStatus" Type="Int16" Nullable="false" />
-          <Property Name="OrgId" Type="Int16" Nullable="false" />
-          <Property Name="BatchId" Type="Int16" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int16" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Int16" />
-          <Property Name="Active" Type="Byte" />
-          <NavigationProperty Name="Batch" Relationship="TTPModel.FK_ExamStudentSubjectResult_Batches" FromRole="ExamStudentSubjectResult" ToRole="Batch" />
-          <NavigationProperty Name="ClassSubjectMarkComponent" Relationship="TTPModel.FK_ExamStudentSubject_ClassSubjectMarkComponentId" FromRole="ExamStudentSubjectResult" ToRole="ClassSubjectMarkComponent" />
-          <NavigationProperty Name="Exam" Relationship="TTPModel.FK_ExamStudentSubjectResult_ExamId" FromRole="ExamStudentSubjectResult" ToRole="Exam" />
-          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_ExamStudentSubject_MasterDataStatus" FromRole="ExamStudentSubjectResult" ToRole="MasterData" />
-          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_ExamStudentSubject_Organization" FromRole="ExamStudentSubjectResult" ToRole="Organization" />
-          <NavigationProperty Name="StudentClassSubject" Relationship="TTPModel.FK_ExamStudentSubject_StudentClassSubjectId" FromRole="ExamStudentSubjectResult" ToRole="StudentClassSubject" />
-        </EntityType>
-        <Association Name="FK_ExamStudentSubjectResult_Batches">
-          <End Type="TTPModel.Batch" Role="Batch" Multiplicity="1" />
-          <End Type="TTPModel.ExamStudentSubjectResult" Role="ExamStudentSubjectResult" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Batch">
-              <PropertyRef Name="BatchId" />
-            </Principal>
-            <Dependent Role="ExamStudentSubjectResult">
-              <PropertyRef Name="BatchId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ExamStudentSubject_ClassSubjectMarkComponentId">
-          <End Type="TTPModel.ClassSubjectMarkComponent" Role="ClassSubjectMarkComponent" Multiplicity="1" />
-          <End Type="TTPModel.ExamStudentSubjectResult" Role="ExamStudentSubjectResult" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClassSubjectMarkComponent">
-              <PropertyRef Name="ClassSubjectMarkComponentId" />
-            </Principal>
-            <Dependent Role="ExamStudentSubjectResult">
-              <PropertyRef Name="ClassSubjectMarkComponentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ExamStudentSubjectResult_ExamId">
-          <End Type="TTPModel.Exam" Role="Exam" Multiplicity="1" />
-          <End Type="TTPModel.ExamStudentSubjectResult" Role="ExamStudentSubjectResult" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Exam">
-              <PropertyRef Name="ExamId" />
-            </Principal>
-            <Dependent Role="ExamStudentSubjectResult">
-              <PropertyRef Name="ExamId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ExamStudentSubject_MasterDataStatus">
-          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
-          <End Type="TTPModel.ExamStudentSubjectResult" Role="ExamStudentSubjectResult" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="ExamStudentSubjectResult">
-              <PropertyRef Name="ExamStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ExamStudentSubject_Organization">
-          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
-          <End Type="TTPModel.ExamStudentSubjectResult" Role="ExamStudentSubjectResult" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="ExamStudentSubjectResult">
-              <PropertyRef Name="OrgId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ExamStudentSubject_StudentClassSubjectId">
-          <End Type="TTPModel.StudentClassSubject" Role="StudentClassSubject" Multiplicity="1" />
-          <End Type="TTPModel.ExamStudentSubjectResult" Role="ExamStudentSubjectResult" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StudentClassSubject">
-              <PropertyRef Name="StudentClassSubjectId" />
-            </Principal>
-            <Dependent Role="ExamStudentSubjectResult">
-              <PropertyRef Name="StudentClassSubjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5406,6 +6713,200 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EmpEmployeeGradeSalHistories">
+            <EntityTypeMapping TypeName="TTPModel.EmpEmployeeGradeSalHistory">
+              <MappingFragment StoreEntitySet="EmpEmployeeGradeSalHistory">
+                <ScalarProperty Name="EmployeeGradeHistoryId" ColumnName="EmployeeGradeHistoryId" />
+                <ScalarProperty Name="EmpGradeId" ColumnName="EmpGradeId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="CTC" ColumnName="CTC" />
+                <ScalarProperty Name="Gratuity" ColumnName="Gratuity" />
+                <ScalarProperty Name="Gross" ColumnName="Gross" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="WorkAccountId" ColumnName="WorkAccountId" />
+                <ScalarProperty Name="JobTitleId" ColumnName="JobTitleId" />
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpEmployees">
+            <EntityTypeMapping TypeName="TTPModel.EmpEmployee">
+              <MappingFragment StoreEntitySet="EmpEmployees">
+                <ScalarProperty Name="EmpEmployeeId" ColumnName="EmpEmployeeId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="pincode" ColumnName="pincode" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Bloodgroup" ColumnName="Bloodgroup" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
+                <ScalarProperty Name="IFSCcode" ColumnName="IFSCcode" />
+                <ScalarProperty Name="MICRNo" ColumnName="MICRNo" />
+                <ScalarProperty Name="AdhaarNo" ColumnName="AdhaarNo" />
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
+                <ScalarProperty Name="ReligionId" ColumnName="ReligionId" />
+                <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="AlternateContactNo" ColumnName="AlternateContactNo" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="EmploymentTypeId" ColumnName="EmploymentTypeId" />
+                <ScalarProperty Name="EmployeeGradeId" ColumnName="EmployeeGradeId" />
+                <ScalarProperty Name="ReportTo" ColumnName="ReportTo" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="EmployeeTerm" ColumnName="EmployeeTerm" />
+                <ScalarProperty Name="EmploymentStatus" ColumnName="EmploymentStatus" />
+                <ScalarProperty Name="ConfirmationDate" ColumnName="ConfirmationDate" />
+                <ScalarProperty Name="NoticePeriodDays" ColumnName="NoticePeriodDays" />
+                <ScalarProperty Name="ProbationPeriodDays" ColumnName="ProbationPeriodDays" />
+                <ScalarProperty Name="PAN" ColumnName="PAN" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="MarriedDate" ColumnName="MarriedDate" />
+                <ScalarProperty Name="SpouseName" ColumnName="SpouseName" />
+                <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+                <ScalarProperty Name="PFAccountNo" ColumnName="PFAccountNo" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpEmployeeSalaryComponents">
+            <EntityTypeMapping TypeName="TTPModel.EmpEmployeeSalaryComponent">
+              <MappingFragment StoreEntitySet="EmpEmployeeSalaryComponents">
+                <ScalarProperty Name="EmployeeSalaryComponentId" ColumnName="EmployeeSalaryComponentId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="EmpGradeComponentId" ColumnName="EmpGradeComponentId" />
+                <ScalarProperty Name="EmpployeeCompPCorAmount" ColumnName="EmpployeeCompPCorAmount" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpEmployeeSkills">
+            <EntityTypeMapping TypeName="TTPModel.EmpEmployeeSkill">
+              <MappingFragment StoreEntitySet="EmpEmployeeSkills">
+                <ScalarProperty Name="EmpEmployeeSkillId" ColumnName="EmpEmployeeSkillId" />
+                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ExperienceInMonths" ColumnName="ExperienceInMonths" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpGradeComponents">
+            <EntityTypeMapping TypeName="TTPModel.EmpGradeComponent">
+              <MappingFragment StoreEntitySet="EmpGradeComponents">
+                <ScalarProperty Name="EmpGradeSalaryComponentId" ColumnName="EmpGradeSalaryComponentId" />
+                <ScalarProperty Name="EmpGradeId" ColumnName="EmpGradeId" />
+                <ScalarProperty Name="SalaryComponentId" ColumnName="SalaryComponentId" />
+                <ScalarProperty Name="PercentOfBasicOrAmount" ColumnName="PercentOfBasicOrAmount" />
+                <ScalarProperty Name="ComponentTypeId" ColumnName="ComponentTypeId" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeEducationHistories">
+            <EntityTypeMapping TypeName="TTPModel.EmployeeEducationHistory">
+              <MappingFragment StoreEntitySet="EmployeeEducationHistory">
+                <ScalarProperty Name="EmployeeEducationHistoryId" ColumnName="EmployeeEducationHistoryId" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="FromYear" ColumnName="FromYear" />
+                <ScalarProperty Name="ToYear" ColumnName="ToYear" />
+                <ScalarProperty Name="PercentageObtained" ColumnName="PercentageObtained" />
+                <ScalarProperty Name="BoardName" ColumnName="BoardName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeFamilies">
+            <EntityTypeMapping TypeName="TTPModel.EmployeeFamily">
+              <MappingFragment StoreEntitySet="EmployeeFamily">
+                <ScalarProperty Name="EmployeeFamilyId" ColumnName="EmployeeFamilyId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="FamilyRelationShipId" ColumnName="FamilyRelationShipId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeGradeLeaves">
+            <EntityTypeMapping TypeName="TTPModel.EmployeeGradeLeaf">
+              <MappingFragment StoreEntitySet="EmployeeGradeLeaves">
+                <ScalarProperty Name="EmployeeGradeLeaveId" ColumnName="EmployeeGradeLeaveId" />
+                <ScalarProperty Name="EmployeeGradeId" ColumnName="EmployeeGradeId" />
+                <ScalarProperty Name="LeaveTypeId" ColumnName="LeaveTypeId" />
+                <ScalarProperty Name="NoOfDays" ColumnName="NoOfDays" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpadatedDate" ColumnName="UpadatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeLeaves">
+            <EntityTypeMapping TypeName="TTPModel.EmployeeLeaf">
+              <MappingFragment StoreEntitySet="EmployeeLeaves">
+                <ScalarProperty Name="EmployeeLeaveId" ColumnName="EmployeeLeaveId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="LeaveTypeId" ColumnName="LeaveTypeId" />
+                <ScalarProperty Name="LeaveFrom" ColumnName="LeaveFrom" />
+                <ScalarProperty Name="LeaveTo" ColumnName="LeaveTo" />
+                <ScalarProperty Name="NoOfLeaves" ColumnName="NoOfLeaves" />
+                <ScalarProperty Name="ApplyDate" ColumnName="ApplyDate" />
+                <ScalarProperty Name="LeaveStatus" ColumnName="LeaveStatus" />
+                <ScalarProperty Name="ApprovedRejectedDate" ColumnName="ApprovedRejectedDate" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="Reamarks" ColumnName="Reamarks" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeMonthlySalaries">
+            <EntityTypeMapping TypeName="TTPModel.EmployeeMonthlySalary">
+              <MappingFragment StoreEntitySet="EmployeeMonthlySalary">
+                <ScalarProperty Name="EmployeeMonthlySalaryId" ColumnName="EmployeeMonthlySalaryId" />
+                <ScalarProperty Name="SalaryMonth" ColumnName="SalaryMonth" />
+                <ScalarProperty Name="Gross" ColumnName="Gross" />
+                <ScalarProperty Name="Deduction" ColumnName="Deduction" />
+                <ScalarProperty Name="NetSalary" ColumnName="NetSalary" />
+                <ScalarProperty Name="PresentDays" ColumnName="PresentDays" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Released" ColumnName="Released" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Exams">
             <EntityTypeMapping TypeName="TTPModel.Exam">
               <MappingFragment StoreEntitySet="Exams">
@@ -5458,6 +6959,48 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExamStudentSubjectResults">
+            <EntityTypeMapping TypeName="TTPModel.ExamStudentSubjectResult">
+              <MappingFragment StoreEntitySet="ExamStudentSubjectResult">
+                <ScalarProperty Name="ExamStudentSubjectResultId" ColumnName="ExamStudentSubjectResultId" />
+                <ScalarProperty Name="ExamId" ColumnName="ExamId" />
+                <ScalarProperty Name="StudentClassSubjectId" ColumnName="StudentClassSubjectId" />
+                <ScalarProperty Name="ClassSubjectMarkComponentId" ColumnName="ClassSubjectMarkComponentId" />
+                <ScalarProperty Name="Marks" ColumnName="Marks" />
+                <ScalarProperty Name="ExamStatus" ColumnName="ExamStatus" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FilesNPhotos">
+            <EntityTypeMapping TypeName="TTPModel.FilesNPhoto">
+              <MappingFragment StoreEntitySet="FilesNPhotos">
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UpdatedFileFolderName" ColumnName="UpdatedFileFolderName" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="FileOrFolder" ColumnName="FileOrFolder" />
+                <ScalarProperty Name="FileOrPhoto" ColumnName="FileOrPhoto" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
+                <ScalarProperty Name="DocTypeId" ColumnName="DocTypeId" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5689,12 +7232,11 @@
           <EntitySetMapping Name="StudentClasses">
             <EntityTypeMapping TypeName="TTPModel.StudentClass">
               <MappingFragment StoreEntitySet="StudentClass">
-                <ScalarProperty Name="Promoted" ColumnName="Promoted" />
-                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
                 <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="ClassId" ColumnName="ClassId" />
                 <ScalarProperty Name="RollNo" ColumnName="RollNo" />
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
                 <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="FeeTypeId" ColumnName="FeeTypeId" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
@@ -5705,6 +7247,7 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="Promoted" ColumnName="Promoted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5889,48 +7432,6 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="FilesNPhotos">
-            <EntityTypeMapping TypeName="TTPModel.FilesNPhoto">
-              <MappingFragment StoreEntitySet="FilesNPhotos">
-                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
-                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
-                <ScalarProperty Name="Parent" ColumnName="Parent" />
-                <ScalarProperty Name="DocTypeId" ColumnName="DocTypeId" />
-                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="FileOrPhoto" ColumnName="FileOrPhoto" />
-                <ScalarProperty Name="FileOrFolder" ColumnName="FileOrFolder" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="UpdatedFileFolderName" ColumnName="UpdatedFileFolderName" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="FileId" ColumnName="FileId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ExamStudentSubjectResults">
-            <EntityTypeMapping TypeName="TTPModel.ExamStudentSubjectResult">
-              <MappingFragment StoreEntitySet="ExamStudentSubjectResult">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
-                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
-                <ScalarProperty Name="ExamStatus" ColumnName="ExamStatus" />
-                <ScalarProperty Name="Marks" ColumnName="Marks" />
-                <ScalarProperty Name="ClassSubjectMarkComponentId" ColumnName="ClassSubjectMarkComponentId" />
-                <ScalarProperty Name="StudentClassSubjectId" ColumnName="StudentClassSubjectId" />
-                <ScalarProperty Name="ExamId" ColumnName="ExamId" />
-                <ScalarProperty Name="ExamStudentSubjectResultId" ColumnName="ExamStudentSubjectResultId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

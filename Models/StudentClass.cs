@@ -31,6 +31,7 @@ namespace schools.Models
         public int StudentId { get; set; }
         public short ClassId { get; set; }
         public string RollNo { get; set; }
+        public short SectionId { get; set; }
         public short BatchId { get; set; }
         public short FeeTypeId { get; set; }
         public string Remarks { get; set; }
@@ -41,7 +42,6 @@ namespace schools.Models
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
-        public short SectionId { get; set; }
         public Nullable<byte> Promoted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

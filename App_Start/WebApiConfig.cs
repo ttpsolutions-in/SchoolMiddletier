@@ -76,7 +76,19 @@ namespace schools
             builder.EntitySet<StudentCertificate>("StudentCertificates");
             builder.EntitySet<ApplicationFeature>("ApplicationFeatures");
             builder.EntitySet<ApplicationFeatureRolesPerm>("ApplicationFeatureRolesPerms");
-            
+
+            builder.EntitySet<EmpEmployee>("EmpEmployees");
+            builder.EntitySet<EmpEmployeeSkill>("EmpEmployeeSkills");
+            builder.EntitySet<EmployeeFamily>("EmployeeFamilies");
+            builder.EntitySet<EmployeeLeaf>("EmployeeLeaves");
+            builder.EntitySet<EmployeeMonthlySalary>("EmployeeMonthlySalaries");
+            builder.EntitySet<EmpEmployeeSalaryComponent>("EmpEmployeeSalaryComponents");
+            builder.EntitySet<EmpGradeComponent>("EmpGradeComponents");
+            builder.EntitySet<EmpEmployeeSkill>("EmpEmployeeSkills");
+            builder.EntitySet<EmployeeGradeLeaf>("EmployeeGradeLeaves");
+            builder.EntitySet<EmployeeEducationHistory>("EmployeeEducationHistories");
+            builder.EntitySet<EmployeeLeaf>("EmployeeLeaves");
+
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 
 
