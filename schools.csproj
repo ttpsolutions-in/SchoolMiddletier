@@ -413,6 +413,7 @@
     <Compile Include="Controllers\SubjectTypesController.cs" />
     <Compile Include="Controllers\TaskConfigurationsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VariableConfigurationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -580,6 +581,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ttp.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VariableConfiguration.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />

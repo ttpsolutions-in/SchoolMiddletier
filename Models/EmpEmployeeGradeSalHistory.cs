@@ -14,6 +14,12 @@ namespace schools.Models
     
     public partial class EmpEmployeeGradeSalHistory
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public EmpEmployeeGradeSalHistory()
+        {
+            this.EmpEmployeeSalaryComponents = new HashSet<EmpEmployeeSalaryComponent>();
+        }
+    
         public short EmployeeGradeHistoryId { get; set; }
         public short EmpGradeId { get; set; }
         public short EmployeeId { get; set; }
@@ -33,10 +39,15 @@ namespace schools.Models
         public Nullable<short> WorkAccountId { get; set; }
         public Nullable<short> JobTitleId { get; set; }
         public Nullable<short> DesignationId { get; set; }
+        public byte Active { get; set; }
     
-        public virtual EmpEmployee EmpEmployee { get; set; }
         public virtual MasterData MasterData { get; set; }
         public virtual MasterData MasterData1 { get; set; }
         public virtual MasterData MasterData2 { get; set; }
+        public virtual EmpEmployee EmpEmployee { get; set; }
+        public virtual EmpEmployeeGradeSalHistory EmpEmployeeGradeSalHistory1 { get; set; }
+        public virtual EmpEmployeeGradeSalHistory EmpEmployeeGradeSalHistory2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmpEmployeeSalaryComponent> EmpEmployeeSalaryComponents { get; set; }
     }
 }

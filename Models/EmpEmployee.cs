@@ -33,11 +33,12 @@ namespace schools.Models
         public string MotherName { get; set; }
         public short Gender { get; set; }
         public string Address { get; set; }
+        public System.DateTime DOB { get; set; }
+        public System.DateTime DOJ { get; set; }
         public Nullable<short> CityId { get; set; }
         public string pincode { get; set; }
         public Nullable<short> StateId { get; set; }
         public Nullable<short> CountryId { get; set; }
-        public System.DateTime DOB { get; set; }
         public string Bloodgroup { get; set; }
         public string CategoryId { get; set; }
         public string BankAccountNo { get; set; }
@@ -46,29 +47,25 @@ namespace schools.Models
         public string AdhaarNo { get; set; }
         public string PhotoPath { get; set; }
         public Nullable<short> ReligionId { get; set; }
-        public System.DateTime DOJ { get; set; }
         public string ContactNo { get; set; }
         public string AlternateContactNo { get; set; }
         public string EmailAddress { get; set; }
-        public Nullable<short> EmploymentTypeId { get; set; }
-        public Nullable<short> EmployeeGradeId { get; set; }
         public Nullable<short> ReportTo { get; set; }
-        public short DepartmentId { get; set; }
         public Nullable<short> LocationId { get; set; }
-        public short DesignationId { get; set; }
-        public Nullable<short> EmployeeTerm { get; set; }
-        public Nullable<short> EmploymentStatus { get; set; }
+        public Nullable<short> EmploymentStatusId { get; set; }
+        public Nullable<short> EmploymentTypeId { get; set; }
+        public Nullable<short> EmploymentTermId { get; set; }
         public Nullable<System.DateTime> ConfirmationDate { get; set; }
         public Nullable<short> NoticePeriodDays { get; set; }
         public Nullable<short> ProbationPeriodDays { get; set; }
         public string PAN { get; set; }
-        public Nullable<short> MaritalStatus { get; set; }
-        public Nullable<System.DateTime> MarriedDate { get; set; }
-        public string SpouseName { get; set; }
         public string PassportNo { get; set; }
+        public Nullable<short> MaritalStatusId { get; set; }
+        public Nullable<System.DateTime> MarriedDate { get; set; }
         public string PFAccountNo { get; set; }
-        public Nullable<short> OrgId { get; set; }
-        public Nullable<byte> Active { get; set; }
+        public short OrgId { get; set; }
+        public byte Active { get; set; }
+        public string EmployeeCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpEmployeeGradeSalHistory> EmpEmployeeGradeSalHistories { get; set; }

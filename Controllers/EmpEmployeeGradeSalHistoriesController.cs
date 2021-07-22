@@ -23,8 +23,9 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<EmpEmployeeGradeSalHistory>("EmpEmployeeGradeSalHistories");
-    builder.EntitySet<EmpEmployee>("EmpEmployees"); 
     builder.EntitySet<MasterData>("MasterDatas"); 
+    builder.EntitySet<EmpEmployee>("EmpEmployees"); 
+    builder.EntitySet<EmpEmployeeSalaryComponent>("EmpEmployeeSalaryComponents"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class EmpEmployeeGradeSalHistoriesController : ODataController
@@ -149,13 +150,6 @@ namespace schools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/EmpEmployeeGradeSalHistories(5)/EmpEmployee
-        [EnableQuery]
-        public SingleResult<EmpEmployee> GetEmpEmployee([FromODataUri] short key)
-        {
-            return SingleResult.Create(db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).Select(m => m.EmpEmployee));
-        }
-
         // GET: odata/EmpEmployeeGradeSalHistories(5)/MasterData
         [EnableQuery]
         public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
@@ -175,6 +169,34 @@ namespace schools.Controllers
         public SingleResult<MasterData> GetMasterData2([FromODataUri] short key)
         {
             return SingleResult.Create(db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).Select(m => m.MasterData2));
+        }
+
+        // GET: odata/EmpEmployeeGradeSalHistories(5)/EmpEmployee
+        [EnableQuery]
+        public SingleResult<EmpEmployee> GetEmpEmployee([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).Select(m => m.EmpEmployee));
+        }
+
+        // GET: odata/EmpEmployeeGradeSalHistories(5)/EmpEmployeeGradeSalHistory1
+        [EnableQuery]
+        public SingleResult<EmpEmployeeGradeSalHistory> GetEmpEmployeeGradeSalHistory1([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).Select(m => m.EmpEmployeeGradeSalHistory1));
+        }
+
+        // GET: odata/EmpEmployeeGradeSalHistories(5)/EmpEmployeeGradeSalHistory2
+        [EnableQuery]
+        public SingleResult<EmpEmployeeGradeSalHistory> GetEmpEmployeeGradeSalHistory2([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).Select(m => m.EmpEmployeeGradeSalHistory2));
+        }
+
+        // GET: odata/EmpEmployeeGradeSalHistories(5)/EmpEmployeeSalaryComponents
+        [EnableQuery]
+        public IQueryable<EmpEmployeeSalaryComponent> GetEmpEmployeeSalaryComponents([FromODataUri] short key)
+        {
+            return db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).SelectMany(m => m.EmpEmployeeSalaryComponents);
         }
 
         protected override void Dispose(bool disposing)

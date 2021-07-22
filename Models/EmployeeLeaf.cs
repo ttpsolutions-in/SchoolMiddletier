@@ -27,9 +27,9 @@ namespace schools.Models
         public string Reamarks { get; set; }
         public short OrgId { get; set; }
     
-        public virtual EmpEmployee EmpEmployee { get; set; }
         public virtual MasterData MasterData { get; set; }
         public virtual MasterData MasterData1 { get; set; }
         public virtual Organization Organization { get; set; }
+        public virtual EmpEmployee EmpEmployee { get; set; }
     }
 }

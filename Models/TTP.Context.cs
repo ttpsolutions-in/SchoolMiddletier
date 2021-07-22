@@ -40,7 +40,6 @@ namespace schools.Models
         public virtual DbSet<ClassSubject> ClassSubjects { get; set; }
         public virtual DbSet<ClassSubjectMarkComponent> ClassSubjectMarkComponents { get; set; }
         public virtual DbSet<EmpEmployeeGradeSalHistory> EmpEmployeeGradeSalHistories { get; set; }
-        public virtual DbSet<EmpEmployee> EmpEmployees { get; set; }
         public virtual DbSet<EmpEmployeeSalaryComponent> EmpEmployeeSalaryComponents { get; set; }
         public virtual DbSet<EmpEmployeeSkill> EmpEmployeeSkills { get; set; }
         public virtual DbSet<EmpGradeComponent> EmpGradeComponents { get; set; }
@@ -74,5 +73,7 @@ namespace schools.Models
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<SubjectType> SubjectTypes { get; set; }
         public virtual DbSet<TaskConfiguration> TaskConfigurations { get; set; }
+        public virtual DbSet<EmpEmployee> EmpEmployees { get; set; }
+        public virtual DbSet<VariableConfiguration> VariableConfigurations { get; set; }
     }
 }

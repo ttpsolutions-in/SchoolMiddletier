@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TTPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TTPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -229,54 +229,52 @@
           <Property Name="WorkAccountId" Type="smallint" />
           <Property Name="JobTitleId" Type="smallint" />
           <Property Name="DesignationId" Type="smallint" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="EmpEmployees">
           <Key>
             <PropertyRef Name="EmpEmployeeId" />
           </Key>
-          <Property Name="EmpEmployeeId" Type="smallint" Nullable="false" />
+          <Property Name="EmpEmployeeId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="30" />
           <Property Name="FatherName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="MotherName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Gender" Type="smallint" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="DOB" Type="datetime" Nullable="false" />
+          <Property Name="DOJ" Type="datetime" Nullable="false" />
           <Property Name="CityId" Type="smallint" />
           <Property Name="pincode" Type="varchar" MaxLength="20" />
           <Property Name="StateId" Type="smallint" />
           <Property Name="CountryId" Type="smallint" />
-          <Property Name="DOB" Type="datetime" Nullable="false" />
           <Property Name="Bloodgroup" Type="varchar" MaxLength="5" />
           <Property Name="CategoryId" Type="nchar" MaxLength="10" />
-          <Property Name="BankAccountNo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="BankAccountNo" Type="varchar" MaxLength="20" />
           <Property Name="IFSCcode" Type="varchar" MaxLength="10" />
           <Property Name="MICRNo" Type="varchar" MaxLength="20" />
-          <Property Name="AdhaarNo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="AdhaarNo" Type="varchar" MaxLength="15" />
           <Property Name="PhotoPath" Type="varchar" MaxLength="50" />
           <Property Name="ReligionId" Type="smallint" />
-          <Property Name="DOJ" Type="datetime" Nullable="false" />
           <Property Name="ContactNo" Type="varchar" MaxLength="10" />
           <Property Name="AlternateContactNo" Type="varchar" MaxLength="10" />
           <Property Name="EmailAddress" Type="varchar" MaxLength="30" />
-          <Property Name="EmploymentTypeId" Type="smallint" />
-          <Property Name="EmployeeGradeId" Type="smallint" />
           <Property Name="ReportTo" Type="smallint" />
-          <Property Name="DepartmentId" Type="smallint" Nullable="false" />
           <Property Name="LocationId" Type="smallint" />
-          <Property Name="DesignationId" Type="smallint" Nullable="false" />
-          <Property Name="EmployeeTerm" Type="smallint" />
-          <Property Name="EmploymentStatus" Type="smallint" />
+          <Property Name="EmploymentStatusId" Type="smallint" />
+          <Property Name="EmploymentTypeId" Type="smallint" />
+          <Property Name="EmploymentTermId" Type="smallint" />
           <Property Name="ConfirmationDate" Type="datetime" />
           <Property Name="NoticePeriodDays" Type="smallint" />
           <Property Name="ProbationPeriodDays" Type="smallint" />
           <Property Name="PAN" Type="varchar" MaxLength="12" />
-          <Property Name="MaritalStatus" Type="smallint" />
-          <Property Name="MarriedDate" Type="datetime" />
-          <Property Name="SpouseName" Type="varchar" MaxLength="30" />
           <Property Name="PassportNo" Type="varchar" MaxLength="12" />
+          <Property Name="MaritalStatusId" Type="smallint" />
+          <Property Name="MarriedDate" Type="datetime" />
           <Property Name="PFAccountNo" Type="varchar" MaxLength="20" />
-          <Property Name="OrgId" Type="smallint" />
-          <Property Name="Active" Type="tinyint" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="EmployeeCode" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="EmpEmployeeSalaryComponents">
           <Key>
@@ -285,9 +283,15 @@
           <Property Name="EmployeeSalaryComponentId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeId" Type="smallint" Nullable="false" />
           <Property Name="EmpGradeComponentId" Type="smallint" Nullable="false" />
-          <Property Name="EmpployeeCompPCorAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="EmployeeGradeSalHistoryId" Type="smallint" Nullable="false" />
+          <Property Name="ActualFormulaOrAmount" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="EmpEmployeeSkills">
           <Key>
@@ -307,7 +311,7 @@
           <Property Name="EmpGradeSalaryComponentId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmpGradeId" Type="smallint" Nullable="false" />
           <Property Name="SalaryComponentId" Type="smallint" Nullable="false" />
-          <Property Name="PercentOfBasicOrAmount" Type="smallint" Nullable="false" />
+          <Property Name="FormulaOrAmount" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="ComponentTypeId" Type="smallint" Nullable="false" />
           <Property Name="OrgId" Type="smallint" Nullable="false" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
@@ -315,6 +319,8 @@
           <Property Name="CreatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="Deduction" Type="tinyint" />
+          <Property Name="TaxableAmount" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="EmployeeEducationHistory">
           <Key>
@@ -882,6 +888,19 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
         </EntityType>
+        <EntityType Name="VariableConfiguration">
+          <Key>
+            <PropertyRef Name="VariableConfigurationId" />
+          </Key>
+          <Property Name="VariableConfigurationId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VariableName" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="VariableDescription" Type="varchar" MaxLength="100" />
+          <Property Name="VariableAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VariableFormula" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="DisplayOrder" Type="tinyint" Nullable="false" />
+        </EntityType>
         <Association Name="FK_ApplicationFeatures_MasterDataApplicationId">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
           <End Role="ApplicationFeatures" Type="Self.ApplicationFeatures" Multiplicity="*" />
@@ -1151,6 +1170,18 @@
             </Principal>
             <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeGradeSalHistory_EmpEmployeeGradeSalHistory">
+          <End Role="EmpEmployeeGradeSalHistory" Type="Self.EmpEmployeeGradeSalHistory" Multiplicity="1" />
+          <End Role="EmpEmployeeGradeSalHistory1" Type="Self.EmpEmployeeGradeSalHistory" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployeeGradeSalHistory">
+              <PropertyRef Name="EmployeeGradeHistoryId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeGradeSalHistory1">
+              <PropertyRef Name="EmployeeGradeHistoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2534,6 +2565,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_VariableConfiguration_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="VariableConfiguration" Type="Self.VariableConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="VariableConfiguration">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="TTPModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
@@ -2585,6 +2628,7 @@
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubjectTypes" EntityType="Self.SubjectTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaskConfiguration" EntityType="Self.TaskConfiguration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VariableConfiguration" EntityType="Self.VariableConfiguration" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ApplicationFeatures_MasterDataApplicationId" Association="Self.FK_ApplicationFeatures_MasterDataApplicationId">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="ApplicationFeatures" EntitySet="ApplicationFeatures" />
@@ -2672,6 +2716,10 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_EmpEmployeeGradeSalHistory" Association="Self.FK_EmpEmployeeGradeSalHistory_EmpEmployeeGradeSalHistory">
+            <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistory" />
+            <End Role="EmpEmployeeGradeSalHistory1" EntitySet="EmpEmployeeGradeSalHistory" />
           </AssociationSet>
           <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_EmpEmployees" Association="Self.FK_EmpEmployeeGradeSalHistory_EmpEmployees">
             <End Role="EmpEmployees" EntitySet="EmpEmployees" />
@@ -3133,9 +3181,12 @@
             <End Role="Organization" EntitySet="Organization" />
             <End Role="TaskConfiguration" EntitySet="TaskConfiguration" />
           </AssociationSet>
+          <AssociationSet Name="FK_VariableConfiguration_Organization" Association="Self.FK_VariableConfiguration_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="VariableConfiguration" EntitySet="VariableConfiguration" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TTPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -3410,65 +3461,14 @@
           <Property Name="WorkAccountId" Type="Int16" />
           <Property Name="JobTitleId" Type="Int16" />
           <Property Name="DesignationId" Type="Int16" />
-          <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmpEmployeeGradeSalHistory_EmpEmployees" FromRole="EmpEmployeeGradeSalHistory" ToRole="EmpEmployees" />
           <NavigationProperty Name="MasterData" Relationship="Self.FK_EmpEmployeeGradeSalHistory_MasterDataGradeId" FromRole="EmpEmployeeGradeSalHistory" ToRole="MasterData" />
           <NavigationProperty Name="MasterData1" Relationship="Self.FK_EmpEmployeeGradeSalHistory_MasterDataOrganizationId" FromRole="EmpEmployeeGradeSalHistory" ToRole="MasterData" />
           <NavigationProperty Name="MasterData2" Relationship="Self.FK_EmpEmployeeGradeSalHistory_MasterDataWorkAccountId" FromRole="EmpEmployeeGradeSalHistory" ToRole="MasterData" />
-        </EntityType>
-        <EntityType Name="EmpEmployee">
-          <Key>
-            <PropertyRef Name="EmpEmployeeId" />
-          </Key>
-          <Property Name="EmpEmployeeId" Type="Int16" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="FatherName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="MotherName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Gender" Type="Int16" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CityId" Type="Int16" />
-          <Property Name="pincode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="StateId" Type="Int16" />
-          <Property Name="CountryId" Type="Int16" />
-          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Bloodgroup" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="CategoryId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="BankAccountNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IFSCcode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="MICRNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="AdhaarNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PhotoPath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ReligionId" Type="Int16" />
-          <Property Name="DOJ" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="AlternateContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="EmailAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="EmploymentTypeId" Type="Int16" />
-          <Property Name="EmployeeGradeId" Type="Int16" />
-          <Property Name="ReportTo" Type="Int16" />
-          <Property Name="DepartmentId" Type="Int16" Nullable="false" />
-          <Property Name="LocationId" Type="Int16" />
-          <Property Name="DesignationId" Type="Int16" Nullable="false" />
-          <Property Name="EmployeeTerm" Type="Int16" />
-          <Property Name="EmploymentStatus" Type="Int16" />
-          <Property Name="ConfirmationDate" Type="DateTime" Precision="3" />
-          <Property Name="NoticePeriodDays" Type="Int16" />
-          <Property Name="ProbationPeriodDays" Type="Int16" />
-          <Property Name="PAN" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="MaritalStatus" Type="Int16" />
-          <Property Name="MarriedDate" Type="DateTime" Precision="3" />
-          <Property Name="SpouseName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="PassportNo" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="PFAccountNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="OrgId" Type="Int16" />
-          <Property Name="Active" Type="Byte" />
-          <NavigationProperty Name="EmpEmployeeGradeSalHistories" Relationship="Self.FK_EmpEmployeeGradeSalHistory_EmpEmployees" FromRole="EmpEmployees" ToRole="EmpEmployeeGradeSalHistory" />
-          <NavigationProperty Name="EmpEmployeeSkills" Relationship="Self.FK_EmpEmployeeSkills_EmpEmployees" FromRole="EmpEmployees" ToRole="EmpEmployeeSkills" />
-          <NavigationProperty Name="EmployeeEducationHistories" Relationship="Self.FK_EmployeeEducationHistory_EmpEmployees" FromRole="EmpEmployees" ToRole="EmployeeEducationHistory" />
-          <NavigationProperty Name="EmployeeFamilies" Relationship="Self.FK_EmployeeFamily_EmpEmployees" FromRole="EmpEmployees" ToRole="EmployeeFamily" />
-          <NavigationProperty Name="EmployeeLeaves" Relationship="Self.FK_EmployeeLeaves_EmpEmployees" FromRole="EmpEmployees" ToRole="EmployeeLeaves" />
-          <NavigationProperty Name="EmployeeMonthlySalaries" Relationship="Self.FK_EmployeeMonthlySalary_EmpEmployees" FromRole="EmpEmployees" ToRole="EmployeeMonthlySalary" />
-          <NavigationProperty Name="EmpEmployeeSalaryComponents" Relationship="Self.FK_EmployeeSalaryComponents_EmpEmployees" FromRole="EmpEmployees" ToRole="EmpEmployeeSalaryComponents" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="EmpEmployee" Relationship="TTPModel.FK_EmpEmployeeGradeSalHistory_EmpEmployees" FromRole="EmpEmployeeGradeSalHistory" ToRole="EmpEmployee" />
+          <NavigationProperty Name="EmpEmployeeGradeSalHistory1" Relationship="TTPModel.FK_EmpEmployeeGradeSalHistory_EmpEmployeeGradeSalHistory" FromRole="EmpEmployeeGradeSalHistory" ToRole="EmpEmployeeGradeSalHistory1" />
+          <NavigationProperty Name="EmpEmployeeGradeSalHistory2" Relationship="TTPModel.FK_EmpEmployeeGradeSalHistory_EmpEmployeeGradeSalHistory" FromRole="EmpEmployeeGradeSalHistory1" ToRole="EmpEmployeeGradeSalHistory" />
+          <NavigationProperty Name="EmpEmployeeSalaryComponents" Relationship="TTPModel.FK_EmpEmployeeSalaryComponents_EmpEmployeeGradeSalHistory" FromRole="EmpEmployeeGradeSalHistory" ToRole="EmpEmployeeSalaryComponent" />
         </EntityType>
         <EntityType Name="EmpEmployeeSalaryComponent">
           <Key>
@@ -3477,12 +3477,19 @@
           <Property Name="EmployeeSalaryComponentId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmployeeId" Type="Int16" Nullable="false" />
           <Property Name="EmpGradeComponentId" Type="Int16" Nullable="false" />
-          <Property Name="EmpployeeCompPCorAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmployeeSalaryComponents_EmpEmployees" FromRole="EmpEmployeeSalaryComponents" ToRole="EmpEmployees" />
           <NavigationProperty Name="EmpGradeComponent" Relationship="Self.FK_EmpEmployeeSalaryComponents_EmpGradeComponents" FromRole="EmpEmployeeSalaryComponents" ToRole="EmpGradeComponents" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_EmployeeSalaryComponents_Organization" FromRole="EmpEmployeeSalaryComponents" ToRole="Organization" />
+          <NavigationProperty Name="EmpEmployee" Relationship="TTPModel.FK_EmployeeSalaryComponents_EmpEmployees" FromRole="EmpEmployeeSalaryComponent" ToRole="EmpEmployee" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EmployeeGradeSalHistoryId" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="EmpEmployeeGradeSalHistory" Relationship="TTPModel.FK_EmpEmployeeSalaryComponents_EmpEmployeeGradeSalHistory" FromRole="EmpEmployeeSalaryComponent" ToRole="EmpEmployeeGradeSalHistory" />
+          <Property Name="ActualFormulaOrAmount" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="EmpEmployeeSkill">
           <Key>
@@ -3494,8 +3501,8 @@
           <Property Name="Status" Type="Byte" Nullable="false" />
           <Property Name="ExperienceInMonths" Type="Int16" Nullable="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmpEmployeeSkills_EmpEmployees" FromRole="EmpEmployeeSkills" ToRole="EmpEmployees" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_EmpEmployeeSkills_Organization" FromRole="EmpEmployeeSkills" ToRole="Organization" />
+          <NavigationProperty Name="EmpEmployee" Relationship="TTPModel.FK_EmpEmployeeSkills_EmpEmployees" FromRole="EmpEmployeeSkill" ToRole="EmpEmployee" />
         </EntityType>
         <EntityType Name="EmpGradeComponent">
           <Key>
@@ -3504,7 +3511,6 @@
           <Property Name="EmpGradeSalaryComponentId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmpGradeId" Type="Int16" Nullable="false" />
           <Property Name="SalaryComponentId" Type="Int16" Nullable="false" />
-          <Property Name="PercentOfBasicOrAmount" Type="Int16" Nullable="false" />
           <Property Name="ComponentTypeId" Type="Int16" Nullable="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
           <Property Name="Active" Type="Byte" Nullable="false" />
@@ -3517,6 +3523,9 @@
           <NavigationProperty Name="MasterData1" Relationship="Self.FK_EmpGradeComponents_MasterDataGradeId" FromRole="EmpGradeComponents" ToRole="MasterData" />
           <NavigationProperty Name="MasterData2" Relationship="Self.FK_EmpGradeComponents_MasterDataSalaryComponentId" FromRole="EmpGradeComponents" ToRole="MasterData" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_EmpGradeComponents_Organization" FromRole="EmpGradeComponents" ToRole="Organization" />
+          <Property Name="Deduction" Type="Byte" />
+          <Property Name="TaxableAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FormulaOrAmount" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="EmployeeEducationHistory">
           <Key>
@@ -3531,8 +3540,8 @@
           <Property Name="Status" Type="Byte" Nullable="false" />
           <Property Name="EmployeeId" Type="Int16" Nullable="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmployeeEducationHistory_EmpEmployees" FromRole="EmployeeEducationHistory" ToRole="EmpEmployees" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_EmployeeEducationHistory_Organization" FromRole="EmployeeEducationHistory" ToRole="Organization" />
+          <NavigationProperty Name="EmpEmployee" Relationship="TTPModel.FK_EmployeeEducationHistory_EmpEmployees" FromRole="EmployeeEducationHistory" ToRole="EmpEmployee" />
         </EntityType>
         <EntityType Name="EmployeeFamily">
           <Key>
@@ -3546,10 +3555,10 @@
           <Property Name="Age" Type="Int16" Nullable="false" />
           <Property Name="Gender" Type="Int16" Nullable="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmployeeFamily_EmpEmployees" FromRole="EmployeeFamily" ToRole="EmpEmployees" />
           <NavigationProperty Name="MasterData" Relationship="Self.FK_EmployeeFamily_MasterDataGenderId" FromRole="EmployeeFamily" ToRole="MasterData" />
           <NavigationProperty Name="MasterData1" Relationship="Self.FK_EmployeeFamily_MasterDataRelationshipId" FromRole="EmployeeFamily" ToRole="MasterData" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_EmployeeFamily_Organization" FromRole="EmployeeFamily" ToRole="Organization" />
+          <NavigationProperty Name="EmpEmployee" Relationship="TTPModel.FK_EmployeeFamily_EmpEmployees" FromRole="EmployeeFamily" ToRole="EmpEmployee" />
         </EntityType>
         <EntityType Name="EmployeeGradeLeaf">
           <Key>
@@ -3584,10 +3593,10 @@
           <Property Name="ApprovedBy" Type="Int16" />
           <Property Name="Reamarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmployeeLeaves_EmpEmployees" FromRole="EmployeeLeaves" ToRole="EmpEmployees" />
           <NavigationProperty Name="MasterData" Relationship="Self.FK_EmployeeLeaves_MasterDataLeaveStatus" FromRole="EmployeeLeaves" ToRole="MasterData" />
           <NavigationProperty Name="MasterData1" Relationship="Self.FK_EmployeeLeaves_MasterDataLeaveTypeId" FromRole="EmployeeLeaves" ToRole="MasterData" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_EmployeeLeaves_Organization" FromRole="EmployeeLeaves" ToRole="Organization" />
+          <NavigationProperty Name="EmpEmployee" Relationship="TTPModel.FK_EmployeeLeaves_EmpEmployees" FromRole="EmployeeLeaf" ToRole="EmpEmployee" />
         </EntityType>
         <EntityType Name="EmployeeMonthlySalary">
           <Key>
@@ -3603,8 +3612,8 @@
           <Property Name="Released" Type="Byte" />
           <Property Name="PaymentDate" Type="DateTime" Precision="3" />
           <Property Name="OrgId" Type="Int16" />
-          <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmployeeMonthlySalary_EmpEmployees" FromRole="EmployeeMonthlySalary" ToRole="EmpEmployees" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_EmployeeMonthlySalary_Organization" FromRole="EmployeeMonthlySalary" ToRole="Organization" />
+          <NavigationProperty Name="EmpEmployee" Relationship="TTPModel.FK_EmployeeMonthlySalary_EmpEmployees" FromRole="EmployeeMonthlySalary" ToRole="EmpEmployee" />
         </EntityType>
         <EntityType Name="Exam">
           <Key>
@@ -3863,6 +3872,7 @@
           <NavigationProperty Name="StudentFeeReceipt" Relationship="Self.FK_StudentFeeReceipt_OrganizationOrgId" FromRole="Organization" ToRole="StudentFeeReceipt" />
           <NavigationProperty Name="Students" Relationship="Self.FK_Students_OrganizationOrgId" FromRole="Organization" ToRole="Students" />
           <NavigationProperty Name="TaskConfigurations" Relationship="Self.FK_TaskConfiguration_OrganizationId" FromRole="Organization" ToRole="TaskConfiguration" />
+          <NavigationProperty Name="VariableConfigurations" Relationship="TTPModel.FK_VariableConfiguration_Organization" FromRole="Organization" ToRole="VariableConfiguration" />
         </EntityType>
         <EntityType Name="PageHistory">
           <Key>
@@ -4824,18 +4834,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EmpEmployeeGradeSalHistory_EmpEmployees">
-          <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
-          <End Role="EmpEmployeeGradeSalHistory" Type="Self.EmpEmployeeGradeSalHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EmpEmployees">
-              <PropertyRef Name="EmpEmployeeId" />
-            </Principal>
-            <Dependent Role="EmpEmployeeGradeSalHistory">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EmpEmployeeGradeSalHistory_MasterDataGradeId">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
           <End Role="EmpEmployeeGradeSalHistory" Type="Self.EmpEmployeeGradeSalHistory" Multiplicity="*" />
@@ -4869,78 +4867,6 @@
             </Principal>
             <Dependent Role="EmpEmployeeGradeSalHistory">
               <PropertyRef Name="WorkAccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmpEmployeeSkills_EmpEmployees">
-          <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
-          <End Role="EmpEmployeeSkills" Type="Self.EmpEmployeeSkill" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EmpEmployees">
-              <PropertyRef Name="EmpEmployeeId" />
-            </Principal>
-            <Dependent Role="EmpEmployeeSkills">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeEducationHistory_EmpEmployees">
-          <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
-          <End Role="EmployeeEducationHistory" Type="Self.EmployeeEducationHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EmpEmployees">
-              <PropertyRef Name="EmpEmployeeId" />
-            </Principal>
-            <Dependent Role="EmployeeEducationHistory">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeFamily_EmpEmployees">
-          <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
-          <End Role="EmployeeFamily" Type="Self.EmployeeFamily" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EmpEmployees">
-              <PropertyRef Name="EmpEmployeeId" />
-            </Principal>
-            <Dependent Role="EmployeeFamily">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeLeaves_EmpEmployees">
-          <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
-          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaf" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EmpEmployees">
-              <PropertyRef Name="EmpEmployeeId" />
-            </Principal>
-            <Dependent Role="EmployeeLeaves">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeMonthlySalary_EmpEmployees">
-          <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
-          <End Role="EmployeeMonthlySalary" Type="Self.EmployeeMonthlySalary" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EmpEmployees">
-              <PropertyRef Name="EmpEmployeeId" />
-            </Principal>
-            <Dependent Role="EmployeeMonthlySalary">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeSalaryComponents_EmpEmployees">
-          <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
-          <End Role="EmpEmployeeSalaryComponents" Type="Self.EmpEmployeeSalaryComponent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EmpEmployees">
-              <PropertyRef Name="EmpEmployeeId" />
-            </Principal>
-            <Dependent Role="EmpEmployeeSalaryComponents">
-              <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5924,7 +5850,6 @@
           <EntitySet Name="ClassSubjects" EntityType="Self.ClassSubject" />
           <EntitySet Name="ClassSubjectMarkComponents" EntityType="Self.ClassSubjectMarkComponent" />
           <EntitySet Name="EmpEmployeeGradeSalHistories" EntityType="Self.EmpEmployeeGradeSalHistory" />
-          <EntitySet Name="EmpEmployees" EntityType="Self.EmpEmployee" />
           <EntitySet Name="EmpEmployeeSalaryComponents" EntityType="Self.EmpEmployeeSalaryComponent" />
           <EntitySet Name="EmpEmployeeSkills" EntityType="Self.EmpEmployeeSkill" />
           <EntitySet Name="EmpGradeComponents" EntityType="Self.EmpGradeComponent" />
@@ -6138,10 +6063,6 @@
             <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
             <End Role="ExamStudentSubjectResult" EntitySet="ExamStudentSubjectResults" />
           </AssociationSet>
-          <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_EmpEmployees" Association="Self.FK_EmpEmployeeGradeSalHistory_EmpEmployees">
-            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
-            <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistories" />
-          </AssociationSet>
           <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_MasterDataGradeId" Association="Self.FK_EmpEmployeeGradeSalHistory_MasterDataGradeId">
             <End Role="MasterData" EntitySet="MasterDatas" />
             <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistories" />
@@ -6153,30 +6074,6 @@
           <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_MasterDataWorkAccountId" Association="Self.FK_EmpEmployeeGradeSalHistory_MasterDataWorkAccountId">
             <End Role="MasterData" EntitySet="MasterDatas" />
             <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmpEmployeeSkills_EmpEmployees" Association="Self.FK_EmpEmployeeSkills_EmpEmployees">
-            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
-            <End Role="EmpEmployeeSkills" EntitySet="EmpEmployeeSkills" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeEducationHistory_EmpEmployees" Association="Self.FK_EmployeeEducationHistory_EmpEmployees">
-            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
-            <End Role="EmployeeEducationHistory" EntitySet="EmployeeEducationHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeFamily_EmpEmployees" Association="Self.FK_EmployeeFamily_EmpEmployees">
-            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
-            <End Role="EmployeeFamily" EntitySet="EmployeeFamilies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeLeaves_EmpEmployees" Association="Self.FK_EmployeeLeaves_EmpEmployees">
-            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
-            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeMonthlySalary_EmpEmployees" Association="Self.FK_EmployeeMonthlySalary_EmpEmployees">
-            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
-            <End Role="EmployeeMonthlySalary" EntitySet="EmployeeMonthlySalaries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeSalaryComponents_EmpEmployees" Association="Self.FK_EmployeeSalaryComponents_EmpEmployees">
-            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
-            <End Role="EmpEmployeeSalaryComponents" EntitySet="EmpEmployeeSalaryComponents" />
           </AssociationSet>
           <AssociationSet Name="FK_EmpEmployeeSalaryComponents_EmpGradeComponents" Association="Self.FK_EmpEmployeeSalaryComponents_EmpGradeComponents">
             <End Role="EmpGradeComponents" EntitySet="EmpGradeComponents" />
@@ -6502,7 +6399,235 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="EmpEmployees" EntityType="TTPModel.EmpEmployee" />
+          <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_EmpEmployees" Association="TTPModel.FK_EmpEmployeeGradeSalHistory_EmpEmployees">
+            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
+            <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeSkills_EmpEmployees" Association="TTPModel.FK_EmpEmployeeSkills_EmpEmployees">
+            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
+            <End Role="EmpEmployeeSkill" EntitySet="EmpEmployeeSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeEducationHistory_EmpEmployees" Association="TTPModel.FK_EmployeeEducationHistory_EmpEmployees">
+            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
+            <End Role="EmployeeEducationHistory" EntitySet="EmployeeEducationHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeFamily_EmpEmployees" Association="TTPModel.FK_EmployeeFamily_EmpEmployees">
+            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
+            <End Role="EmployeeFamily" EntitySet="EmployeeFamilies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeLeaves_EmpEmployees" Association="TTPModel.FK_EmployeeLeaves_EmpEmployees">
+            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
+            <End Role="EmployeeLeaf" EntitySet="EmployeeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMonthlySalary_EmpEmployees" Association="TTPModel.FK_EmployeeMonthlySalary_EmpEmployees">
+            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
+            <End Role="EmployeeMonthlySalary" EntitySet="EmployeeMonthlySalaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeSalaryComponents_EmpEmployees" Association="TTPModel.FK_EmployeeSalaryComponents_EmpEmployees">
+            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
+            <End Role="EmpEmployeeSalaryComponent" EntitySet="EmpEmployeeSalaryComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_EmpEmployeeGradeSalHistory" Association="TTPModel.FK_EmpEmployeeGradeSalHistory_EmpEmployeeGradeSalHistory">
+            <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistories" />
+            <End Role="EmpEmployeeGradeSalHistory1" EntitySet="EmpEmployeeGradeSalHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeSalaryComponents_EmpEmployeeGradeSalHistory" Association="TTPModel.FK_EmpEmployeeSalaryComponents_EmpEmployeeGradeSalHistory">
+            <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistories" />
+            <End Role="EmpEmployeeSalaryComponent" EntitySet="EmpEmployeeSalaryComponents" />
+          </AssociationSet>
+          <EntitySet Name="VariableConfigurations" EntityType="TTPModel.VariableConfiguration" />
+          <AssociationSet Name="FK_VariableConfiguration_Organization" Association="TTPModel.FK_VariableConfiguration_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="VariableConfiguration" EntitySet="VariableConfigurations" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="EmpEmployee">
+          <Key>
+            <PropertyRef Name="EmpEmployeeId" />
+          </Key>
+          <Property Name="EmpEmployeeId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FatherName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MotherName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="Int16" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DOJ" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CityId" Type="Int16" />
+          <Property Name="pincode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="StateId" Type="Int16" />
+          <Property Name="CountryId" Type="Int16" />
+          <Property Name="Bloodgroup" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="BankAccountNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IFSCcode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MICRNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AdhaarNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PhotoPath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReligionId" Type="Int16" />
+          <Property Name="ContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AlternateContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ReportTo" Type="Int16" />
+          <Property Name="LocationId" Type="Int16" />
+          <Property Name="EmploymentStatusId" Type="Int16" />
+          <Property Name="EmploymentTypeId" Type="Int16" />
+          <Property Name="EmploymentTermId" Type="Int16" />
+          <Property Name="ConfirmationDate" Type="DateTime" Precision="3" />
+          <Property Name="NoticePeriodDays" Type="Int16" />
+          <Property Name="ProbationPeriodDays" Type="Int16" />
+          <Property Name="PAN" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="PassportNo" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="MaritalStatusId" Type="Int16" />
+          <Property Name="MarriedDate" Type="DateTime" Precision="3" />
+          <Property Name="PFAccountNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="EmployeeCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EmpEmployeeGradeSalHistories" Relationship="TTPModel.FK_EmpEmployeeGradeSalHistory_EmpEmployees" FromRole="EmpEmployee" ToRole="EmpEmployeeGradeSalHistory" />
+          <NavigationProperty Name="EmpEmployeeSkills" Relationship="TTPModel.FK_EmpEmployeeSkills_EmpEmployees" FromRole="EmpEmployee" ToRole="EmpEmployeeSkill" />
+          <NavigationProperty Name="EmployeeEducationHistories" Relationship="TTPModel.FK_EmployeeEducationHistory_EmpEmployees" FromRole="EmpEmployee" ToRole="EmployeeEducationHistory" />
+          <NavigationProperty Name="EmployeeFamilies" Relationship="TTPModel.FK_EmployeeFamily_EmpEmployees" FromRole="EmpEmployee" ToRole="EmployeeFamily" />
+          <NavigationProperty Name="EmployeeLeaves" Relationship="TTPModel.FK_EmployeeLeaves_EmpEmployees" FromRole="EmpEmployee" ToRole="EmployeeLeaf" />
+          <NavigationProperty Name="EmployeeMonthlySalaries" Relationship="TTPModel.FK_EmployeeMonthlySalary_EmpEmployees" FromRole="EmpEmployee" ToRole="EmployeeMonthlySalary" />
+          <NavigationProperty Name="EmpEmployeeSalaryComponents" Relationship="TTPModel.FK_EmployeeSalaryComponents_EmpEmployees" FromRole="EmpEmployee" ToRole="EmpEmployeeSalaryComponent" />
+        </EntityType>
+        <Association Name="FK_EmpEmployeeGradeSalHistory_EmpEmployees">
+          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="1" />
+          <End Type="TTPModel.EmpEmployeeGradeSalHistory" Role="EmpEmployeeGradeSalHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployee">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeGradeSalHistory">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeSkills_EmpEmployees">
+          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="1" />
+          <End Type="TTPModel.EmpEmployeeSkill" Role="EmpEmployeeSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployee">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeSkill">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeEducationHistory_EmpEmployees">
+          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="1" />
+          <End Type="TTPModel.EmployeeEducationHistory" Role="EmployeeEducationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployee">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeEducationHistory">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeFamily_EmpEmployees">
+          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="1" />
+          <End Type="TTPModel.EmployeeFamily" Role="EmployeeFamily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployee">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeFamily">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeLeaves_EmpEmployees">
+          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="1" />
+          <End Type="TTPModel.EmployeeLeaf" Role="EmployeeLeaf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployee">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeLeaf">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMonthlySalary_EmpEmployees">
+          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="1" />
+          <End Type="TTPModel.EmployeeMonthlySalary" Role="EmployeeMonthlySalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployee">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeMonthlySalary">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeSalaryComponents_EmpEmployees">
+          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="1" />
+          <End Type="TTPModel.EmpEmployeeSalaryComponent" Role="EmpEmployeeSalaryComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployee">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeSalaryComponent">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeGradeSalHistory_EmpEmployeeGradeSalHistory">
+          <End Type="TTPModel.EmpEmployeeGradeSalHistory" Role="EmpEmployeeGradeSalHistory" Multiplicity="1" />
+          <End Type="TTPModel.EmpEmployeeGradeSalHistory" Role="EmpEmployeeGradeSalHistory1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployeeGradeSalHistory">
+              <PropertyRef Name="EmployeeGradeHistoryId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeGradeSalHistory1">
+              <PropertyRef Name="EmployeeGradeHistoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeSalaryComponents_EmpEmployeeGradeSalHistory">
+          <End Type="TTPModel.EmpEmployeeGradeSalHistory" Role="EmpEmployeeGradeSalHistory" Multiplicity="1" />
+          <End Type="TTPModel.EmpEmployeeSalaryComponent" Role="EmpEmployeeSalaryComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployeeGradeSalHistory">
+              <PropertyRef Name="EmployeeGradeHistoryId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeSalaryComponent">
+              <PropertyRef Name="EmployeeGradeSalHistoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VariableConfiguration">
+          <Key>
+            <PropertyRef Name="VariableConfigurationId" />
+          </Key>
+          <Property Name="VariableName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="VariableDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VariableAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VariableFormula" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="DisplayOrder" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_VariableConfiguration_Organization" FromRole="VariableConfiguration" ToRole="Organization" />
+          <Property Name="VariableConfigurationId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="FK_VariableConfiguration_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.VariableConfiguration" Role="VariableConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="VariableConfiguration">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6716,6 +6841,7 @@
           <EntitySetMapping Name="EmpEmployeeGradeSalHistories">
             <EntityTypeMapping TypeName="TTPModel.EmpEmployeeGradeSalHistory">
               <MappingFragment StoreEntitySet="EmpEmployeeGradeSalHistory">
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="EmployeeGradeHistoryId" ColumnName="EmployeeGradeHistoryId" />
                 <ScalarProperty Name="EmpGradeId" ColumnName="EmpGradeId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
@@ -6738,62 +6864,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EmpEmployees">
-            <EntityTypeMapping TypeName="TTPModel.EmpEmployee">
-              <MappingFragment StoreEntitySet="EmpEmployees">
-                <ScalarProperty Name="EmpEmployeeId" ColumnName="EmpEmployeeId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
-                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="pincode" ColumnName="pincode" />
-                <ScalarProperty Name="StateId" ColumnName="StateId" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="Bloodgroup" ColumnName="Bloodgroup" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
-                <ScalarProperty Name="IFSCcode" ColumnName="IFSCcode" />
-                <ScalarProperty Name="MICRNo" ColumnName="MICRNo" />
-                <ScalarProperty Name="AdhaarNo" ColumnName="AdhaarNo" />
-                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
-                <ScalarProperty Name="ReligionId" ColumnName="ReligionId" />
-                <ScalarProperty Name="DOJ" ColumnName="DOJ" />
-                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
-                <ScalarProperty Name="AlternateContactNo" ColumnName="AlternateContactNo" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="EmploymentTypeId" ColumnName="EmploymentTypeId" />
-                <ScalarProperty Name="EmployeeGradeId" ColumnName="EmployeeGradeId" />
-                <ScalarProperty Name="ReportTo" ColumnName="ReportTo" />
-                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
-                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
-                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
-                <ScalarProperty Name="EmployeeTerm" ColumnName="EmployeeTerm" />
-                <ScalarProperty Name="EmploymentStatus" ColumnName="EmploymentStatus" />
-                <ScalarProperty Name="ConfirmationDate" ColumnName="ConfirmationDate" />
-                <ScalarProperty Name="NoticePeriodDays" ColumnName="NoticePeriodDays" />
-                <ScalarProperty Name="ProbationPeriodDays" ColumnName="ProbationPeriodDays" />
-                <ScalarProperty Name="PAN" ColumnName="PAN" />
-                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
-                <ScalarProperty Name="MarriedDate" ColumnName="MarriedDate" />
-                <ScalarProperty Name="SpouseName" ColumnName="SpouseName" />
-                <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
-                <ScalarProperty Name="PFAccountNo" ColumnName="PFAccountNo" />
-                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EmpEmployeeSalaryComponents">
             <EntityTypeMapping TypeName="TTPModel.EmpEmployeeSalaryComponent">
               <MappingFragment StoreEntitySet="EmpEmployeeSalaryComponents">
+                <ScalarProperty Name="ActualFormulaOrAmount" ColumnName="ActualFormulaOrAmount" />
+                <ScalarProperty Name="EmployeeGradeSalHistoryId" ColumnName="EmployeeGradeSalHistoryId" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="EmployeeSalaryComponentId" ColumnName="EmployeeSalaryComponentId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="EmpGradeComponentId" ColumnName="EmpGradeComponentId" />
-                <ScalarProperty Name="EmpployeeCompPCorAmount" ColumnName="EmpployeeCompPCorAmount" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
               </MappingFragment>
@@ -6814,10 +6897,12 @@
           <EntitySetMapping Name="EmpGradeComponents">
             <EntityTypeMapping TypeName="TTPModel.EmpGradeComponent">
               <MappingFragment StoreEntitySet="EmpGradeComponents">
+                <ScalarProperty Name="FormulaOrAmount" ColumnName="FormulaOrAmount" />
+                <ScalarProperty Name="TaxableAmount" ColumnName="TaxableAmount" />
+                <ScalarProperty Name="Deduction" ColumnName="Deduction" />
                 <ScalarProperty Name="EmpGradeSalaryComponentId" ColumnName="EmpGradeSalaryComponentId" />
                 <ScalarProperty Name="EmpGradeId" ColumnName="EmpGradeId" />
                 <ScalarProperty Name="SalaryComponentId" ColumnName="SalaryComponentId" />
-                <ScalarProperty Name="PercentOfBasicOrAmount" ColumnName="PercentOfBasicOrAmount" />
                 <ScalarProperty Name="ComponentTypeId" ColumnName="ComponentTypeId" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
@@ -7432,6 +7517,66 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="EmpEmployees">
+            <EntityTypeMapping TypeName="TTPModel.EmpEmployee">
+              <MappingFragment StoreEntitySet="EmpEmployees">
+                <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="PFAccountNo" ColumnName="PFAccountNo" />
+                <ScalarProperty Name="MarriedDate" ColumnName="MarriedDate" />
+                <ScalarProperty Name="MaritalStatusId" ColumnName="MaritalStatusId" />
+                <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+                <ScalarProperty Name="PAN" ColumnName="PAN" />
+                <ScalarProperty Name="ProbationPeriodDays" ColumnName="ProbationPeriodDays" />
+                <ScalarProperty Name="NoticePeriodDays" ColumnName="NoticePeriodDays" />
+                <ScalarProperty Name="ConfirmationDate" ColumnName="ConfirmationDate" />
+                <ScalarProperty Name="EmploymentTermId" ColumnName="EmploymentTermId" />
+                <ScalarProperty Name="EmploymentTypeId" ColumnName="EmploymentTypeId" />
+                <ScalarProperty Name="EmploymentStatusId" ColumnName="EmploymentStatusId" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="ReportTo" ColumnName="ReportTo" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="AlternateContactNo" ColumnName="AlternateContactNo" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="ReligionId" ColumnName="ReligionId" />
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
+                <ScalarProperty Name="AdhaarNo" ColumnName="AdhaarNo" />
+                <ScalarProperty Name="MICRNo" ColumnName="MICRNo" />
+                <ScalarProperty Name="IFSCcode" ColumnName="IFSCcode" />
+                <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Bloodgroup" ColumnName="Bloodgroup" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="pincode" ColumnName="pincode" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="EmpEmployeeId" ColumnName="EmpEmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VariableConfigurations">
+            <EntityTypeMapping TypeName="TTPModel.VariableConfiguration">
+              <MappingFragment StoreEntitySet="VariableConfiguration">
+                <ScalarProperty Name="VariableConfigurationId" ColumnName="VariableConfigurationId" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="VariableFormula" ColumnName="VariableFormula" />
+                <ScalarProperty Name="VariableAmount" ColumnName="VariableAmount" />
+                <ScalarProperty Name="VariableDescription" ColumnName="VariableDescription" />
+                <ScalarProperty Name="VariableName" ColumnName="VariableName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

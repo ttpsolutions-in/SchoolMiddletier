@@ -12,20 +12,17 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EmployeeFamily
+    public partial class VariableConfiguration
     {
-        public short EmployeeFamilyId { get; set; }
-        public short EmployeeId { get; set; }
-        public short FamilyRelationShipId { get; set; }
-        public short FirstName { get; set; }
-        public short LastName { get; set; }
-        public short Age { get; set; }
-        public short Gender { get; set; }
+        public string VariableName { get; set; }
+        public string VariableDescription { get; set; }
+        public decimal VariableAmount { get; set; }
+        public string VariableFormula { get; set; }
+        public byte Active { get; set; }
         public short OrgId { get; set; }
+        public byte DisplayOrder { get; set; }
+        public short VariableConfigurationId { get; set; }
     
-        public virtual MasterData MasterData { get; set; }
-        public virtual MasterData MasterData1 { get; set; }
         public virtual Organization Organization { get; set; }
-        public virtual EmpEmployee EmpEmployee { get; set; }
     }
 }

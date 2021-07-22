@@ -52,6 +52,7 @@ namespace schools.Models
             this.StudentFeePayments = new HashSet<StudentFeePayment>();
             this.Students = new HashSet<Student>();
             this.TaskConfigurations = new HashSet<TaskConfiguration>();
+            this.VariableConfigurations = new HashSet<VariableConfiguration>();
         }
     
         public short OrganizationId { get; set; }
@@ -142,5 +143,7 @@ namespace schools.Models
         public virtual ICollection<Student> Students { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaskConfiguration> TaskConfigurations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VariableConfiguration> VariableConfigurations { get; set; }
     }
 }

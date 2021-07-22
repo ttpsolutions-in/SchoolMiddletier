@@ -24,7 +24,7 @@ namespace schools.Models
         public short EmployeeId { get; set; }
         public short OrgId { get; set; }
     
-        public virtual EmpEmployee EmpEmployee { get; set; }
         public virtual Organization Organization { get; set; }
+        public virtual EmpEmployee EmpEmployee { get; set; }
     }
 }

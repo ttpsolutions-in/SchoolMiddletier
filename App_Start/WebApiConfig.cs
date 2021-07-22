@@ -88,6 +88,8 @@ namespace schools
             builder.EntitySet<EmployeeGradeLeaf>("EmployeeGradeLeaves");
             builder.EntitySet<EmployeeEducationHistory>("EmployeeEducationHistories");
             builder.EntitySet<EmployeeLeaf>("EmployeeLeaves");
+            builder.EntitySet<EmpEmployeeGradeSalHistory>("EmpEmployeeGradeSalHistories");
+            builder.EntitySet<VariableConfiguration>("VariableConfigurations");
 
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 

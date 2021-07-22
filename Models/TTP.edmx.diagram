@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5d245cd5972c47ea8dd00a9fdbee2b00" Name="Diagram1">
-        <EntityTypeShape EntityType="TTPModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+      <Diagram DiagramId="5d245cd5972c47ea8dd00a9fdbee2b00" Name="Diagram1" ZoomLevel="54">
+        <EntityTypeShape EntityType="TTPModel.C__MigrationHistory" Width="5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Album" Width="1.5" PointX="0.75" PointY="94.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.ApplicationFeatureRolesPerm" Width="1.5" PointX="7.5" PointY="131.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.ApplicationFeature" Width="1.5" PointX="5.25" PointY="132.5" IsExpanded="true" />
@@ -20,13 +20,12 @@
         <EntityTypeShape EntityType="TTPModel.ClassSubject" Width="1.5" PointX="7.5" PointY="108.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.ClassSubjectMarkComponent" Width="1.5" PointX="15.75" PointY="100.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.EmpEmployeeGradeSalHistory" Width="1.5" PointX="5.25" PointY="135.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.EmpEmployee" Width="1.5" PointX="5.75" PointY="68" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.EmpEmployeeSalaryComponent" Width="1.5" PointX="3" PointY="89" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.EmpEmployeeSalaryComponent" Width="2.25" PointX="3" PointY="89" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.EmpEmployeeSkill" Width="1.5" PointX="6" PointY="90.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.EmpGradeComponent" Width="1.5" PointX="8.25" PointY="117.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.EmpGradeComponent" Width="2.375" PointX="8.25" PointY="117.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.EmployeeEducationHistory" Width="1.5" PointX="8" PointY="80.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.EmployeeFamily" Width="1.5" PointX="13.25" PointY="109.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.EmployeeGradeLeaf" Width="1.5" PointX="11.25" PointY="117.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.EmployeeGradeLeaf" Width="2.5" PointX="11.25" PointY="117.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.EmployeeLeaf" Width="1.5" PointX="13.25" PointY="104.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.EmployeeMonthlySalary" Width="1.5" PointX="9" PointY="90.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Exam" Width="1.5" PointX="10.25" PointY="103.875" IsExpanded="true" />
@@ -99,16 +98,9 @@
         <AssociationConnector Association="TTPModel.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ClassSubjectMarkComponents_OrganizationId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_ClassSubjectMarkComponentId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_EmpEmployeeGradeSalHistory_EmpEmployees" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmpEmployeeGradeSalHistory_MasterDataGradeId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmpEmployeeGradeSalHistory_MasterDataOrganizationId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmpEmployeeGradeSalHistory_MasterDataWorkAccountId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_EmpEmployeeSkills_EmpEmployees" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_EmployeeEducationHistory_EmpEmployees" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_EmployeeFamily_EmpEmployees" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_EmployeeLeaves_EmpEmployees" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_EmployeeMonthlySalary_EmpEmployees" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_EmployeeSalaryComponents_EmpEmployees" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmpEmployeeSalaryComponents_EmpGradeComponents" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmployeeSalaryComponents_Organization" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmpEmployeeSkills_Organization" ManuallyRouted="false" />
@@ -190,6 +182,18 @@
         <AssociationConnector Association="TTPModel.FK_StudentFeeReceipt_Students" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_Students_Students" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TTPModel.EmpEmployee" Width="1.5" PointX="3.375" PointY="7.375" />
+        <AssociationConnector Association="TTPModel.FK_EmpEmployeeGradeSalHistory_EmpEmployees" />
+        <AssociationConnector Association="TTPModel.FK_EmpEmployeeSkills_EmpEmployees" />
+        <AssociationConnector Association="TTPModel.FK_EmployeeEducationHistory_EmpEmployees" />
+        <AssociationConnector Association="TTPModel.FK_EmployeeFamily_EmpEmployees" />
+        <AssociationConnector Association="TTPModel.FK_EmployeeLeaves_EmpEmployees" />
+        <AssociationConnector Association="TTPModel.FK_EmployeeMonthlySalary_EmpEmployees" />
+        <AssociationConnector Association="TTPModel.FK_EmployeeSalaryComponents_EmpEmployees" />
+        <AssociationConnector Association="TTPModel.FK_EmpEmployeeGradeSalHistory_EmpEmployeeGradeSalHistory" />
+        <AssociationConnector Association="TTPModel.FK_EmpEmployeeSalaryComponents_EmpEmployeeGradeSalHistory" />
+        <EntityTypeShape EntityType="TTPModel.VariableConfiguration" Width="2.5" PointX="6.375" PointY="6.75" />
+        <AssociationConnector Association="TTPModel.FK_VariableConfiguration_Organization" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

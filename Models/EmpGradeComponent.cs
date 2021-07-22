@@ -23,7 +23,6 @@ namespace schools.Models
         public short EmpGradeSalaryComponentId { get; set; }
         public short EmpGradeId { get; set; }
         public short SalaryComponentId { get; set; }
-        public short PercentOfBasicOrAmount { get; set; }
         public short ComponentTypeId { get; set; }
         public short OrgId { get; set; }
         public byte Active { get; set; }
@@ -31,6 +30,9 @@ namespace schools.Models
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
+        public Nullable<byte> Deduction { get; set; }
+        public Nullable<decimal> TaxableAmount { get; set; }
+        public string FormulaOrAmount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpEmployeeSalaryComponent> EmpEmployeeSalaryComponents { get; set; }
