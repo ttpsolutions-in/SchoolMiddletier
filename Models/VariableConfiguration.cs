@@ -14,6 +14,7 @@ namespace schools.Models
     
     public partial class VariableConfiguration
     {
+        public short VariableConfigurationId { get; set; }
         public string VariableName { get; set; }
         public string VariableDescription { get; set; }
         public decimal VariableAmount { get; set; }
@@ -21,7 +22,11 @@ namespace schools.Models
         public byte Active { get; set; }
         public short OrgId { get; set; }
         public byte DisplayOrder { get; set; }
-        public short VariableConfigurationId { get; set; }
+        public Nullable<short> VariableTypeId { get; set; }
+        public Nullable<short> CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<short> UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
     
         public virtual Organization Organization { get; set; }
     }

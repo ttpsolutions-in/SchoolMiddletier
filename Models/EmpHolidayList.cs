@@ -12,20 +12,23 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EmployeeFamily
+    public partial class EmpHolidayList
     {
-        public short EmployeeFamilyId { get; set; }
-        public short EmployeeId { get; set; }
-        public short FamilyRelationShipId { get; set; }
-        public short FirstName { get; set; }
-        public short LastName { get; set; }
-        public short Age { get; set; }
-        public short Gender { get; set; }
+        public short HolidayCalendarId { get; set; }
+        public string HolidayName { get; set; }
+        public System.DateTime HolidayDate { get; set; }
+        public short LocationId { get; set; }
+        public short HolidayTypeId { get; set; }
+        public short FinancialYearId { get; set; }
+        public byte Active { get; set; }
         public short OrgId { get; set; }
+        public Nullable<short> CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<short> UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
     
-        public virtual EmpEmployee EmpEmployee { get; set; }
+        public virtual Batch Batch { get; set; }
         public virtual MasterData MasterData { get; set; }
         public virtual MasterData MasterData1 { get; set; }
-        public virtual Organization Organization { get; set; }
     }
 }

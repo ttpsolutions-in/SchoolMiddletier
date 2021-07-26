@@ -23,9 +23,9 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<EmpEmployeeGradeSalHistory>("EmpEmployeeGradeSalHistories");
-    builder.EntitySet<MasterData>("MasterDatas"); 
     builder.EntitySet<EmpEmployee>("EmpEmployees"); 
-    builder.EntitySet<EmpEmployeeSalaryComponent>("EmpEmployeeSalaryComponents"); 
+    builder.EntitySet<MasterData>("MasterDatas"); 
+    builder.EntitySet<Organization>("Organizations"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class EmpEmployeeGradeSalHistoriesController : ODataController
@@ -150,34 +150,6 @@ namespace schools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/EmpEmployeeGradeSalHistories(5)/MasterData
-        [EnableQuery]
-        public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
-        {
-            return SingleResult.Create(db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).Select(m => m.MasterData));
-        }
-
-        // GET: odata/EmpEmployeeGradeSalHistories(5)/MasterData1
-        [EnableQuery]
-        public SingleResult<MasterData> GetMasterData1([FromODataUri] short key)
-        {
-            return SingleResult.Create(db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).Select(m => m.MasterData1));
-        }
-
-        // GET: odata/EmpEmployeeGradeSalHistories(5)/MasterData2
-        [EnableQuery]
-        public SingleResult<MasterData> GetMasterData2([FromODataUri] short key)
-        {
-            return SingleResult.Create(db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).Select(m => m.MasterData2));
-        }
-
-        // GET: odata/EmpEmployeeGradeSalHistories(5)/EmpEmployee
-        [EnableQuery]
-        public SingleResult<EmpEmployee> GetEmpEmployee([FromODataUri] short key)
-        {
-            return SingleResult.Create(db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).Select(m => m.EmpEmployee));
-        }
-
         // GET: odata/EmpEmployeeGradeSalHistories(5)/EmpEmployeeGradeSalHistory1
         [EnableQuery]
         public SingleResult<EmpEmployeeGradeSalHistory> GetEmpEmployeeGradeSalHistory1([FromODataUri] short key)
@@ -192,11 +164,32 @@ namespace schools.Controllers
             return SingleResult.Create(db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).Select(m => m.EmpEmployeeGradeSalHistory2));
         }
 
-        // GET: odata/EmpEmployeeGradeSalHistories(5)/EmpEmployeeSalaryComponents
+        // GET: odata/EmpEmployeeGradeSalHistories(5)/EmpEmployee
         [EnableQuery]
-        public IQueryable<EmpEmployeeSalaryComponent> GetEmpEmployeeSalaryComponents([FromODataUri] short key)
+        public SingleResult<EmpEmployee> GetEmpEmployee([FromODataUri] short key)
         {
-            return db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).SelectMany(m => m.EmpEmployeeSalaryComponents);
+            return SingleResult.Create(db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).Select(m => m.EmpEmployee));
+        }
+
+        // GET: odata/EmpEmployeeGradeSalHistories(5)/MasterData
+        [EnableQuery]
+        public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).Select(m => m.MasterData));
+        }
+
+        // GET: odata/EmpEmployeeGradeSalHistories(5)/MasterData1
+        [EnableQuery]
+        public SingleResult<MasterData> GetMasterData1([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).Select(m => m.MasterData1));
+        }
+
+        // GET: odata/EmpEmployeeGradeSalHistories(5)/Organization
+        [EnableQuery]
+        public SingleResult<Organization> GetOrganization([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.EmpEmployeeGradeSalHistories.Where(m => m.EmployeeGradeHistoryId == key).Select(m => m.Organization));
         }
 
         protected override void Dispose(bool disposing)

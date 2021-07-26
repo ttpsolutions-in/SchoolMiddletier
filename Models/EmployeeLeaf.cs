@@ -19,17 +19,23 @@ namespace schools.Models
         public short LeaveTypeId { get; set; }
         public System.DateTime LeaveFrom { get; set; }
         public System.DateTime LeaveTo { get; set; }
-        public short NoOfLeaves { get; set; }
+        public short NoOfDays { get; set; }
+        public string LeaveReason { get; set; }
         public Nullable<System.DateTime> ApplyDate { get; set; }
-        public Nullable<short> LeaveStatus { get; set; }
-        public Nullable<System.DateTime> ApprovedRejectedDate { get; set; }
+        public Nullable<short> LeaveStatusId { get; set; }
+        public Nullable<System.DateTime> ApproveRejecteDate { get; set; }
         public Nullable<short> ApprovedBy { get; set; }
-        public string Reamarks { get; set; }
+        public string Remarks { get; set; }
         public short OrgId { get; set; }
+        public byte Active { get; set; }
+        public Nullable<short> CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<short> UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
     
+        public virtual EmpEmployee EmpEmployee { get; set; }
         public virtual MasterData MasterData { get; set; }
         public virtual MasterData MasterData1 { get; set; }
         public virtual Organization Organization { get; set; }
-        public virtual EmpEmployee EmpEmployee { get; set; }
     }
 }

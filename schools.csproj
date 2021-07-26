@@ -374,14 +374,15 @@
     <Compile Include="Controllers\ClassFeesController.cs" />
     <Compile Include="Controllers\ClassSubjectMarkComponentsController.cs" />
     <Compile Include="Controllers\ClassSubjectsController.cs" />
+    <Compile Include="Controllers\EmpComponentsController.cs" />
     <Compile Include="Controllers\EmpEmployeeGradeSalHistoriesController.cs" />
     <Compile Include="Controllers\EmpEmployeeSalaryComponentsController.cs" />
     <Compile Include="Controllers\EmpEmployeesController.cs" />
     <Compile Include="Controllers\EmpEmployeeSkillsController.cs" />
-    <Compile Include="Controllers\EmpGradeComponentsController.cs" />
+    <Compile Include="Controllers\EmpHolidayListsController.cs" />
+    <Compile Include="Controllers\EmpLeavesController.cs" />
     <Compile Include="Controllers\EmployeeEducationHistoriesController.cs" />
     <Compile Include="Controllers\EmployeeFamiliesController.cs" />
-    <Compile Include="Controllers\EmployeeGradeLeavesController.cs" />
     <Compile Include="Controllers\EmployeeLeavesController.cs" />
     <Compile Include="Controllers\EmployeeMonthlySalariesController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
@@ -391,7 +392,6 @@
     <Compile Include="Controllers\FilesNPhotoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
-    <Compile Include="Controllers\MasterDatasController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
@@ -420,170 +420,173 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ApplicationFeature.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ApplicationFeatureRolesPerm.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AppUser.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Attendance.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Batch.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClassFee.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClassSubject.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClassSubjectMarkComponent.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmpComponent.cs">
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmpEmployee.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmpEmployeeGradeSalHistory.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmpEmployeeSalaryComponent.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmpEmployeeSkill.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EmpGradeComponent.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+    <Compile Include="Models\EmpHolidayList.cs">
+      <DependentUpon>TTP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmpLeaf.cs">
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeEducationHistory.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeFamily.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EmployeeGradeLeaf.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeLeaf.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeMonthlySalary.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Exam.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ExamSlot.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ExamStudentResult.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ExamStudentSubjectResult.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FilesNPhoto.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MasterData.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MasterRolePermission.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Message.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Organization.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Page.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PageHistory.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PaymentDetail.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhotoGallery.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RoleUser.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SlotAndClassSubject.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Student.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentActivity.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentCertificate.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentClass.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentClassSubject.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentDocument.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentFeePayment.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentFeeReceipt.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SubjectType.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaskConfiguration.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ttp.Context.cs">
+    <Compile Include="Models\TTP.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ttp.Context.tt</DependentUpon>
+      <DependentUpon>TTP.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ttp.cs">
+    <Compile Include="Models\TTP.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ttp.Designer.cs">
+    <Compile Include="Models\TTP.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ttp.edmx</DependentUpon>
+      <DependentUpon>TTP.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\VariableConfiguration.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
+      <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -599,15 +602,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\ttp.Context.tt">
+    <Content Include="Models\TTP.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ttp.edmx</DependentUpon>
-      <LastGenOutput>ttp.Context.cs</LastGenOutput>
+      <DependentUpon>TTP.edmx</DependentUpon>
+      <LastGenOutput>TTP.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ttp.tt">
+    <Content Include="Models\TTP.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ttp.edmx</DependentUpon>
-      <LastGenOutput>ttp.cs</LastGenOutput>
+      <DependentUpon>TTP.edmx</DependentUpon>
+      <LastGenOutput>TTP.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -630,12 +633,12 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\ttp.edmx">
+    <EntityDeploy Include="Models\TTP.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ttp.Designer.cs</LastGenOutput>
+      <LastGenOutput>TTP.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\ttp.edmx.diagram">
-      <DependentUpon>ttp.edmx</DependentUpon>
+    <Content Include="Models\TTP.edmx.diagram">
+      <DependentUpon>TTP.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

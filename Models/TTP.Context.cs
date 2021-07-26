@@ -39,13 +39,15 @@ namespace schools.Models
         public virtual DbSet<ClassFee> ClassFees { get; set; }
         public virtual DbSet<ClassSubject> ClassSubjects { get; set; }
         public virtual DbSet<ClassSubjectMarkComponent> ClassSubjectMarkComponents { get; set; }
+        public virtual DbSet<EmpComponent> EmpComponents { get; set; }
         public virtual DbSet<EmpEmployeeGradeSalHistory> EmpEmployeeGradeSalHistories { get; set; }
+        public virtual DbSet<EmpEmployee> EmpEmployees { get; set; }
         public virtual DbSet<EmpEmployeeSalaryComponent> EmpEmployeeSalaryComponents { get; set; }
         public virtual DbSet<EmpEmployeeSkill> EmpEmployeeSkills { get; set; }
-        public virtual DbSet<EmpGradeComponent> EmpGradeComponents { get; set; }
+        public virtual DbSet<EmpHolidayList> EmpHolidayLists { get; set; }
+        public virtual DbSet<EmpLeaf> EmpLeaves { get; set; }
         public virtual DbSet<EmployeeEducationHistory> EmployeeEducationHistories { get; set; }
         public virtual DbSet<EmployeeFamily> EmployeeFamilies { get; set; }
-        public virtual DbSet<EmployeeGradeLeaf> EmployeeGradeLeaves { get; set; }
         public virtual DbSet<EmployeeLeaf> EmployeeLeaves { get; set; }
         public virtual DbSet<EmployeeMonthlySalary> EmployeeMonthlySalaries { get; set; }
         public virtual DbSet<Exam> Exams { get; set; }
@@ -73,7 +75,6 @@ namespace schools.Models
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<SubjectType> SubjectTypes { get; set; }
         public virtual DbSet<TaskConfiguration> TaskConfigurations { get; set; }
-        public virtual DbSet<EmpEmployee> EmpEmployees { get; set; }
         public virtual DbSet<VariableConfiguration> VariableConfigurations { get; set; }
     }
 }

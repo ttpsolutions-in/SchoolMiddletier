@@ -16,20 +16,21 @@ namespace schools.Models
     {
         public short EmployeeSalaryComponentId { get; set; }
         public short EmployeeId { get; set; }
-        public short EmpGradeComponentId { get; set; }
+        public short EmpComponentId { get; set; }
+        public short EmployeeGradeSalHistoryId { get; set; }
+        public string ActualFormulaOrAmount { get; set; }
         public decimal Amount { get; set; }
         public short OrgId { get; set; }
+        public short SalMonthYear { get; set; }
+        public Nullable<System.DateTime> RealeasedDate { get; set; }
         public byte Active { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
-        public short EmployeeGradeSalHistoryId { get; set; }
-        public string ActualFormulaOrAmount { get; set; }
     
-        public virtual EmpGradeComponent EmpGradeComponent { get; set; }
-        public virtual Organization Organization { get; set; }
+        public virtual EmpComponent EmpComponent { get; set; }
         public virtual EmpEmployee EmpEmployee { get; set; }
-        public virtual EmpEmployeeGradeSalHistory EmpEmployeeGradeSalHistory { get; set; }
+        public virtual Organization Organization { get; set; }
     }
 }

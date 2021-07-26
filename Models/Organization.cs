@@ -23,12 +23,13 @@ namespace schools.Models
             this.ClassFees = new HashSet<ClassFee>();
             this.ClassSubjects = new HashSet<ClassSubject>();
             this.ClassSubjectMarkComponents = new HashSet<ClassSubjectMarkComponent>();
+            this.EmpComponents = new HashSet<EmpComponent>();
+            this.EmpEmployeeGradeSalHistories = new HashSet<EmpEmployeeGradeSalHistory>();
             this.EmpEmployeeSalaryComponents = new HashSet<EmpEmployeeSalaryComponent>();
             this.EmpEmployeeSkills = new HashSet<EmpEmployeeSkill>();
-            this.EmpGradeComponents = new HashSet<EmpGradeComponent>();
+            this.EmpLeaves = new HashSet<EmpLeaf>();
             this.EmployeeEducationHistories = new HashSet<EmployeeEducationHistory>();
             this.EmployeeFamilies = new HashSet<EmployeeFamily>();
-            this.EmployeeGradeLeaves = new HashSet<EmployeeGradeLeaf>();
             this.EmployeeLeaves = new HashSet<EmployeeLeaf>();
             this.EmployeeMonthlySalaries = new HashSet<EmployeeMonthlySalary>();
             this.Exams = new HashSet<Exam>();
@@ -85,17 +86,19 @@ namespace schools.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassSubjectMarkComponent> ClassSubjectMarkComponents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmpComponent> EmpComponents { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmpEmployeeGradeSalHistory> EmpEmployeeGradeSalHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpEmployeeSalaryComponent> EmpEmployeeSalaryComponents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpEmployeeSkill> EmpEmployeeSkills { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmpGradeComponent> EmpGradeComponents { get; set; }
+        public virtual ICollection<EmpLeaf> EmpLeaves { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeEducationHistory> EmployeeEducationHistories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeFamily> EmployeeFamilies { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeeGradeLeaf> EmployeeGradeLeaves { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeLeaf> EmployeeLeaves { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

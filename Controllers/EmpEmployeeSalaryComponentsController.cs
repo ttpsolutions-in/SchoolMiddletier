@@ -23,9 +23,8 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<EmpEmployeeSalaryComponent>("EmpEmployeeSalaryComponents");
+    builder.EntitySet<EmpComponent>("EmpComponents"); 
     builder.EntitySet<EmpEmployee>("EmpEmployees"); 
-    builder.EntitySet<EmpGradeComponent>("EmpGradeComponents"); 
-    builder.EntitySet<EmployeeMonthlySalary>("EmployeeMonthlySalaries"); 
     builder.EntitySet<Organization>("Organizations"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
@@ -151,18 +150,18 @@ namespace schools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // GET: odata/EmpEmployeeSalaryComponents(5)/EmpComponent
+        [EnableQuery]
+        public SingleResult<EmpComponent> GetEmpComponent([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.EmpEmployeeSalaryComponents.Where(m => m.EmployeeSalaryComponentId == key).Select(m => m.EmpComponent));
+        }
+
         // GET: odata/EmpEmployeeSalaryComponents(5)/EmpEmployee
         [EnableQuery]
         public SingleResult<EmpEmployee> GetEmpEmployee([FromODataUri] short key)
         {
             return SingleResult.Create(db.EmpEmployeeSalaryComponents.Where(m => m.EmployeeSalaryComponentId == key).Select(m => m.EmpEmployee));
-        }
-
-        // GET: odata/EmpEmployeeSalaryComponents(5)/EmpGradeComponent
-        [EnableQuery]
-        public SingleResult<EmpGradeComponent> GetEmpGradeComponent([FromODataUri] short key)
-        {
-            return SingleResult.Create(db.EmpEmployeeSalaryComponents.Where(m => m.EmployeeSalaryComponentId == key).Select(m => m.EmpGradeComponent));
         }
 
         // GET: odata/EmpEmployeeSalaryComponents(5)/Organization

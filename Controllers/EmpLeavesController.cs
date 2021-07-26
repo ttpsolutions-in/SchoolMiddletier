@@ -22,32 +22,30 @@ namespace schools.Controllers
     using System.Web.Http.OData.Extensions;
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<EmployeeGradeLeaf>("EmployeeGradeLeaves");
-    builder.EntitySet<EmpGrade>("EmpGrades"); 
-    builder.EntitySet<MasterData>("MasterDatas"); 
+    builder.EntitySet<EmpLeaf>("EmpLeaves");
     builder.EntitySet<Organization>("Organizations"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class EmployeeGradeLeavesController : ODataController
+    public class EmpLeavesController : ODataController
     {
         private TTPEntities db = new TTPEntities();
 
-        // GET: odata/EmployeeGradeLeaves
+        // GET: odata/EmpLeaves
         [EnableQuery]
-        public IQueryable<EmployeeGradeLeaf> GetEmployeeGradeLeaves()
+        public IQueryable<EmpLeaf> GetEmpLeaves()
         {
-            return db.EmployeeGradeLeaves;
+            return db.EmpLeaves;
         }
 
-        // GET: odata/EmployeeGradeLeaves(5)
+        // GET: odata/EmpLeaves(5)
         [EnableQuery]
-        public SingleResult<EmployeeGradeLeaf> GetEmployeeGradeLeaf([FromODataUri] short key)
+        public SingleResult<EmpLeaf> GetEmpLeaf([FromODataUri] short key)
         {
-            return SingleResult.Create(db.EmployeeGradeLeaves.Where(employeeGradeLeaf => employeeGradeLeaf.EmployeeGradeLeaveId == key));
+            return SingleResult.Create(db.EmpLeaves.Where(empLeaf => empLeaf.EmpLeaveId == key));
         }
 
-        // PUT: odata/EmployeeGradeLeaves(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<EmployeeGradeLeaf> patch)
+        // PUT: odata/EmpLeaves(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<EmpLeaf> patch)
         {
             Validate(patch.GetEntity());
 
@@ -56,13 +54,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            EmployeeGradeLeaf employeeGradeLeaf = await db.EmployeeGradeLeaves.FindAsync(key);
-            if (employeeGradeLeaf == null)
+            EmpLeaf empLeaf = await db.EmpLeaves.FindAsync(key);
+            if (empLeaf == null)
             {
                 return NotFound();
             }
 
-            patch.Put(employeeGradeLeaf);
+            patch.Put(empLeaf);
 
             try
             {
@@ -70,7 +68,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EmployeeGradeLeafExists(key))
+                if (!EmpLeafExists(key))
                 {
                     return NotFound();
                 }
@@ -80,26 +78,26 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(employeeGradeLeaf);
+            return Updated(empLeaf);
         }
 
-        // POST: odata/EmployeeGradeLeaves
-        public async Task<IHttpActionResult> Post(EmployeeGradeLeaf employeeGradeLeaf)
+        // POST: odata/EmpLeaves
+        public async Task<IHttpActionResult> Post(EmpLeaf empLeaf)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.EmployeeGradeLeaves.Add(employeeGradeLeaf);
+            db.EmpLeaves.Add(empLeaf);
             await db.SaveChangesAsync();
 
-            return Created(employeeGradeLeaf);
+            return Created(empLeaf);
         }
 
-        // PATCH: odata/EmployeeGradeLeaves(5)
+        // PATCH: odata/EmpLeaves(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<EmployeeGradeLeaf> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<EmpLeaf> patch)
         {
             Validate(patch.GetEntity());
 
@@ -108,13 +106,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            EmployeeGradeLeaf employeeGradeLeaf = await db.EmployeeGradeLeaves.FindAsync(key);
-            if (employeeGradeLeaf == null)
+            EmpLeaf empLeaf = await db.EmpLeaves.FindAsync(key);
+            if (empLeaf == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(employeeGradeLeaf);
+            patch.Patch(empLeaf);
 
             try
             {
@@ -122,7 +120,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EmployeeGradeLeafExists(key))
+                if (!EmpLeafExists(key))
                 {
                     return NotFound();
                 }
@@ -132,37 +130,29 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(employeeGradeLeaf);
+            return Updated(empLeaf);
         }
 
-        // DELETE: odata/EmployeeGradeLeaves(5)
+        // DELETE: odata/EmpLeaves(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] short key)
         {
-            EmployeeGradeLeaf employeeGradeLeaf = await db.EmployeeGradeLeaves.FindAsync(key);
-            if (employeeGradeLeaf == null)
+            EmpLeaf empLeaf = await db.EmpLeaves.FindAsync(key);
+            if (empLeaf == null)
             {
                 return NotFound();
             }
 
-            db.EmployeeGradeLeaves.Remove(employeeGradeLeaf);
+            db.EmpLeaves.Remove(empLeaf);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-      
-        // GET: odata/EmployeeGradeLeaves(5)/MasterData
-        [EnableQuery]
-        public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
-        {
-            return SingleResult.Create(db.EmployeeGradeLeaves.Where(m => m.EmployeeGradeLeaveId == key).Select(m => m.MasterData));
-        }
-
-        // GET: odata/EmployeeGradeLeaves(5)/Organization
+        // GET: odata/EmpLeaves(5)/Organization
         [EnableQuery]
         public SingleResult<Organization> GetOrganization([FromODataUri] short key)
         {
-            return SingleResult.Create(db.EmployeeGradeLeaves.Where(m => m.EmployeeGradeLeaveId == key).Select(m => m.Organization));
+            return SingleResult.Create(db.EmpLeaves.Where(m => m.EmpLeaveId == key).Select(m => m.Organization));
         }
 
         protected override void Dispose(bool disposing)
@@ -174,9 +164,9 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool EmployeeGradeLeafExists(short key)
+        private bool EmpLeafExists(short key)
         {
-            return db.EmployeeGradeLeaves.Count(e => e.EmployeeGradeLeaveId == key) > 0;
+            return db.EmpLeaves.Count(e => e.EmpLeaveId == key) > 0;
         }
     }
 }

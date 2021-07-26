@@ -76,20 +76,23 @@ namespace schools
             builder.EntitySet<StudentCertificate>("StudentCertificates");
             builder.EntitySet<ApplicationFeature>("ApplicationFeatures");
             builder.EntitySet<ApplicationFeatureRolesPerm>("ApplicationFeatureRolesPerms");
-
+            
             builder.EntitySet<EmpEmployee>("EmpEmployees");
             builder.EntitySet<EmpEmployeeSkill>("EmpEmployeeSkills");
             builder.EntitySet<EmployeeFamily>("EmployeeFamilies");
             builder.EntitySet<EmployeeLeaf>("EmployeeLeaves");
             builder.EntitySet<EmployeeMonthlySalary>("EmployeeMonthlySalaries");
             builder.EntitySet<EmpEmployeeSalaryComponent>("EmpEmployeeSalaryComponents");
-            builder.EntitySet<EmpGradeComponent>("EmpGradeComponents");
+            //builder.EntitySet<EmpGradeComponent>("EmpGradeComponents");
+            builder.EntitySet<EmpComponent>("EmpComponents");
             builder.EntitySet<EmpEmployeeSkill>("EmpEmployeeSkills");
-            builder.EntitySet<EmployeeGradeLeaf>("EmployeeGradeLeaves");
+            //builder.EntitySet<EmployeeGradeLeaf>("EmployeeGradeLeaves");
+            builder.EntitySet<EmpLeaf>("EmpLeaves");
             builder.EntitySet<EmployeeEducationHistory>("EmployeeEducationHistories");
             builder.EntitySet<EmployeeLeaf>("EmployeeLeaves");
             builder.EntitySet<EmpEmployeeGradeSalHistory>("EmpEmployeeGradeSalHistories");
             builder.EntitySet<VariableConfiguration>("VariableConfigurations");
+            builder.EntitySet<EmpHolidayList>("EmpHolidayLists");
 
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 
