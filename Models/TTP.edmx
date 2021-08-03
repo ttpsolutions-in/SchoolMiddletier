@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TTPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TTPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -14,6 +14,60 @@
           <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="Model" Type="varbinary(max)" Nullable="false" />
           <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountingPeriod">
+          <Key>
+            <PropertyRef Name="AccountingPeriodId" />
+          </Key>
+          <Property Name="AccountingPeriodId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="CurrentPeriod" Type="tinyint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+        </EntityType>
+        <EntityType Name="AccountingTrialBalances">
+          <Key>
+            <PropertyRef Name="AccountingTrialBalanceId" />
+          </Key>
+          <Property Name="AccountingTrialBalanceId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GeneralLedger" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="AccountGroupId" Type="smallint" Nullable="false" />
+          <Property Name="AccountNatureId" Type="smallint" Nullable="false" />
+          <Property Name="Debit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Credit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Balance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="DepartmentId" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="Active" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="AccountingVouchers">
+          <Key>
+            <PropertyRef Name="AccountingVoucherId" />
+          </Key>
+          <Property Name="AccountingVoucherId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocDate" Type="datetime" Nullable="false" />
+          <Property Name="PostingDate" Type="datetime" Nullable="false" />
+          <Property Name="Reference" Type="varchar" MaxLength="30" />
+          <Property Name="GLAccountId" Type="smallint" Nullable="false" />
+          <Property Name="DebitCreditId" Type="tinyint" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ShortText" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="SubOrgId" Type="smallint" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
         </EntityType>
         <EntityType Name="Albums">
           <Key>
@@ -188,6 +242,7 @@
           <Property Name="CreatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="TeacherId" Type="smallint" />
         </EntityType>
         <EntityType Name="ClassSubjectMarkComponents">
           <Key>
@@ -206,6 +261,21 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
         </EntityType>
+        <EntityType Name="ClassSubjectTeacher">
+          <Key>
+            <PropertyRef Name="ClassSubjectTeacherId" />
+          </Key>
+          <Property Name="ClassSubjectTeacherId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeacherId" Type="smallint" Nullable="false" />
+          <Property Name="ClassSubjectId" Type="smallint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="BatchId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="EmpComponents">
           <Key>
             <PropertyRef Name="EmpSalaryComponentId" />
@@ -213,8 +283,7 @@
           <Property Name="EmpSalaryComponentId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SalaryComponent" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FormulaOrAmount" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="Deduction" Type="tinyint" Nullable="false" />
-          <Property Name="LimitAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ComponentTypeId" Type="smallint" Nullable="false" />
           <Property Name="OrgId" Type="smallint" Nullable="false" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" />
@@ -231,8 +300,6 @@
           <Property Name="EmployeeId" Type="smallint" Nullable="false" />
           <Property Name="DepartmentId" Type="smallint" Nullable="false" />
           <Property Name="CTC" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Gratuity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Gross" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="FromDate" Type="datetime" Nullable="false" />
           <Property Name="ToDate" Type="datetime" Nullable="false" />
           <Property Name="OrgId" Type="smallint" Nullable="false" />
@@ -245,6 +312,28 @@
           <Property Name="WorkAccountId" Type="smallint" />
           <Property Name="JobTitleId" Type="smallint" />
           <Property Name="DesignationId" Type="smallint" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmpEmployeeGroups">
+          <Key>
+            <PropertyRef Name="EmployeeGroupId" />
+          </Key>
+          <Property Name="EmployeeGroupId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmpGradeId" Type="smallint" Nullable="false" />
+          <Property Name="DepartmentId" Type="smallint" Nullable="false" />
+          <Property Name="WorkAccountId" Type="smallint" />
+          <Property Name="JobTitleId" Type="smallint" />
+          <Property Name="DesignationId" Type="smallint" />
+          <Property Name="GroupTypeId" Type="smallint" Nullable="false" />
+          <Property Name="SubOrgId" Type="smallint" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="Remarks" Type="varchar" MaxLength="250" />
+          <Property Name="ApprovedBy" Type="smallint" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="EmpEmployees">
@@ -279,7 +368,6 @@
           <Property Name="LocationId" Type="smallint" />
           <Property Name="EmploymentStatusId" Type="smallint" />
           <Property Name="EmploymentTypeId" Type="smallint" />
-          <Property Name="EmploymentTermId" Type="smallint" />
           <Property Name="ConfirmationDate" Type="datetime" />
           <Property Name="NoticePeriodDays" Type="smallint" />
           <Property Name="ProbationPeriodDays" Type="smallint" />
@@ -289,8 +377,14 @@
           <Property Name="MarriedDate" Type="datetime" />
           <Property Name="PFAccountNo" Type="varchar" MaxLength="20" />
           <Property Name="OrgId" Type="smallint" Nullable="false" />
-          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="SubOrgId" Type="smallint" />
+          <Property Name="NatureId" Type="smallint" />
           <Property Name="EmployeeCode" Type="varchar" MaxLength="30" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="EmpEmployeeSalaryComponents">
           <Key>
@@ -299,7 +393,6 @@
           <Property Name="EmployeeSalaryComponentId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeId" Type="smallint" Nullable="false" />
           <Property Name="EmpComponentId" Type="smallint" Nullable="false" />
-          <Property Name="EmployeeGradeSalHistoryId" Type="smallint" Nullable="false" />
           <Property Name="ActualFormulaOrAmount" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="OrgId" Type="smallint" Nullable="false" />
@@ -419,6 +512,22 @@
           <Property Name="PaymentDate" Type="datetime" />
           <Property Name="OrgId" Type="smallint" />
         </EntityType>
+        <EntityType Name="EmpManagerGroupMapping">
+          <Key>
+            <PropertyRef Name="ManagerGroupMappingId" />
+          </Key>
+          <Property Name="ManagerGroupMappingId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeGroupId" Type="smallint" Nullable="false" />
+          <Property Name="ManagerEmployeeId" Type="smallint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="FromDate" Type="datetime" Nullable="false" />
+          <Property Name="ToDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Active" Type="tinyint" />
+        </EntityType>
         <EntityType Name="Exams">
           <Key>
             <PropertyRef Name="ExamId" />
@@ -515,8 +624,8 @@
           <Key>
             <PropertyRef Name="MasterDataId" />
           </Key>
-          <Property Name="MasterDataId" Type="smallint" Nullable="false" />
-          <Property Name="MasterDataName" Type="varchar" MaxLength="50" />
+          <Property Name="MasterDataId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasterDataName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="100" />
           <Property Name="ParentId" Type="smallint" />
           <Property Name="CreatedDate" Type="datetime" />
@@ -526,21 +635,6 @@
           <Property Name="LocationId" Type="smallint" />
           <Property Name="ApplicationId" Type="smallint" />
           <Property Name="Active" Type="tinyint" />
-        </EntityType>
-        <EntityType Name="MasterRolePermission">
-          <Key>
-            <PropertyRef Name="MasterRolePermissionId" />
-          </Key>
-          <Property Name="MasterRolePermissionId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MasterDataId" Type="smallint" Nullable="false" />
-          <Property Name="RoleId" Type="smallint" Nullable="false" />
-          <Property Name="PermissionId" Type="smallint" Nullable="false" />
-          <Property Name="Active" Type="tinyint" Nullable="false" />
-          <Property Name="OrgId" Type="smallint" Nullable="false" />
-          <Property Name="CreatedBy" Type="smallint" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="UpdatedBy" Type="smallint" />
-          <Property Name="UpdatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Messages">
           <Key>
@@ -560,7 +654,7 @@
             <PropertyRef Name="OrganizationId" />
           </Key>
           <Property Name="OrganizationId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="OrganizationName" Type="varchar" MaxLength="50" />
+          <Property Name="OrganizationName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="LogoPath" Type="varchar" MaxLength="100" />
           <Property Name="Address" Type="varchar" MaxLength="250" />
           <Property Name="City" Type="smallint" />
@@ -571,6 +665,8 @@
           <Property Name="ValidTo" Type="datetime" />
           <Property Name="Active" Type="tinyint" />
           <Property Name="PlanId" Type="smallint" />
+          <Property Name="ParentId" Type="smallint" />
+          <Property Name="MainOrgId" Type="smallint" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
@@ -873,6 +969,22 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
         </EntityType>
+        <EntityType Name="StudTeacherClassMapping">
+          <Key>
+            <PropertyRef Name="TeacherClassMappingId" />
+          </Key>
+          <Property Name="TeacherClassMappingId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeacherId" Type="smallint" Nullable="false" />
+          <Property Name="ClassId" Type="smallint" Nullable="false" />
+          <Property Name="SectionId" Type="smallint" Nullable="false" />
+          <Property Name="BatchId" Type="smallint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+        </EntityType>
         <EntityType Name="SubjectTypes">
           <Key>
             <PropertyRef Name="SubjectTypeId" />
@@ -929,6 +1041,78 @@
           <Property Name="UpdatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
         </EntityType>
+        <Association Name="FK_AccountingPeriod_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="AccountingPeriod" Type="Self.AccountingPeriod" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="AccountingPeriod">
+              <PropertyRef Name="AccountingPeriodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountingTrialBalances_AccountgroupId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="AccountingTrialBalances" Type="Self.AccountingTrialBalances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="AccountingTrialBalances">
+              <PropertyRef Name="AccountGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountingTrialBalances_MasterDataAccountNature">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="AccountingTrialBalances" Type="Self.AccountingTrialBalances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="AccountingTrialBalances">
+              <PropertyRef Name="AccountNatureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountingTrialBalances_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="AccountingTrialBalances" Type="Self.AccountingTrialBalances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="AccountingTrialBalances">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountingVouchers_AccountingTrialBalances">
+          <End Role="AccountingTrialBalances" Type="Self.AccountingTrialBalances" Multiplicity="1" />
+          <End Role="AccountingVouchers" Type="Self.AccountingVouchers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingTrialBalances">
+              <PropertyRef Name="AccountingTrialBalanceId" />
+            </Principal>
+            <Dependent Role="AccountingVouchers">
+              <PropertyRef Name="GLAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountingVouchers_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="AccountingVouchers" Type="Self.AccountingVouchers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="AccountingVouchers">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ApplicationFeatures_MasterDataApplicationId">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
           <End Role="ApplicationFeatures" Type="Self.ApplicationFeatures" Multiplicity="*" />
@@ -1145,6 +1329,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ClassSubjectTeacher_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="ClassSubjectTeacher" Type="Self.ClassSubjectTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="ClassSubjectTeacher">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassSubjectTeacher_ClassSubject">
+          <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="1" />
+          <End Role="ClassSubjectTeacher" Type="Self.ClassSubjectTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassSubject">
+              <PropertyRef Name="ClassSubjectId" />
+            </Principal>
+            <Dependent Role="ClassSubjectTeacher">
+              <PropertyRef Name="ClassSubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassSubjectTeacher_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployees" Multiplicity="1" />
+          <End Role="ClassSubjectTeacher" Type="Self.ClassSubjectTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="ClassSubjectTeacher">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassSubjectTeacher_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="ClassSubjectTeacher" Type="Self.ClassSubjectTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="ClassSubjectTeacher">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1198,6 +1430,18 @@
             </Principal>
             <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpComponents_ComponentType">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="EmpComponents" Type="Self.EmpComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmpComponents">
+              <PropertyRef Name="ComponentTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1270,6 +1514,30 @@
             </Principal>
             <Dependent Role="EmpEmployeeGradeSalHistory">
               <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeGroups_OrganizationOrgId">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="EmpEmployeeGroups" Type="Self.EmpEmployeeGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeGroups">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeGroups_OrganizationSubOrgId">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+          <End Role="EmpEmployeeGroups" Type="Self.EmpEmployeeGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeGroups">
+              <PropertyRef Name="SubOrgId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1810,18 +2078,6 @@
             </Principal>
             <Dependent Role="MasterData">
               <PropertyRef Name="OrgId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MasterRolePermission_MasterDataId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="MasterRolePermission" Type="Self.MasterRolePermission" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="MasterRolePermission">
-              <PropertyRef Name="MasterDataId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2557,6 +2813,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StudTeacherClassMapping_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="StudTeacherClassMapping" Type="Self.StudTeacherClassMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudTeacherClassMapping">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudTeacherClassMapping_EmpEmployeesTeacherId">
+          <End Role="EmpEmployees" Type="Self.EmpEmployees" Multiplicity="1" />
+          <End Role="StudTeacherClassMapping" Type="Self.StudTeacherClassMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="StudTeacherClassMapping">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudTeacherClassMapping_MasterDataClassId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="StudTeacherClassMapping" Type="Self.StudTeacherClassMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="StudTeacherClassMapping">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudTeacherClassMapping_MasterDataSectionId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="StudTeacherClassMapping" Type="Self.StudTeacherClassMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="StudTeacherClassMapping">
+              <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudTeacherClassMapping_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="StudTeacherClassMapping" Type="Self.StudTeacherClassMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="StudTeacherClassMapping">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SubjectTypes_Batches">
           <End Role="Batches" Type="Self.Batches" Multiplicity="0..1" />
           <End Role="SubjectTypes" Type="Self.SubjectTypes" Multiplicity="*" />
@@ -2595,6 +2911,9 @@
         </Association>
         <EntityContainer Name="TTPModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountingPeriod" EntityType="Self.AccountingPeriod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountingTrialBalances" EntityType="Self.AccountingTrialBalances" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountingVouchers" EntityType="Self.AccountingVouchers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicationFeatureRolesPerm" EntityType="Self.ApplicationFeatureRolesPerm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicationFeatures" EntityType="Self.ApplicationFeatures" Schema="dbo" store:Type="Tables" />
@@ -2609,8 +2928,10 @@
           <EntitySet Name="ClassFee" EntityType="Self.ClassFee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSubject" EntityType="Self.ClassSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSubjectMarkComponents" EntityType="Self.ClassSubjectMarkComponents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassSubjectTeacher" EntityType="Self.ClassSubjectTeacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpComponents" EntityType="Self.EmpComponents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpEmployeeGradeSalHistory" EntityType="Self.EmpEmployeeGradeSalHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpEmployeeGroups" EntityType="Self.EmpEmployeeGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpEmployees" EntityType="Self.EmpEmployees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpEmployeeSalaryComponents" EntityType="Self.EmpEmployeeSalaryComponents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpEmployeeSkills" EntityType="Self.EmpEmployeeSkills" Schema="dbo" store:Type="Tables" />
@@ -2620,13 +2941,13 @@
           <EntitySet Name="EmployeeFamily" EntityType="Self.EmployeeFamily" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeLeaves" EntityType="Self.EmployeeLeaves" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeMonthlySalary" EntityType="Self.EmployeeMonthlySalary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpManagerGroupMapping" EntityType="Self.EmpManagerGroupMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Exams" EntityType="Self.Exams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExamSlot" EntityType="Self.ExamSlot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExamStudentResult" EntityType="Self.ExamStudentResult" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExamStudentSubjectResult" EntityType="Self.ExamStudentSubjectResult" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FilesNPhotos" EntityType="Self.FilesNPhotos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MasterData" EntityType="Self.MasterData" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MasterRolePermission" EntityType="Self.MasterRolePermission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PageHistory" EntityType="Self.PageHistory" Schema="dbo" store:Type="Tables" />
@@ -2643,9 +2964,34 @@
           <EntitySet Name="StudentFeePayment" EntityType="Self.StudentFeePayment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentFeeReceipt" EntityType="Self.StudentFeeReceipt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudTeacherClassMapping" EntityType="Self.StudTeacherClassMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubjectTypes" EntityType="Self.SubjectTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaskConfiguration" EntityType="Self.TaskConfiguration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VariableConfiguration" EntityType="Self.VariableConfiguration" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AccountingPeriod_Organization" Association="Self.FK_AccountingPeriod_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="AccountingPeriod" EntitySet="AccountingPeriod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountingTrialBalances_AccountgroupId" Association="Self.FK_AccountingTrialBalances_AccountgroupId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="AccountingTrialBalances" EntitySet="AccountingTrialBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountingTrialBalances_MasterDataAccountNature" Association="Self.FK_AccountingTrialBalances_MasterDataAccountNature">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="AccountingTrialBalances" EntitySet="AccountingTrialBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountingTrialBalances_Organization" Association="Self.FK_AccountingTrialBalances_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="AccountingTrialBalances" EntitySet="AccountingTrialBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountingVouchers_AccountingTrialBalances" Association="Self.FK_AccountingVouchers_AccountingTrialBalances">
+            <End Role="AccountingTrialBalances" EntitySet="AccountingTrialBalances" />
+            <End Role="AccountingVouchers" EntitySet="AccountingVouchers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountingVouchers_Organization" Association="Self.FK_AccountingVouchers_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="AccountingVouchers" EntitySet="AccountingVouchers" />
+          </AssociationSet>
           <AssociationSet Name="FK_ApplicationFeatures_MasterDataApplicationId" Association="Self.FK_ApplicationFeatures_MasterDataApplicationId">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="ApplicationFeatures" EntitySet="ApplicationFeatures" />
@@ -2718,6 +3064,22 @@
             <End Role="Organization" EntitySet="Organization" />
             <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
           </AssociationSet>
+          <AssociationSet Name="FK_ClassSubjectTeacher_Batches" Association="Self.FK_ClassSubjectTeacher_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="ClassSubjectTeacher" EntitySet="ClassSubjectTeacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassSubjectTeacher_ClassSubject" Association="Self.FK_ClassSubjectTeacher_ClassSubject">
+            <End Role="ClassSubject" EntitySet="ClassSubject" />
+            <End Role="ClassSubjectTeacher" EntitySet="ClassSubjectTeacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassSubjectTeacher_EmpEmployees" Association="Self.FK_ClassSubjectTeacher_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="ClassSubjectTeacher" EntitySet="ClassSubjectTeacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassSubjectTeacher_Organization" Association="Self.FK_ClassSubjectTeacher_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="ClassSubjectTeacher" EntitySet="ClassSubjectTeacher" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -2733,6 +3095,10 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpComponents_ComponentType" Association="Self.FK_EmpComponents_ComponentType">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="EmpComponents" EntitySet="EmpComponents" />
           </AssociationSet>
           <AssociationSet Name="FK_EmpComponents_OrganizationId" Association="Self.FK_EmpComponents_OrganizationId">
             <End Role="Organization" EntitySet="Organization" />
@@ -2757,6 +3123,14 @@
           <AssociationSet Name="FK_EmpEmployeeGradeSalHistory_OrganizationId" Association="Self.FK_EmpEmployeeGradeSalHistory_OrganizationId">
             <End Role="Organization" EntitySet="Organization" />
             <End Role="EmpEmployeeGradeSalHistory" EntitySet="EmpEmployeeGradeSalHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeGroups_OrganizationOrgId" Association="Self.FK_EmpEmployeeGroups_OrganizationOrgId">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="EmpEmployeeGroups" EntitySet="EmpEmployeeGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeGroups_OrganizationSubOrgId" Association="Self.FK_EmpEmployeeGroups_OrganizationSubOrgId">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="EmpEmployeeGroups" EntitySet="EmpEmployeeGroups" />
           </AssociationSet>
           <AssociationSet Name="FK_EmpEmployeeSalaryComponents_ComponentId" Association="Self.FK_EmpEmployeeSalaryComponents_ComponentId">
             <End Role="EmpComponents" EntitySet="EmpComponents" />
@@ -2937,10 +3311,6 @@
           <AssociationSet Name="FK_MasterData_Organization" Association="Self.FK_MasterData_Organization">
             <End Role="Organization" EntitySet="Organization" />
             <End Role="MasterData" EntitySet="MasterData" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MasterRolePermission_MasterDataId" Association="Self.FK_MasterRolePermission_MasterDataId">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="MasterRolePermission" EntitySet="MasterRolePermission" />
           </AssociationSet>
           <AssociationSet Name="FK_Messages_Organization" Association="Self.FK_Messages_Organization">
             <End Role="Organization" EntitySet="Organization" />
@@ -3186,6 +3556,26 @@
             <End Role="Students" EntitySet="Students" />
             <End Role="Students1" EntitySet="Students" />
           </AssociationSet>
+          <AssociationSet Name="FK_StudTeacherClassMapping_Batches" Association="Self.FK_StudTeacherClassMapping_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="StudTeacherClassMapping" EntitySet="StudTeacherClassMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudTeacherClassMapping_EmpEmployeesTeacherId" Association="Self.FK_StudTeacherClassMapping_EmpEmployeesTeacherId">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="StudTeacherClassMapping" EntitySet="StudTeacherClassMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudTeacherClassMapping_MasterDataClassId" Association="Self.FK_StudTeacherClassMapping_MasterDataClassId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="StudTeacherClassMapping" EntitySet="StudTeacherClassMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudTeacherClassMapping_MasterDataSectionId" Association="Self.FK_StudTeacherClassMapping_MasterDataSectionId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="StudTeacherClassMapping" EntitySet="StudTeacherClassMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudTeacherClassMapping_Organization" Association="Self.FK_StudTeacherClassMapping_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="StudTeacherClassMapping" EntitySet="StudTeacherClassMapping" />
+          </AssociationSet>
           <AssociationSet Name="FK_SubjectTypes_Batches" Association="Self.FK_SubjectTypes_Batches">
             <End Role="Batches" EntitySet="Batches" />
             <End Role="SubjectTypes" EntitySet="SubjectTypes" />
@@ -3199,8 +3589,7 @@
             <End Role="VariableConfiguration" EntitySet="VariableConfiguration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TTPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -3363,7 +3752,6 @@
           <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_Batches" FromRole="Batches" ToRole="Attendance" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_Batches_Organization" FromRole="Batches" ToRole="Organization" />
           <NavigationProperty Name="ClassFees" Relationship="Self.FK_ClassFee_Batches" FromRole="Batches" ToRole="ClassFee" />
-          <NavigationProperty Name="ClassSubjects" Relationship="Self.FK_ClassSubject_Batches" FromRole="Batches" ToRole="ClassSubject" />
           <NavigationProperty Name="ClassSubjectMarkComponents" Relationship="Self.FK_ClassSubjectMarkComponents_Batches" FromRole="Batches" ToRole="ClassSubjectMarkComponents" />
           <NavigationProperty Name="Exams" Relationship="Self.FK_Exams_BatchesBatchId" FromRole="Batches" ToRole="Exams" />
           <NavigationProperty Name="ExamSlots" Relationship="Self.FK_ExamSlot_Batches" FromRole="Batches" ToRole="ExamSlot" />
@@ -3381,6 +3769,9 @@
           <NavigationProperty Name="StudentFeePayments" Relationship="Self.FK_StudentFeePayment_Batches" FromRole="Batches" ToRole="StudentFeePayment" />
           <NavigationProperty Name="StudentFeeReceipts" Relationship="Self.FK_StudentFeeReceipt_Batches" FromRole="Batches" ToRole="StudentFeeReceipt" />
           <NavigationProperty Name="SubjectTypes" Relationship="Self.FK_SubjectTypes_Batches" FromRole="Batches" ToRole="SubjectTypes" />
+          <NavigationProperty Name="ClassSubjects" Relationship="TTPModel.FK_ClassSubject_Batches" FromRole="Batch" ToRole="ClassSubject" />
+          <NavigationProperty Name="StudTeacherClassMappings" Relationship="TTPModel.FK_StudTeacherClassMapping_Batches" FromRole="Batch" ToRole="StudTeacherClassMapping" />
+          <NavigationProperty Name="ClassSubjectTeachers" Relationship="TTPModel.FK_ClassSubjectTeacher_Batches" FromRole="Batch" ToRole="ClassSubjectTeacher" />
         </EntityType>
         <EntityType Name="ClassFee">
           <Key>
@@ -3407,30 +3798,6 @@
           <NavigationProperty Name="PaymentDetails" Relationship="Self.FK_PaymentDetails_ClassFee" FromRole="ClassFee" ToRole="PaymentDetails" />
           <NavigationProperty Name="StudentFeePayments" Relationship="Self.FK_StudentFeePayment_ClassFee" FromRole="ClassFee" ToRole="StudentFeePayment" />
         </EntityType>
-        <EntityType Name="ClassSubject">
-          <Key>
-            <PropertyRef Name="ClassSubjectId" />
-          </Key>
-          <Property Name="ClassSubjectId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClassId" Type="Int16" Nullable="false" />
-          <Property Name="SubjectId" Type="Int16" Nullable="false" />
-          <Property Name="SubjectTypeId" Type="Int16" Nullable="false" />
-          <Property Name="Active" Type="Byte" Nullable="false" />
-          <Property Name="OrgId" Type="Int16" Nullable="false" />
-          <Property Name="BatchId" Type="Int16" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int16" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Int16" />
-          <NavigationProperty Name="Batch" Relationship="Self.FK_ClassSubject_Batches" FromRole="ClassSubject" ToRole="Batches" />
-          <NavigationProperty Name="MasterData" Relationship="Self.FK_ClassSubject_MasterDataClassId" FromRole="ClassSubject" ToRole="MasterData" />
-          <NavigationProperty Name="MasterData1" Relationship="Self.FK_ClassSubject_MasterDataSubjectsId" FromRole="ClassSubject" ToRole="MasterData" />
-          <NavigationProperty Name="Organization" Relationship="Self.FK_ClassSubject_OrganizationId" FromRole="ClassSubject" ToRole="Organization" />
-          <NavigationProperty Name="SubjectType" Relationship="Self.FK_ClassSubject_SubjectTypesId" FromRole="ClassSubject" ToRole="SubjectTypes" />
-          <NavigationProperty Name="ClassSubjectMarkComponents" Relationship="Self.FK_ClassSubjectMarkComponents_ClassSubjectId" FromRole="ClassSubject" ToRole="ClassSubjectMarkComponents" />
-          <NavigationProperty Name="SlotAndClassSubjects" Relationship="Self.FK_SlotAndClassSubject_ClassSubjectId" FromRole="ClassSubject" ToRole="SlotAndClassSubject" />
-          <NavigationProperty Name="StudentClassSubjects" Relationship="Self.FK_StudentClassSubject_ClassSubjectId" FromRole="ClassSubject" ToRole="StudentClassSubject" />
-        </EntityType>
         <EntityType Name="ClassSubjectMarkComponent">
           <Key>
             <PropertyRef Name="ClassSubjectMarkComponentId" />
@@ -3448,10 +3815,10 @@
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
           <NavigationProperty Name="Batch" Relationship="Self.FK_ClassSubjectMarkComponents_Batches" FromRole="ClassSubjectMarkComponents" ToRole="Batches" />
-          <NavigationProperty Name="ClassSubject" Relationship="Self.FK_ClassSubjectMarkComponents_ClassSubjectId" FromRole="ClassSubjectMarkComponents" ToRole="ClassSubject" />
           <NavigationProperty Name="MasterData" Relationship="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" FromRole="ClassSubjectMarkComponents" ToRole="MasterData" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_ClassSubjectMarkComponents_OrganizationId" FromRole="ClassSubjectMarkComponents" ToRole="Organization" />
           <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubject_ClassSubjectMarkComponentId" FromRole="ClassSubjectMarkComponents" ToRole="ExamStudentSubjectResult" />
+          <NavigationProperty Name="ClassSubject" Relationship="TTPModel.FK_ClassSubjectMarkComponents_ClassSubjectId" FromRole="ClassSubjectMarkComponent" ToRole="ClassSubject" />
         </EntityType>
         <EntityType Name="EmpComponent">
           <Key>
@@ -3460,8 +3827,6 @@
           <Property Name="EmpSalaryComponentId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SalaryComponent" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FormulaOrAmount" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Deduction" Type="Byte" Nullable="false" />
-          <Property Name="LimitAmount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
           <Property Name="Active" Type="Byte" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
@@ -3470,6 +3835,8 @@
           <Property Name="UpdatedBy" Type="Int16" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_EmpComponents_OrganizationId" FromRole="EmpComponents" ToRole="Organization" />
           <NavigationProperty Name="EmpEmployeeSalaryComponents" Relationship="Self.FK_EmpEmployeeSalaryComponents_ComponentId" FromRole="EmpComponents" ToRole="EmpEmployeeSalaryComponents" />
+          <Property Name="ComponentTypeId" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_EmpComponents_ComponentType" FromRole="EmpComponent" ToRole="MasterData" />
         </EntityType>
         <EntityType Name="EmpEmployeeGradeSalHistory">
           <Key>
@@ -3480,8 +3847,6 @@
           <Property Name="EmployeeId" Type="Int16" Nullable="false" />
           <Property Name="DepartmentId" Type="Int16" Nullable="false" />
           <Property Name="CTC" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Gratuity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Gross" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
@@ -3534,7 +3899,6 @@
           <Property Name="LocationId" Type="Int16" />
           <Property Name="EmploymentStatusId" Type="Int16" />
           <Property Name="EmploymentTypeId" Type="Int16" />
-          <Property Name="EmploymentTermId" Type="Int16" />
           <Property Name="ConfirmationDate" Type="DateTime" Precision="3" />
           <Property Name="NoticePeriodDays" Type="Int16" />
           <Property Name="ProbationPeriodDays" Type="Int16" />
@@ -3553,6 +3917,14 @@
           <NavigationProperty Name="EmployeeLeaves" Relationship="Self.FK_EmployeeLeaves_EmpEmployees" FromRole="EmpEmployees" ToRole="EmployeeLeaves" />
           <NavigationProperty Name="EmployeeMonthlySalaries" Relationship="Self.FK_EmployeeMonthlySalary_EmpEmployees" FromRole="EmpEmployees" ToRole="EmployeeMonthlySalary" />
           <NavigationProperty Name="EmpEmployeeSalaryComponents" Relationship="Self.FK_EmployeeSalaryComponents_EmpEmployees" FromRole="EmpEmployees" ToRole="EmpEmployeeSalaryComponents" />
+          <Property Name="NatureId" Type="Int16" />
+          <Property Name="SubOrgId" Type="Int16" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="StudTeacherClassMappings" Relationship="TTPModel.FK_StudTeacherClassMapping_EmpEmployeesTeacherId" FromRole="EmpEmployee" ToRole="StudTeacherClassMapping" />
+          <NavigationProperty Name="ClassSubjectTeachers" Relationship="TTPModel.FK_ClassSubjectTeacher_EmpEmployees" FromRole="EmpEmployee" ToRole="ClassSubjectTeacher" />
         </EntityType>
         <EntityType Name="EmpEmployeeSalaryComponent">
           <Key>
@@ -3561,7 +3933,6 @@
           <Property Name="EmployeeSalaryComponentId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmployeeId" Type="Int16" Nullable="false" />
           <Property Name="EmpComponentId" Type="Int16" Nullable="false" />
-          <Property Name="EmployeeGradeSalHistoryId" Type="Int16" Nullable="false" />
           <Property Name="ActualFormulaOrAmount" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
@@ -3823,7 +4194,7 @@
             <PropertyRef Name="MasterDataId" />
           </Key>
           <Property Name="MasterDataId" Type="Int16" Nullable="false" />
-          <Property Name="MasterDataName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MasterDataName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ParentId" Type="Int16" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
@@ -3837,8 +4208,6 @@
           <NavigationProperty Name="ClassFees" Relationship="Self.FK_FeeMaster_ClassMaster" FromRole="MasterData" ToRole="ClassFee" />
           <NavigationProperty Name="ClassFees1" Relationship="Self.FK_FeeMaster_FeeNameMaster" FromRole="MasterData" ToRole="ClassFee" />
           <NavigationProperty Name="ClassFees2" Relationship="Self.FK_FeeMaster_LocationMaster" FromRole="MasterData" ToRole="ClassFee" />
-          <NavigationProperty Name="ClassSubjects" Relationship="Self.FK_ClassSubject_MasterDataClassId" FromRole="MasterData" ToRole="ClassSubject" />
-          <NavigationProperty Name="ClassSubjects1" Relationship="Self.FK_ClassSubject_MasterDataSubjectsId" FromRole="MasterData" ToRole="ClassSubject" />
           <NavigationProperty Name="ClassSubjectMarkComponents" Relationship="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" FromRole="MasterData" ToRole="ClassSubjectMarkComponents" />
           <NavigationProperty Name="EmpEmployeeGradeSalHistories" Relationship="Self.FK_EmpEmployeeGradeSalHistory_MasterDataGradeId" FromRole="MasterData" ToRole="EmpEmployeeGradeSalHistory" />
           <NavigationProperty Name="EmpEmployeeGradeSalHistories1" Relationship="Self.FK_EmpEmployeeGradeSalHistory_MasterDataWorkAccountId" FromRole="MasterData" ToRole="EmpEmployeeGradeSalHistory" />
@@ -3854,7 +4223,6 @@
           <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubject_MasterDataStatus" FromRole="MasterData" ToRole="ExamStudentSubjectResult" />
           <NavigationProperty Name="FilesNPhotos" Relationship="Self.FK_FilesNPhotos_MasterData" FromRole="MasterData" ToRole="FilesNPhotos" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_MasterData_Organization" FromRole="MasterData" ToRole="Organization" />
-          <NavigationProperty Name="MasterRolePermissions" Relationship="Self.FK_MasterRolePermission_MasterDataId" FromRole="MasterData" ToRole="MasterRolePermission" />
           <NavigationProperty Name="Pages" Relationship="Self.FK_Pages_MasterData" FromRole="MasterData" ToRole="Pages" />
           <NavigationProperty Name="RoleUsers" Relationship="Self.FK_RoleUser_MasterDataRoleId" FromRole="MasterData" ToRole="RoleUser" />
           <NavigationProperty Name="StudentClasses" Relationship="Self.FK_StudentClass_Class" FromRole="MasterData" ToRole="StudentClass" />
@@ -3869,22 +4237,13 @@
           <NavigationProperty Name="Students6" Relationship="Self.FK_Students_ReasonForLeaving" FromRole="MasterData" ToRole="Students" />
           <NavigationProperty Name="Students7" Relationship="Self.FK_Students_Religion" FromRole="MasterData" ToRole="Students" />
           <NavigationProperty Name="Students8" Relationship="Self.FK_Students_State" FromRole="MasterData" ToRole="Students" />
-        </EntityType>
-        <EntityType Name="MasterRolePermission">
-          <Key>
-            <PropertyRef Name="MasterRolePermissionId" />
-          </Key>
-          <Property Name="MasterRolePermissionId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MasterDataId" Type="Int16" Nullable="false" />
-          <Property Name="RoleId" Type="Int16" Nullable="false" />
-          <Property Name="PermissionId" Type="Int16" Nullable="false" />
-          <Property Name="Active" Type="Byte" Nullable="false" />
-          <Property Name="OrgId" Type="Int16" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int16" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Int16" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="MasterData" Relationship="Self.FK_MasterRolePermission_MasterDataId" FromRole="MasterRolePermission" ToRole="MasterData" />
+          <NavigationProperty Name="EmpComponents" Relationship="TTPModel.FK_EmpComponents_ComponentType" FromRole="MasterData" ToRole="EmpComponent" />
+          <NavigationProperty Name="ClassSubjects" Relationship="TTPModel.FK_ClassSubject_MasterDataClassId" FromRole="MasterData" ToRole="ClassSubject" />
+          <NavigationProperty Name="ClassSubjects1" Relationship="TTPModel.FK_ClassSubject_MasterDataSubjectsId" FromRole="MasterData" ToRole="ClassSubject" />
+          <NavigationProperty Name="StudTeacherClassMappings" Relationship="TTPModel.FK_StudTeacherClassMapping_MasterDataClassId" FromRole="MasterData" ToRole="StudTeacherClassMapping" />
+          <NavigationProperty Name="StudTeacherClassMappings1" Relationship="TTPModel.FK_StudTeacherClassMapping_MasterDataSectionId" FromRole="MasterData" ToRole="StudTeacherClassMapping" />
+          <NavigationProperty Name="AccountingTrialBalances" Relationship="TTPModel.FK_AccountingTrialBalances_AccountgroupId" FromRole="MasterData" ToRole="AccountingTrialBalance" />
+          <NavigationProperty Name="AccountingTrialBalances1" Relationship="TTPModel.FK_AccountingTrialBalances_MasterDataAccountNature" FromRole="MasterData" ToRole="AccountingTrialBalance" />
         </EntityType>
         <EntityType Name="Message">
           <Key>
@@ -3905,7 +4264,7 @@
             <PropertyRef Name="OrganizationId" />
           </Key>
           <Property Name="OrganizationId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrganizationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrganizationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LogoPath" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="City" Type="Int16" />
@@ -3924,7 +4283,6 @@
           <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_OrganizationId" FromRole="Organization" ToRole="Attendance" />
           <NavigationProperty Name="Batches" Relationship="Self.FK_Batches_Organization" FromRole="Organization" ToRole="Batches" />
           <NavigationProperty Name="ClassFees" Relationship="Self.FK_ClassFee_OrganizationId" FromRole="Organization" ToRole="ClassFee" />
-          <NavigationProperty Name="ClassSubjects" Relationship="Self.FK_ClassSubject_OrganizationId" FromRole="Organization" ToRole="ClassSubject" />
           <NavigationProperty Name="ClassSubjectMarkComponents" Relationship="Self.FK_ClassSubjectMarkComponents_OrganizationId" FromRole="Organization" ToRole="ClassSubjectMarkComponents" />
           <NavigationProperty Name="EmpComponents" Relationship="Self.FK_EmpComponents_OrganizationId" FromRole="Organization" ToRole="EmpComponents" />
           <NavigationProperty Name="EmpEmployeeGradeSalHistories" Relationship="Self.FK_EmpEmployeeGradeSalHistory_OrganizationId" FromRole="Organization" ToRole="EmpEmployeeGradeSalHistory" />
@@ -3958,6 +4316,16 @@
           <NavigationProperty Name="Students" Relationship="Self.FK_Students_OrganizationOrgId" FromRole="Organization" ToRole="Students" />
           <NavigationProperty Name="TaskConfigurations" Relationship="Self.FK_TaskConfiguration_OrganizationId" FromRole="Organization" ToRole="TaskConfiguration" />
           <NavigationProperty Name="VariableConfigurations" Relationship="Self.FK_VariableConfiguration_Organization" FromRole="Organization" ToRole="VariableConfiguration" />
+          <Property Name="ParentId" Type="Int16" />
+          <Property Name="MainOrgId" Type="Int16" />
+          <NavigationProperty Name="EmpEmployeeGroups" Relationship="TTPModel.FK_EmpEmployeeGroups_OrganizationOrgId" FromRole="Organization" ToRole="EmpEmployeeGroup" />
+          <NavigationProperty Name="EmpEmployeeGroups1" Relationship="TTPModel.FK_EmpEmployeeGroups_OrganizationSubOrgId" FromRole="Organization" ToRole="EmpEmployeeGroup" />
+          <NavigationProperty Name="ClassSubjects" Relationship="TTPModel.FK_ClassSubject_OrganizationId" FromRole="Organization" ToRole="ClassSubject" />
+          <NavigationProperty Name="StudTeacherClassMappings" Relationship="TTPModel.FK_StudTeacherClassMapping_Organization" FromRole="Organization" ToRole="StudTeacherClassMapping" />
+          <NavigationProperty Name="ClassSubjectTeachers" Relationship="TTPModel.FK_ClassSubjectTeacher_Organization" FromRole="Organization" ToRole="ClassSubjectTeacher" />
+          <NavigationProperty Name="AccountingTrialBalances" Relationship="TTPModel.FK_AccountingTrialBalances_Organization" FromRole="Organization" ToRole="AccountingTrialBalance" />
+          <NavigationProperty Name="AccountingVouchers" Relationship="TTPModel.FK_AccountingVouchers_Organization" FromRole="Organization" ToRole="AccountingVoucher" />
+          <NavigationProperty Name="AccountingPeriod" Relationship="TTPModel.FK_AccountingPeriod_Organization" FromRole="Organization" ToRole="AccountingPeriod" />
         </EntityType>
         <EntityType Name="PageHistory">
           <Key>
@@ -4088,9 +4456,9 @@
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
           <NavigationProperty Name="Batch" Relationship="Self.FK_SlotAndClassSubject_Batches" FromRole="SlotAndClassSubject" ToRole="Batches" />
-          <NavigationProperty Name="ClassSubject" Relationship="Self.FK_SlotAndClassSubject_ClassSubjectId" FromRole="SlotAndClassSubject" ToRole="ClassSubject" />
           <NavigationProperty Name="ExamSlot" Relationship="Self.FK_SlotAndClassSubject_ExamSlot" FromRole="SlotAndClassSubject" ToRole="ExamSlot" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_SlotAndClassSubject_Organization" FromRole="SlotAndClassSubject" ToRole="Organization" />
+          <NavigationProperty Name="ClassSubject" Relationship="TTPModel.FK_SlotAndClassSubject_ClassSubjectId" FromRole="SlotAndClassSubject" ToRole="ClassSubject" />
         </EntityType>
         <EntityType Name="StudentActivity">
           <Key>
@@ -4183,10 +4551,10 @@
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
           <NavigationProperty Name="Batch" Relationship="Self.FK_StudentClassSubject_BatchesBatchId" FromRole="StudentClassSubject" ToRole="Batches" />
-          <NavigationProperty Name="ClassSubject" Relationship="Self.FK_StudentClassSubject_ClassSubjectId" FromRole="StudentClassSubject" ToRole="ClassSubject" />
           <NavigationProperty Name="ExamStudentSubjectResults" Relationship="Self.FK_ExamStudentSubject_StudentClassSubjectId" FromRole="StudentClassSubject" ToRole="ExamStudentSubjectResult" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_StudentClassSubject_OrganizationOrgId" FromRole="StudentClassSubject" ToRole="Organization" />
           <NavigationProperty Name="StudentClass" Relationship="Self.FK_StudentClassSubject_StudentClassId" FromRole="StudentClassSubject" ToRole="StudentClass" />
+          <NavigationProperty Name="ClassSubject" Relationship="TTPModel.FK_StudentClassSubject_ClassSubjectId" FromRole="StudentClassSubject" ToRole="ClassSubject" />
         </EntityType>
         <EntityType Name="StudentDocument">
           <Key>
@@ -4349,7 +4717,7 @@
           <Property Name="UpdatedBy" Type="Int16" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Batch" Relationship="Self.FK_SubjectTypes_Batches" FromRole="SubjectTypes" ToRole="Batches" />
-          <NavigationProperty Name="ClassSubjects" Relationship="Self.FK_ClassSubject_SubjectTypesId" FromRole="SubjectTypes" ToRole="ClassSubject" />
+          <NavigationProperty Name="ClassSubjects" Relationship="TTPModel.FK_ClassSubject_SubjectTypesId" FromRole="SubjectType" ToRole="ClassSubject" />
         </EntityType>
         <EntityType Name="TaskConfiguration">
           <Key>
@@ -4538,18 +4906,6 @@
               <PropertyRef Name="BatchId" />
             </Principal>
             <Dependent Role="ClassFee">
-              <PropertyRef Name="BatchId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClassSubject_Batches">
-          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
-          <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Batches">
-              <PropertyRef Name="BatchId" />
-            </Principal>
-            <Dependent Role="ClassSubject">
               <PropertyRef Name="BatchId" />
             </Dependent>
           </ReferentialConstraint>
@@ -4827,90 +5183,6 @@
             </Principal>
             <Dependent Role="StudentFeePayment">
               <PropertyRef Name="ClassFeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClassSubject_MasterDataClassId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="ClassSubject">
-              <PropertyRef Name="ClassId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClassSubject_MasterDataSubjectsId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="ClassSubject">
-              <PropertyRef Name="SubjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClassSubject_OrganizationId">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
-          <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="ClassSubject">
-              <PropertyRef Name="OrgId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClassSubject_SubjectTypesId">
-          <End Role="SubjectTypes" Type="Self.SubjectType" Multiplicity="1" />
-          <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SubjectTypes">
-              <PropertyRef Name="SubjectTypeId" />
-            </Principal>
-            <Dependent Role="ClassSubject">
-              <PropertyRef Name="SubjectTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClassSubjectMarkComponents_ClassSubjectId">
-          <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="1" />
-          <End Role="ClassSubjectMarkComponents" Type="Self.ClassSubjectMarkComponent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClassSubject">
-              <PropertyRef Name="ClassSubjectId" />
-            </Principal>
-            <Dependent Role="ClassSubjectMarkComponents">
-              <PropertyRef Name="ClassSubjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SlotAndClassSubject_ClassSubjectId">
-          <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="1" />
-          <End Role="SlotAndClassSubject" Type="Self.SlotAndClassSubject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClassSubject">
-              <PropertyRef Name="ClassSubjectId" />
-            </Principal>
-            <Dependent Role="SlotAndClassSubject">
-              <PropertyRef Name="ClassSubjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentClassSubject_ClassSubjectId">
-          <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="1" />
-          <End Role="StudentClassSubject" Type="Self.StudentClassSubject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClassSubject">
-              <PropertyRef Name="ClassSubjectId" />
-            </Principal>
-            <Dependent Role="StudentClassSubject">
-              <PropertyRef Name="ClassSubjectId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5463,18 +5735,6 @@
             </Principal>
             <Dependent Role="MasterData">
               <PropertyRef Name="OrgId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MasterRolePermission_MasterDataId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="MasterRolePermission" Type="Self.MasterRolePermission" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="MasterRolePermission">
-              <PropertyRef Name="MasterDataId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6047,7 +6307,6 @@
           <EntitySet Name="Attendances" EntityType="Self.Attendance" />
           <EntitySet Name="Batches" EntityType="Self.Batch" />
           <EntitySet Name="ClassFees" EntityType="Self.ClassFee" />
-          <EntitySet Name="ClassSubjects" EntityType="Self.ClassSubject" />
           <EntitySet Name="ClassSubjectMarkComponents" EntityType="Self.ClassSubjectMarkComponent" />
           <EntitySet Name="EmpComponents" EntityType="Self.EmpComponent" />
           <EntitySet Name="EmpEmployeeGradeSalHistories" EntityType="Self.EmpEmployeeGradeSalHistory" />
@@ -6066,7 +6325,6 @@
           <EntitySet Name="ExamStudentSubjectResults" EntityType="Self.ExamStudentSubjectResult" />
           <EntitySet Name="FilesNPhotos" EntityType="Self.FilesNPhoto" />
           <EntitySet Name="MasterDatas" EntityType="Self.MasterData" />
-          <EntitySet Name="MasterRolePermissions" EntityType="Self.MasterRolePermission" />
           <EntitySet Name="Messages" EntityType="Self.Message" />
           <EntitySet Name="Organizations" EntityType="Self.Organization" />
           <EntitySet Name="PageHistories" EntityType="Self.PageHistory" />
@@ -6133,10 +6391,6 @@
           <AssociationSet Name="FK_ClassFee_Batches" Association="Self.FK_ClassFee_Batches">
             <End Role="Batches" EntitySet="Batches" />
             <End Role="ClassFee" EntitySet="ClassFees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClassSubject_Batches" Association="Self.FK_ClassSubject_Batches">
-            <End Role="Batches" EntitySet="Batches" />
-            <End Role="ClassSubject" EntitySet="ClassSubjects" />
           </AssociationSet>
           <AssociationSet Name="FK_ClassSubjectMarkComponents_Batches" Association="Self.FK_ClassSubjectMarkComponents_Batches">
             <End Role="Batches" EntitySet="Batches" />
@@ -6229,34 +6483,6 @@
           <AssociationSet Name="FK_StudentFeePayment_ClassFee" Association="Self.FK_StudentFeePayment_ClassFee">
             <End Role="ClassFee" EntitySet="ClassFees" />
             <End Role="StudentFeePayment" EntitySet="StudentFeePayments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClassSubject_MasterDataClassId" Association="Self.FK_ClassSubject_MasterDataClassId">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="ClassSubject" EntitySet="ClassSubjects" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClassSubject_MasterDataSubjectsId" Association="Self.FK_ClassSubject_MasterDataSubjectsId">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="ClassSubject" EntitySet="ClassSubjects" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClassSubject_OrganizationId" Association="Self.FK_ClassSubject_OrganizationId">
-            <End Role="Organization" EntitySet="Organizations" />
-            <End Role="ClassSubject" EntitySet="ClassSubjects" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClassSubject_SubjectTypesId" Association="Self.FK_ClassSubject_SubjectTypesId">
-            <End Role="SubjectTypes" EntitySet="SubjectTypes" />
-            <End Role="ClassSubject" EntitySet="ClassSubjects" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClassSubjectMarkComponents_ClassSubjectId" Association="Self.FK_ClassSubjectMarkComponents_ClassSubjectId">
-            <End Role="ClassSubject" EntitySet="ClassSubjects" />
-            <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SlotAndClassSubject_ClassSubjectId" Association="Self.FK_SlotAndClassSubject_ClassSubjectId">
-            <End Role="ClassSubject" EntitySet="ClassSubjects" />
-            <End Role="SlotAndClassSubject" EntitySet="SlotAndClassSubjects" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentClassSubject_ClassSubjectId" Association="Self.FK_StudentClassSubject_ClassSubjectId">
-            <End Role="ClassSubject" EntitySet="ClassSubjects" />
-            <End Role="StudentClassSubject" EntitySet="StudentClassSubjects" />
           </AssociationSet>
           <AssociationSet Name="FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" Association="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId">
             <End Role="MasterData" EntitySet="MasterDatas" />
@@ -6441,10 +6667,6 @@
           <AssociationSet Name="FK_MasterData_Organization" Association="Self.FK_MasterData_Organization">
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="MasterData" EntitySet="MasterDatas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MasterRolePermission_MasterDataId" Association="Self.FK_MasterRolePermission_MasterDataId">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="MasterRolePermission" EntitySet="MasterRolePermissions" />
           </AssociationSet>
           <AssociationSet Name="FK_Pages_MasterData" Association="Self.FK_Pages_MasterData">
             <End Role="MasterData" EntitySet="MasterDatas" />
@@ -6634,7 +6856,598 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_EmpComponents_ComponentType" Association="TTPModel.FK_EmpComponents_ComponentType">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="EmpComponent" EntitySet="EmpComponents" />
+          </AssociationSet>
+          <EntitySet Name="EmpEmployeeGroups" EntityType="TTPModel.EmpEmployeeGroup" />
+          <EntitySet Name="EmpManagerGroupMappings" EntityType="TTPModel.EmpManagerGroupMapping" />
+          <AssociationSet Name="FK_EmpEmployeeGroups_OrganizationOrgId" Association="TTPModel.FK_EmpEmployeeGroups_OrganizationOrgId">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="EmpEmployeeGroup" EntitySet="EmpEmployeeGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpEmployeeGroups_OrganizationSubOrgId" Association="TTPModel.FK_EmpEmployeeGroups_OrganizationSubOrgId">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="EmpEmployeeGroup" EntitySet="EmpEmployeeGroups" />
+          </AssociationSet>
+          <EntitySet Name="ClassSubjects" EntityType="TTPModel.ClassSubject" />
+          <AssociationSet Name="FK_ClassSubject_Batches" Association="TTPModel.FK_ClassSubject_Batches">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="ClassSubject" EntitySet="ClassSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassSubject_MasterDataClassId" Association="TTPModel.FK_ClassSubject_MasterDataClassId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="ClassSubject" EntitySet="ClassSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassSubject_MasterDataSubjectsId" Association="TTPModel.FK_ClassSubject_MasterDataSubjectsId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="ClassSubject" EntitySet="ClassSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassSubject_OrganizationId" Association="TTPModel.FK_ClassSubject_OrganizationId">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="ClassSubject" EntitySet="ClassSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassSubject_SubjectTypesId" Association="TTPModel.FK_ClassSubject_SubjectTypesId">
+            <End Role="SubjectType" EntitySet="SubjectTypes" />
+            <End Role="ClassSubject" EntitySet="ClassSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassSubjectMarkComponents_ClassSubjectId" Association="TTPModel.FK_ClassSubjectMarkComponents_ClassSubjectId">
+            <End Role="ClassSubject" EntitySet="ClassSubjects" />
+            <End Role="ClassSubjectMarkComponent" EntitySet="ClassSubjectMarkComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SlotAndClassSubject_ClassSubjectId" Association="TTPModel.FK_SlotAndClassSubject_ClassSubjectId">
+            <End Role="ClassSubject" EntitySet="ClassSubjects" />
+            <End Role="SlotAndClassSubject" EntitySet="SlotAndClassSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentClassSubject_ClassSubjectId" Association="TTPModel.FK_StudentClassSubject_ClassSubjectId">
+            <End Role="ClassSubject" EntitySet="ClassSubjects" />
+            <End Role="StudentClassSubject" EntitySet="StudentClassSubjects" />
+          </AssociationSet>
+          <EntitySet Name="StudTeacherClassMappings" EntityType="TTPModel.StudTeacherClassMapping" />
+          <AssociationSet Name="FK_StudTeacherClassMapping_Batches" Association="TTPModel.FK_StudTeacherClassMapping_Batches">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="StudTeacherClassMapping" EntitySet="StudTeacherClassMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudTeacherClassMapping_EmpEmployeesTeacherId" Association="TTPModel.FK_StudTeacherClassMapping_EmpEmployeesTeacherId">
+            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
+            <End Role="StudTeacherClassMapping" EntitySet="StudTeacherClassMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudTeacherClassMapping_MasterDataClassId" Association="TTPModel.FK_StudTeacherClassMapping_MasterDataClassId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="StudTeacherClassMapping" EntitySet="StudTeacherClassMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudTeacherClassMapping_MasterDataSectionId" Association="TTPModel.FK_StudTeacherClassMapping_MasterDataSectionId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="StudTeacherClassMapping" EntitySet="StudTeacherClassMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudTeacherClassMapping_Organization" Association="TTPModel.FK_StudTeacherClassMapping_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="StudTeacherClassMapping" EntitySet="StudTeacherClassMappings" />
+          </AssociationSet>
+          <EntitySet Name="ClassSubjectTeachers" EntityType="TTPModel.ClassSubjectTeacher" />
+          <AssociationSet Name="FK_ClassSubjectTeacher_Batches" Association="TTPModel.FK_ClassSubjectTeacher_Batches">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="ClassSubjectTeacher" EntitySet="ClassSubjectTeachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassSubjectTeacher_ClassSubject" Association="TTPModel.FK_ClassSubjectTeacher_ClassSubject">
+            <End Role="ClassSubject" EntitySet="ClassSubjects" />
+            <End Role="ClassSubjectTeacher" EntitySet="ClassSubjectTeachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassSubjectTeacher_EmpEmployees" Association="TTPModel.FK_ClassSubjectTeacher_EmpEmployees">
+            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
+            <End Role="ClassSubjectTeacher" EntitySet="ClassSubjectTeachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassSubjectTeacher_Organization" Association="TTPModel.FK_ClassSubjectTeacher_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="ClassSubjectTeacher" EntitySet="ClassSubjectTeachers" />
+          </AssociationSet>
+          <EntitySet Name="AccountingTrialBalances" EntityType="TTPModel.AccountingTrialBalance" />
+          <EntitySet Name="AccountingVouchers" EntityType="TTPModel.AccountingVoucher" />
+          <AssociationSet Name="FK_AccountingTrialBalances_AccountgroupId" Association="TTPModel.FK_AccountingTrialBalances_AccountgroupId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="AccountingTrialBalance" EntitySet="AccountingTrialBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountingTrialBalances_MasterDataAccountNature" Association="TTPModel.FK_AccountingTrialBalances_MasterDataAccountNature">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="AccountingTrialBalance" EntitySet="AccountingTrialBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountingTrialBalances_Organization" Association="TTPModel.FK_AccountingTrialBalances_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="AccountingTrialBalance" EntitySet="AccountingTrialBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountingVouchers_AccountingTrialBalances" Association="TTPModel.FK_AccountingVouchers_AccountingTrialBalances">
+            <End Role="AccountingTrialBalance" EntitySet="AccountingTrialBalances" />
+            <End Role="AccountingVoucher" EntitySet="AccountingVouchers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountingVouchers_Organization" Association="TTPModel.FK_AccountingVouchers_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="AccountingVoucher" EntitySet="AccountingVouchers" />
+          </AssociationSet>
+          <EntitySet Name="AccountingPeriods" EntityType="TTPModel.AccountingPeriod" />
+          <AssociationSet Name="FK_AccountingPeriod_Organization" Association="TTPModel.FK_AccountingPeriod_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="AccountingPeriod" EntitySet="AccountingPeriods" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_EmpComponents_ComponentType">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.EmpComponent" Role="EmpComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="EmpComponent">
+              <PropertyRef Name="ComponentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EmpEmployeeGroup">
+          <Key>
+            <PropertyRef Name="EmployeeGroupId" />
+          </Key>
+          <Property Name="EmployeeGroupId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmpGradeId" Type="Int16" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int16" Nullable="false" />
+          <Property Name="WorkAccountId" Type="Int16" />
+          <Property Name="JobTitleId" Type="Int16" />
+          <Property Name="DesignationId" Type="Int16" />
+          <Property Name="GroupTypeId" Type="Int16" Nullable="false" />
+          <Property Name="SubOrgId" Type="Int16" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ApprovedBy" Type="Int16" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_EmpEmployeeGroups_OrganizationOrgId" FromRole="EmpEmployeeGroup" ToRole="Organization" />
+          <NavigationProperty Name="Organization1" Relationship="TTPModel.FK_EmpEmployeeGroups_OrganizationSubOrgId" FromRole="EmpEmployeeGroup" ToRole="Organization" />
+        </EntityType>
+        <EntityType Name="EmpManagerGroupMapping">
+          <Key>
+            <PropertyRef Name="ManagerGroupMappingId" />
+          </Key>
+          <Property Name="ManagerGroupMappingId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeGroupId" Type="Int16" Nullable="false" />
+          <Property Name="ManagerEmployeeId" Type="Int16" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Byte" />
+        </EntityType>
+        <Association Name="FK_EmpEmployeeGroups_OrganizationOrgId">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.EmpEmployeeGroup" Role="EmpEmployeeGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeGroup">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpEmployeeGroups_OrganizationSubOrgId">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="0..1" />
+          <End Type="TTPModel.EmpEmployeeGroup" Role="EmpEmployeeGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="EmpEmployeeGroup">
+              <PropertyRef Name="SubOrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClassSubject">
+          <Key>
+            <PropertyRef Name="ClassSubjectId" />
+          </Key>
+          <Property Name="ClassSubjectId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassId" Type="Int16" Nullable="false" />
+          <Property Name="SubjectId" Type="Int16" Nullable="false" />
+          <Property Name="SubjectTypeId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <NavigationProperty Name="Batch" Relationship="TTPModel.FK_ClassSubject_Batches" FromRole="ClassSubject" ToRole="Batch" />
+          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_ClassSubject_MasterDataClassId" FromRole="ClassSubject" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="TTPModel.FK_ClassSubject_MasterDataSubjectsId" FromRole="ClassSubject" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_ClassSubject_OrganizationId" FromRole="ClassSubject" ToRole="Organization" />
+          <NavigationProperty Name="SubjectType" Relationship="TTPModel.FK_ClassSubject_SubjectTypesId" FromRole="ClassSubject" ToRole="SubjectType" />
+          <NavigationProperty Name="ClassSubjectMarkComponents" Relationship="TTPModel.FK_ClassSubjectMarkComponents_ClassSubjectId" FromRole="ClassSubject" ToRole="ClassSubjectMarkComponent" />
+          <NavigationProperty Name="SlotAndClassSubjects" Relationship="TTPModel.FK_SlotAndClassSubject_ClassSubjectId" FromRole="ClassSubject" ToRole="SlotAndClassSubject" />
+          <NavigationProperty Name="StudentClassSubjects" Relationship="TTPModel.FK_StudentClassSubject_ClassSubjectId" FromRole="ClassSubject" ToRole="StudentClassSubject" />
+          <NavigationProperty Name="ClassSubjectTeachers" Relationship="TTPModel.FK_ClassSubjectTeacher_ClassSubject" FromRole="ClassSubject" ToRole="ClassSubjectTeacher" />
+          <Property Name="TeacherId" Type="Int16" />
+        </EntityType>
+        <Association Name="FK_ClassSubject_Batches">
+          <End Type="TTPModel.Batch" Role="Batch" Multiplicity="1" />
+          <End Type="TTPModel.ClassSubject" Role="ClassSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="ClassSubject">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassSubject_MasterDataClassId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.ClassSubject" Role="ClassSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="ClassSubject">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassSubject_MasterDataSubjectsId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.ClassSubject" Role="ClassSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="ClassSubject">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassSubject_OrganizationId">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.ClassSubject" Role="ClassSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="ClassSubject">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassSubject_SubjectTypesId">
+          <End Type="TTPModel.SubjectType" Role="SubjectType" Multiplicity="1" />
+          <End Type="TTPModel.ClassSubject" Role="ClassSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectType">
+              <PropertyRef Name="SubjectTypeId" />
+            </Principal>
+            <Dependent Role="ClassSubject">
+              <PropertyRef Name="SubjectTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassSubjectMarkComponents_ClassSubjectId">
+          <End Type="TTPModel.ClassSubject" Role="ClassSubject" Multiplicity="1" />
+          <End Type="TTPModel.ClassSubjectMarkComponent" Role="ClassSubjectMarkComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassSubject">
+              <PropertyRef Name="ClassSubjectId" />
+            </Principal>
+            <Dependent Role="ClassSubjectMarkComponent">
+              <PropertyRef Name="ClassSubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SlotAndClassSubject_ClassSubjectId">
+          <End Type="TTPModel.ClassSubject" Role="ClassSubject" Multiplicity="1" />
+          <End Type="TTPModel.SlotAndClassSubject" Role="SlotAndClassSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassSubject">
+              <PropertyRef Name="ClassSubjectId" />
+            </Principal>
+            <Dependent Role="SlotAndClassSubject">
+              <PropertyRef Name="ClassSubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentClassSubject_ClassSubjectId">
+          <End Type="TTPModel.ClassSubject" Role="ClassSubject" Multiplicity="1" />
+          <End Type="TTPModel.StudentClassSubject" Role="StudentClassSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassSubject">
+              <PropertyRef Name="ClassSubjectId" />
+            </Principal>
+            <Dependent Role="StudentClassSubject">
+              <PropertyRef Name="ClassSubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StudTeacherClassMapping">
+          <Key>
+            <PropertyRef Name="TeacherClassMappingId" />
+          </Key>
+          <Property Name="TeacherClassMappingId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeacherId" Type="Int16" Nullable="false" />
+          <Property Name="ClassId" Type="Int16" Nullable="false" />
+          <Property Name="SectionId" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Batch" Relationship="TTPModel.FK_StudTeacherClassMapping_Batches" FromRole="StudTeacherClassMapping" ToRole="Batch" />
+          <NavigationProperty Name="EmpEmployee" Relationship="TTPModel.FK_StudTeacherClassMapping_EmpEmployeesTeacherId" FromRole="StudTeacherClassMapping" ToRole="EmpEmployee" />
+          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_StudTeacherClassMapping_MasterDataClassId" FromRole="StudTeacherClassMapping" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="TTPModel.FK_StudTeacherClassMapping_MasterDataSectionId" FromRole="StudTeacherClassMapping" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_StudTeacherClassMapping_Organization" FromRole="StudTeacherClassMapping" ToRole="Organization" />
+        </EntityType>
+        <Association Name="FK_StudTeacherClassMapping_Batches">
+          <End Type="TTPModel.Batch" Role="Batch" Multiplicity="1" />
+          <End Type="TTPModel.StudTeacherClassMapping" Role="StudTeacherClassMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="StudTeacherClassMapping">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudTeacherClassMapping_EmpEmployeesTeacherId">
+          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="1" />
+          <End Type="TTPModel.StudTeacherClassMapping" Role="StudTeacherClassMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployee">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="StudTeacherClassMapping">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudTeacherClassMapping_MasterDataClassId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.StudTeacherClassMapping" Role="StudTeacherClassMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="StudTeacherClassMapping">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudTeacherClassMapping_MasterDataSectionId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.StudTeacherClassMapping" Role="StudTeacherClassMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="StudTeacherClassMapping">
+              <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudTeacherClassMapping_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.StudTeacherClassMapping" Role="StudTeacherClassMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="StudTeacherClassMapping">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClassSubjectTeacher">
+          <Key>
+            <PropertyRef Name="ClassSubjectTeacherId" />
+          </Key>
+          <Property Name="ClassSubjectTeacherId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeacherId" Type="Int16" Nullable="false" />
+          <Property Name="ClassSubjectId" Type="Int16" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Batch" Relationship="TTPModel.FK_ClassSubjectTeacher_Batches" FromRole="ClassSubjectTeacher" ToRole="Batch" />
+          <NavigationProperty Name="ClassSubject" Relationship="TTPModel.FK_ClassSubjectTeacher_ClassSubject" FromRole="ClassSubjectTeacher" ToRole="ClassSubject" />
+          <NavigationProperty Name="EmpEmployee" Relationship="TTPModel.FK_ClassSubjectTeacher_EmpEmployees" FromRole="ClassSubjectTeacher" ToRole="EmpEmployee" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_ClassSubjectTeacher_Organization" FromRole="ClassSubjectTeacher" ToRole="Organization" />
+        </EntityType>
+        <Association Name="FK_ClassSubjectTeacher_Batches">
+          <End Type="TTPModel.Batch" Role="Batch" Multiplicity="1" />
+          <End Type="TTPModel.ClassSubjectTeacher" Role="ClassSubjectTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="ClassSubjectTeacher">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassSubjectTeacher_ClassSubject">
+          <End Type="TTPModel.ClassSubject" Role="ClassSubject" Multiplicity="1" />
+          <End Type="TTPModel.ClassSubjectTeacher" Role="ClassSubjectTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassSubject">
+              <PropertyRef Name="ClassSubjectId" />
+            </Principal>
+            <Dependent Role="ClassSubjectTeacher">
+              <PropertyRef Name="ClassSubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassSubjectTeacher_EmpEmployees">
+          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="1" />
+          <End Type="TTPModel.ClassSubjectTeacher" Role="ClassSubjectTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployee">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="ClassSubjectTeacher">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassSubjectTeacher_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.ClassSubjectTeacher" Role="ClassSubjectTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="ClassSubjectTeacher">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AccountingTrialBalance">
+          <Key>
+            <PropertyRef Name="AccountingTrialBalanceId" />
+          </Key>
+          <Property Name="AccountingTrialBalanceId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GeneralLedger" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="AccountGroupId" Type="Int16" Nullable="false" />
+          <Property Name="AccountNatureId" Type="Int16" Nullable="false" />
+          <Property Name="Debit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Credit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Balance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_AccountingTrialBalances_AccountgroupId" FromRole="AccountingTrialBalance" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="TTPModel.FK_AccountingTrialBalances_MasterDataAccountNature" FromRole="AccountingTrialBalance" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_AccountingTrialBalances_Organization" FromRole="AccountingTrialBalance" ToRole="Organization" />
+          <NavigationProperty Name="AccountingVouchers" Relationship="TTPModel.FK_AccountingVouchers_AccountingTrialBalances" FromRole="AccountingTrialBalance" ToRole="AccountingVoucher" />
+          <Property Name="Active" Type="Byte" />
+        </EntityType>
+        <EntityType Name="AccountingVoucher">
+          <Key>
+            <PropertyRef Name="AccountingVoucherId" />
+          </Key>
+          <Property Name="AccountingVoucherId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PostingDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reference" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="GLAccountId" Type="Int16" Nullable="false" />
+          <Property Name="DebitCreditId" Type="Byte" Nullable="false" />
+          <Property Name="ShortText" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="SubOrgId" Type="Int16" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <NavigationProperty Name="AccountingTrialBalance" Relationship="TTPModel.FK_AccountingVouchers_AccountingTrialBalances" FromRole="AccountingVoucher" ToRole="AccountingTrialBalance" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_AccountingVouchers_Organization" FromRole="AccountingVoucher" ToRole="Organization" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AccountingTrialBalances_AccountgroupId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.AccountingTrialBalance" Role="AccountingTrialBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="AccountingTrialBalance">
+              <PropertyRef Name="AccountGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountingTrialBalances_MasterDataAccountNature">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.AccountingTrialBalance" Role="AccountingTrialBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="AccountingTrialBalance">
+              <PropertyRef Name="AccountNatureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountingTrialBalances_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.AccountingTrialBalance" Role="AccountingTrialBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="AccountingTrialBalance">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountingVouchers_AccountingTrialBalances">
+          <End Type="TTPModel.AccountingTrialBalance" Role="AccountingTrialBalance" Multiplicity="1" />
+          <End Type="TTPModel.AccountingVoucher" Role="AccountingVoucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingTrialBalance">
+              <PropertyRef Name="AccountingTrialBalanceId" />
+            </Principal>
+            <Dependent Role="AccountingVoucher">
+              <PropertyRef Name="GLAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountingVouchers_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.AccountingVoucher" Role="AccountingVoucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="AccountingVoucher">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AccountingPeriod">
+          <Key>
+            <PropertyRef Name="AccountingPeriodId" />
+          </Key>
+          <Property Name="AccountingPeriodId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CurrentPeriod" Type="Byte" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_AccountingPeriod_Organization" FromRole="AccountingPeriod" ToRole="Organization" />
+        </EntityType>
+        <Association Name="FK_AccountingPeriod_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.AccountingPeriod" Role="AccountingPeriod" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="AccountingPeriod">
+              <PropertyRef Name="AccountingPeriodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6810,23 +7623,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ClassSubjects">
-            <EntityTypeMapping TypeName="TTPModel.ClassSubject">
-              <MappingFragment StoreEntitySet="ClassSubject">
-                <ScalarProperty Name="ClassSubjectId" ColumnName="ClassSubjectId" />
-                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
-                <ScalarProperty Name="SubjectTypeId" ColumnName="SubjectTypeId" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
-                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ClassSubjectMarkComponents">
             <EntityTypeMapping TypeName="TTPModel.ClassSubjectMarkComponent">
               <MappingFragment StoreEntitySet="ClassSubjectMarkComponents">
@@ -6848,11 +7644,10 @@
           <EntitySetMapping Name="EmpComponents">
             <EntityTypeMapping TypeName="TTPModel.EmpComponent">
               <MappingFragment StoreEntitySet="EmpComponents">
+                <ScalarProperty Name="ComponentTypeId" ColumnName="ComponentTypeId" />
                 <ScalarProperty Name="EmpSalaryComponentId" ColumnName="EmpSalaryComponentId" />
                 <ScalarProperty Name="SalaryComponent" ColumnName="SalaryComponent" />
                 <ScalarProperty Name="FormulaOrAmount" ColumnName="FormulaOrAmount" />
-                <ScalarProperty Name="Deduction" ColumnName="Deduction" />
-                <ScalarProperty Name="LimitAmount" ColumnName="LimitAmount" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -6870,8 +7665,6 @@
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="CTC" ColumnName="CTC" />
-                <ScalarProperty Name="Gratuity" ColumnName="Gratuity" />
-                <ScalarProperty Name="Gross" ColumnName="Gross" />
                 <ScalarProperty Name="FromDate" ColumnName="FromDate" />
                 <ScalarProperty Name="ToDate" ColumnName="ToDate" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
@@ -6891,6 +7684,12 @@
           <EntitySetMapping Name="EmpEmployees">
             <EntityTypeMapping TypeName="TTPModel.EmpEmployee">
               <MappingFragment StoreEntitySet="EmpEmployees">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SubOrgId" ColumnName="SubOrgId" />
+                <ScalarProperty Name="NatureId" ColumnName="NatureId" />
                 <ScalarProperty Name="EmpEmployeeId" ColumnName="EmpEmployeeId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -6919,7 +7718,6 @@
                 <ScalarProperty Name="LocationId" ColumnName="LocationId" />
                 <ScalarProperty Name="EmploymentStatusId" ColumnName="EmploymentStatusId" />
                 <ScalarProperty Name="EmploymentTypeId" ColumnName="EmploymentTypeId" />
-                <ScalarProperty Name="EmploymentTermId" ColumnName="EmploymentTermId" />
                 <ScalarProperty Name="ConfirmationDate" ColumnName="ConfirmationDate" />
                 <ScalarProperty Name="NoticePeriodDays" ColumnName="NoticePeriodDays" />
                 <ScalarProperty Name="ProbationPeriodDays" ColumnName="ProbationPeriodDays" />
@@ -6940,7 +7738,6 @@
                 <ScalarProperty Name="EmployeeSalaryComponentId" ColumnName="EmployeeSalaryComponentId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="EmpComponentId" ColumnName="EmpComponentId" />
-                <ScalarProperty Name="EmployeeGradeSalHistoryId" ColumnName="EmployeeGradeSalHistoryId" />
                 <ScalarProperty Name="ActualFormulaOrAmount" ColumnName="ActualFormulaOrAmount" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
@@ -7183,22 +7980,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MasterRolePermissions">
-            <EntityTypeMapping TypeName="TTPModel.MasterRolePermission">
-              <MappingFragment StoreEntitySet="MasterRolePermission">
-                <ScalarProperty Name="MasterRolePermissionId" ColumnName="MasterRolePermissionId" />
-                <ScalarProperty Name="MasterDataId" ColumnName="MasterDataId" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Messages">
             <EntityTypeMapping TypeName="TTPModel.Message">
               <MappingFragment StoreEntitySet="Messages">
@@ -7216,6 +7997,8 @@
           <EntitySetMapping Name="Organizations">
             <EntityTypeMapping TypeName="TTPModel.Organization">
               <MappingFragment StoreEntitySet="Organization">
+                <ScalarProperty Name="MainOrgId" ColumnName="MainOrgId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
                 <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
                 <ScalarProperty Name="LogoPath" ColumnName="LogoPath" />
@@ -7613,6 +8396,154 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="EmpEmployeeGroups">
+            <EntityTypeMapping TypeName="TTPModel.EmpEmployeeGroup">
+              <MappingFragment StoreEntitySet="EmpEmployeeGroups">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="SubOrgId" ColumnName="SubOrgId" />
+                <ScalarProperty Name="GroupTypeId" ColumnName="GroupTypeId" />
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="JobTitleId" ColumnName="JobTitleId" />
+                <ScalarProperty Name="WorkAccountId" ColumnName="WorkAccountId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="EmpGradeId" ColumnName="EmpGradeId" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="EmployeeGroupId" ColumnName="EmployeeGroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpManagerGroupMappings">
+            <EntityTypeMapping TypeName="TTPModel.EmpManagerGroupMapping">
+              <MappingFragment StoreEntitySet="EmpManagerGroupMapping">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="ManagerEmployeeId" ColumnName="ManagerEmployeeId" />
+                <ScalarProperty Name="EmployeeGroupId" ColumnName="EmployeeGroupId" />
+                <ScalarProperty Name="ManagerGroupMappingId" ColumnName="ManagerGroupMappingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassSubjects">
+            <EntityTypeMapping TypeName="TTPModel.ClassSubject">
+              <MappingFragment StoreEntitySet="ClassSubject">
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SubjectTypeId" ColumnName="SubjectTypeId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="ClassSubjectId" ColumnName="ClassSubjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudTeacherClassMappings">
+            <EntityTypeMapping TypeName="TTPModel.StudTeacherClassMapping">
+              <MappingFragment StoreEntitySet="StudTeacherClassMapping">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="TeacherClassMappingId" ColumnName="TeacherClassMappingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassSubjectTeachers">
+            <EntityTypeMapping TypeName="TTPModel.ClassSubjectTeacher">
+              <MappingFragment StoreEntitySet="ClassSubjectTeacher">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="ClassSubjectId" ColumnName="ClassSubjectId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="ClassSubjectTeacherId" ColumnName="ClassSubjectTeacherId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountingTrialBalances">
+            <EntityTypeMapping TypeName="TTPModel.AccountingTrialBalance">
+              <MappingFragment StoreEntitySet="AccountingTrialBalances">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="AccountNatureId" ColumnName="AccountNatureId" />
+                <ScalarProperty Name="AccountGroupId" ColumnName="AccountGroupId" />
+                <ScalarProperty Name="GeneralLedger" ColumnName="GeneralLedger" />
+                <ScalarProperty Name="AccountingTrialBalanceId" ColumnName="AccountingTrialBalanceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountingVouchers">
+            <EntityTypeMapping TypeName="TTPModel.AccountingVoucher">
+              <MappingFragment StoreEntitySet="AccountingVouchers">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SubOrgId" ColumnName="SubOrgId" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="ShortText" ColumnName="ShortText" />
+                <ScalarProperty Name="DebitCreditId" ColumnName="DebitCreditId" />
+                <ScalarProperty Name="GLAccountId" ColumnName="GLAccountId" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
+                <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+                <ScalarProperty Name="AccountingVoucherId" ColumnName="AccountingVoucherId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountingPeriods">
+            <EntityTypeMapping TypeName="TTPModel.AccountingPeriod">
+              <MappingFragment StoreEntitySet="AccountingPeriod">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CurrentPeriod" ColumnName="CurrentPeriod" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="AccountingPeriodId" ColumnName="AccountingPeriodId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -37,7 +37,6 @@ namespace schools.Models
         public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<Batch> Batches { get; set; }
         public virtual DbSet<ClassFee> ClassFees { get; set; }
-        public virtual DbSet<ClassSubject> ClassSubjects { get; set; }
         public virtual DbSet<ClassSubjectMarkComponent> ClassSubjectMarkComponents { get; set; }
         public virtual DbSet<EmpComponent> EmpComponents { get; set; }
         public virtual DbSet<EmpEmployeeGradeSalHistory> EmpEmployeeGradeSalHistories { get; set; }
@@ -56,7 +55,6 @@ namespace schools.Models
         public virtual DbSet<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
         public virtual DbSet<FilesNPhoto> FilesNPhotos { get; set; }
         public virtual DbSet<MasterData> MasterDatas { get; set; }
-        public virtual DbSet<MasterRolePermission> MasterRolePermissions { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Organization> Organizations { get; set; }
         public virtual DbSet<PageHistory> PageHistories { get; set; }
@@ -76,5 +74,13 @@ namespace schools.Models
         public virtual DbSet<SubjectType> SubjectTypes { get; set; }
         public virtual DbSet<TaskConfiguration> TaskConfigurations { get; set; }
         public virtual DbSet<VariableConfiguration> VariableConfigurations { get; set; }
+        public virtual DbSet<EmpEmployeeGroup> EmpEmployeeGroups { get; set; }
+        public virtual DbSet<EmpManagerGroupMapping> EmpManagerGroupMappings { get; set; }
+        public virtual DbSet<ClassSubject> ClassSubjects { get; set; }
+        public virtual DbSet<StudTeacherClassMapping> StudTeacherClassMappings { get; set; }
+        public virtual DbSet<ClassSubjectTeacher> ClassSubjectTeachers { get; set; }
+        public virtual DbSet<AccountingTrialBalance> AccountingTrialBalances { get; set; }
+        public virtual DbSet<AccountingVoucher> AccountingVouchers { get; set; }
+        public virtual DbSet<AccountingPeriod> AccountingPeriods { get; set; }
     }
 }

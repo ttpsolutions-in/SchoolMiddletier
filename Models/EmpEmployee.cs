@@ -24,6 +24,8 @@ namespace schools.Models
             this.EmployeeLeaves = new HashSet<EmployeeLeaf>();
             this.EmployeeMonthlySalaries = new HashSet<EmployeeMonthlySalary>();
             this.EmpEmployeeSalaryComponents = new HashSet<EmpEmployeeSalaryComponent>();
+            this.StudTeacherClassMappings = new HashSet<StudTeacherClassMapping>();
+            this.ClassSubjectTeachers = new HashSet<ClassSubjectTeacher>();
         }
     
         public short EmpEmployeeId { get; set; }
@@ -54,7 +56,6 @@ namespace schools.Models
         public Nullable<short> LocationId { get; set; }
         public Nullable<short> EmploymentStatusId { get; set; }
         public Nullable<short> EmploymentTypeId { get; set; }
-        public Nullable<short> EmploymentTermId { get; set; }
         public Nullable<System.DateTime> ConfirmationDate { get; set; }
         public Nullable<short> NoticePeriodDays { get; set; }
         public Nullable<short> ProbationPeriodDays { get; set; }
@@ -66,6 +67,12 @@ namespace schools.Models
         public short OrgId { get; set; }
         public byte Active { get; set; }
         public string EmployeeCode { get; set; }
+        public Nullable<short> NatureId { get; set; }
+        public Nullable<short> SubOrgId { get; set; }
+        public Nullable<short> CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<short> UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpEmployeeGradeSalHistory> EmpEmployeeGradeSalHistories { get; set; }
@@ -81,5 +88,9 @@ namespace schools.Models
         public virtual ICollection<EmployeeMonthlySalary> EmployeeMonthlySalaries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpEmployeeSalaryComponent> EmpEmployeeSalaryComponents { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudTeacherClassMapping> StudTeacherClassMappings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClassSubjectTeacher> ClassSubjectTeachers { get; set; }
     }
 }

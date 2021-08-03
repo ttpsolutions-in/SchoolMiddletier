@@ -93,6 +93,14 @@ namespace schools
             builder.EntitySet<EmpEmployeeGradeSalHistory>("EmpEmployeeGradeSalHistories");
             builder.EntitySet<VariableConfiguration>("VariableConfigurations");
             builder.EntitySet<EmpHolidayList>("EmpHolidayLists");
+            builder.EntitySet<EmpManagerGroupMapping>("EmpManagerGroupMappings");
+            builder.EntitySet<EmpEmployeeGroup>("EmpEmployeeGroups");
+            //builder.EntitySet<StudTeacherStudentMapping>("StudTeacherStudentMappings");
+            builder.EntitySet<StudTeacherClassMapping>("StudTeacherClassMappings");
+            //builder.EntitySet<ClassSubjectTeacher>("ClassSubjectTeachers");
+            builder.EntitySet<AccountingVoucher>("AccountingVouchers");
+            builder.EntitySet<AccountingTrialBalance>("AccountingTrialBalances");
+            builder.EntitySet<AccountingPeriod>("AccountingPeriods");
 
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 

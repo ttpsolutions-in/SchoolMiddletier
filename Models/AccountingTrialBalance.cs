@@ -12,30 +12,33 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StudentClassSubject
+    public partial class AccountingTrialBalance
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public StudentClassSubject()
+        public AccountingTrialBalance()
         {
-            this.ExamStudentSubjectResults = new HashSet<ExamStudentSubjectResult>();
+            this.AccountingVouchers = new HashSet<AccountingVoucher>();
         }
     
-        public short StudentClassSubjectId { get; set; }
-        public short ClassSubjectId { get; set; }
-        public int StudentClassId { get; set; }
-        public byte Active { get; set; }
+        public short AccountingTrialBalanceId { get; set; }
+        public string GeneralLedger { get; set; }
+        public short AccountGroupId { get; set; }
+        public short AccountNatureId { get; set; }
+        public Nullable<decimal> Debit { get; set; }
+        public Nullable<decimal> Credit { get; set; }
+        public decimal Balance { get; set; }
         public short OrgId { get; set; }
-        public short BatchId { get; set; }
+        public Nullable<short> DepartmentId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
+        public Nullable<byte> Active { get; set; }
     
-        public virtual Batch Batch { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
+        public virtual MasterData MasterData { get; set; }
+        public virtual MasterData MasterData1 { get; set; }
         public virtual Organization Organization { get; set; }
-        public virtual StudentClass StudentClass { get; set; }
-        public virtual ClassSubject ClassSubject { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccountingVoucher> AccountingVouchers { get; set; }
     }
 }

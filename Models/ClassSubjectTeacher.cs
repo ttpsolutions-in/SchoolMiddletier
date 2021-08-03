@@ -12,23 +12,21 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EmpEmployeeSalaryComponent
+    public partial class ClassSubjectTeacher
     {
-        public short EmployeeSalaryComponentId { get; set; }
-        public short EmployeeId { get; set; }
-        public short EmpComponentId { get; set; }
-        public string ActualFormulaOrAmount { get; set; }
-        public decimal Amount { get; set; }
+        public short ClassSubjectTeacherId { get; set; }
+        public short TeacherId { get; set; }
+        public short ClassSubjectId { get; set; }
         public short OrgId { get; set; }
-        public short SalMonthYear { get; set; }
-        public Nullable<System.DateTime> RealeasedDate { get; set; }
+        public short BatchId { get; set; }
         public byte Active { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
     
-        public virtual EmpComponent EmpComponent { get; set; }
+        public virtual Batch Batch { get; set; }
+        public virtual ClassSubject ClassSubject { get; set; }
         public virtual EmpEmployee EmpEmployee { get; set; }
         public virtual Organization Organization { get; set; }
     }

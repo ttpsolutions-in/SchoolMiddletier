@@ -12,19 +12,18 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MasterRolePermission
+    public partial class EmpManagerGroupMapping
     {
-        public short MasterRolePermissionId { get; set; }
-        public short MasterDataId { get; set; }
-        public short RoleId { get; set; }
-        public short PermissionId { get; set; }
-        public byte Active { get; set; }
+        public short ManagerGroupMappingId { get; set; }
+        public short EmployeeGroupId { get; set; }
+        public short ManagerEmployeeId { get; set; }
         public short OrgId { get; set; }
+        public System.DateTime FromDate { get; set; }
+        public System.DateTime ToDate { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
-    
-        public virtual MasterData MasterData { get; set; }
+        public Nullable<byte> Active { get; set; }
     }
 }

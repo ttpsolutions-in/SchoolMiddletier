@@ -365,6 +365,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountingPeriodsController.cs" />
+    <Compile Include="Controllers\AccountingTrialBalancesController.cs" />
+    <Compile Include="Controllers\AccountingVouchersController.cs" />
     <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\ApplicationFeatureRolesPermsController.cs" />
     <Compile Include="Controllers\ApplicationFeaturesController.cs" />
@@ -374,8 +377,10 @@
     <Compile Include="Controllers\ClassFeesController.cs" />
     <Compile Include="Controllers\ClassSubjectMarkComponentsController.cs" />
     <Compile Include="Controllers\ClassSubjectsController.cs" />
+    <Compile Include="Controllers\ClassSubjectTeachersController.cs" />
     <Compile Include="Controllers\EmpComponentsController.cs" />
     <Compile Include="Controllers\EmpEmployeeGradeSalHistoriesController.cs" />
+    <Compile Include="Controllers\EmpEmployeeGroupsController.cs" />
     <Compile Include="Controllers\EmpEmployeeSalaryComponentsController.cs" />
     <Compile Include="Controllers\EmpEmployeesController.cs" />
     <Compile Include="Controllers\EmpEmployeeSkillsController.cs" />
@@ -385,6 +390,7 @@
     <Compile Include="Controllers\EmployeeFamiliesController.cs" />
     <Compile Include="Controllers\EmployeeLeavesController.cs" />
     <Compile Include="Controllers\EmployeeMonthlySalariesController.cs" />
+    <Compile Include="Controllers\EmpManagerGroupMappingsController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
     <Compile Include="Controllers\ExamSlotsController.cs" />
     <Compile Include="Controllers\ExamStudentResultsController.cs" />
@@ -392,6 +398,7 @@
     <Compile Include="Controllers\FilesNPhotoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\MasterDatasController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
@@ -410,6 +417,7 @@
     <Compile Include="Controllers\StudentFeePaymentsController.cs" />
     <Compile Include="Controllers\StudentFeeReceiptsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Controllers\StudTeacherClassMappingsController.cs" />
     <Compile Include="Controllers\SubjectTypesController.cs" />
     <Compile Include="Controllers\TaskConfigurationsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -418,6 +426,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
+    <Compile Include="Models\AccountingPeriod.cs">
+      <DependentUpon>TTP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountingTrialBalance.cs">
+      <DependentUpon>TTP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountingVoucher.cs">
+      <DependentUpon>TTP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs">
       <DependentUpon>TTP.tt</DependentUpon>
@@ -458,6 +475,9 @@
     <Compile Include="Models\ClassSubjectMarkComponent.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClassSubjectTeacher.cs">
+      <DependentUpon>TTP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
@@ -468,6 +488,9 @@
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmpEmployeeGradeSalHistory.cs">
+      <DependentUpon>TTP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmpEmployeeGroup.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmpEmployeeSalaryComponent.cs">
@@ -494,6 +517,9 @@
     <Compile Include="Models\EmployeeMonthlySalary.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmpManagerGroupMapping.cs">
+      <DependentUpon>TTP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Exam.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
@@ -511,9 +537,6 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MasterData.cs">
-      <DependentUpon>TTP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MasterRolePermission.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Message.cs">
@@ -562,6 +585,9 @@
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentFeeReceipt.cs">
+      <DependentUpon>TTP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StudTeacherClassMapping.cs">
       <DependentUpon>TTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SubjectType.cs">

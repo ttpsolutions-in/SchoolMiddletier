@@ -20,6 +20,7 @@ namespace schools.Models
             this.ClassSubjectMarkComponents = new HashSet<ClassSubjectMarkComponent>();
             this.SlotAndClassSubjects = new HashSet<SlotAndClassSubject>();
             this.StudentClassSubjects = new HashSet<StudentClassSubject>();
+            this.ClassSubjectTeachers = new HashSet<ClassSubjectTeacher>();
         }
     
         public short ClassSubjectId { get; set; }
@@ -33,6 +34,7 @@ namespace schools.Models
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
+        public Nullable<short> TeacherId { get; set; }
     
         public virtual Batch Batch { get; set; }
         public virtual MasterData MasterData { get; set; }
@@ -45,5 +47,7 @@ namespace schools.Models
         public virtual ICollection<SlotAndClassSubject> SlotAndClassSubjects { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentClassSubject> StudentClassSubjects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClassSubjectTeacher> ClassSubjectTeachers { get; set; }
     }
 }

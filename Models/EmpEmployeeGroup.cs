@@ -12,15 +12,17 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EmpEmployeeGradeSalHistory
+    public partial class EmpEmployeeGroup
     {
-        public short EmployeeGradeHistoryId { get; set; }
+        public short EmployeeGroupId { get; set; }
+        public string GroupName { get; set; }
         public short EmpGradeId { get; set; }
-        public short EmployeeId { get; set; }
         public short DepartmentId { get; set; }
-        public decimal CTC { get; set; }
-        public System.DateTime FromDate { get; set; }
-        public System.DateTime ToDate { get; set; }
+        public Nullable<short> WorkAccountId { get; set; }
+        public Nullable<short> JobTitleId { get; set; }
+        public Nullable<short> DesignationId { get; set; }
+        public short GroupTypeId { get; set; }
+        public Nullable<short> SubOrgId { get; set; }
         public short OrgId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> CreatedBy { get; set; }
@@ -28,16 +30,9 @@ namespace schools.Models
         public Nullable<short> UpdatedBy { get; set; }
         public string Remarks { get; set; }
         public Nullable<short> ApprovedBy { get; set; }
-        public Nullable<short> WorkAccountId { get; set; }
-        public Nullable<short> JobTitleId { get; set; }
-        public Nullable<short> DesignationId { get; set; }
         public byte Active { get; set; }
     
-        public virtual EmpEmployeeGradeSalHistory EmpEmployeeGradeSalHistory1 { get; set; }
-        public virtual EmpEmployeeGradeSalHistory EmpEmployeeGradeSalHistory2 { get; set; }
-        public virtual EmpEmployee EmpEmployee { get; set; }
-        public virtual MasterData MasterData { get; set; }
-        public virtual MasterData MasterData1 { get; set; }
         public virtual Organization Organization { get; set; }
+        public virtual Organization Organization1 { get; set; }
     }
 }
