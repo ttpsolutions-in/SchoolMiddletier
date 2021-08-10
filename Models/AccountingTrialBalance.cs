@@ -21,14 +21,11 @@ namespace schools.Models
         }
     
         public short AccountingTrialBalanceId { get; set; }
-        public string GeneralLedger { get; set; }
-        public short AccountGroupId { get; set; }
-        public short AccountNatureId { get; set; }
-        public Nullable<decimal> Debit { get; set; }
-        public Nullable<decimal> Credit { get; set; }
+        public short LedgerId { get; set; }
+        public decimal TotalDebit { get; set; }
+        public decimal TotalCredit { get; set; }
         public decimal Balance { get; set; }
         public short OrgId { get; set; }
-        public Nullable<short> DepartmentId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
@@ -36,7 +33,6 @@ namespace schools.Models
         public Nullable<byte> Active { get; set; }
     
         public virtual MasterData MasterData { get; set; }
-        public virtual MasterData MasterData1 { get; set; }
         public virtual Organization Organization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountingVoucher> AccountingVouchers { get; set; }

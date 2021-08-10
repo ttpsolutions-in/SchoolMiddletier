@@ -22,23 +22,21 @@ namespace schools.Models
     
         public short PageId { get; set; }
         public string PageTitle { get; set; }
-        public Nullable<short> LatestPublishedId { get; set; }
-        public Nullable<short> LatestDraftId { get; set; }
-        public System.DateTime UpdateDate { get; set; }
-        public byte Active { get; set; }
-        public Nullable<byte> CurrentVersion { get; set; }
+        public short ParentId { get; set; }
+        public short ApplicationId { get; set; }
         public string label { get; set; }
-        public string faIcon { get; set; }
         public string link { get; set; }
-        public Nullable<short> ParentId { get; set; }
+        public byte Active { get; set; }
+        public Nullable<short> OrgId { get; set; }
+        public string faIcon { get; set; }
+        public string FullPath { get; set; }
+        public string PhotoPath { get; set; }
+        public Nullable<System.DateTime> UpdateDate { get; set; }
+        public Nullable<byte> CurrentVersion { get; set; }
         public Nullable<byte> IsTemplate { get; set; }
         public Nullable<short> DisplayOrder { get; set; }
         public Nullable<byte> HasSubmenu { get; set; }
         public Nullable<byte> HomePage { get; set; }
-        public Nullable<short> Module { get; set; }
-        public Nullable<short> OrgId { get; set; }
-        public string FullPath { get; set; }
-        public string PhotoPath { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }

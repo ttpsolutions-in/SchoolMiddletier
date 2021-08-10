@@ -22,8 +22,12 @@ namespace schools.Models
     
         public short ApplicationFeatureId { get; set; }
         public string FeatureName { get; set; }
-        public Nullable<short> ApplicationId { get; set; }
-        public Nullable<byte> Active { get; set; }
+        public short ApplicationId { get; set; }
+        public byte Active { get; set; }
+        public Nullable<short> CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<short> UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ApplicationFeatureRolesPerm> ApplicationFeatureRolesPerms { get; set; }

@@ -30,9 +30,9 @@ namespace schools.Models
         public Nullable<short> BatchId { get; set; }
     
         public virtual Batch Batch { get; set; }
-        public virtual ClassFee ClassFee { get; set; }
         public virtual Organization Organization { get; set; }
         public virtual StudentFeePayment StudentFeePayment { get; set; }
         public virtual StudentFeeReceipt StudentFeeReceipt { get; set; }
+        public virtual ClassFee ClassFee { get; set; }
     }
 }

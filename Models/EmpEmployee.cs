@@ -26,6 +26,7 @@ namespace schools.Models
             this.EmpEmployeeSalaryComponents = new HashSet<EmpEmployeeSalaryComponent>();
             this.StudTeacherClassMappings = new HashSet<StudTeacherClassMapping>();
             this.ClassSubjectTeachers = new HashSet<ClassSubjectTeacher>();
+            this.AccountingLedgerTrialBalances = new HashSet<AccountingLedgerTrialBalance>();
         }
     
         public short EmpEmployeeId { get; set; }
@@ -92,5 +93,7 @@ namespace schools.Models
         public virtual ICollection<StudTeacherClassMapping> StudTeacherClassMappings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassSubjectTeacher> ClassSubjectTeachers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccountingLedgerTrialBalance> AccountingLedgerTrialBalances { get; set; }
     }
 }

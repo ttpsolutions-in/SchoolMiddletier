@@ -18,7 +18,6 @@ namespace schools.Models
         public Batch()
         {
             this.Attendances = new HashSet<Attendance>();
-            this.ClassFees = new HashSet<ClassFee>();
             this.ClassSubjectMarkComponents = new HashSet<ClassSubjectMarkComponent>();
             this.Exams = new HashSet<Exam>();
             this.ExamSlots = new HashSet<ExamSlot>();
@@ -39,6 +38,8 @@ namespace schools.Models
             this.ClassSubjects = new HashSet<ClassSubject>();
             this.StudTeacherClassMappings = new HashSet<StudTeacherClassMapping>();
             this.ClassSubjectTeachers = new HashSet<ClassSubjectTeacher>();
+            this.AccountingLedgerTrialBalances = new HashSet<AccountingLedgerTrialBalance>();
+            this.ClassFees = new HashSet<ClassFee>();
         }
     
         public short BatchId { get; set; }
@@ -54,8 +55,6 @@ namespace schools.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
         public virtual Organization Organization { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClassFee> ClassFees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassSubjectMarkComponent> ClassSubjectMarkComponents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -96,5 +95,9 @@ namespace schools.Models
         public virtual ICollection<StudTeacherClassMapping> StudTeacherClassMappings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassSubjectTeacher> ClassSubjectTeachers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccountingLedgerTrialBalance> AccountingLedgerTrialBalances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClassFee> ClassFees { get; set; }
     }
 }

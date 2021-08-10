@@ -101,6 +101,7 @@ namespace schools
             builder.EntitySet<AccountingVoucher>("AccountingVouchers");
             builder.EntitySet<AccountingTrialBalance>("AccountingTrialBalances");
             builder.EntitySet<AccountingPeriod>("AccountingPeriods");
+            builder.EntitySet<AccountingLedgerTrialBalance>("AccountingLedgerTrialBalances");
 
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 

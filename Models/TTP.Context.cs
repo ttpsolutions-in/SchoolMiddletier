@@ -28,7 +28,6 @@ namespace schools.Models
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Album> Albums { get; set; }
         public virtual DbSet<ApplicationFeatureRolesPerm> ApplicationFeatureRolesPerms { get; set; }
-        public virtual DbSet<ApplicationFeature> ApplicationFeatures { get; set; }
         public virtual DbSet<AppUser> AppUsers { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
@@ -36,7 +35,6 @@ namespace schools.Models
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<Batch> Batches { get; set; }
-        public virtual DbSet<ClassFee> ClassFees { get; set; }
         public virtual DbSet<ClassSubjectMarkComponent> ClassSubjectMarkComponents { get; set; }
         public virtual DbSet<EmpComponent> EmpComponents { get; set; }
         public virtual DbSet<EmpEmployeeGradeSalHistory> EmpEmployeeGradeSalHistories { get; set; }
@@ -58,7 +56,6 @@ namespace schools.Models
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Organization> Organizations { get; set; }
         public virtual DbSet<PageHistory> PageHistories { get; set; }
-        public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<PaymentDetail> PaymentDetails { get; set; }
         public virtual DbSet<PhotoGallery> PhotoGalleries { get; set; }
         public virtual DbSet<RoleUser> RoleUsers { get; set; }
@@ -79,8 +76,12 @@ namespace schools.Models
         public virtual DbSet<ClassSubject> ClassSubjects { get; set; }
         public virtual DbSet<StudTeacherClassMapping> StudTeacherClassMappings { get; set; }
         public virtual DbSet<ClassSubjectTeacher> ClassSubjectTeachers { get; set; }
-        public virtual DbSet<AccountingTrialBalance> AccountingTrialBalances { get; set; }
         public virtual DbSet<AccountingVoucher> AccountingVouchers { get; set; }
         public virtual DbSet<AccountingPeriod> AccountingPeriods { get; set; }
+        public virtual DbSet<Page> Pages { get; set; }
+        public virtual DbSet<ApplicationFeature> ApplicationFeatures { get; set; }
+        public virtual DbSet<AccountingLedgerTrialBalance> AccountingLedgerTrialBalances { get; set; }
+        public virtual DbSet<AccountingTrialBalance> AccountingTrialBalances { get; set; }
+        public virtual DbSet<ClassFee> ClassFees { get; set; }
     }
 }

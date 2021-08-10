@@ -40,11 +40,11 @@ namespace schools.Models
         public Nullable<short> UpdatedBy { get; set; }
     
         public virtual Batch Batch { get; set; }
-        public virtual ClassFee ClassFee { get; set; }
         public virtual Organization Organization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaymentDetail> PaymentDetails { get; set; }
         public virtual StudentClass StudentClass { get; set; }
         public virtual Student Student { get; set; }
+        public virtual ClassFee ClassFee { get; set; }
     }
 }

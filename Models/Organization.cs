@@ -20,7 +20,6 @@ namespace schools.Models
             this.AppUsers = new HashSet<AppUser>();
             this.Attendances = new HashSet<Attendance>();
             this.Batches = new HashSet<Batch>();
-            this.ClassFees = new HashSet<ClassFee>();
             this.ClassSubjectMarkComponents = new HashSet<ClassSubjectMarkComponent>();
             this.EmpComponents = new HashSet<EmpComponent>();
             this.EmpEmployeeGradeSalHistories = new HashSet<EmpEmployeeGradeSalHistory>();
@@ -39,7 +38,6 @@ namespace schools.Models
             this.MasterDatas = new HashSet<MasterData>();
             this.Messages = new HashSet<Message>();
             this.PageHistories = new HashSet<PageHistory>();
-            this.Pages = new HashSet<Page>();
             this.PaymentDetails = new HashSet<PaymentDetail>();
             this.PhotoGalleries = new HashSet<PhotoGallery>();
             this.RoleUsers = new HashSet<RoleUser>();
@@ -58,8 +56,11 @@ namespace schools.Models
             this.ClassSubjects = new HashSet<ClassSubject>();
             this.StudTeacherClassMappings = new HashSet<StudTeacherClassMapping>();
             this.ClassSubjectTeachers = new HashSet<ClassSubjectTeacher>();
-            this.AccountingTrialBalances = new HashSet<AccountingTrialBalance>();
             this.AccountingVouchers = new HashSet<AccountingVoucher>();
+            this.Pages = new HashSet<Page>();
+            this.AccountingLedgerTrialBalances = new HashSet<AccountingLedgerTrialBalance>();
+            this.AccountingTrialBalances = new HashSet<AccountingTrialBalance>();
+            this.ClassFees = new HashSet<ClassFee>();
         }
     
         public short OrganizationId { get; set; }
@@ -87,8 +88,6 @@ namespace schools.Models
         public virtual ICollection<Attendance> Attendances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Batch> Batches { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClassFee> ClassFees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassSubjectMarkComponent> ClassSubjectMarkComponents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -125,8 +124,6 @@ namespace schools.Models
         public virtual ICollection<Message> Messages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PageHistory> PageHistories { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Page> Pages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaymentDetail> PaymentDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -165,9 +162,15 @@ namespace schools.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassSubjectTeacher> ClassSubjectTeachers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccountingTrialBalance> AccountingTrialBalances { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountingVoucher> AccountingVouchers { get; set; }
         public virtual AccountingPeriod AccountingPeriod { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Page> Pages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccountingLedgerTrialBalance> AccountingLedgerTrialBalances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccountingTrialBalance> AccountingTrialBalances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClassFee> ClassFees { get; set; }
     }
 }

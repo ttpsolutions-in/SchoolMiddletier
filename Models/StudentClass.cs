@@ -25,6 +25,7 @@ namespace schools.Models
             this.StudentDocuments = new HashSet<StudentDocument>();
             this.StudentFeePayments = new HashSet<StudentFeePayment>();
             this.StudentFeeReceipts = new HashSet<StudentFeeReceipt>();
+            this.AccountingLedgerTrialBalances = new HashSet<AccountingLedgerTrialBalance>();
         }
     
         public int StudentClassId { get; set; }
@@ -65,5 +66,7 @@ namespace schools.Models
         public virtual ICollection<StudentFeePayment> StudentFeePayments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentFeeReceipt> StudentFeeReceipts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccountingLedgerTrialBalance> AccountingLedgerTrialBalances { get; set; }
     }
 }

@@ -23,7 +23,10 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<ClassFee>("ClassFees");
+    builder.EntitySet<Batch>("Batches"); 
+    builder.EntitySet<Organization>("Organizations"); 
     builder.EntitySet<MasterData>("MasterDatas"); 
+    builder.EntitySet<PaymentDetail>("PaymentDetails"); 
     builder.EntitySet<StudentFeePayment>("StudentFeePayments"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
@@ -149,6 +152,20 @@ namespace schools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // GET: odata/ClassFees(5)/Batch
+        [EnableQuery]
+        public SingleResult<Batch> GetBatch([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.ClassFees.Where(m => m.ClassFeeId == key).Select(m => m.Batch));
+        }
+
+        // GET: odata/ClassFees(5)/Organization
+        [EnableQuery]
+        public SingleResult<Organization> GetOrganization([FromODataUri] short key)
+        {
+            return SingleResult.Create(db.ClassFees.Where(m => m.ClassFeeId == key).Select(m => m.Organization));
+        }
+
         // GET: odata/ClassFees(5)/MasterData
         [EnableQuery]
         public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
@@ -168,6 +185,13 @@ namespace schools.Controllers
         public SingleResult<MasterData> GetMasterData2([FromODataUri] short key)
         {
             return SingleResult.Create(db.ClassFees.Where(m => m.ClassFeeId == key).Select(m => m.MasterData2));
+        }
+
+        // GET: odata/ClassFees(5)/PaymentDetails
+        [EnableQuery]
+        public IQueryable<PaymentDetail> GetPaymentDetails([FromODataUri] short key)
+        {
+            return db.ClassFees.Where(m => m.ClassFeeId == key).SelectMany(m => m.PaymentDetails);
         }
 
         // GET: odata/ClassFees(5)/StudentFeePayments

@@ -30,7 +30,7 @@ namespace schools.Models
         public Nullable<short> UpdatedBy { get; set; }
         public decimal Amount { get; set; }
     
-        public virtual AccountingTrialBalance AccountingTrialBalance { get; set; }
         public virtual Organization Organization { get; set; }
+        public virtual AccountingTrialBalance AccountingTrialBalance { get; set; }
     }
 }

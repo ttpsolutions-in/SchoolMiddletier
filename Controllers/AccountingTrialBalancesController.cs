@@ -157,13 +157,6 @@ namespace schools.Controllers
             return SingleResult.Create(db.AccountingTrialBalances.Where(m => m.AccountingTrialBalanceId == key).Select(m => m.MasterData));
         }
 
-        // GET: odata/AccountingTrialBalances(5)/MasterData1
-        [EnableQuery]
-        public SingleResult<MasterData> GetMasterData1([FromODataUri] short key)
-        {
-            return SingleResult.Create(db.AccountingTrialBalances.Where(m => m.AccountingTrialBalanceId == key).Select(m => m.MasterData1));
-        }
-
         // GET: odata/AccountingTrialBalances(5)/Organization
         [EnableQuery]
         public SingleResult<Organization> GetOrganization([FromODataUri] short key)
