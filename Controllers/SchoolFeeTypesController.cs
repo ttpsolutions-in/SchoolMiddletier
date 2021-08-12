@@ -22,30 +22,30 @@ namespace schools.Controllers
     using System.Web.Http.OData.Extensions;
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<AccountingPeriod>("AccountingPeriods");
-    builder.EntitySet<Organization>("Organizations"); 
+    builder.EntitySet<SchoolFeeType>("SchoolFeeTypes");
+    builder.EntitySet<StudentClass>("StudentClasses"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class AccountingPeriodsController : ODataController
+    public class SchoolFeeTypesController : ODataController
     {
         private TTPEntities db = new TTPEntities();
 
-        // GET: odata/AccountingPeriods
+        // GET: odata/SchoolFeeTypes
         [EnableQuery]
-        public IQueryable<AccountingPeriod> GetAccountingPeriods()
+        public IQueryable<SchoolFeeType> GetSchoolFeeTypes()
         {
-            return db.AccountingPeriods;
+            return db.SchoolFeeTypes;
         }
 
-        // GET: odata/AccountingPeriods(5)
+        // GET: odata/SchoolFeeTypes(5)
         [EnableQuery]
-        public SingleResult<AccountingPeriod> GetAccountingPeriod([FromODataUri] short key)
+        public SingleResult<SchoolFeeType> GetSchoolFeeType([FromODataUri] short key)
         {
-            return SingleResult.Create(db.AccountingPeriods.Where(accountingPeriod => accountingPeriod.AccountingPeriodId == key));
+            return SingleResult.Create(db.SchoolFeeTypes.Where(schoolFeeType => schoolFeeType.FeeTypeId == key));
         }
 
-        // PUT: odata/AccountingPeriods(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<AccountingPeriod> patch)
+        // PUT: odata/SchoolFeeTypes(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<SchoolFeeType> patch)
         {
             Validate(patch.GetEntity());
 
@@ -54,13 +54,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            AccountingPeriod accountingPeriod = await db.AccountingPeriods.FindAsync(key);
-            if (accountingPeriod == null)
+            SchoolFeeType schoolFeeType = await db.SchoolFeeTypes.FindAsync(key);
+            if (schoolFeeType == null)
             {
                 return NotFound();
             }
 
-            patch.Put(accountingPeriod);
+            patch.Put(schoolFeeType);
 
             try
             {
@@ -68,7 +68,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccountingPeriodExists(key))
+                if (!SchoolFeeTypeExists(key))
                 {
                     return NotFound();
                 }
@@ -78,26 +78,26 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(accountingPeriod);
+            return Updated(schoolFeeType);
         }
 
-        // POST: odata/AccountingPeriods
-        public async Task<IHttpActionResult> Post(AccountingPeriod accountingPeriod)
+        // POST: odata/SchoolFeeTypes
+        public async Task<IHttpActionResult> Post(SchoolFeeType schoolFeeType)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.AccountingPeriods.Add(accountingPeriod);
+            db.SchoolFeeTypes.Add(schoolFeeType);
             await db.SaveChangesAsync();
 
-            return Created(accountingPeriod);
+            return Created(schoolFeeType);
         }
 
-        // PATCH: odata/AccountingPeriods(5)
+        // PATCH: odata/SchoolFeeTypes(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<AccountingPeriod> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<SchoolFeeType> patch)
         {
             Validate(patch.GetEntity());
 
@@ -106,13 +106,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            AccountingPeriod accountingPeriod = await db.AccountingPeriods.FindAsync(key);
-            if (accountingPeriod == null)
+            SchoolFeeType schoolFeeType = await db.SchoolFeeTypes.FindAsync(key);
+            if (schoolFeeType == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(accountingPeriod);
+            patch.Patch(schoolFeeType);
 
             try
             {
@@ -120,7 +120,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccountingPeriodExists(key))
+                if (!SchoolFeeTypeExists(key))
                 {
                     return NotFound();
                 }
@@ -130,29 +130,29 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(accountingPeriod);
+            return Updated(schoolFeeType);
         }
 
-        // DELETE: odata/AccountingPeriods(5)
+        // DELETE: odata/SchoolFeeTypes(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] short key)
         {
-            AccountingPeriod accountingPeriod = await db.AccountingPeriods.FindAsync(key);
-            if (accountingPeriod == null)
+            SchoolFeeType schoolFeeType = await db.SchoolFeeTypes.FindAsync(key);
+            if (schoolFeeType == null)
             {
                 return NotFound();
             }
 
-            db.AccountingPeriods.Remove(accountingPeriod);
+            db.SchoolFeeTypes.Remove(schoolFeeType);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/AccountingPeriods(5)/Organization
+        // GET: odata/SchoolFeeTypes(5)/StudentClasses
         [EnableQuery]
-        public SingleResult<Organization> GetOrganization([FromODataUri] short key)
+        public IQueryable<StudentClass> GetStudentClasses([FromODataUri] short key)
         {
-            return SingleResult.Create(db.AccountingPeriods.Where(m => m.AccountingPeriodId == key).Select(m => m.Organization));
+            return db.SchoolFeeTypes.Where(m => m.FeeTypeId == key).SelectMany(m => m.StudentClasses);
         }
 
         protected override void Dispose(bool disposing)
@@ -164,9 +164,9 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool AccountingPeriodExists(short key)
+        private bool SchoolFeeTypeExists(short key)
         {
-            return db.AccountingPeriods.Count(e => e.AccountingPeriodId == key) > 0;
+            return db.SchoolFeeTypes.Count(e => e.FeeTypeId == key) > 0;
         }
     }
 }

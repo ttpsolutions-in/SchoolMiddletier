@@ -77,11 +77,11 @@ namespace schools.Models
         public virtual DbSet<StudTeacherClassMapping> StudTeacherClassMappings { get; set; }
         public virtual DbSet<ClassSubjectTeacher> ClassSubjectTeachers { get; set; }
         public virtual DbSet<AccountingVoucher> AccountingVouchers { get; set; }
-        public virtual DbSet<AccountingPeriod> AccountingPeriods { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<ApplicationFeature> ApplicationFeatures { get; set; }
-        public virtual DbSet<AccountingLedgerTrialBalance> AccountingLedgerTrialBalances { get; set; }
         public virtual DbSet<AccountingTrialBalance> AccountingTrialBalances { get; set; }
         public virtual DbSet<ClassFee> ClassFees { get; set; }
+        public virtual DbSet<AccountingLedgerTrialBalance> AccountingLedgerTrialBalances { get; set; }
+        public virtual DbSet<SchoolFeeType> SchoolFeeTypes { get; set; }
     }
 }

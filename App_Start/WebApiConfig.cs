@@ -100,8 +100,8 @@ namespace schools
             //builder.EntitySet<ClassSubjectTeacher>("ClassSubjectTeachers");
             builder.EntitySet<AccountingVoucher>("AccountingVouchers");
             builder.EntitySet<AccountingTrialBalance>("AccountingTrialBalances");
-            builder.EntitySet<AccountingPeriod>("AccountingPeriods");
             builder.EntitySet<AccountingLedgerTrialBalance>("AccountingLedgerTrialBalances");
+            builder.EntitySet<SchoolFeeType>("SchoolFeeTypes");
 
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 

@@ -12,25 +12,27 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EmpEmployeeSalaryComponent
+    public partial class SchoolFeeType
     {
-        public short EmployeeSalaryComponentId { get; set; }
-        public short EmployeeId { get; set; }
-        public short EmpComponentId { get; set; }
-        public string ActualFormulaOrAmount { get; set; }
-        public decimal Amount { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SchoolFeeType()
+        {
+            this.StudentClasses = new HashSet<StudentClass>();
+        }
+    
+        public short FeeTypeId { get; set; }
+        public string FeeTypeName { get; set; }
+        public string Description { get; set; }
+        public string Formula { get; set; }
         public short OrgId { get; set; }
-        public Nullable<System.DateTime> RealeasedDate { get; set; }
+        public short BatchId { get; set; }
         public byte Active { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
-        public byte Month { get; set; }
-        public Nullable<short> BatchId { get; set; }
     
-        public virtual EmpComponent EmpComponent { get; set; }
-        public virtual EmpEmployee EmpEmployee { get; set; }
-        public virtual Organization Organization { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentClass> StudentClasses { get; set; }
     }
 }

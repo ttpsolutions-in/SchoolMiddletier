@@ -42,9 +42,9 @@ namespace schools.Controllers
     builder.EntitySet<StudTeacherClassMapping>("StudTeacherClassMappings"); 
     builder.EntitySet<Page>("Pages"); 
     builder.EntitySet<ApplicationFeature>("ApplicationFeatures"); 
-    builder.EntitySet<AccountingLedgerTrialBalance>("AccountingLedgerTrialBalances"); 
     builder.EntitySet<AccountingTrialBalance>("AccountingTrialBalances"); 
     builder.EntitySet<ClassFee>("ClassFees"); 
+    builder.EntitySet<AccountingLedgerTrialBalance>("AccountingLedgerTrialBalances"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class MasterDatasController : ODataController
@@ -429,34 +429,6 @@ namespace schools.Controllers
             return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.ApplicationFeatures);
         }
 
-        // GET: odata/MasterDatas(5)/AccountingLedgerTrialBalances
-        [EnableQuery]
-        public IQueryable<AccountingLedgerTrialBalance> GetAccountingLedgerTrialBalances([FromODataUri] short key)
-        {
-            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.AccountingLedgerTrialBalances);
-        }
-
-        // GET: odata/MasterDatas(5)/AccountingLedgerTrialBalances1
-        [EnableQuery]
-        public IQueryable<AccountingLedgerTrialBalance> GetAccountingLedgerTrialBalances1([FromODataUri] short key)
-        {
-            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.AccountingLedgerTrialBalances1);
-        }
-
-        // GET: odata/MasterDatas(5)/AccountingLedgerTrialBalances2
-        [EnableQuery]
-        public IQueryable<AccountingLedgerTrialBalance> GetAccountingLedgerTrialBalances2([FromODataUri] short key)
-        {
-            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.AccountingLedgerTrialBalances2);
-        }
-
-        // GET: odata/MasterDatas(5)/AccountingLedgerTrialBalances3
-        [EnableQuery]
-        public IQueryable<AccountingLedgerTrialBalance> GetAccountingLedgerTrialBalances3([FromODataUri] short key)
-        {
-            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.AccountingLedgerTrialBalances3);
-        }
-
         // GET: odata/MasterDatas(5)/AccountingTrialBalances
         [EnableQuery]
         public IQueryable<AccountingTrialBalance> GetAccountingTrialBalances([FromODataUri] short key)
@@ -483,6 +455,27 @@ namespace schools.Controllers
         public IQueryable<ClassFee> GetClassFees2([FromODataUri] short key)
         {
             return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.ClassFees2);
+        }
+
+        // GET: odata/MasterDatas(5)/AccountingLedgerTrialBalances
+        [EnableQuery]
+        public IQueryable<AccountingLedgerTrialBalance> GetAccountingLedgerTrialBalances([FromODataUri] short key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.AccountingLedgerTrialBalances);
+        }
+
+        // GET: odata/MasterDatas(5)/AccountingLedgerTrialBalances1
+        [EnableQuery]
+        public IQueryable<AccountingLedgerTrialBalance> GetAccountingLedgerTrialBalances1([FromODataUri] short key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.AccountingLedgerTrialBalances1);
+        }
+
+        // GET: odata/MasterDatas(5)/AccountingLedgerTrialBalances2
+        [EnableQuery]
+        public IQueryable<AccountingLedgerTrialBalance> GetAccountingLedgerTrialBalances2([FromODataUri] short key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.AccountingLedgerTrialBalances2);
         }
 
         protected override void Dispose(bool disposing)

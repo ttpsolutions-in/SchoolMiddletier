@@ -26,7 +26,6 @@ namespace schools.Models
         public short ClassId { get; set; }
         public decimal Amount { get; set; }
         public short BatchId { get; set; }
-        public string YearMonth { get; set; }
         public byte Recurring { get; set; }
         public byte Active { get; set; }
         public Nullable<short> LocationId { get; set; }
@@ -36,6 +35,7 @@ namespace schools.Models
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
+        public byte Month { get; set; }
     
         public virtual Batch Batch { get; set; }
         public virtual Organization Organization { get; set; }

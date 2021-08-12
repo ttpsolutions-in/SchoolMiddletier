@@ -194,8 +194,6 @@
         <AssociationConnector Association="TTPModel.FK_ClassSubjectTeacher_Organization" />
         <EntityTypeShape EntityType="TTPModel.AccountingVoucher" Width="1.5" PointX="7.375" PointY="5.75" />
         <AssociationConnector Association="TTPModel.FK_AccountingVouchers_Organization" />
-        <EntityTypeShape EntityType="TTPModel.AccountingPeriod" Width="1.5" PointX="3" PointY="117.75" />
-        <AssociationConnector Association="TTPModel.FK_AccountingPeriod_Organization" />
         <EntityTypeShape EntityType="TTPModel.Page" Width="1.5" PointX="16.25" PointY="111.375" />
         <AssociationConnector Association="TTPModel.FK_Pages_MasterDataApplicationId" />
         <AssociationConnector Association="TTPModel.FK_Pages_Organization" />
@@ -203,15 +201,6 @@
         <EntityTypeShape EntityType="TTPModel.ApplicationFeature" Width="1.5" PointX="5.25" PointY="134.375" />
         <AssociationConnector Association="TTPModel.FK_ApplicationRoleUsers_ApplicationFeatureId" />
         <AssociationConnector Association="TTPModel.FK_ApplicationFeatures_MasterDataApplicationId" />
-        <EntityTypeShape EntityType="TTPModel.AccountingLedgerTrialBalance" Width="1.5" PointX="18.5" PointY="115.625" />
-        <AssociationConnector Association="TTPModel.FK_Ledgers_Batches" />
-        <AssociationConnector Association="TTPModel.FK_Ledgers_EmpEmployeeId" />
-        <AssociationConnector Association="TTPModel.FK_Ledgers_MasterDataAccountGroupId" />
-        <AssociationConnector Association="TTPModel.FK_Ledgers_MasterDataAccountNatureId" />
-        <AssociationConnector Association="TTPModel.FK_Ledgers_MasterDataGeneralLedgerId" />
-        <AssociationConnector Association="TTPModel.FK_Ledgers_MasterDataMonthId" />
-        <AssociationConnector Association="TTPModel.FK_Ledgers_OrganizationId" />
-        <AssociationConnector Association="TTPModel.FK_Ledgers_StudentClassId" />
         <EntityTypeShape EntityType="TTPModel.AccountingTrialBalance" Width="1.5" PointX="11.25" PointY="122.75" />
         <AssociationConnector Association="TTPModel.FK_AccountingTrialBalances_MasterDataLedgerId" />
         <AssociationConnector Association="TTPModel.FK_AccountingTrialBalances_Organization" />
@@ -224,6 +213,16 @@
         <AssociationConnector Association="TTPModel.FK_FeeMaster_LocationMaster" />
         <AssociationConnector Association="TTPModel.FK_PaymentDetails_ClassFee" />
         <AssociationConnector Association="TTPModel.FK_StudentFeePayment_ClassFee" />
+        <EntityTypeShape EntityType="TTPModel.AccountingLedgerTrialBalance" Width="1.5" PointX="18.5" PointY="116.375" />
+        <AssociationConnector Association="TTPModel.FK_Ledgers_Batches" />
+        <AssociationConnector Association="TTPModel.FK_Ledgers_EmpEmployeeId" />
+        <AssociationConnector Association="TTPModel.FK_Ledgers_MasterDataAccountGroupId" />
+        <AssociationConnector Association="TTPModel.FK_Ledgers_MasterDataAccountNatureId" />
+        <AssociationConnector Association="TTPModel.FK_Ledgers_MasterDataGeneralLedgerId" />
+        <AssociationConnector Association="TTPModel.FK_Ledgers_OrganizationId" />
+        <AssociationConnector Association="TTPModel.FK_Ledgers_StudentClassId" />
+        <EntityTypeShape EntityType="TTPModel.SchoolFeeType" Width="1.5" PointX="7.375" PointY="1" />
+        <AssociationConnector Association="TTPModel.FK_StudentClass_Feetype1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

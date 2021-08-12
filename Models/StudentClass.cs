@@ -68,5 +68,6 @@ namespace schools.Models
         public virtual ICollection<StudentFeeReceipt> StudentFeeReceipts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountingLedgerTrialBalance> AccountingLedgerTrialBalances { get; set; }
+        public virtual SchoolFeeType SchoolFeeType { get; set; }
     }
 }

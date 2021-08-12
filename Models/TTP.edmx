@@ -23,7 +23,7 @@
           <Property Name="StudentClassId" Type="int" />
           <Property Name="EmployeeId" Type="smallint" />
           <Property Name="GeneralLedgerId" Type="smallint" />
-          <Property Name="MonthYearId" Type="smallint" />
+          <Property Name="Month" Type="tinyint" />
           <Property Name="AccountGroupId" Type="smallint" Nullable="false" />
           <Property Name="AccountNatureId" Type="smallint" Nullable="false" />
           <Property Name="TotalDebit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -36,21 +36,6 @@
           <Property Name="UpdateBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AccountingPeriod">
-          <Key>
-            <PropertyRef Name="AccountingPeriodId" />
-          </Key>
-          <Property Name="AccountingPeriodId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StartDate" Type="datetime" Nullable="false" />
-          <Property Name="EndDate" Type="datetime" Nullable="false" />
-          <Property Name="CurrentPeriod" Type="tinyint" Nullable="false" />
-          <Property Name="Active" Type="tinyint" Nullable="false" />
-          <Property Name="OrgId" Type="smallint" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="CreatedBy" Type="smallint" />
-          <Property Name="UpdatedDate" Type="datetime" />
-          <Property Name="UpdatedBy" Type="smallint" />
         </EntityType>
         <EntityType Name="AccountingTrialBalances">
           <Key>
@@ -225,6 +210,8 @@
           <Property Name="BatchId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BatchName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CurrentBatch" Type="tinyint" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
           <Property Name="OrgId" Type="smallint" Nullable="false" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" />
@@ -241,7 +228,7 @@
           <Property Name="ClassId" Type="smallint" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="BatchId" Type="smallint" Nullable="false" />
-          <Property Name="YearMonth" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Month" Type="tinyint" Nullable="false" />
           <Property Name="Recurring" Type="tinyint" Nullable="false" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
           <Property Name="LocationId" Type="smallint" />
@@ -421,7 +408,8 @@
           <Property Name="ActualFormulaOrAmount" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="OrgId" Type="smallint" Nullable="false" />
-          <Property Name="SalMonthYear" Type="smallint" Nullable="false" />
+          <Property Name="Month" Type="tinyint" Nullable="false" />
+          <Property Name="BatchId" Type="smallint" />
           <Property Name="RealeasedDate" Type="datetime" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
           <Property Name="CreatedBy" Type="smallint" />
@@ -649,7 +637,7 @@
           <Key>
             <PropertyRef Name="MasterDataId" />
           </Key>
-          <Property Name="MasterDataId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasterDataId" Type="smallint" Nullable="false" />
           <Property Name="MasterDataName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="100" />
           <Property Name="ParentId" Type="smallint" />
@@ -792,6 +780,22 @@
           <Property Name="CreatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
+        </EntityType>
+        <EntityType Name="SchoolFeeTypes">
+          <Key>
+            <PropertyRef Name="FeeTypeId" />
+          </Key>
+          <Property Name="FeeTypeId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FeeTypeName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="256" />
+          <Property Name="Formula" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="BatchId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="SlotAndClassSubject">
           <Key>
@@ -1064,18 +1068,6 @@
           <Property Name="UpdatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
         </EntityType>
-        <Association Name="FK_AccountingPeriod_Organization">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
-          <End Role="AccountingPeriod" Type="Self.AccountingPeriod" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="AccountingPeriod">
-              <PropertyRef Name="AccountingPeriodId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AccountingTrialBalances_MasterDataLedgerId">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
           <End Role="AccountingTrialBalances" Type="Self.AccountingTrialBalances" Multiplicity="*" />
@@ -2128,18 +2120,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Ledgers_MasterDataMonthId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
-          <End Role="AccountingLedgerTrialBalance" Type="Self.AccountingLedgerTrialBalance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="AccountingLedgerTrialBalance">
-              <PropertyRef Name="MonthYearId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Ledgers_OrganizationId">
           <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
           <End Role="AccountingLedgerTrialBalance" Type="Self.AccountingLedgerTrialBalance" Multiplicity="*" />
@@ -2525,11 +2505,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentClass_Feetype">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="SchoolFeeTypes" Type="Self.SchoolFeeTypes" Multiplicity="1" />
           <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
+            <Principal Role="SchoolFeeTypes">
+              <PropertyRef Name="FeeTypeId" />
             </Principal>
             <Dependent Role="StudentClass">
               <PropertyRef Name="FeeTypeId" />
@@ -3007,7 +2987,6 @@
         <EntityContainer Name="TTPModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountingLedgerTrialBalance" EntityType="Self.AccountingLedgerTrialBalance" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AccountingPeriod" EntityType="Self.AccountingPeriod" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountingTrialBalances" EntityType="Self.AccountingTrialBalances" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountingVouchers" EntityType="Self.AccountingVouchers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
@@ -3051,6 +3030,7 @@
           <EntitySet Name="PaymentDetails" EntityType="Self.PaymentDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhotoGallery" EntityType="Self.PhotoGallery" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleUser" EntityType="Self.RoleUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SchoolFeeTypes" EntityType="Self.SchoolFeeTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SlotAndClassSubject" EntityType="Self.SlotAndClassSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentActivity" EntityType="Self.StudentActivity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentCertificate" EntityType="Self.StudentCertificate" Schema="dbo" store:Type="Tables" />
@@ -3064,10 +3044,6 @@
           <EntitySet Name="SubjectTypes" EntityType="Self.SubjectTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaskConfiguration" EntityType="Self.TaskConfiguration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VariableConfiguration" EntityType="Self.VariableConfiguration" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AccountingPeriod_Organization" Association="Self.FK_AccountingPeriod_Organization">
-            <End Role="Organization" EntitySet="Organization" />
-            <End Role="AccountingPeriod" EntitySet="AccountingPeriod" />
-          </AssociationSet>
           <AssociationSet Name="FK_AccountingTrialBalances_MasterDataLedgerId" Association="Self.FK_AccountingTrialBalances_MasterDataLedgerId">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="AccountingTrialBalances" EntitySet="AccountingTrialBalances" />
@@ -3416,10 +3392,6 @@
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalance" />
           </AssociationSet>
-          <AssociationSet Name="FK_Ledgers_MasterDataMonthId" Association="Self.FK_Ledgers_MasterDataMonthId">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalance" />
-          </AssociationSet>
           <AssociationSet Name="FK_Ledgers_OrganizationId" Association="Self.FK_Ledgers_OrganizationId">
             <End Role="Organization" EntitySet="Organization" />
             <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalance" />
@@ -3549,7 +3521,7 @@
             <End Role="StudentClass" EntitySet="StudentClass" />
           </AssociationSet>
           <AssociationSet Name="FK_StudentClass_Feetype" Association="Self.FK_StudentClass_Feetype">
-            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="SchoolFeeTypes" EntitySet="SchoolFeeTypes" />
             <End Role="StudentClass" EntitySet="StudentClass" />
           </AssociationSet>
           <AssociationSet Name="FK_StudentClass_OrganizationOrgId" Association="Self.FK_StudentClass_OrganizationOrgId">
@@ -3880,8 +3852,10 @@
           <NavigationProperty Name="ClassSubjects" Relationship="TTPModel.FK_ClassSubject_Batches" FromRole="Batch" ToRole="ClassSubject" />
           <NavigationProperty Name="StudTeacherClassMappings" Relationship="TTPModel.FK_StudTeacherClassMapping_Batches" FromRole="Batch" ToRole="StudTeacherClassMapping" />
           <NavigationProperty Name="ClassSubjectTeachers" Relationship="TTPModel.FK_ClassSubjectTeacher_Batches" FromRole="Batch" ToRole="ClassSubjectTeacher" />
-          <NavigationProperty Name="AccountingLedgerTrialBalances" Relationship="TTPModel.FK_Ledgers_Batches" FromRole="Batch" ToRole="AccountingLedgerTrialBalance" />
           <NavigationProperty Name="ClassFees" Relationship="TTPModel.FK_ClassFee_Batches" FromRole="Batch" ToRole="ClassFee" />
+          <NavigationProperty Name="AccountingLedgerTrialBalances" Relationship="TTPModel.FK_Ledgers_Batches" FromRole="Batch" ToRole="AccountingLedgerTrialBalance" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="ClassSubjectMarkComponent">
           <Key>
@@ -4022,7 +3996,6 @@
           <Property Name="ActualFormulaOrAmount" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
-          <Property Name="SalMonthYear" Type="Int16" Nullable="false" />
           <Property Name="RealeasedDate" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Byte" Nullable="false" />
           <Property Name="CreatedBy" Type="Int16" />
@@ -4032,6 +4005,8 @@
           <NavigationProperty Name="EmpComponent" Relationship="Self.FK_EmpEmployeeSalaryComponents_ComponentId" FromRole="EmpEmployeeSalaryComponents" ToRole="EmpComponents" />
           <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmployeeSalaryComponents_EmpEmployees" FromRole="EmpEmployeeSalaryComponents" ToRole="EmpEmployees" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_EmployeeSalaryComponents_Organization" FromRole="EmpEmployeeSalaryComponents" ToRole="Organization" />
+          <Property Name="Month" Type="Byte" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" />
         </EntityType>
         <EntityType Name="EmpEmployeeSkill">
           <Key>
@@ -4325,14 +4300,13 @@
           <NavigationProperty Name="StudTeacherClassMappings1" Relationship="TTPModel.FK_StudTeacherClassMapping_MasterDataSectionId" FromRole="MasterData" ToRole="StudTeacherClassMapping" />
           <NavigationProperty Name="Pages" Relationship="TTPModel.FK_Pages_MasterDataApplicationId" FromRole="MasterData" ToRole="Page" />
           <NavigationProperty Name="ApplicationFeatures" Relationship="TTPModel.FK_ApplicationFeatures_MasterDataApplicationId" FromRole="MasterData" ToRole="ApplicationFeature" />
-          <NavigationProperty Name="AccountingLedgerTrialBalances" Relationship="TTPModel.FK_Ledgers_MasterDataAccountGroupId" FromRole="MasterData" ToRole="AccountingLedgerTrialBalance" />
-          <NavigationProperty Name="AccountingLedgerTrialBalances1" Relationship="TTPModel.FK_Ledgers_MasterDataAccountNatureId" FromRole="MasterData" ToRole="AccountingLedgerTrialBalance" />
-          <NavigationProperty Name="AccountingLedgerTrialBalances2" Relationship="TTPModel.FK_Ledgers_MasterDataGeneralLedgerId" FromRole="MasterData" ToRole="AccountingLedgerTrialBalance" />
-          <NavigationProperty Name="AccountingLedgerTrialBalances3" Relationship="TTPModel.FK_Ledgers_MasterDataMonthId" FromRole="MasterData" ToRole="AccountingLedgerTrialBalance" />
           <NavigationProperty Name="AccountingTrialBalances" Relationship="TTPModel.FK_AccountingTrialBalances_MasterDataLedgerId" FromRole="MasterData" ToRole="AccountingTrialBalance" />
           <NavigationProperty Name="ClassFees" Relationship="TTPModel.FK_FeeMaster_ClassMaster" FromRole="MasterData" ToRole="ClassFee" />
           <NavigationProperty Name="ClassFees1" Relationship="TTPModel.FK_FeeMaster_FeeNameMaster" FromRole="MasterData" ToRole="ClassFee" />
           <NavigationProperty Name="ClassFees2" Relationship="TTPModel.FK_FeeMaster_LocationMaster" FromRole="MasterData" ToRole="ClassFee" />
+          <NavigationProperty Name="AccountingLedgerTrialBalances" Relationship="TTPModel.FK_Ledgers_MasterDataAccountGroupId" FromRole="MasterData" ToRole="AccountingLedgerTrialBalance" />
+          <NavigationProperty Name="AccountingLedgerTrialBalances1" Relationship="TTPModel.FK_Ledgers_MasterDataAccountNatureId" FromRole="MasterData" ToRole="AccountingLedgerTrialBalance" />
+          <NavigationProperty Name="AccountingLedgerTrialBalances2" Relationship="TTPModel.FK_Ledgers_MasterDataGeneralLedgerId" FromRole="MasterData" ToRole="AccountingLedgerTrialBalance" />
           </EntityType>
         <EntityType Name="Message">
           <Key>
@@ -4411,11 +4385,10 @@
           <NavigationProperty Name="StudTeacherClassMappings" Relationship="TTPModel.FK_StudTeacherClassMapping_Organization" FromRole="Organization" ToRole="StudTeacherClassMapping" />
           <NavigationProperty Name="ClassSubjectTeachers" Relationship="TTPModel.FK_ClassSubjectTeacher_Organization" FromRole="Organization" ToRole="ClassSubjectTeacher" />
           <NavigationProperty Name="AccountingVouchers" Relationship="TTPModel.FK_AccountingVouchers_Organization" FromRole="Organization" ToRole="AccountingVoucher" />
-          <NavigationProperty Name="AccountingPeriod" Relationship="TTPModel.FK_AccountingPeriod_Organization" FromRole="Organization" ToRole="AccountingPeriod" />
           <NavigationProperty Name="Pages" Relationship="TTPModel.FK_Pages_Organization" FromRole="Organization" ToRole="Page" />
-          <NavigationProperty Name="AccountingLedgerTrialBalances" Relationship="TTPModel.FK_Ledgers_OrganizationId" FromRole="Organization" ToRole="AccountingLedgerTrialBalance" />
           <NavigationProperty Name="AccountingTrialBalances" Relationship="TTPModel.FK_AccountingTrialBalances_Organization" FromRole="Organization" ToRole="AccountingTrialBalance" />
           <NavigationProperty Name="ClassFees" Relationship="TTPModel.FK_ClassFee_OrganizationId" FromRole="Organization" ToRole="ClassFee" />
+          <NavigationProperty Name="AccountingLedgerTrialBalances" Relationship="TTPModel.FK_Ledgers_OrganizationId" FromRole="Organization" ToRole="AccountingLedgerTrialBalance" />
         </EntityType>
         <EntityType Name="PageHistory">
           <Key>
@@ -4595,6 +4568,7 @@
           <NavigationProperty Name="StudentFeePayments" Relationship="Self.FK_StudentFeePayment_StudentFeePayment" FromRole="StudentClass" ToRole="StudentFeePayment" />
           <NavigationProperty Name="StudentFeeReceipts" Relationship="Self.FK_StudentFeeReceipt_StudentClass" FromRole="StudentClass" ToRole="StudentFeeReceipt" />
           <NavigationProperty Name="AccountingLedgerTrialBalances" Relationship="TTPModel.FK_Ledgers_StudentClassId" FromRole="StudentClass" ToRole="AccountingLedgerTrialBalance" />
+          <NavigationProperty Name="SchoolFeeType" Relationship="TTPModel.FK_StudentClass_Feetype1" FromRole="StudentClass" ToRole="SchoolFeeType" />
         </EntityType>
         <EntityType Name="StudentClassSubject">
           <Key>
@@ -6811,11 +6785,6 @@
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="AccountingVoucher" EntitySet="AccountingVouchers" />
           </AssociationSet>
-          <EntitySet Name="AccountingPeriods" EntityType="TTPModel.AccountingPeriod" />
-          <AssociationSet Name="FK_AccountingPeriod_Organization" Association="TTPModel.FK_AccountingPeriod_Organization">
-            <End Role="Organization" EntitySet="Organizations" />
-            <End Role="AccountingPeriod" EntitySet="AccountingPeriods" />
-          </AssociationSet>
           <EntitySet Name="Pages" EntityType="TTPModel.Page" />
           <AssociationSet Name="FK_Pages_MasterDataApplicationId" Association="TTPModel.FK_Pages_MasterDataApplicationId">
             <End Role="MasterData" EntitySet="MasterDatas" />
@@ -6837,39 +6806,6 @@
           <AssociationSet Name="FK_ApplicationFeatures_MasterDataApplicationId" Association="TTPModel.FK_ApplicationFeatures_MasterDataApplicationId">
             <End Role="MasterData" EntitySet="MasterDatas" />
             <End Role="ApplicationFeature" EntitySet="ApplicationFeatures" />
-          </AssociationSet>
-          <EntitySet Name="AccountingLedgerTrialBalances" EntityType="TTPModel.AccountingLedgerTrialBalance" />
-          <AssociationSet Name="FK_Ledgers_Batches" Association="TTPModel.FK_Ledgers_Batches">
-            <End Role="Batch" EntitySet="Batches" />
-            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ledgers_EmpEmployeeId" Association="TTPModel.FK_Ledgers_EmpEmployeeId">
-            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
-            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ledgers_MasterDataAccountGroupId" Association="TTPModel.FK_Ledgers_MasterDataAccountGroupId">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ledgers_MasterDataAccountNatureId" Association="TTPModel.FK_Ledgers_MasterDataAccountNatureId">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ledgers_MasterDataGeneralLedgerId" Association="TTPModel.FK_Ledgers_MasterDataGeneralLedgerId">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ledgers_MasterDataMonthId" Association="TTPModel.FK_Ledgers_MasterDataMonthId">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ledgers_OrganizationId" Association="TTPModel.FK_Ledgers_OrganizationId">
-            <End Role="Organization" EntitySet="Organizations" />
-            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ledgers_StudentClassId" Association="TTPModel.FK_Ledgers_StudentClassId">
-            <End Role="StudentClass" EntitySet="StudentClasses" />
-            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
           </AssociationSet>
           <EntitySet Name="AccountingTrialBalances" EntityType="TTPModel.AccountingTrialBalance" />
           <AssociationSet Name="FK_AccountingTrialBalances_MasterDataLedgerId" Association="TTPModel.FK_AccountingTrialBalances_MasterDataLedgerId">
@@ -6912,6 +6848,40 @@
           <AssociationSet Name="FK_StudentFeePayment_ClassFee" Association="TTPModel.FK_StudentFeePayment_ClassFee">
             <End Role="ClassFee" EntitySet="ClassFees" />
             <End Role="StudentFeePayment" EntitySet="StudentFeePayments" />
+          </AssociationSet>
+          <EntitySet Name="AccountingLedgerTrialBalances" EntityType="TTPModel.AccountingLedgerTrialBalance" />
+          <AssociationSet Name="FK_Ledgers_Batches" Association="TTPModel.FK_Ledgers_Batches">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ledgers_EmpEmployeeId" Association="TTPModel.FK_Ledgers_EmpEmployeeId">
+            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
+            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ledgers_MasterDataAccountGroupId" Association="TTPModel.FK_Ledgers_MasterDataAccountGroupId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ledgers_MasterDataAccountNatureId" Association="TTPModel.FK_Ledgers_MasterDataAccountNatureId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ledgers_MasterDataGeneralLedgerId" Association="TTPModel.FK_Ledgers_MasterDataGeneralLedgerId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ledgers_OrganizationId" Association="TTPModel.FK_Ledgers_OrganizationId">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ledgers_StudentClassId" Association="TTPModel.FK_Ledgers_StudentClassId">
+            <End Role="StudentClass" EntitySet="StudentClasses" />
+            <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
+          </AssociationSet>
+          <EntitySet Name="SchoolFeeTypes" EntityType="TTPModel.SchoolFeeType" />
+          <AssociationSet Name="FK_StudentClass_Feetype1" Association="TTPModel.FK_StudentClass_Feetype1">
+            <End Role="SchoolFeeType" EntitySet="SchoolFeeTypes" />
+            <End Role="StudentClass" EntitySet="StudentClasses" />
           </AssociationSet>
           </EntityContainer>
         <Association Name="FK_EmpComponents_ComponentType">
@@ -7294,34 +7264,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="AccountingPeriod">
-          <Key>
-            <PropertyRef Name="AccountingPeriodId" />
-          </Key>
-          <Property Name="AccountingPeriodId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CurrentPeriod" Type="Byte" Nullable="false" />
-          <Property Name="Active" Type="Byte" Nullable="false" />
-          <Property Name="OrgId" Type="Int16" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int16" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Int16" />
-          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_AccountingPeriod_Organization" FromRole="AccountingPeriod" ToRole="Organization" />
-        </EntityType>
-        <Association Name="FK_AccountingPeriod_Organization">
-          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
-          <End Type="TTPModel.AccountingPeriod" Role="AccountingPeriod" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="AccountingPeriod">
-              <PropertyRef Name="AccountingPeriodId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Page">
           <Key>
             <PropertyRef Name="PageId" />
@@ -7426,132 +7368,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="AccountingLedgerTrialBalance">
-          <Key>
-            <PropertyRef Name="StudentEmployeeLedegerId" />
-          </Key>
-          <Property Name="StudentEmployeeLedegerId" Type="Int16" Nullable="false" />
-          <Property Name="StudentClassId" Type="Int32" />
-          <Property Name="EmployeeId" Type="Int16" />
-          <Property Name="GeneralLedgerId" Type="Int16" />
-          <Property Name="MonthYearId" Type="Int16" />
-          <Property Name="AccountGroupId" Type="Int16" Nullable="false" />
-          <Property Name="AccountNatureId" Type="Int16" Nullable="false" />
-          <Property Name="TotalDebit" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="TotalCredit" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Balance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="OrgId" Type="Int16" Nullable="false" />
-          <Property Name="BatchId" Type="Int16" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int16" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdateBy" Type="Int16" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="Active" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="Batch" Relationship="TTPModel.FK_Ledgers_Batches" FromRole="AccountingLedgerTrialBalance" ToRole="Batch" />
-          <NavigationProperty Name="EmpEmployee" Relationship="TTPModel.FK_Ledgers_EmpEmployeeId" FromRole="AccountingLedgerTrialBalance" ToRole="EmpEmployee" />
-          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_Ledgers_MasterDataAccountGroupId" FromRole="AccountingLedgerTrialBalance" ToRole="MasterData" />
-          <NavigationProperty Name="MasterData1" Relationship="TTPModel.FK_Ledgers_MasterDataAccountNatureId" FromRole="AccountingLedgerTrialBalance" ToRole="MasterData" />
-          <NavigationProperty Name="MasterData2" Relationship="TTPModel.FK_Ledgers_MasterDataGeneralLedgerId" FromRole="AccountingLedgerTrialBalance" ToRole="MasterData" />
-          <NavigationProperty Name="MasterData3" Relationship="TTPModel.FK_Ledgers_MasterDataMonthId" FromRole="AccountingLedgerTrialBalance" ToRole="MasterData" />
-          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_Ledgers_OrganizationId" FromRole="AccountingLedgerTrialBalance" ToRole="Organization" />
-          <NavigationProperty Name="StudentClass" Relationship="TTPModel.FK_Ledgers_StudentClassId" FromRole="AccountingLedgerTrialBalance" ToRole="StudentClass" />
-        </EntityType>
-        <Association Name="FK_Ledgers_Batches">
-          <End Type="TTPModel.Batch" Role="Batch" Multiplicity="1" />
-          <End Type="TTPModel.AccountingLedgerTrialBalance" Role="AccountingLedgerTrialBalance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Batch">
-              <PropertyRef Name="BatchId" />
-            </Principal>
-            <Dependent Role="AccountingLedgerTrialBalance">
-              <PropertyRef Name="BatchId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ledgers_EmpEmployeeId">
-          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="0..1" />
-          <End Type="TTPModel.AccountingLedgerTrialBalance" Role="AccountingLedgerTrialBalance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EmpEmployee">
-              <PropertyRef Name="EmpEmployeeId" />
-            </Principal>
-            <Dependent Role="AccountingLedgerTrialBalance">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ledgers_MasterDataAccountGroupId">
-          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
-          <End Type="TTPModel.AccountingLedgerTrialBalance" Role="AccountingLedgerTrialBalance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="AccountingLedgerTrialBalance">
-              <PropertyRef Name="AccountGroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ledgers_MasterDataAccountNatureId">
-          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
-          <End Type="TTPModel.AccountingLedgerTrialBalance" Role="AccountingLedgerTrialBalance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="AccountingLedgerTrialBalance">
-              <PropertyRef Name="AccountNatureId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ledgers_MasterDataGeneralLedgerId">
-          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="0..1" />
-          <End Type="TTPModel.AccountingLedgerTrialBalance" Role="AccountingLedgerTrialBalance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="AccountingLedgerTrialBalance">
-              <PropertyRef Name="GeneralLedgerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ledgers_MasterDataMonthId">
-          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="0..1" />
-          <End Type="TTPModel.AccountingLedgerTrialBalance" Role="AccountingLedgerTrialBalance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="AccountingLedgerTrialBalance">
-              <PropertyRef Name="MonthYearId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ledgers_OrganizationId">
-          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
-          <End Type="TTPModel.AccountingLedgerTrialBalance" Role="AccountingLedgerTrialBalance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="AccountingLedgerTrialBalance">
-              <PropertyRef Name="OrgId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ledgers_StudentClassId">
-          <End Type="TTPModel.StudentClass" Role="StudentClass" Multiplicity="0..1" />
-          <End Type="TTPModel.AccountingLedgerTrialBalance" Role="AccountingLedgerTrialBalance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StudentClass">
-              <PropertyRef Name="StudentClassId" />
-            </Principal>
-            <Dependent Role="AccountingLedgerTrialBalance">
-              <PropertyRef Name="StudentClassId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="AccountingTrialBalance">
           <Key>
             <PropertyRef Name="AccountingTrialBalanceId" />
@@ -7616,7 +7432,6 @@
           <Property Name="ClassId" Type="Int16" Nullable="false" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="BatchId" Type="Int16" Nullable="false" />
-          <Property Name="YearMonth" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="Recurring" Type="Byte" Nullable="false" />
           <Property Name="Active" Type="Byte" Nullable="false" />
           <Property Name="LocationId" Type="Int16" />
@@ -7633,6 +7448,7 @@
           <NavigationProperty Name="MasterData2" Relationship="TTPModel.FK_FeeMaster_LocationMaster" FromRole="ClassFee" ToRole="MasterData" />
           <NavigationProperty Name="PaymentDetails" Relationship="TTPModel.FK_PaymentDetails_ClassFee" FromRole="ClassFee" ToRole="PaymentDetail" />
           <NavigationProperty Name="StudentFeePayments" Relationship="TTPModel.FK_StudentFeePayment_ClassFee" FromRole="ClassFee" ToRole="StudentFeePayment" />
+          <Property Name="Month" Type="Byte" Nullable="false" />
         </EntityType>
         <Association Name="FK_ClassFee_Batches">
           <End Type="TTPModel.Batch" Role="Batch" Multiplicity="1" />
@@ -7715,6 +7531,148 @@
             </Principal>
             <Dependent Role="StudentFeePayment">
               <PropertyRef Name="ClassFeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AccountingLedgerTrialBalance">
+          <Key>
+            <PropertyRef Name="StudentEmployeeLedegerId" />
+          </Key>
+          <Property Name="StudentEmployeeLedegerId" Type="Int16" Nullable="false" />
+          <Property Name="StudentClassId" Type="Int32" />
+          <Property Name="EmployeeId" Type="Int16" />
+          <Property Name="GeneralLedgerId" Type="Int16" />
+          <Property Name="AccountGroupId" Type="Int16" Nullable="false" />
+          <Property Name="AccountNatureId" Type="Int16" Nullable="false" />
+          <Property Name="TotalDebit" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalCredit" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Balance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Batch" Relationship="TTPModel.FK_Ledgers_Batches" FromRole="AccountingLedgerTrialBalance" ToRole="Batch" />
+          <NavigationProperty Name="EmpEmployee" Relationship="TTPModel.FK_Ledgers_EmpEmployeeId" FromRole="AccountingLedgerTrialBalance" ToRole="EmpEmployee" />
+          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_Ledgers_MasterDataAccountGroupId" FromRole="AccountingLedgerTrialBalance" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="TTPModel.FK_Ledgers_MasterDataAccountNatureId" FromRole="AccountingLedgerTrialBalance" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData2" Relationship="TTPModel.FK_Ledgers_MasterDataGeneralLedgerId" FromRole="AccountingLedgerTrialBalance" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_Ledgers_OrganizationId" FromRole="AccountingLedgerTrialBalance" ToRole="Organization" />
+          <NavigationProperty Name="StudentClass" Relationship="TTPModel.FK_Ledgers_StudentClassId" FromRole="AccountingLedgerTrialBalance" ToRole="StudentClass" />
+          <Property Name="Month" Type="Byte" />
+        </EntityType>
+        <Association Name="FK_Ledgers_Batches">
+          <End Type="TTPModel.Batch" Role="Batch" Multiplicity="1" />
+          <End Type="TTPModel.AccountingLedgerTrialBalance" Role="AccountingLedgerTrialBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="AccountingLedgerTrialBalance">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ledgers_EmpEmployeeId">
+          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="0..1" />
+          <End Type="TTPModel.AccountingLedgerTrialBalance" Role="AccountingLedgerTrialBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployee">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="AccountingLedgerTrialBalance">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ledgers_MasterDataAccountGroupId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.AccountingLedgerTrialBalance" Role="AccountingLedgerTrialBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="AccountingLedgerTrialBalance">
+              <PropertyRef Name="AccountGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ledgers_MasterDataAccountNatureId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.AccountingLedgerTrialBalance" Role="AccountingLedgerTrialBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="AccountingLedgerTrialBalance">
+              <PropertyRef Name="AccountNatureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ledgers_MasterDataGeneralLedgerId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="0..1" />
+          <End Type="TTPModel.AccountingLedgerTrialBalance" Role="AccountingLedgerTrialBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="AccountingLedgerTrialBalance">
+              <PropertyRef Name="GeneralLedgerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ledgers_OrganizationId">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.AccountingLedgerTrialBalance" Role="AccountingLedgerTrialBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="AccountingLedgerTrialBalance">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ledgers_StudentClassId">
+          <End Type="TTPModel.StudentClass" Role="StudentClass" Multiplicity="0..1" />
+          <End Type="TTPModel.AccountingLedgerTrialBalance" Role="AccountingLedgerTrialBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentClass">
+              <PropertyRef Name="StudentClassId" />
+            </Principal>
+            <Dependent Role="AccountingLedgerTrialBalance">
+              <PropertyRef Name="StudentClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SchoolFeeType">
+          <Key>
+            <PropertyRef Name="FeeTypeId" />
+          </Key>
+          <Property Name="FeeTypeId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FeeTypeName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Formula" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="StudentClasses" Relationship="TTPModel.FK_StudentClass_Feetype1" FromRole="SchoolFeeType" ToRole="StudentClass" />
+        </EntityType>
+        <Association Name="FK_StudentClass_Feetype1">
+          <End Type="TTPModel.SchoolFeeType" Role="SchoolFeeType" Multiplicity="1" />
+          <End Type="TTPModel.StudentClass" Role="StudentClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolFeeType">
+              <PropertyRef Name="FeeTypeId" />
+            </Principal>
+            <Dependent Role="StudentClass">
+              <PropertyRef Name="FeeTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7852,6 +7810,8 @@
           <EntitySetMapping Name="Batches">
             <EntityTypeMapping TypeName="TTPModel.Batch">
               <MappingFragment StoreEntitySet="Batches">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="BatchName" ColumnName="BatchName" />
                 <ScalarProperty Name="CurrentBatch" ColumnName="CurrentBatch" />
@@ -7976,13 +7936,14 @@
           <EntitySetMapping Name="EmpEmployeeSalaryComponents">
             <EntityTypeMapping TypeName="TTPModel.EmpEmployeeSalaryComponent">
               <MappingFragment StoreEntitySet="EmpEmployeeSalaryComponents">
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="EmployeeSalaryComponentId" ColumnName="EmployeeSalaryComponentId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="EmpComponentId" ColumnName="EmpComponentId" />
                 <ScalarProperty Name="ActualFormulaOrAmount" ColumnName="ActualFormulaOrAmount" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
-                <ScalarProperty Name="SalMonthYear" ColumnName="SalMonthYear" />
                 <ScalarProperty Name="RealeasedDate" ColumnName="RealeasedDate" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -8720,22 +8681,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AccountingPeriods">
-            <EntityTypeMapping TypeName="TTPModel.AccountingPeriod">
-              <MappingFragment StoreEntitySet="AccountingPeriod">
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="CurrentPeriod" ColumnName="CurrentPeriod" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="AccountingPeriodId" ColumnName="AccountingPeriodId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Pages">
             <EntityTypeMapping TypeName="TTPModel.Page">
               <MappingFragment StoreEntitySet="Pages">
@@ -8777,29 +8722,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AccountingLedgerTrialBalances">
-            <EntityTypeMapping TypeName="TTPModel.AccountingLedgerTrialBalance">
-              <MappingFragment StoreEntitySet="AccountingLedgerTrialBalance">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
-                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
-                <ScalarProperty Name="Balance" ColumnName="Balance" />
-                <ScalarProperty Name="TotalCredit" ColumnName="TotalCredit" />
-                <ScalarProperty Name="TotalDebit" ColumnName="TotalDebit" />
-                <ScalarProperty Name="AccountNatureId" ColumnName="AccountNatureId" />
-                <ScalarProperty Name="AccountGroupId" ColumnName="AccountGroupId" />
-                <ScalarProperty Name="MonthYearId" ColumnName="MonthYearId" />
-                <ScalarProperty Name="GeneralLedgerId" ColumnName="GeneralLedgerId" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
-                <ScalarProperty Name="StudentEmployeeLedegerId" ColumnName="StudentEmployeeLedegerId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AccountingTrialBalances">
             <EntityTypeMapping TypeName="TTPModel.AccountingTrialBalance">
               <MappingFragment StoreEntitySet="AccountingTrialBalances">
@@ -8820,6 +8742,7 @@
           <EntitySetMapping Name="ClassFees">
             <EntityTypeMapping TypeName="TTPModel.ClassFee">
               <MappingFragment StoreEntitySet="ClassFee">
+                <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -8829,12 +8752,51 @@
                 <ScalarProperty Name="LocationId" ColumnName="LocationId" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Recurring" ColumnName="Recurring" />
-                <ScalarProperty Name="YearMonth" ColumnName="YearMonth" />
                 <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="ClassId" ColumnName="ClassId" />
                 <ScalarProperty Name="FeeNameId" ColumnName="FeeNameId" />
                 <ScalarProperty Name="ClassFeeId" ColumnName="ClassFeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountingLedgerTrialBalances">
+            <EntityTypeMapping TypeName="TTPModel.AccountingLedgerTrialBalance">
+              <MappingFragment StoreEntitySet="AccountingLedgerTrialBalance">
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="TotalCredit" ColumnName="TotalCredit" />
+                <ScalarProperty Name="TotalDebit" ColumnName="TotalDebit" />
+                <ScalarProperty Name="AccountNatureId" ColumnName="AccountNatureId" />
+                <ScalarProperty Name="AccountGroupId" ColumnName="AccountGroupId" />
+                <ScalarProperty Name="GeneralLedgerId" ColumnName="GeneralLedgerId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
+                <ScalarProperty Name="StudentEmployeeLedegerId" ColumnName="StudentEmployeeLedegerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchoolFeeTypes">
+            <EntityTypeMapping TypeName="TTPModel.SchoolFeeType">
+              <MappingFragment StoreEntitySet="SchoolFeeTypes">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="Formula" ColumnName="Formula" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FeeTypeName" ColumnName="FeeTypeName" />
+                <ScalarProperty Name="FeeTypeId" ColumnName="FeeTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

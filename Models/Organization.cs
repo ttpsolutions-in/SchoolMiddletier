@@ -58,9 +58,9 @@ namespace schools.Models
             this.ClassSubjectTeachers = new HashSet<ClassSubjectTeacher>();
             this.AccountingVouchers = new HashSet<AccountingVoucher>();
             this.Pages = new HashSet<Page>();
-            this.AccountingLedgerTrialBalances = new HashSet<AccountingLedgerTrialBalance>();
             this.AccountingTrialBalances = new HashSet<AccountingTrialBalance>();
             this.ClassFees = new HashSet<ClassFee>();
+            this.AccountingLedgerTrialBalances = new HashSet<AccountingLedgerTrialBalance>();
         }
     
         public short OrganizationId { get; set; }
@@ -163,14 +163,13 @@ namespace schools.Models
         public virtual ICollection<ClassSubjectTeacher> ClassSubjectTeachers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountingVoucher> AccountingVouchers { get; set; }
-        public virtual AccountingPeriod AccountingPeriod { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Page> Pages { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccountingLedgerTrialBalance> AccountingLedgerTrialBalances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountingTrialBalance> AccountingTrialBalances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassFee> ClassFees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccountingLedgerTrialBalance> AccountingLedgerTrialBalances { get; set; }
     }
 }
