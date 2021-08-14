@@ -14,14 +14,14 @@ namespace schools.Models
     
     public partial class EmployeeEducationHistory
     {
-        public short EmployeeEducationHistoryId { get; set; }
+        public int EmployeeEducationHistoryId { get; set; }
         public string CourseName { get; set; }
         public short FromYear { get; set; }
         public short ToYear { get; set; }
         public short PercentageObtained { get; set; }
         public string BoardName { get; set; }
         public byte Status { get; set; }
-        public short EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         public short OrgId { get; set; }
     
         public virtual EmpEmployee EmpEmployee { get; set; }

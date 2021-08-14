@@ -29,7 +29,6 @@ namespace schools.Controllers
     builder.EntitySet<StudentClass>("StudentClasses"); 
     builder.EntitySet<StudentDocument>("StudentDocuments"); 
     builder.EntitySet<StudentFeePayment>("StudentFeePayments"); 
-    builder.EntitySet<StudentFeeReceipt>("StudentFeeReceipts"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class StudentsController : ODataController
@@ -252,11 +251,18 @@ namespace schools.Controllers
             return db.Students.Where(m => m.StudentId == key).SelectMany(m => m.StudentFeePayments);
         }
 
-        // GET: odata/Students(5)/StudentFeeReceipts
+        // GET: odata/Students(5)/Students1
         [EnableQuery]
-        public IQueryable<StudentFeeReceipt> GetStudentFeeReceipts([FromODataUri] int key)
+        public SingleResult<Student> GetStudents1([FromODataUri] int key)
         {
-            return db.Students.Where(m => m.StudentId == key).SelectMany(m => m.StudentFeeReceipts);
+            return SingleResult.Create(db.Students.Where(m => m.StudentId == key).Select(m => m.Students1));
+        }
+
+        // GET: odata/Students(5)/Student1
+        [EnableQuery]
+        public SingleResult<Student> GetStudent1([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.Students.Where(m => m.StudentId == key).Select(m => m.Student1));
         }
 
         protected override void Dispose(bool disposing)

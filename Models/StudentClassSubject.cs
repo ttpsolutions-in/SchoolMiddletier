@@ -20,7 +20,7 @@ namespace schools.Models
             this.ExamStudentSubjectResults = new HashSet<ExamStudentSubjectResult>();
         }
     
-        public short StudentClassSubjectId { get; set; }
+        public int StudentClassSubjectId { get; set; }
         public short ClassSubjectId { get; set; }
         public int StudentClassId { get; set; }
         public byte Active { get; set; }
@@ -32,10 +32,10 @@ namespace schools.Models
         public Nullable<short> UpdatedBy { get; set; }
     
         public virtual Batch Batch { get; set; }
+        public virtual ClassSubject ClassSubject { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
         public virtual Organization Organization { get; set; }
         public virtual StudentClass StudentClass { get; set; }
-        public virtual ClassSubject ClassSubject { get; set; }
     }
 }

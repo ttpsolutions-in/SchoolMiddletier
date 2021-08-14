@@ -14,12 +14,12 @@ namespace schools.Models
     
     public partial class StudentDocument
     {
-        public short StudentDocId { get; set; }
+        public int StudentDocId { get; set; }
         public string DocName { get; set; }
         public System.DateTime UploadDate { get; set; }
         public int StudentId { get; set; }
         public int StudentClassId { get; set; }
-        public short DocTypeId { get; set; }
+        public int DocTypeId { get; set; }
         public byte Active { get; set; }
         public Nullable<short> OrgId { get; set; }
         public Nullable<short> BatchId { get; set; }

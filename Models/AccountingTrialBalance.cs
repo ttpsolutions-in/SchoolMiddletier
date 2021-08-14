@@ -14,14 +14,8 @@ namespace schools.Models
     
     public partial class AccountingTrialBalance
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AccountingTrialBalance()
-        {
-            this.AccountingVouchers = new HashSet<AccountingVoucher>();
-        }
-    
         public short AccountingTrialBalanceId { get; set; }
-        public short LedgerId { get; set; }
+        public int LedgerId { get; set; }
         public decimal TotalDebit { get; set; }
         public decimal TotalCredit { get; set; }
         public decimal Balance { get; set; }
@@ -34,7 +28,5 @@ namespace schools.Models
     
         public virtual MasterData MasterData { get; set; }
         public virtual Organization Organization { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccountingVoucher> AccountingVouchers { get; set; }
     }
 }

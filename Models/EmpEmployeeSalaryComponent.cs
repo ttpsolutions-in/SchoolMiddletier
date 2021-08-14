@@ -14,20 +14,20 @@ namespace schools.Models
     
     public partial class EmpEmployeeSalaryComponent
     {
-        public short EmployeeSalaryComponentId { get; set; }
-        public short EmployeeId { get; set; }
+        public int EmployeeSalaryComponentId { get; set; }
+        public int EmployeeId { get; set; }
         public short EmpComponentId { get; set; }
         public string ActualFormulaOrAmount { get; set; }
         public decimal Amount { get; set; }
         public short OrgId { get; set; }
+        public byte Month { get; set; }
+        public Nullable<short> BatchId { get; set; }
         public Nullable<System.DateTime> RealeasedDate { get; set; }
         public byte Active { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
-        public byte Month { get; set; }
-        public Nullable<short> BatchId { get; set; }
     
         public virtual EmpComponent EmpComponent { get; set; }
         public virtual EmpEmployee EmpEmployee { get; set; }

@@ -14,12 +14,14 @@ namespace schools.Models
     
     public partial class AccountingVoucher
     {
-        public short AccountingVoucherId { get; set; }
+        public int AccountingVoucherId { get; set; }
         public System.DateTime DocDate { get; set; }
         public System.DateTime PostingDate { get; set; }
         public string Reference { get; set; }
-        public short GLAccountId { get; set; }
+        public int GLAccountId { get; set; }
         public byte DebitCreditId { get; set; }
+        public decimal Amount { get; set; }
+        public Nullable<short> ClassFeeId { get; set; }
         public string ShortText { get; set; }
         public short OrgId { get; set; }
         public Nullable<short> SubOrgId { get; set; }
@@ -28,9 +30,10 @@ namespace schools.Models
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
-        public decimal Amount { get; set; }
+        public Nullable<int> FeeReceiptId { get; set; }
     
+        public virtual AccountingLedgerTrialBalance AccountingLedgerTrialBalance { get; set; }
         public virtual Organization Organization { get; set; }
-        public virtual AccountingTrialBalance AccountingTrialBalance { get; set; }
+        public virtual StudentFeeReceipt StudentFeeReceipt { get; set; }
     }
 }

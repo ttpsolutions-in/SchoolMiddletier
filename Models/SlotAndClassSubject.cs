@@ -14,7 +14,7 @@ namespace schools.Models
     
     public partial class SlotAndClassSubject
     {
-        public short SlotClassSubjectId { get; set; }
+        public int SlotClassSubjectId { get; set; }
         public short SlotId { get; set; }
         public short ClassSubjectId { get; set; }
         public short OrgId { get; set; }
@@ -26,8 +26,8 @@ namespace schools.Models
         public Nullable<short> UpdatedBy { get; set; }
     
         public virtual Batch Batch { get; set; }
+        public virtual ClassSubject ClassSubject { get; set; }
         public virtual ExamSlot ExamSlot { get; set; }
         public virtual Organization Organization { get; set; }
-        public virtual ClassSubject ClassSubject { get; set; }
     }
 }

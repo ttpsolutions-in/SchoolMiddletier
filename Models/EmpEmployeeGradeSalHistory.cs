@@ -15,8 +15,8 @@ namespace schools.Models
     public partial class EmpEmployeeGradeSalHistory
     {
         public short EmployeeGradeHistoryId { get; set; }
-        public short EmpGradeId { get; set; }
-        public short EmployeeId { get; set; }
+        public int EmpGradeId { get; set; }
+        public int EmployeeId { get; set; }
         public short DepartmentId { get; set; }
         public decimal CTC { get; set; }
         public System.DateTime FromDate { get; set; }
@@ -28,7 +28,7 @@ namespace schools.Models
         public Nullable<short> UpdatedBy { get; set; }
         public string Remarks { get; set; }
         public Nullable<short> ApprovedBy { get; set; }
-        public Nullable<short> WorkAccountId { get; set; }
+        public Nullable<int> WorkAccountId { get; set; }
         public Nullable<short> JobTitleId { get; set; }
         public Nullable<short> DesignationId { get; set; }
         public byte Active { get; set; }

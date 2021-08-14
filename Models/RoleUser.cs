@@ -15,8 +15,8 @@ namespace schools.Models
     public partial class RoleUser
     {
         public short RoleUserId { get; set; }
-        public short RoleId { get; set; }
-        public short UserId { get; set; }
+        public int RoleId { get; set; }
+        public int UserId { get; set; }
         public short OrgId { get; set; }
         public Nullable<short> DepartmentId { get; set; }
         public Nullable<short> LocationId { get; set; }

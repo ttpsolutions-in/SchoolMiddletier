@@ -14,9 +14,9 @@ namespace schools.Models
     
     public partial class EmpEmployeeSkill
     {
-        public short EmpEmployeeSkillId { get; set; }
+        public int EmpEmployeeSkillId { get; set; }
         public short SkillId { get; set; }
-        public short EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         public byte Status { get; set; }
         public short ExperienceInMonths { get; set; }
         public short OrgId { get; set; }

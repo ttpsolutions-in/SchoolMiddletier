@@ -14,12 +14,19 @@ namespace schools.Models
     
     public partial class AccountingLedgerTrialBalance
     {
-        public short StudentEmployeeLedegerId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AccountingLedgerTrialBalance()
+        {
+            this.AccountingVouchers = new HashSet<AccountingVoucher>();
+        }
+    
+        public int StudentEmployeeLedegerId { get; set; }
         public Nullable<int> StudentClassId { get; set; }
-        public Nullable<short> EmployeeId { get; set; }
-        public Nullable<short> GeneralLedgerId { get; set; }
-        public short AccountGroupId { get; set; }
-        public short AccountNatureId { get; set; }
+        public Nullable<int> EmployeeId { get; set; }
+        public Nullable<int> GeneralLedgerId { get; set; }
+        public Nullable<byte> Month { get; set; }
+        public int AccountGroupId { get; set; }
+        public int AccountNatureId { get; set; }
         public decimal TotalDebit { get; set; }
         public decimal TotalCredit { get; set; }
         public decimal Balance { get; set; }
@@ -30,8 +37,9 @@ namespace schools.Models
         public Nullable<short> UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte Active { get; set; }
-        public Nullable<byte> Month { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccountingVoucher> AccountingVouchers { get; set; }
         public virtual Batch Batch { get; set; }
         public virtual EmpEmployee EmpEmployee { get; set; }
         public virtual MasterData MasterData { get; set; }

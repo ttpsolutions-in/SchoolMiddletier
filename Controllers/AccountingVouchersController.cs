@@ -23,7 +23,7 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<AccountingVoucher>("AccountingVouchers");
-    builder.EntitySet<AccountingTrialBalance>("AccountingTrialBalances"); 
+    builder.EntitySet<AccountingLedgerTrialBalance>("AccountingLedgerTrialBalances"); 
     builder.EntitySet<Organization>("Organizations"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
@@ -40,13 +40,13 @@ namespace schools.Controllers
 
         // GET: odata/AccountingVouchers(5)
         [EnableQuery]
-        public SingleResult<AccountingVoucher> GetAccountingVoucher([FromODataUri] short key)
+        public SingleResult<AccountingVoucher> GetAccountingVoucher([FromODataUri] int key)
         {
             return SingleResult.Create(db.AccountingVouchers.Where(accountingVoucher => accountingVoucher.AccountingVoucherId == key));
         }
 
         // PUT: odata/AccountingVouchers(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<AccountingVoucher> patch)
+        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<AccountingVoucher> patch)
         {
             Validate(patch.GetEntity());
 
@@ -98,7 +98,7 @@ namespace schools.Controllers
 
         // PATCH: odata/AccountingVouchers(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<AccountingVoucher> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<AccountingVoucher> patch)
         {
             Validate(patch.GetEntity());
 
@@ -135,7 +135,7 @@ namespace schools.Controllers
         }
 
         // DELETE: odata/AccountingVouchers(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] short key)
+        public async Task<IHttpActionResult> Delete([FromODataUri] int key)
         {
             AccountingVoucher accountingVoucher = await db.AccountingVouchers.FindAsync(key);
             if (accountingVoucher == null)
@@ -149,16 +149,16 @@ namespace schools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/AccountingVouchers(5)/AccountingTrialBalance
+        // GET: odata/AccountingVouchers(5)/AccountingLedgerTrialBalance
         [EnableQuery]
-        public SingleResult<AccountingTrialBalance> GetAccountingTrialBalance([FromODataUri] short key)
+        public SingleResult<AccountingLedgerTrialBalance> GetAccountingLedgerTrialBalance([FromODataUri] int key)
         {
-            return SingleResult.Create(db.AccountingVouchers.Where(m => m.AccountingVoucherId == key).Select(m => m.AccountingTrialBalance));
+            return SingleResult.Create(db.AccountingVouchers.Where(m => m.AccountingVoucherId == key).Select(m => m.AccountingLedgerTrialBalance));
         }
 
         // GET: odata/AccountingVouchers(5)/Organization
         [EnableQuery]
-        public SingleResult<Organization> GetOrganization([FromODataUri] short key)
+        public SingleResult<Organization> GetOrganization([FromODataUri] int key)
         {
             return SingleResult.Create(db.AccountingVouchers.Where(m => m.AccountingVoucherId == key).Select(m => m.Organization));
         }
@@ -172,7 +172,7 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool AccountingVoucherExists(short key)
+        private bool AccountingVoucherExists(int key)
         {
             return db.AccountingVouchers.Count(e => e.AccountingVoucherId == key) > 0;
         }

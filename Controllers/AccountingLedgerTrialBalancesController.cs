@@ -23,6 +23,7 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<AccountingLedgerTrialBalance>("AccountingLedgerTrialBalances");
+    builder.EntitySet<AccountingVoucher>("AccountingVouchers"); 
     builder.EntitySet<Batch>("Batches"); 
     builder.EntitySet<EmpEmployee>("EmpEmployees"); 
     builder.EntitySet<MasterData>("MasterDatas"); 
@@ -43,13 +44,13 @@ namespace schools.Controllers
 
         // GET: odata/AccountingLedgerTrialBalances(5)
         [EnableQuery]
-        public SingleResult<AccountingLedgerTrialBalance> GetAccountingLedgerTrialBalance([FromODataUri] short key)
+        public SingleResult<AccountingLedgerTrialBalance> GetAccountingLedgerTrialBalance([FromODataUri] int key)
         {
             return SingleResult.Create(db.AccountingLedgerTrialBalances.Where(accountingLedgerTrialBalance => accountingLedgerTrialBalance.StudentEmployeeLedegerId == key));
         }
 
         // PUT: odata/AccountingLedgerTrialBalances(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<AccountingLedgerTrialBalance> patch)
+        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<AccountingLedgerTrialBalance> patch)
         {
             Validate(patch.GetEntity());
 
@@ -116,7 +117,7 @@ namespace schools.Controllers
 
         // PATCH: odata/AccountingLedgerTrialBalances(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<AccountingLedgerTrialBalance> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<AccountingLedgerTrialBalance> patch)
         {
             Validate(patch.GetEntity());
 
@@ -153,7 +154,7 @@ namespace schools.Controllers
         }
 
         // DELETE: odata/AccountingLedgerTrialBalances(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] short key)
+        public async Task<IHttpActionResult> Delete([FromODataUri] int key)
         {
             AccountingLedgerTrialBalance accountingLedgerTrialBalance = await db.AccountingLedgerTrialBalances.FindAsync(key);
             if (accountingLedgerTrialBalance == null)
@@ -167,51 +168,58 @@ namespace schools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // GET: odata/AccountingLedgerTrialBalances(5)/AccountingVouchers
+        [EnableQuery]
+        public IQueryable<AccountingVoucher> GetAccountingVouchers([FromODataUri] int key)
+        {
+            return db.AccountingLedgerTrialBalances.Where(m => m.StudentEmployeeLedegerId == key).SelectMany(m => m.AccountingVouchers);
+        }
+
         // GET: odata/AccountingLedgerTrialBalances(5)/Batch
         [EnableQuery]
-        public SingleResult<Batch> GetBatch([FromODataUri] short key)
+        public SingleResult<Batch> GetBatch([FromODataUri] int key)
         {
             return SingleResult.Create(db.AccountingLedgerTrialBalances.Where(m => m.StudentEmployeeLedegerId == key).Select(m => m.Batch));
         }
 
         // GET: odata/AccountingLedgerTrialBalances(5)/EmpEmployee
         [EnableQuery]
-        public SingleResult<EmpEmployee> GetEmpEmployee([FromODataUri] short key)
+        public SingleResult<EmpEmployee> GetEmpEmployee([FromODataUri] int key)
         {
             return SingleResult.Create(db.AccountingLedgerTrialBalances.Where(m => m.StudentEmployeeLedegerId == key).Select(m => m.EmpEmployee));
         }
 
         // GET: odata/AccountingLedgerTrialBalances(5)/MasterData
         [EnableQuery]
-        public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
+        public SingleResult<MasterData> GetMasterData([FromODataUri] int key)
         {
             return SingleResult.Create(db.AccountingLedgerTrialBalances.Where(m => m.StudentEmployeeLedegerId == key).Select(m => m.MasterData));
         }
 
         // GET: odata/AccountingLedgerTrialBalances(5)/MasterData1
         [EnableQuery]
-        public SingleResult<MasterData> GetMasterData1([FromODataUri] short key)
+        public SingleResult<MasterData> GetMasterData1([FromODataUri] int key)
         {
             return SingleResult.Create(db.AccountingLedgerTrialBalances.Where(m => m.StudentEmployeeLedegerId == key).Select(m => m.MasterData1));
         }
 
         // GET: odata/AccountingLedgerTrialBalances(5)/MasterData2
         [EnableQuery]
-        public SingleResult<MasterData> GetMasterData2([FromODataUri] short key)
+        public SingleResult<MasterData> GetMasterData2([FromODataUri] int key)
         {
             return SingleResult.Create(db.AccountingLedgerTrialBalances.Where(m => m.StudentEmployeeLedegerId == key).Select(m => m.MasterData2));
         }
 
         // GET: odata/AccountingLedgerTrialBalances(5)/Organization
         [EnableQuery]
-        public SingleResult<Organization> GetOrganization([FromODataUri] short key)
+        public SingleResult<Organization> GetOrganization([FromODataUri] int key)
         {
             return SingleResult.Create(db.AccountingLedgerTrialBalances.Where(m => m.StudentEmployeeLedegerId == key).Select(m => m.Organization));
         }
 
         // GET: odata/AccountingLedgerTrialBalances(5)/StudentClass
         [EnableQuery]
-        public SingleResult<StudentClass> GetStudentClass([FromODataUri] short key)
+        public SingleResult<StudentClass> GetStudentClass([FromODataUri] int key)
         {
             return SingleResult.Create(db.AccountingLedgerTrialBalances.Where(m => m.StudentEmployeeLedegerId == key).Select(m => m.StudentClass));
         }
@@ -225,7 +233,7 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool AccountingLedgerTrialBalanceExists(short key)
+        private bool AccountingLedgerTrialBalanceExists(int key)
         {
             return db.AccountingLedgerTrialBalances.Count(e => e.StudentEmployeeLedegerId == key) > 0;
         }

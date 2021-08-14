@@ -14,13 +14,13 @@ namespace schools.Models
     
     public partial class EmployeeFamily
     {
-        public short EmployeeFamilyId { get; set; }
-        public short EmployeeId { get; set; }
-        public short FamilyRelationShipId { get; set; }
-        public short FirstName { get; set; }
-        public short LastName { get; set; }
-        public short Age { get; set; }
-        public short Gender { get; set; }
+        public int EmployeeFamilyId { get; set; }
+        public int EmployeeId { get; set; }
+        public int FamilyRelationShipId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public byte Age { get; set; }
+        public int Gender { get; set; }
         public short OrgId { get; set; }
     
         public virtual EmpEmployee EmpEmployee { get; set; }

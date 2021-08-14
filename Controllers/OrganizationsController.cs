@@ -213,12 +213,12 @@ namespace schools.Controllers
             return db.Organizations.Where(m => m.OrganizationId == key).SelectMany(m => m.StudentFeePayments);
         }
 
-        // GET: odata/Organizations(5)/StudentFeeReceipt
-        [EnableQuery]
-        public SingleResult<StudentFeeReceipt> GetStudentFeeReceipt([FromODataUri] short key)
-        {
-            return SingleResult.Create(db.Organizations.Where(m => m.OrganizationId == key).Select(m => m.StudentFeeReceipt));
-        }
+        //// GET: odata/Organizations(5)/StudentFeeReceipt
+        //[EnableQuery]
+        //public SingleResult<StudentFeeReceipt> GetStudentFeeReceipt([FromODataUri] short key)
+        //{
+        //    return SingleResult.Create(db.Organizations.Where(m => m.OrganizationId == key).Select(m => m.StudentFeeReceipt));
+        //}
 
         // GET: odata/Organizations(5)/Students
         [EnableQuery]

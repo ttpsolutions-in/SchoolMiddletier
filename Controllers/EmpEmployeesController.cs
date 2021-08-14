@@ -23,6 +23,8 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<EmpEmployee>("EmpEmployees");
+    builder.EntitySet<AccountingLedgerTrialBalance>("AccountingLedgerTrialBalances"); 
+    builder.EntitySet<ClassSubjectTeacher>("ClassSubjectTeachers"); 
     builder.EntitySet<EmpEmployeeGradeSalHistory>("EmpEmployeeGradeSalHistories"); 
     builder.EntitySet<EmpEmployeeSkill>("EmpEmployeeSkills"); 
     builder.EntitySet<EmployeeEducationHistory>("EmployeeEducationHistories"); 
@@ -30,6 +32,7 @@ namespace schools.Controllers
     builder.EntitySet<EmployeeLeaf>("EmployeeLeaves"); 
     builder.EntitySet<EmployeeMonthlySalary>("EmployeeMonthlySalaries"); 
     builder.EntitySet<EmpEmployeeSalaryComponent>("EmpEmployeeSalaryComponents"); 
+    builder.EntitySet<StudTeacherClassMapping>("StudTeacherClassMappings"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class EmpEmployeesController : ODataController
@@ -45,13 +48,13 @@ namespace schools.Controllers
 
         // GET: odata/EmpEmployees(5)
         [EnableQuery]
-        public SingleResult<EmpEmployee> GetEmpEmployee([FromODataUri] short key)
+        public SingleResult<EmpEmployee> GetEmpEmployee([FromODataUri] int key)
         {
             return SingleResult.Create(db.EmpEmployees.Where(empEmployee => empEmployee.EmpEmployeeId == key));
         }
 
         // PUT: odata/EmpEmployees(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<EmpEmployee> patch)
+        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<EmpEmployee> patch)
         {
             Validate(patch.GetEntity());
 
@@ -96,29 +99,14 @@ namespace schools.Controllers
             }
 
             db.EmpEmployees.Add(empEmployee);
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (EmpEmployeeExists(empEmployee.EmpEmployeeId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await db.SaveChangesAsync();
 
             return Created(empEmployee);
         }
 
         // PATCH: odata/EmpEmployees(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<EmpEmployee> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<EmpEmployee> patch)
         {
             Validate(patch.GetEntity());
 
@@ -155,7 +143,7 @@ namespace schools.Controllers
         }
 
         // DELETE: odata/EmpEmployees(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] short key)
+        public async Task<IHttpActionResult> Delete([FromODataUri] int key)
         {
             EmpEmployee empEmployee = await db.EmpEmployees.FindAsync(key);
             if (empEmployee == null)
@@ -169,53 +157,74 @@ namespace schools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // GET: odata/EmpEmployees(5)/AccountingLedgerTrialBalances
+        [EnableQuery]
+        public IQueryable<AccountingLedgerTrialBalance> GetAccountingLedgerTrialBalances([FromODataUri] int key)
+        {
+            return db.EmpEmployees.Where(m => m.EmpEmployeeId == key).SelectMany(m => m.AccountingLedgerTrialBalances);
+        }
+
+        // GET: odata/EmpEmployees(5)/ClassSubjectTeachers
+        [EnableQuery]
+        public IQueryable<ClassSubjectTeacher> GetClassSubjectTeachers([FromODataUri] int key)
+        {
+            return db.EmpEmployees.Where(m => m.EmpEmployeeId == key).SelectMany(m => m.ClassSubjectTeachers);
+        }
+
         // GET: odata/EmpEmployees(5)/EmpEmployeeGradeSalHistories
         [EnableQuery]
-        public IQueryable<EmpEmployeeGradeSalHistory> GetEmpEmployeeGradeSalHistories([FromODataUri] short key)
+        public IQueryable<EmpEmployeeGradeSalHistory> GetEmpEmployeeGradeSalHistories([FromODataUri] int key)
         {
             return db.EmpEmployees.Where(m => m.EmpEmployeeId == key).SelectMany(m => m.EmpEmployeeGradeSalHistories);
         }
 
         // GET: odata/EmpEmployees(5)/EmpEmployeeSkills
         [EnableQuery]
-        public IQueryable<EmpEmployeeSkill> GetEmpEmployeeSkills([FromODataUri] short key)
+        public IQueryable<EmpEmployeeSkill> GetEmpEmployeeSkills([FromODataUri] int key)
         {
             return db.EmpEmployees.Where(m => m.EmpEmployeeId == key).SelectMany(m => m.EmpEmployeeSkills);
         }
 
         // GET: odata/EmpEmployees(5)/EmployeeEducationHistories
         [EnableQuery]
-        public IQueryable<EmployeeEducationHistory> GetEmployeeEducationHistories([FromODataUri] short key)
+        public IQueryable<EmployeeEducationHistory> GetEmployeeEducationHistories([FromODataUri] int key)
         {
             return db.EmpEmployees.Where(m => m.EmpEmployeeId == key).SelectMany(m => m.EmployeeEducationHistories);
         }
 
         // GET: odata/EmpEmployees(5)/EmployeeFamilies
         [EnableQuery]
-        public IQueryable<EmployeeFamily> GetEmployeeFamilies([FromODataUri] short key)
+        public IQueryable<EmployeeFamily> GetEmployeeFamilies([FromODataUri] int key)
         {
             return db.EmpEmployees.Where(m => m.EmpEmployeeId == key).SelectMany(m => m.EmployeeFamilies);
         }
 
         // GET: odata/EmpEmployees(5)/EmployeeLeaves
         [EnableQuery]
-        public IQueryable<EmployeeLeaf> GetEmployeeLeaves([FromODataUri] short key)
+        public IQueryable<EmployeeLeaf> GetEmployeeLeaves([FromODataUri] int key)
         {
             return db.EmpEmployees.Where(m => m.EmpEmployeeId == key).SelectMany(m => m.EmployeeLeaves);
         }
 
         // GET: odata/EmpEmployees(5)/EmployeeMonthlySalaries
         [EnableQuery]
-        public IQueryable<EmployeeMonthlySalary> GetEmployeeMonthlySalaries([FromODataUri] short key)
+        public IQueryable<EmployeeMonthlySalary> GetEmployeeMonthlySalaries([FromODataUri] int key)
         {
             return db.EmpEmployees.Where(m => m.EmpEmployeeId == key).SelectMany(m => m.EmployeeMonthlySalaries);
         }
 
         // GET: odata/EmpEmployees(5)/EmpEmployeeSalaryComponents
         [EnableQuery]
-        public IQueryable<EmpEmployeeSalaryComponent> GetEmpEmployeeSalaryComponents([FromODataUri] short key)
+        public IQueryable<EmpEmployeeSalaryComponent> GetEmpEmployeeSalaryComponents([FromODataUri] int key)
         {
             return db.EmpEmployees.Where(m => m.EmpEmployeeId == key).SelectMany(m => m.EmpEmployeeSalaryComponents);
+        }
+
+        // GET: odata/EmpEmployees(5)/StudTeacherClassMappings
+        [EnableQuery]
+        public IQueryable<StudTeacherClassMapping> GetStudTeacherClassMappings([FromODataUri] int key)
+        {
+            return db.EmpEmployees.Where(m => m.EmpEmployeeId == key).SelectMany(m => m.StudTeacherClassMappings);
         }
 
         protected override void Dispose(bool disposing)
@@ -227,7 +236,7 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool EmpEmployeeExists(short key)
+        private bool EmpEmployeeExists(int key)
         {
             return db.EmpEmployees.Count(e => e.EmpEmployeeId == key) > 0;
         }

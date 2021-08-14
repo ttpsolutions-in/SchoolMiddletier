@@ -27,7 +27,7 @@ namespace schools.Models
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
         public Nullable<int> StudentClassId { get; set; }
-        public Nullable<short> DocTypeId { get; set; }
+        public Nullable<int> DocTypeId { get; set; }
         public string Parent { get; set; }
         public Nullable<short> BatchId { get; set; }
         public Nullable<short> OrgId { get; set; }

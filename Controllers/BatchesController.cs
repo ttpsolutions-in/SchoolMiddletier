@@ -229,13 +229,7 @@ namespace schools.Controllers
         {
             return db.Batches.Where(m => m.BatchId == key).SelectMany(m => m.ExamStudentSubjectResults);
         }
-
-        // GET: odata/Batches(5)/PaymentDetails
-        [EnableQuery]
-        public IQueryable<PaymentDetail> GetPaymentDetails([FromODataUri] short key)
-        {
-            return db.Batches.Where(m => m.BatchId == key).SelectMany(m => m.PaymentDetails);
-        }
+               
 
         // GET: odata/Batches(5)/RoleUsers
         [EnableQuery]
@@ -293,12 +287,12 @@ namespace schools.Controllers
             return db.Batches.Where(m => m.BatchId == key).SelectMany(m => m.StudentFeePayments);
         }
 
-        // GET: odata/Batches(5)/StudentFeeReceipts
-        [EnableQuery]
-        public IQueryable<StudentFeeReceipt> GetStudentFeeReceipts([FromODataUri] short key)
-        {
-            return db.Batches.Where(m => m.BatchId == key).SelectMany(m => m.StudentFeeReceipts);
-        }
+        //// GET: odata/Batches(5)/StudentFeeReceipts
+        //[EnableQuery]
+        //public IQueryable<StudentFeeReceipts> GetStudentFeeReceipts([FromODataUri] short key)
+        //{
+        //    return db.Batches.Where(m => m.BatchId == key).SelectMany(m => m.StudentFeeReceipts);
+        //}
 
         // GET: odata/Batches(5)/SubjectTypes
         [EnableQuery]

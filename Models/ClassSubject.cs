@@ -18,14 +18,14 @@ namespace schools.Models
         public ClassSubject()
         {
             this.ClassSubjectMarkComponents = new HashSet<ClassSubjectMarkComponent>();
+            this.ClassSubjectTeachers = new HashSet<ClassSubjectTeacher>();
             this.SlotAndClassSubjects = new HashSet<SlotAndClassSubject>();
             this.StudentClassSubjects = new HashSet<StudentClassSubject>();
-            this.ClassSubjectTeachers = new HashSet<ClassSubjectTeacher>();
         }
     
         public short ClassSubjectId { get; set; }
-        public short ClassId { get; set; }
-        public short SubjectId { get; set; }
+        public int ClassId { get; set; }
+        public int SubjectId { get; set; }
         public short SubjectTypeId { get; set; }
         public byte Active { get; set; }
         public short OrgId { get; set; }
@@ -44,10 +44,10 @@ namespace schools.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassSubjectMarkComponent> ClassSubjectMarkComponents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClassSubjectTeacher> ClassSubjectTeachers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SlotAndClassSubject> SlotAndClassSubjects { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentClassSubject> StudentClassSubjects { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClassSubjectTeacher> ClassSubjectTeachers { get; set; }
     }
 }

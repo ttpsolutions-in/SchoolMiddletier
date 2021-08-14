@@ -22,7 +22,7 @@ namespace schools.Models
     
         public short ApplicationFeatureId { get; set; }
         public string FeatureName { get; set; }
-        public short ApplicationId { get; set; }
+        public int ApplicationId { get; set; }
         public byte Active { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }

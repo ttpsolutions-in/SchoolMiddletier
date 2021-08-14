@@ -23,7 +23,6 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<StudentFeeReceipt>("StudentFeeReceipts");
-    builder.EntitySet<PaymentDetail>("PaymentDetails"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class StudentFeeReceiptsController : ODataController
@@ -39,13 +38,13 @@ namespace schools.Controllers
 
         // GET: odata/StudentFeeReceipts(5)
         [EnableQuery]
-        public SingleResult<StudentFeeReceipt> GetStudentFeeReceipt([FromODataUri] short key)
+        public SingleResult<StudentFeeReceipt> GetStudentFeeReceipt([FromODataUri] int key)
         {
-            return SingleResult.Create(db.StudentFeeReceipts.Where(studentFeeReceipt => studentFeeReceipt.StudentReceiptId == key));
+            return SingleResult.Create(db.StudentFeeReceipts.Where(studentFeeReceipt => studentFeeReceipt.StudentFeeReceiptId == key));
         }
 
         // PUT: odata/StudentFeeReceipts(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<StudentFeeReceipt> patch)
+        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<StudentFeeReceipt> patch)
         {
             Validate(patch.GetEntity());
 
@@ -97,7 +96,7 @@ namespace schools.Controllers
 
         // PATCH: odata/StudentFeeReceipts(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<StudentFeeReceipt> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<StudentFeeReceipt> patch)
         {
             Validate(patch.GetEntity());
 
@@ -134,7 +133,7 @@ namespace schools.Controllers
         }
 
         // DELETE: odata/StudentFeeReceipts(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] short key)
+        public async Task<IHttpActionResult> Delete([FromODataUri] int key)
         {
             StudentFeeReceipt studentFeeReceipt = await db.StudentFeeReceipts.FindAsync(key);
             if (studentFeeReceipt == null)
@@ -148,13 +147,6 @@ namespace schools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/StudentFeeReceipts(5)/PaymentDetails
-        [EnableQuery]
-        public IQueryable<PaymentDetail> GetPaymentDetails([FromODataUri] short key)
-        {
-            return db.StudentFeeReceipts.Where(m => m.StudentReceiptId == key).SelectMany(m => m.PaymentDetails);
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -164,9 +156,9 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool StudentFeeReceiptExists(short key)
+        private bool StudentFeeReceiptExists(int key)
         {
-            return db.StudentFeeReceipts.Count(e => e.StudentReceiptId == key) > 0;
+            return db.StudentFeeReceipts.Count(e => e.StudentFeeReceiptId == key) > 0;
         }
     }
 }

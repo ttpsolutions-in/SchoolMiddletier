@@ -14,7 +14,7 @@ namespace schools.Models
     
     public partial class StudentCertificate
     {
-        public short StudentCertificateId { get; set; }
+        public int StudentCertificateId { get; set; }
         public short CertificateTypeId { get; set; }
         public System.DateTime IssuedDate { get; set; }
         public int StudentClassId { get; set; }

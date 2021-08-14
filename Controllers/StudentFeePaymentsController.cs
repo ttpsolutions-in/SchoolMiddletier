@@ -23,8 +23,11 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<StudentFeePayment>("StudentFeePayments");
-    builder.EntitySet<StudentClass>("StudentClasses"); 
+    builder.EntitySet<Batch>("Batches"); 
     builder.EntitySet<ClassFee>("ClassFees"); 
+    builder.EntitySet<Organization>("Organizations"); 
+    builder.EntitySet<StudentClass>("StudentClasses"); 
+    builder.EntitySet<Student>("Students"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class StudentFeePaymentsController : ODataController
@@ -149,11 +152,11 @@ namespace schools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/StudentFeePayments(5)/StudentClass
+        // GET: odata/StudentFeePayments(5)/Batch
         [EnableQuery]
-        public SingleResult<StudentClass> GetStudentClass([FromODataUri] int key)
+        public SingleResult<Batch> GetBatch([FromODataUri] int key)
         {
-            return SingleResult.Create(db.StudentFeePayments.Where(m => m.StudentFeeId == key).Select(m => m.StudentClass));
+            return SingleResult.Create(db.StudentFeePayments.Where(m => m.StudentFeeId == key).Select(m => m.Batch));
         }
 
         // GET: odata/StudentFeePayments(5)/ClassFee
@@ -161,6 +164,27 @@ namespace schools.Controllers
         public SingleResult<ClassFee> GetClassFee([FromODataUri] int key)
         {
             return SingleResult.Create(db.StudentFeePayments.Where(m => m.StudentFeeId == key).Select(m => m.ClassFee));
+        }
+
+        // GET: odata/StudentFeePayments(5)/Organization
+        [EnableQuery]
+        public SingleResult<Organization> GetOrganization([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.StudentFeePayments.Where(m => m.StudentFeeId == key).Select(m => m.Organization));
+        }
+
+        // GET: odata/StudentFeePayments(5)/StudentClass
+        [EnableQuery]
+        public SingleResult<StudentClass> GetStudentClass([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.StudentFeePayments.Where(m => m.StudentFeeId == key).Select(m => m.StudentClass));
+        }
+
+        // GET: odata/StudentFeePayments(5)/Student
+        [EnableQuery]
+        public SingleResult<Student> GetStudent([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.StudentFeePayments.Where(m => m.StudentFeeId == key).Select(m => m.Student));
         }
 
         protected override void Dispose(bool disposing)

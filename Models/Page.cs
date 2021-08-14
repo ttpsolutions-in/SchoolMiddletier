@@ -23,7 +23,7 @@ namespace schools.Models
         public short PageId { get; set; }
         public string PageTitle { get; set; }
         public short ParentId { get; set; }
-        public short ApplicationId { get; set; }
+        public int ApplicationId { get; set; }
         public string label { get; set; }
         public string link { get; set; }
         public byte Active { get; set; }

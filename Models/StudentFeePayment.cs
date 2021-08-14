@@ -14,12 +14,6 @@ namespace schools.Models
     
     public partial class StudentFeePayment
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public StudentFeePayment()
-        {
-            this.PaymentDetails = new HashSet<PaymentDetail>();
-        }
-    
         public int StudentFeeId { get; set; }
         public int StudentId { get; set; }
         public int StudentClassId { get; set; }
@@ -40,11 +34,9 @@ namespace schools.Models
         public Nullable<short> UpdatedBy { get; set; }
     
         public virtual Batch Batch { get; set; }
+        public virtual ClassFee ClassFee { get; set; }
         public virtual Organization Organization { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PaymentDetail> PaymentDetails { get; set; }
         public virtual StudentClass StudentClass { get; set; }
         public virtual Student Student { get; set; }
-        public virtual ClassFee ClassFee { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace schools.Models
         }
     
         public short ExamId { get; set; }
-        public short ExamNameId { get; set; }
+        public int ExamNameId { get; set; }
         public System.DateTime StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<short> BatchId { get; set; }

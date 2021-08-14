@@ -14,15 +14,15 @@ namespace schools.Models
     
     public partial class EmployeeLeaf
     {
-        public short EmployeeLeaveId { get; set; }
-        public short EmployeeId { get; set; }
-        public short LeaveTypeId { get; set; }
+        public int EmployeeLeaveId { get; set; }
+        public int EmployeeId { get; set; }
+        public int LeaveTypeId { get; set; }
         public System.DateTime LeaveFrom { get; set; }
         public System.DateTime LeaveTo { get; set; }
         public short NoOfDays { get; set; }
         public string LeaveReason { get; set; }
         public Nullable<System.DateTime> ApplyDate { get; set; }
-        public Nullable<short> LeaveStatusId { get; set; }
+        public Nullable<int> LeaveStatusId { get; set; }
         public Nullable<System.DateTime> ApproveRejecteDate { get; set; }
         public Nullable<short> ApprovedBy { get; set; }
         public string Remarks { get; set; }

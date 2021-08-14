@@ -23,17 +23,17 @@ namespace schools.Models
         public short EmpSalaryComponentId { get; set; }
         public string SalaryComponent { get; set; }
         public string FormulaOrAmount { get; set; }
+        public int ComponentTypeId { get; set; }
         public short OrgId { get; set; }
         public byte Active { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
-        public short ComponentTypeId { get; set; }
     
+        public virtual MasterData MasterData { get; set; }
         public virtual Organization Organization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpEmployeeSalaryComponent> EmpEmployeeSalaryComponents { get; set; }
-        public virtual MasterData MasterData { get; set; }
     }
 }

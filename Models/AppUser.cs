@@ -20,7 +20,7 @@ namespace schools.Models
             this.RoleUsers = new HashSet<RoleUser>();
         }
     
-        public short ApplicationUserId { get; set; }
+        public int ApplicationUserId { get; set; }
         public string UserName { get; set; }
         public string EmailAddress { get; set; }
         public string ContactNo { get; set; }

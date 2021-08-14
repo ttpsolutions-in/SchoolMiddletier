@@ -54,7 +54,6 @@ namespace schools
             builder.EntitySet<Student>("Students");
             builder.EntitySet<StudentClass>("StudentClasses");
             builder.EntitySet<StudentFeePayment>("StudentFeePayments");
-            builder.EntitySet<PaymentDetail>("PaymentDetails");
             builder.EntitySet<StudentFeeReceipt>("StudentFeeReceipts");
             builder.EntitySet<StudentDocument>("StudentDocuments");
             builder.EntitySet<TaskConfiguration>("TaskConfigurations");

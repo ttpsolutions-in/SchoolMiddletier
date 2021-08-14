@@ -20,7 +20,7 @@ namespace schools.Models
         public decimal Deduction { get; set; }
         public decimal NetSalary { get; set; }
         public short PresentDays { get; set; }
-        public short EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         public Nullable<byte> Released { get; set; }
         public Nullable<System.DateTime> PaymentDate { get; set; }
         public Nullable<short> OrgId { get; set; }

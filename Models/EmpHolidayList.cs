@@ -17,8 +17,8 @@ namespace schools.Models
         public short HolidayCalendarId { get; set; }
         public string HolidayName { get; set; }
         public System.DateTime HolidayDate { get; set; }
-        public short LocationId { get; set; }
-        public short HolidayTypeId { get; set; }
+        public int LocationId { get; set; }
+        public int HolidayTypeId { get; set; }
         public short FinancialYearId { get; set; }
         public byte Active { get; set; }
         public short OrgId { get; set; }

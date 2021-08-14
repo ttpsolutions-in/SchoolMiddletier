@@ -14,7 +14,7 @@ namespace schools.Models
     
     public partial class PhotoGallery
     {
-        public short PhotoId { get; set; }
+        public int PhotoId { get; set; }
         public string PhotoPath { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> UploadDate { get; set; }

@@ -17,6 +17,8 @@ namespace schools.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EmpEmployee()
         {
+            this.AccountingLedgerTrialBalances = new HashSet<AccountingLedgerTrialBalance>();
+            this.ClassSubjectTeachers = new HashSet<ClassSubjectTeacher>();
             this.EmpEmployeeGradeSalHistories = new HashSet<EmpEmployeeGradeSalHistory>();
             this.EmpEmployeeSkills = new HashSet<EmpEmployeeSkill>();
             this.EmployeeEducationHistories = new HashSet<EmployeeEducationHistory>();
@@ -25,11 +27,9 @@ namespace schools.Models
             this.EmployeeMonthlySalaries = new HashSet<EmployeeMonthlySalary>();
             this.EmpEmployeeSalaryComponents = new HashSet<EmpEmployeeSalaryComponent>();
             this.StudTeacherClassMappings = new HashSet<StudTeacherClassMapping>();
-            this.ClassSubjectTeachers = new HashSet<ClassSubjectTeacher>();
-            this.AccountingLedgerTrialBalances = new HashSet<AccountingLedgerTrialBalance>();
         }
     
-        public short EmpEmployeeId { get; set; }
+        public int EmpEmployeeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FatherName { get; set; }
@@ -66,15 +66,19 @@ namespace schools.Models
         public Nullable<System.DateTime> MarriedDate { get; set; }
         public string PFAccountNo { get; set; }
         public short OrgId { get; set; }
-        public byte Active { get; set; }
-        public string EmployeeCode { get; set; }
-        public Nullable<short> NatureId { get; set; }
         public Nullable<short> SubOrgId { get; set; }
+        public Nullable<short> NatureId { get; set; }
+        public string EmployeeCode { get; set; }
+        public byte Active { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccountingLedgerTrialBalance> AccountingLedgerTrialBalances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClassSubjectTeacher> ClassSubjectTeachers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpEmployeeGradeSalHistory> EmpEmployeeGradeSalHistories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -91,9 +95,5 @@ namespace schools.Models
         public virtual ICollection<EmpEmployeeSalaryComponent> EmpEmployeeSalaryComponents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudTeacherClassMapping> StudTeacherClassMappings { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClassSubjectTeacher> ClassSubjectTeachers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccountingLedgerTrialBalance> AccountingLedgerTrialBalances { get; set; }
     }
 }

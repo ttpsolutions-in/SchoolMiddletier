@@ -14,10 +14,10 @@ namespace schools.Models
     
     public partial class StudTeacherClassMapping
     {
-        public short TeacherClassMappingId { get; set; }
-        public short TeacherId { get; set; }
-        public short ClassId { get; set; }
-        public short SectionId { get; set; }
+        public int TeacherClassMappingId { get; set; }
+        public int TeacherId { get; set; }
+        public int ClassId { get; set; }
+        public int SectionId { get; set; }
         public short BatchId { get; set; }
         public short OrgId { get; set; }
         public Nullable<short> CreatedBy { get; set; }

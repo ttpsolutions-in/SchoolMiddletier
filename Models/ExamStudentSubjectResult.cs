@@ -14,12 +14,12 @@ namespace schools.Models
     
     public partial class ExamStudentSubjectResult
     {
-        public short ExamStudentSubjectResultId { get; set; }
+        public int ExamStudentSubjectResultId { get; set; }
         public short ExamId { get; set; }
-        public short StudentClassSubjectId { get; set; }
+        public int StudentClassSubjectId { get; set; }
         public short ClassSubjectMarkComponentId { get; set; }
         public short Marks { get; set; }
-        public short ExamStatus { get; set; }
+        public int ExamStatus { get; set; }
         public short OrgId { get; set; }
         public short BatchId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }

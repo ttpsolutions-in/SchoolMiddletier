@@ -14,7 +14,7 @@ namespace schools.Models
     
     public partial class ApplicationFeatureRolesPerm
     {
-        public short ApplicationFeatureRoleId { get; set; }
+        public int ApplicationFeatureRoleId { get; set; }
         public short ApplicationFeatureId { get; set; }
         public short RoleId { get; set; }
         public Nullable<short> PermissionId { get; set; }

@@ -187,14 +187,7 @@ namespace schools.Controllers
             return SingleResult.Create(db.ClassFees.Where(m => m.ClassFeeId == key).Select(m => m.MasterData2));
         }
 
-        // GET: odata/ClassFees(5)/PaymentDetails
-        [EnableQuery]
-        public IQueryable<PaymentDetail> GetPaymentDetails([FromODataUri] short key)
-        {
-            return db.ClassFees.Where(m => m.ClassFeeId == key).SelectMany(m => m.PaymentDetails);
-        }
-
-        // GET: odata/ClassFees(5)/StudentFeePayments
+              // GET: odata/ClassFees(5)/StudentFeePayments
         [EnableQuery]
         public IQueryable<StudentFeePayment> GetStudentFeePayments([FromODataUri] short key)
         {

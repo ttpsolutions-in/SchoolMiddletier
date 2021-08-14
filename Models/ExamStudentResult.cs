@@ -18,9 +18,9 @@ namespace schools.Models
         public short ExamId { get; set; }
         public int StudentClassId { get; set; }
         public Nullable<short> TotalMarks { get; set; }
-        public Nullable<short> Grade { get; set; }
+        public Nullable<int> Grade { get; set; }
         public Nullable<short> Rank { get; set; }
-        public short ExamStatus { get; set; }
+        public int ExamStatus { get; set; }
         public short OrgId { get; set; }
         public short BatchId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }

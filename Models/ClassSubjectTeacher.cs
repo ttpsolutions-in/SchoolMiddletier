@@ -14,8 +14,8 @@ namespace schools.Models
     
     public partial class ClassSubjectTeacher
     {
-        public short ClassSubjectTeacherId { get; set; }
-        public short TeacherId { get; set; }
+        public int ClassSubjectTeacherId { get; set; }
+        public int TeacherId { get; set; }
         public short ClassSubjectId { get; set; }
         public short OrgId { get; set; }
         public short BatchId { get; set; }
