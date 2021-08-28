@@ -21,9 +21,10 @@ namespace schools.Models
             this.ClassSubjectTeachers = new HashSet<ClassSubjectTeacher>();
             this.SlotAndClassSubjects = new HashSet<SlotAndClassSubject>();
             this.StudentClassSubjects = new HashSet<StudentClassSubject>();
+            this.SchoolTimeTables = new HashSet<SchoolTimeTable>();
         }
     
-        public short ClassSubjectId { get; set; }
+        public int ClassSubjectId { get; set; }
         public int ClassId { get; set; }
         public int SubjectId { get; set; }
         public short SubjectTypeId { get; set; }
@@ -49,5 +50,7 @@ namespace schools.Models
         public virtual ICollection<SlotAndClassSubject> SlotAndClassSubjects { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentClassSubject> StudentClassSubjects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SchoolTimeTable> SchoolTimeTables { get; set; }
     }
 }

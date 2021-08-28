@@ -32,6 +32,8 @@ namespace schools.Models
         public Nullable<short> JobTitleId { get; set; }
         public Nullable<short> DesignationId { get; set; }
         public byte Active { get; set; }
+        public int ManagerId { get; set; }
+        public Nullable<int> ReportingTo { get; set; }
     
         public virtual EmpEmployeeGradeSalHistory EmpEmployeeGradeSalHistory1 { get; set; }
         public virtual EmpEmployeeGradeSalHistory EmpEmployeeGradeSalHistory2 { get; set; }

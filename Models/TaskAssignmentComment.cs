@@ -12,22 +12,20 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SlotAndClassSubject
+    public partial class TaskAssignmentComment
     {
-        public int SlotClassSubjectId { get; set; }
-        public short SlotId { get; set; }
-        public int ClassSubjectId { get; set; }
-        public short OrgId { get; set; }
-        public short BatchId { get; set; }
-        public byte Active { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public int AssignmentCommentId { get; set; }
+        public int TaskAssignmentId { get; set; }
+        public string Comments { get; set; }
+        public short CommentedBy { get; set; }
         public Nullable<short> CreatedBy { get; set; }
-        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public short OrgId { get; set; }
+        public byte Active { get; set; }
     
-        public virtual Batch Batch { get; set; }
-        public virtual ClassSubject ClassSubject { get; set; }
-        public virtual ExamSlot ExamSlot { get; set; }
         public virtual Organization Organization { get; set; }
+        public virtual TaskAssignment TaskAssignment { get; set; }
     }
 }

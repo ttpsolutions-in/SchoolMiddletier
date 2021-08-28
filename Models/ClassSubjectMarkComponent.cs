@@ -21,7 +21,7 @@ namespace schools.Models
         }
     
         public short ClassSubjectMarkComponentId { get; set; }
-        public short ClassSubjectId { get; set; }
+        public int ClassSubjectId { get; set; }
         public int SubjectComponentId { get; set; }
         public short FullMark { get; set; }
         public short PassMark { get; set; }

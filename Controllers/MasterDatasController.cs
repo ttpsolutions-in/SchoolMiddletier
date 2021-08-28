@@ -33,7 +33,6 @@ namespace schools.Controllers
     builder.EntitySet<EmpEmployeeGradeSalHistory>("EmpEmployeeGradeSalHistories"); 
     builder.EntitySet<EmpHolidayList>("EmpHolidayLists"); 
     builder.EntitySet<EmployeeFamily>("EmployeeFamilies"); 
-    builder.EntitySet<EmployeeLeaf>("EmployeeLeaves"); 
     builder.EntitySet<Exam>("Exams"); 
     builder.EntitySet<ExamStudentResult>("ExamStudentResults"); 
     builder.EntitySet<ExamStudentSubjectResult>("ExamStudentSubjectResults"); 
@@ -45,6 +44,10 @@ namespace schools.Controllers
     builder.EntitySet<StudentDocument>("StudentDocuments"); 
     builder.EntitySet<Student>("Students"); 
     builder.EntitySet<StudTeacherClassMapping>("StudTeacherClassMappings"); 
+    builder.EntitySet<TaskAssignment>("TaskAssignments"); 
+    builder.EntitySet<SchoolClassPeriod>("SchoolClassPeriods"); 
+    builder.EntitySet<LeaveEmployeeLeaf>("LeaveEmployeeLeaves"); 
+    builder.EntitySet<LeavePolicy>("LeavePolicies"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class MasterDatasController : ODataController
@@ -111,22 +114,7 @@ namespace schools.Controllers
             }
 
             db.MasterDatas.Add(masterData);
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (MasterDataExists(masterData.MasterDataId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await db.SaveChangesAsync();
 
             return Created(masterData);
         }
@@ -310,20 +298,6 @@ namespace schools.Controllers
             return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.EmployeeFamilies1);
         }
 
-        // GET: odata/MasterDatas(5)/EmployeeLeaves
-        [EnableQuery]
-        public IQueryable<EmployeeLeaf> GetEmployeeLeaves([FromODataUri] int key)
-        {
-            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.EmployeeLeaves);
-        }
-
-        // GET: odata/MasterDatas(5)/EmployeeLeaves1
-        [EnableQuery]
-        public IQueryable<EmployeeLeaf> GetEmployeeLeaves1([FromODataUri] int key)
-        {
-            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.EmployeeLeaves1);
-        }
-
         // GET: odata/MasterDatas(5)/Exams
         [EnableQuery]
         public IQueryable<Exam> GetExams([FromODataUri] int key)
@@ -469,6 +443,55 @@ namespace schools.Controllers
         public IQueryable<StudTeacherClassMapping> GetStudTeacherClassMappings1([FromODataUri] int key)
         {
             return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.StudTeacherClassMappings1);
+        }
+
+        // GET: odata/MasterDatas(5)/TaskAssignments
+        [EnableQuery]
+        public IQueryable<TaskAssignment> GetTaskAssignments([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.TaskAssignments);
+        }
+
+        // GET: odata/MasterDatas(5)/SchoolClassPeriods
+        [EnableQuery]
+        public IQueryable<SchoolClassPeriod> GetSchoolClassPeriods([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.SchoolClassPeriods);
+        }
+
+        // GET: odata/MasterDatas(5)/SchoolClassPeriods1
+        [EnableQuery]
+        public IQueryable<SchoolClassPeriod> GetSchoolClassPeriods1([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.SchoolClassPeriods1);
+        }
+
+        // GET: odata/MasterDatas(5)/LeaveEmployeeLeaves
+        [EnableQuery]
+        public IQueryable<LeaveEmployeeLeaf> GetLeaveEmployeeLeaves([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.LeaveEmployeeLeaves);
+        }
+
+        // GET: odata/MasterDatas(5)/LeaveEmployeeLeaves1
+        [EnableQuery]
+        public IQueryable<LeaveEmployeeLeaf> GetLeaveEmployeeLeaves1([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.LeaveEmployeeLeaves1);
+        }
+
+        // GET: odata/MasterDatas(5)/LeavePolicies
+        [EnableQuery]
+        public IQueryable<LeavePolicy> GetLeavePolicies([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.LeavePolicies);
+        }
+
+        // GET: odata/MasterDatas(5)/LeavePolicies1
+        [EnableQuery]
+        public IQueryable<LeavePolicy> GetLeavePolicies1([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.LeavePolicies1);
         }
 
         protected override void Dispose(bool disposing)

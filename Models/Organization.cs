@@ -33,10 +33,8 @@ namespace schools.Models
             this.EmpEmployeeGroups1 = new HashSet<EmpEmployeeGroup>();
             this.EmpEmployeeSalaryComponents = new HashSet<EmpEmployeeSalaryComponent>();
             this.EmpEmployeeSkills = new HashSet<EmpEmployeeSkill>();
-            this.EmpLeaves = new HashSet<EmpLeaf>();
             this.EmployeeEducationHistories = new HashSet<EmployeeEducationHistory>();
             this.EmployeeFamilies = new HashSet<EmployeeFamily>();
-            this.EmployeeLeaves = new HashSet<EmployeeLeaf>();
             this.EmployeeMonthlySalaries = new HashSet<EmployeeMonthlySalary>();
             this.Exams = new HashSet<Exam>();
             this.ExamSlots = new HashSet<ExamSlot>();
@@ -61,6 +59,14 @@ namespace schools.Models
             this.TaskConfigurations = new HashSet<TaskConfiguration>();
             this.VariableConfigurations = new HashSet<VariableConfiguration>();
             this.StudentFeeReceipts = new HashSet<StudentFeeReceipt>();
+            this.TaskAssignmentComments = new HashSet<TaskAssignmentComment>();
+            this.TaskAssignments = new HashSet<TaskAssignment>();
+            this.SchoolClassPeriods = new HashSet<SchoolClassPeriod>();
+            this.SchoolTimeTables = new HashSet<SchoolTimeTable>();
+            this.LeaveEmployeeLeaves = new HashSet<LeaveEmployeeLeaf>();
+            this.AttendanceReports = new HashSet<AttendanceReport>();
+            this.LeavePolicies = new HashSet<LeavePolicy>();
+            this.LeaveBalances = new HashSet<LeaveBalance>();
         }
     
         public short OrganizationId { get; set; }
@@ -115,13 +121,9 @@ namespace schools.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpEmployeeSkill> EmpEmployeeSkills { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmpLeaf> EmpLeaves { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeEducationHistory> EmployeeEducationHistories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeFamily> EmployeeFamilies { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeeLeaf> EmployeeLeaves { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeMonthlySalary> EmployeeMonthlySalaries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -170,5 +172,21 @@ namespace schools.Models
         public virtual ICollection<VariableConfiguration> VariableConfigurations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentFeeReceipt> StudentFeeReceipts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskAssignmentComment> TaskAssignmentComments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskAssignment> TaskAssignments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SchoolClassPeriod> SchoolClassPeriods { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SchoolTimeTable> SchoolTimeTables { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LeaveEmployeeLeaf> LeaveEmployeeLeaves { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AttendanceReport> AttendanceReports { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LeavePolicy> LeavePolicies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LeaveBalance> LeaveBalances { get; set; }
     }
 }

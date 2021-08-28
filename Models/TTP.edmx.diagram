@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="663a9c601cba4f9e9ac1ba6b0f7a7d30" Name="Diagram1">
+      <Diagram DiagramId="663a9c601cba4f9e9ac1ba6b0f7a7d30" Name="Diagram1" ZoomLevel="100">
         <EntityTypeShape EntityType="TTPModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.AccountingLedgerTrialBalance" Width="1.5" PointX="5.25" PointY="125" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.AccountingTrialBalance" Width="2" PointX="8.25" PointY="126.125" IsExpanded="true" />
@@ -30,12 +30,10 @@
         <EntityTypeShape EntityType="TTPModel.EmpEmployeeSalaryComponent" Width="1.5" PointX="18.5" PointY="108.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.EmpEmployeeSkill" Width="1.5" PointX="6" PointY="92.5" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.EmpHolidayList" Width="1.5" PointX="8.25" PointY="130.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.EmpLeaf" Width="1.5" PointX="3" PointY="122.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.EmployeeEducationHistory" Width="1.5" PointX="3" PointY="91.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.EmployeeFamily" Width="1.5" PointX="11.25" PointY="134.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.EmployeeLeaf" Width="1.5" PointX="8.25" PointY="136.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.EmployeeMonthlySalary" Width="1.5" PointX="8" PointY="101.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.EmpManagerGroupMapping" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.EmpManagerGroupMapping" Width="2.125" PointX="2.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Exam" Width="1.5" PointX="11.25" PointY="128.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.ExamSlot" Width="1.5" PointX="15.5" PointY="111.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.ExamStudentResult" Width="1.5" PointX="19.5" PointY="126.625" IsExpanded="true" />
@@ -43,7 +41,7 @@
         <EntityTypeShape EntityType="TTPModel.FilesNPhoto" Width="1.5" PointX="14.25" PointY="135.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.MasterData" Width="1.5" PointX="3" PointY="153.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Message" Width="1.5" PointX="3" PointY="149.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.Organization" Width="1.5" PointX="0.75" PointY="91.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.Organization" Width="1.5" PointX="0.875" PointY="92.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.PageHistory" Width="1.5" PointX="21.5" PointY="107.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Page" Width="1.5" PointX="16.25" PointY="122.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.PhotoGallery" Width="1.5" PointX="9" PointY="91" IsExpanded="true" />
@@ -56,7 +54,6 @@
         <EntityTypeShape EntityType="TTPModel.StudentClassSubject" Width="1.5" PointX="12.75" PointY="112.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.StudentDocument" Width="1.5" PointX="22.5" PointY="124.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.StudentFeePayment" Width="1.5" PointX="19.5" PointY="114.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.StudentFeeReceipt" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Student" Width="1.5" PointX="17.25" PointY="129.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.StudTeacherClassMapping" Width="1.5" PointX="13.25" PointY="117.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.SubjectType" Width="1.5" PointX="5.25" PointY="140.25" IsExpanded="true" />
@@ -134,7 +131,6 @@
         <AssociationConnector Association="TTPModel.FK_EmpEmployeeSkills_EmpEmployees" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmployeeEducationHistory_EmpEmployees" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmployeeFamily_EmpEmployees" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_EmployeeLeaves_EmpEmployees" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmployeeMonthlySalary_EmpEmployees" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmployeeSalaryComponents_EmpEmployees" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_StudTeacherClassMapping_EmpEmployeesTeacherId" ManuallyRouted="false" />
@@ -142,14 +138,10 @@
         <AssociationConnector Association="TTPModel.FK_EmpEmployeeSkills_Organization" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_HolidayList_MasterDataHolidayType" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_HolidayList_MasterDataLocationId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_EmpLeaves_Organization" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmployeeEducationHistory_Organization" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmployeeFamily_MasterDataGenderId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmployeeFamily_MasterDataRelationshipId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmployeeFamily_Organization" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_EmployeeLeaves_MasterDataLeaveStatus" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_EmployeeLeaves_MasterDataLeaveTypeId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_EmployeeLeaves_Organization" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmployeeMonthlySalary_Organization" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_Exams_MasterDataExamNameId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_Exams_OrganizationId" ManuallyRouted="false" />
@@ -212,10 +204,49 @@
         <AssociationConnector Association="TTPModel.FK_StudentFeePayment_Student" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_Students_Students" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TTPModel.StudentFeeReceipt" Width="1.5" PointX="10.25" PointY="100.75" />
         <AssociationConnector Association="TTPModel.FK_AccountingVouchers_StudentFeeReceipts" />
         <AssociationConnector Association="TTPModel.FK_StudentFeeReceipts_Batches" />
         <AssociationConnector Association="TTPModel.FK_StudentFeeReceipts_Organization" />
-      </Diagram>
+        <EntityTypeShape EntityType="TTPModel.TaskAssignmentComment" Width="1.5" PointX="12.75" PointY="103.5" />
+        <EntityTypeShape EntityType="TTPModel.TaskAssignment" Width="1.5" PointX="10.5" PointY="115" />
+        <AssociationConnector Association="TTPModel.FK_TaskAssignments_EmpEmployeesAssignedBy" />
+        <AssociationConnector Association="TTPModel.FK_TaskAssignments_EmpEmployeesAssignedTo" />
+        <AssociationConnector Association="TTPModel.FK_TaskAssignments_MasterDataAssignmentStatusId" />
+        <AssociationConnector Association="TTPModel.FK_TaskAssignmentComments_OrgId" />
+        <AssociationConnector Association="TTPModel.FK_TaskAssignments_Organization" />
+        <AssociationConnector Association="TTPModel.FK_TaskAssignments_StudentClass" />
+        <AssociationConnector Association="TTPModel.FK_TaskAssignmentComments_TaskAssignments" />
+        <EntityTypeShape EntityType="TTPModel.SchoolClassPeriod" Width="1.5" PointX="16.25" PointY="116.375" />
+        <AssociationConnector Association="TTPModel.FK_SchoolClassPeriods_Batches" />
+        <AssociationConnector Association="TTPModel.FK_SchoolClassPeriods_MasterDataClassId" />
+        <AssociationConnector Association="TTPModel.FK_SchoolClassPeriods_MasterDataPeriodId" />
+        <AssociationConnector Association="TTPModel.FK_SchoolClassPeriods_Organization" />
+        <EntityTypeShape EntityType="TTPModel.SchoolTimeTable" Width="1.5" PointX="18.5" PointY="103.625" />
+        <AssociationConnector Association="TTPModel.FK_SchoolTimeTable_Batches" />
+        <AssociationConnector Association="TTPModel.FK_SchoolTimeTable_ClassSubject" />
+        <AssociationConnector Association="TTPModel.FK_SchoolTimeTable_OrgId" />
+        <AssociationConnector Association="TTPModel.FK_SchoolTimeTable_SchoolClassPeriodId" />
+        <EntityTypeShape EntityType="TTPModel.LeaveEmployeeLeaf" Width="1.5" PointX="5.25" PointY="112.875" />
+        <AssociationConnector Association="TTPModel.FK_EmployeeLeaves_EmpEmployees1" />
+        <AssociationConnector Association="TTPModel.FK_EmployeeLeaves_MasterDataLeaveStatus1" />
+        <AssociationConnector Association="TTPModel.FK_EmployeeLeaves_MasterDataLeaveTypeId1" />
+        <AssociationConnector Association="TTPModel.FK_EmployeeLeaves_Organization1" />
+        <EntityTypeShape EntityType="TTPModel.AttendanceReport" Width="1.5" PointX="9.25" PointY="85.125" />
+        <AssociationConnector Association="TTPModel.FK_AttendanceReports_BatchesFinancialYear" />
+        <AssociationConnector Association="TTPModel.FK_AttendanceReports_EmpEmployees" />
+        <AssociationConnector Association="TTPModel.FK_AttendanceReports_OrgId" />
+        <EntityTypeShape EntityType="TTPModel.LeavePolicy" Width="1.5" PointX="8.25" PointY="136" />
+        <AssociationConnector Association="TTPModel.FK_LeavePolicy_BatchesFinancialYear" />
+        <AssociationConnector Association="TTPModel.FK_LeavePolicy_MasterDataLeaveNameId" />
+        <AssociationConnector Association="TTPModel.FK_LeavePolicy_MasterDataOpenAdjustClose" />
+        <AssociationConnector Association="TTPModel.FK_LeavePolicy_Organization" />
+        <EntityTypeShape EntityType="TTPModel.LeaveBalance" Width="1.5" PointX="10.5" PointY="107.625" />
+        <AssociationConnector Association="TTPModel.FK_LeaveBalances_BatchesFinancialYear" />
+        <AssociationConnector Association="TTPModel.FK_LeaveBalances_EmpEmployees" />
+        <AssociationConnector Association="TTPModel.FK_LeaveBalances_LeavePolicy" />
+        <AssociationConnector Association="TTPModel.FK_LeaveBalances_Organization" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

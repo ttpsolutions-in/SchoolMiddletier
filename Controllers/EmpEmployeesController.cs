@@ -201,9 +201,9 @@ namespace schools.Controllers
 
         // GET: odata/EmpEmployees(5)/EmployeeLeaves
         [EnableQuery]
-        public IQueryable<EmployeeLeaf> GetEmployeeLeaves([FromODataUri] int key)
+        public IQueryable<LeaveEmployeeLeaf> GetEmployeeLeaves([FromODataUri] int key)
         {
-            return db.EmpEmployees.Where(m => m.EmpEmployeeId == key).SelectMany(m => m.EmployeeLeaves);
+            return db.EmpEmployees.Where(m => m.EmpEmployeeId == key).SelectMany(m => m.LeaveEmployeeLeaves);
         }
 
         // GET: odata/EmpEmployees(5)/EmployeeMonthlySalaries

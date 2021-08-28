@@ -50,10 +50,8 @@ namespace schools.Models
         public virtual DbSet<EmpEmployeeSalaryComponent> EmpEmployeeSalaryComponents { get; set; }
         public virtual DbSet<EmpEmployeeSkill> EmpEmployeeSkills { get; set; }
         public virtual DbSet<EmpHolidayList> EmpHolidayLists { get; set; }
-        public virtual DbSet<EmpLeaf> EmpLeaves { get; set; }
         public virtual DbSet<EmployeeEducationHistory> EmployeeEducationHistories { get; set; }
         public virtual DbSet<EmployeeFamily> EmployeeFamilies { get; set; }
-        public virtual DbSet<EmployeeLeaf> EmployeeLeaves { get; set; }
         public virtual DbSet<EmployeeMonthlySalary> EmployeeMonthlySalaries { get; set; }
         public virtual DbSet<EmpManagerGroupMapping> EmpManagerGroupMappings { get; set; }
         public virtual DbSet<Exam> Exams { get; set; }
@@ -76,11 +74,19 @@ namespace schools.Models
         public virtual DbSet<StudentClassSubject> StudentClassSubjects { get; set; }
         public virtual DbSet<StudentDocument> StudentDocuments { get; set; }
         public virtual DbSet<StudentFeePayment> StudentFeePayments { get; set; }
-        public virtual DbSet<StudentFeeReceipt> StudentFeeReceipts { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudTeacherClassMapping> StudTeacherClassMappings { get; set; }
         public virtual DbSet<SubjectType> SubjectTypes { get; set; }
         public virtual DbSet<TaskConfiguration> TaskConfigurations { get; set; }
         public virtual DbSet<VariableConfiguration> VariableConfigurations { get; set; }
+        public virtual DbSet<StudentFeeReceipt> StudentFeeReceipts { get; set; }
+        public virtual DbSet<TaskAssignmentComment> TaskAssignmentComments { get; set; }
+        public virtual DbSet<TaskAssignment> TaskAssignments { get; set; }
+        public virtual DbSet<SchoolClassPeriod> SchoolClassPeriods { get; set; }
+        public virtual DbSet<SchoolTimeTable> SchoolTimeTables { get; set; }
+        public virtual DbSet<LeaveEmployeeLeaf> LeaveEmployeeLeaves { get; set; }
+        public virtual DbSet<AttendanceReport> AttendanceReports { get; set; }
+        public virtual DbSet<LeavePolicy> LeavePolicies { get; set; }
+        public virtual DbSet<LeaveBalance> LeaveBalances { get; set; }
     }
 }

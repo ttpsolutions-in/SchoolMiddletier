@@ -12,19 +12,25 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EmpLeaf
+    public partial class SchoolTimeTable
     {
-        public short EmpLeaveId { get; set; }
-        public string LeaveName { get; set; }
-        public string FormulaOrDays { get; set; }
-        public short NoOfDays { get; set; }
-        public byte Active { get; set; }
+        public int TimeTableId { get; set; }
+        public int SchoolClassPeriodId { get; set; }
+        public int ClassSubjectId { get; set; }
+        public short BatchId { get; set; }
         public short OrgId { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public byte Active { get; set; }
         public Nullable<short> CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public int SectionId { get; set; }
+        public int DayId { get; set; }
+        public int ClassId { get; set; }
     
+        public virtual Batch Batch { get; set; }
+        public virtual ClassSubject ClassSubject { get; set; }
         public virtual Organization Organization { get; set; }
+        public virtual SchoolClassPeriod SchoolClassPeriod { get; set; }
     }
 }

@@ -196,7 +196,7 @@
           <Property Name="StudentClassId" Type="int" />
           <Property Name="TeacherId" Type="smallint" />
           <Property Name="AttendanceStatus" Type="tinyint" />
-          <Property Name="AttendanceDate" Type="datetime" />
+          <Property Name="AttendanceDate" Type="date" />
           <Property Name="Remarks" Type="varchar" MaxLength="250" />
           <Property Name="OrgId" Type="smallint" />
           <Property Name="CreatedDate" Type="datetime" />
@@ -204,6 +204,27 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
           <Property Name="BatchId" Type="smallint" />
+        </EntityType>
+        <EntityType Name="AttendanceReports">
+          <Key>
+            <PropertyRef Name="AttendanceReportId" />
+          </Key>
+          <Property Name="AttendanceReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="MonthYear" Type="int" Nullable="false" />
+          <Property Name="Presents" Type="tinyint" Nullable="false" />
+          <Property Name="WeekOffs" Type="tinyint" Nullable="false" />
+          <Property Name="Holiday" Type="tinyint" Nullable="false" />
+          <Property Name="LeaveAjusted" Type="tinyint" Nullable="false" />
+          <Property Name="PaidDays" Type="tinyint" Nullable="false" />
+          <Property Name="LossOfPay" Type="tinyint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="FinancialYear" Type="smallint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="Batches">
           <Key>
@@ -245,7 +266,7 @@
           <Key>
             <PropertyRef Name="ClassSubjectId" />
           </Key>
-          <Property Name="ClassSubjectId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassSubjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClassId" Type="int" Nullable="false" />
           <Property Name="SubjectId" Type="int" Nullable="false" />
           <Property Name="SubjectTypeId" Type="smallint" Nullable="false" />
@@ -263,7 +284,7 @@
             <PropertyRef Name="ClassSubjectMarkComponentId" />
           </Key>
           <Property Name="ClassSubjectMarkComponentId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClassSubjectId" Type="smallint" Nullable="false" />
+          <Property Name="ClassSubjectId" Type="int" Nullable="false" />
           <Property Name="SubjectComponentId" Type="int" Nullable="false" />
           <Property Name="FullMark" Type="smallint" Nullable="false" />
           <Property Name="PassMark" Type="smallint" Nullable="false" />
@@ -281,7 +302,7 @@
           </Key>
           <Property Name="ClassSubjectTeacherId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TeacherId" Type="int" Nullable="false" />
-          <Property Name="ClassSubjectId" Type="smallint" Nullable="false" />
+          <Property Name="ClassSubjectId" Type="int" Nullable="false" />
           <Property Name="OrgId" Type="smallint" Nullable="false" />
           <Property Name="BatchId" Type="smallint" Nullable="false" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
@@ -316,6 +337,11 @@
           <Property Name="CTC" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="FromDate" Type="datetime" Nullable="false" />
           <Property Name="ToDate" Type="datetime" Nullable="false" />
+          <Property Name="ManagerId" Type="int" Nullable="false" />
+          <Property Name="ReportingTo" Type="int" />
+          <Property Name="JobTitleId" Type="smallint" />
+          <Property Name="DesignationId" Type="smallint" />
+          <Property Name="WorkAccountId" Type="int" />
           <Property Name="OrgId" Type="smallint" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="smallint" />
@@ -323,9 +349,6 @@
           <Property Name="UpdatedBy" Type="smallint" />
           <Property Name="Remarks" Type="varchar" MaxLength="250" />
           <Property Name="ApprovedBy" Type="smallint" />
-          <Property Name="WorkAccountId" Type="int" />
-          <Property Name="JobTitleId" Type="smallint" />
-          <Property Name="DesignationId" Type="smallint" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="EmpEmployeeGroups">
@@ -355,6 +378,7 @@
             <PropertyRef Name="EmpEmployeeId" />
           </Key>
           <Property Name="EmpEmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShortName" Type="varchar" MaxLength="10" />
           <Property Name="FirstName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="30" />
           <Property Name="FatherName" Type="varchar" MaxLength="30" Nullable="false" />
@@ -447,21 +471,6 @@
           <Property Name="UpdatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
         </EntityType>
-        <EntityType Name="EmpLeaves">
-          <Key>
-            <PropertyRef Name="EmpLeaveId" />
-          </Key>
-          <Property Name="EmpLeaveId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LeaveName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="FormulaOrDays" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="NoOfDays" Type="smallint" Nullable="false" />
-          <Property Name="Active" Type="tinyint" Nullable="false" />
-          <Property Name="OrgId" Type="smallint" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="UpdatedDate" Type="datetime" />
-          <Property Name="CreatedBy" Type="smallint" />
-          <Property Name="UpdatedBy" Type="smallint" />
-        </EntityType>
         <EntityType Name="EmployeeEducationHistory">
           <Key>
             <PropertyRef Name="EmployeeEducationHistoryId" />
@@ -488,29 +497,6 @@
           <Property Name="Age" Type="tinyint" Nullable="false" />
           <Property Name="Gender" Type="int" Nullable="false" />
           <Property Name="OrgId" Type="smallint" Nullable="false" />
-        </EntityType>
-        <EntityType Name="EmployeeLeaves">
-          <Key>
-            <PropertyRef Name="EmployeeLeaveId" />
-          </Key>
-          <Property Name="EmployeeLeaveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EmployeeId" Type="int" Nullable="false" />
-          <Property Name="LeaveTypeId" Type="int" Nullable="false" />
-          <Property Name="LeaveFrom" Type="date" Nullable="false" />
-          <Property Name="LeaveTo" Type="date" Nullable="false" />
-          <Property Name="NoOfDays" Type="smallint" Nullable="false" />
-          <Property Name="LeaveReason" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="ApplyDate" Type="datetime" />
-          <Property Name="LeaveStatusId" Type="int" />
-          <Property Name="ApproveRejecteDate" Type="datetime" />
-          <Property Name="ApprovedBy" Type="smallint" />
-          <Property Name="Remarks" Type="varchar" MaxLength="250" />
-          <Property Name="OrgId" Type="smallint" Nullable="false" />
-          <Property Name="Active" Type="tinyint" Nullable="false" />
-          <Property Name="CreatedBy" Type="smallint" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="UpdatedBy" Type="smallint" />
-          <Property Name="UpdatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="EmployeeMonthlySalary">
           <Key>
@@ -635,13 +621,71 @@
           <Property Name="BatchId" Type="smallint" />
           <Property Name="OrgId" Type="smallint" />
         </EntityType>
+        <EntityType Name="LeaveBalances">
+          <Key>
+            <PropertyRef Name="LeaveBalanceId" />
+          </Key>
+          <Property Name="LeaveBalanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="LeavePolicyId" Type="int" Nullable="false" />
+          <Property Name="NoOfDays" Type="tinyint" Nullable="false" />
+          <Property Name="YearMonth" Type="smallint" Nullable="false" />
+          <Property Name="FinancialYearId" Type="smallint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LeaveEmployeeLeaves">
+          <Key>
+            <PropertyRef Name="EmployeeLeaveId" />
+          </Key>
+          <Property Name="EmployeeLeaveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="LeaveTypeId" Type="int" Nullable="false" />
+          <Property Name="LeaveFrom" Type="date" Nullable="false" />
+          <Property Name="LeaveTo" Type="date" Nullable="false" />
+          <Property Name="NoOfDays" Type="smallint" Nullable="false" />
+          <Property Name="LeaveReason" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ApplyDate" Type="datetime" />
+          <Property Name="LeaveStatusId" Type="int" />
+          <Property Name="ApproveRejectedDate" Type="datetime" />
+          <Property Name="ApprovedBy" Type="smallint" />
+          <Property Name="Remarks" Type="varchar" MaxLength="250" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LeavePolicy">
+          <Key>
+            <PropertyRef Name="LeavePolicyId" />
+          </Key>
+          <Property Name="LeavePolicyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeaveNameId" Type="int" Nullable="false" />
+          <Property Name="LeaveOpenAdjustCloseId" Type="int" Nullable="false" />
+          <Property Name="FormulaOrDays" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="FinancialYearId" Type="smallint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+        </EntityType>
         <EntityType Name="MasterData">
           <Key>
             <PropertyRef Name="MasterDataId" />
           </Key>
           <Property Name="MasterDataId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MasterDataName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar" MaxLength="2000" />
+          <Property Name="Logic" Type="varchar" MaxLength="256" />
+          <Property Name="Sequence" Type="tinyint" />
           <Property Name="ParentId" Type="smallint" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="smallint" />
@@ -764,6 +808,22 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
         </EntityType>
+        <EntityType Name="SchoolClassPeriods">
+          <Key>
+            <PropertyRef Name="SchoolClassPeriodId" />
+          </Key>
+          <Property Name="SchoolClassPeriodId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassId" Type="int" Nullable="false" />
+          <Property Name="PeriodId" Type="int" Nullable="false" />
+          <Property Name="FromToTime" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="BatchId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="SchoolFeeTypes">
           <Key>
             <PropertyRef Name="FeeTypeId" />
@@ -780,13 +840,31 @@
           <Property Name="UpdatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="SchoolTimeTable">
+          <Key>
+            <PropertyRef Name="TimeTableId" />
+          </Key>
+          <Property Name="TimeTableId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DayId" Type="int" Nullable="false" />
+          <Property Name="ClassId" Type="int" Nullable="false" />
+          <Property Name="SectionId" Type="int" Nullable="false" />
+          <Property Name="SchoolClassPeriodId" Type="int" Nullable="false" />
+          <Property Name="ClassSubjectId" Type="int" Nullable="false" />
+          <Property Name="BatchId" Type="smallint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="date" />
+        </EntityType>
         <EntityType Name="SlotAndClassSubject">
           <Key>
             <PropertyRef Name="SlotClassSubjectId" />
           </Key>
           <Property Name="SlotClassSubjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SlotId" Type="smallint" Nullable="false" />
-          <Property Name="ClassSubjectId" Type="smallint" Nullable="false" />
+          <Property Name="ClassSubjectId" Type="int" Nullable="false" />
           <Property Name="OrgId" Type="smallint" Nullable="false" />
           <Property Name="BatchId" Type="smallint" Nullable="false" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
@@ -856,7 +934,7 @@
             <PropertyRef Name="StudentClassSubjectId" />
           </Key>
           <Property Name="StudentClassSubjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClassSubjectId" Type="smallint" Nullable="false" />
+          <Property Name="ClassSubjectId" Type="int" Nullable="false" />
           <Property Name="StudentClassId" Type="int" Nullable="false" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
           <Property Name="OrgId" Type="smallint" Nullable="false" />
@@ -914,22 +992,26 @@
           <Property Name="StudentFeeReceiptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StudentClassId" Type="int" Nullable="false" />
           <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="ReceiptNo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ReceiptNo" Type="int" Nullable="false" />
+          <Property Name="OffLineReceiptNo" Type="varchar" MaxLength="20" />
           <Property Name="ReceiptDate" Type="datetime" Nullable="false" />
           <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="BatchId" Type="smallint" />
-          <Property Name="OrgId" Type="smallint" />
+          <Property Name="BatchId" Type="smallint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
           <Property Name="CreatedBy" Type="smallint" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="Balance" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Students">
           <Key>
             <PropertyRef Name="StudentId" />
           </Key>
           <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
           <Property Name="FatherName" Type="varchar" MaxLength="50" />
           <Property Name="MotherName" Type="varchar" MaxLength="50" />
           <Property Name="Gender" Type="int" />
@@ -1002,6 +1084,46 @@
           <Property Name="BatchId" Type="smallint" />
           <Property Name="Active" Type="tinyint" />
           <Property Name="OrgId" Type="smallint" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TaskAssignmentComments">
+          <Key>
+            <PropertyRef Name="AssignmentCommentId" />
+          </Key>
+          <Property Name="AssignmentCommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskAssignmentId" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CommentedBy" Type="smallint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskAssignments">
+          <Key>
+            <PropertyRef Name="AssignmentId" />
+          </Key>
+          <Property Name="AssignmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AssignmentName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="AssignedToStudentClassId" Type="int" />
+          <Property Name="AssignedToEmployeeId" Type="int" />
+          <Property Name="AssignedByEmployeeId" Type="int" Nullable="false" />
+          <Property Name="AssignmentStatusId" Type="int" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Score" Type="tinyint" />
+          <Property Name="AssignmentDate" Type="datetime" Nullable="false" />
+          <Property Name="ExpectedCompletion" Type="datetime" Nullable="false" />
+          <Property Name="ActualCompletion" Type="datetime" />
+          <Property Name="Remarks" Type="varchar" MaxLength="256" />
+          <Property Name="BatchId" Type="int" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
           <Property Name="CreatedBy" Type="smallint" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
@@ -1177,6 +1299,42 @@
             </Principal>
             <Dependent Role="Attendance">
               <PropertyRef Name="StudentClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendanceReports_BatchesFinancialYear">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="AttendanceReports" Type="Self.AttendanceReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="AttendanceReports">
+              <PropertyRef Name="FinancialYear" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendanceReports_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployees" Multiplicity="1" />
+          <End Role="AttendanceReports" Type="Self.AttendanceReports" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="AttendanceReports">
+              <PropertyRef Name="AttendanceReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendanceReports_OrgId">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="AttendanceReports" Type="Self.AttendanceReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="AttendanceReports">
+              <PropertyRef Name="OrgId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1572,18 +1730,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EmpLeaves_Organization">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
-          <End Role="EmpLeaves" Type="Self.EmpLeaves" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="EmpLeaves">
-              <PropertyRef Name="OrgId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EmployeeEducationHistory_EmpEmployees">
           <End Role="EmpEmployees" Type="Self.EmpEmployees" Multiplicity="1" />
           <End Role="EmployeeEducationHistory" Type="Self.EmployeeEducationHistory" Multiplicity="*" />
@@ -1658,48 +1804,48 @@
         </Association>
         <Association Name="FK_EmployeeLeaves_EmpEmployees">
           <End Role="EmpEmployees" Type="Self.EmpEmployees" Multiplicity="1" />
-          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaves" Multiplicity="*" />
+          <End Role="LeaveEmployeeLeaves" Type="Self.LeaveEmployeeLeaves" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EmpEmployees">
               <PropertyRef Name="EmpEmployeeId" />
             </Principal>
-            <Dependent Role="EmployeeLeaves">
+            <Dependent Role="LeaveEmployeeLeaves">
               <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EmployeeLeaves_MasterDataLeaveStatus">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
-          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaves" Multiplicity="*" />
+          <End Role="LeaveEmployeeLeaves" Type="Self.LeaveEmployeeLeaves" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MasterData">
               <PropertyRef Name="MasterDataId" />
             </Principal>
-            <Dependent Role="EmployeeLeaves">
+            <Dependent Role="LeaveEmployeeLeaves">
               <PropertyRef Name="LeaveStatusId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EmployeeLeaves_MasterDataLeaveTypeId">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaves" Multiplicity="*" />
+          <End Role="LeaveEmployeeLeaves" Type="Self.LeaveEmployeeLeaves" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MasterData">
               <PropertyRef Name="MasterDataId" />
             </Principal>
-            <Dependent Role="EmployeeLeaves">
+            <Dependent Role="LeaveEmployeeLeaves">
               <PropertyRef Name="LeaveTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EmployeeLeaves_Organization">
           <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
-          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaves" Multiplicity="*" />
+          <End Role="LeaveEmployeeLeaves" Type="Self.LeaveEmployeeLeaves" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organization">
               <PropertyRef Name="OrganizationId" />
             </Principal>
-            <Dependent Role="EmployeeLeaves">
+            <Dependent Role="LeaveEmployeeLeaves">
               <PropertyRef Name="OrgId" />
             </Dependent>
           </ReferentialConstraint>
@@ -2064,6 +2210,102 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LeaveBalances_BatchesFinancialYear">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="LeaveBalances" Type="Self.LeaveBalances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="LeaveBalances">
+              <PropertyRef Name="FinancialYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveBalances_EmpEmployees">
+          <End Role="EmpEmployees" Type="Self.EmpEmployees" Multiplicity="1" />
+          <End Role="LeaveBalances" Type="Self.LeaveBalances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="LeaveBalances">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveBalances_LeavePolicy">
+          <End Role="LeavePolicy" Type="Self.LeavePolicy" Multiplicity="1" />
+          <End Role="LeaveBalances" Type="Self.LeaveBalances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeavePolicy">
+              <PropertyRef Name="LeavePolicyId" />
+            </Principal>
+            <Dependent Role="LeaveBalances">
+              <PropertyRef Name="LeavePolicyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveBalances_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="LeaveBalances" Type="Self.LeaveBalances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="LeaveBalances">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeavePolicy_BatchesFinancialYear">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="LeavePolicy" Type="Self.LeavePolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="LeavePolicy">
+              <PropertyRef Name="FinancialYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeavePolicy_MasterDataLeaveNameId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="LeavePolicy" Type="Self.LeavePolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="LeavePolicy">
+              <PropertyRef Name="LeaveNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeavePolicy_MasterDataOpenAdjustClose">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="LeavePolicy" Type="Self.LeavePolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="LeavePolicy">
+              <PropertyRef Name="LeaveOpenAdjustCloseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeavePolicy_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="LeavePolicy" Type="Self.LeavePolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="LeavePolicy">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Ledgers_Batches">
           <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
           <End Role="AccountingLedgerTrialBalance" Type="Self.AccountingLedgerTrialBalance" Multiplicity="*" />
@@ -2289,6 +2531,102 @@
             </Principal>
             <Dependent Role="RoleUser">
               <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolClassPeriods_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="SchoolClassPeriods" Type="Self.SchoolClassPeriods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="SchoolClassPeriods">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolClassPeriods_MasterDataClassId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="SchoolClassPeriods" Type="Self.SchoolClassPeriods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="SchoolClassPeriods">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolClassPeriods_MasterDataPeriodId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="SchoolClassPeriods" Type="Self.SchoolClassPeriods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="SchoolClassPeriods">
+              <PropertyRef Name="PeriodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolClassPeriods_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="SchoolClassPeriods" Type="Self.SchoolClassPeriods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="SchoolClassPeriods">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolTimeTable_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="SchoolTimeTable" Type="Self.SchoolTimeTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="SchoolTimeTable">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolTimeTable_ClassSubject">
+          <End Role="ClassSubject" Type="Self.ClassSubject" Multiplicity="1" />
+          <End Role="SchoolTimeTable" Type="Self.SchoolTimeTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassSubject">
+              <PropertyRef Name="ClassSubjectId" />
+            </Principal>
+            <Dependent Role="SchoolTimeTable">
+              <PropertyRef Name="ClassSubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolTimeTable_OrgId">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="SchoolTimeTable" Type="Self.SchoolTimeTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="SchoolTimeTable">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolTimeTable_SchoolClassPeriodId">
+          <End Role="SchoolClassPeriods" Type="Self.SchoolClassPeriods" Multiplicity="1" />
+          <End Role="SchoolTimeTable" Type="Self.SchoolTimeTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolClassPeriods">
+              <PropertyRef Name="SchoolClassPeriodId" />
+            </Principal>
+            <Dependent Role="SchoolTimeTable">
+              <PropertyRef Name="SchoolClassPeriodId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2641,7 +2979,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentFeeReceipts_Batches">
-          <End Role="Batches" Type="Self.Batches" Multiplicity="0..1" />
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
           <End Role="StudentFeeReceipts" Type="Self.StudentFeeReceipts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Batches">
@@ -2653,7 +2991,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentFeeReceipts_Organization">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
           <End Role="StudentFeeReceipts" Type="Self.StudentFeeReceipts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organization">
@@ -2880,6 +3218,90 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TaskAssignmentComments_OrgId">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="TaskAssignmentComments" Type="Self.TaskAssignmentComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="TaskAssignmentComments">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssignmentComments_TaskAssignments">
+          <End Role="TaskAssignments" Type="Self.TaskAssignments" Multiplicity="1" />
+          <End Role="TaskAssignmentComments" Type="Self.TaskAssignmentComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskAssignments">
+              <PropertyRef Name="AssignmentId" />
+            </Principal>
+            <Dependent Role="TaskAssignmentComments">
+              <PropertyRef Name="TaskAssignmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssignments_EmpEmployeesAssignedBy">
+          <End Role="EmpEmployees" Type="Self.EmpEmployees" Multiplicity="1" />
+          <End Role="TaskAssignments" Type="Self.TaskAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="TaskAssignments">
+              <PropertyRef Name="AssignedByEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssignments_EmpEmployeesAssignedTo">
+          <End Role="EmpEmployees" Type="Self.EmpEmployees" Multiplicity="0..1" />
+          <End Role="TaskAssignments" Type="Self.TaskAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployees">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="TaskAssignments">
+              <PropertyRef Name="AssignedToEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssignments_MasterDataAssignmentStatusId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="TaskAssignments" Type="Self.TaskAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="TaskAssignments">
+              <PropertyRef Name="AssignmentStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssignments_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="TaskAssignments" Type="Self.TaskAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="TaskAssignments">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssignments_StudentClass">
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="0..1" />
+          <End Role="TaskAssignments" Type="Self.TaskAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentClass">
+              <PropertyRef Name="StudentClassId" />
+            </Principal>
+            <Dependent Role="TaskAssignments">
+              <PropertyRef Name="AssignedToStudentClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TaskConfiguration_OrganizationId">
           <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
           <End Role="TaskConfiguration" Type="Self.TaskConfiguration" Multiplicity="*" />
@@ -2919,6 +3341,7 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AttendanceReports" EntityType="Self.AttendanceReports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Batches" EntityType="Self.Batches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassFee" EntityType="Self.ClassFee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSubject" EntityType="Self.ClassSubject" Schema="dbo" store:Type="Tables" />
@@ -2931,10 +3354,8 @@
           <EntitySet Name="EmpEmployeeSalaryComponents" EntityType="Self.EmpEmployeeSalaryComponents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpEmployeeSkills" EntityType="Self.EmpEmployeeSkills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpHolidayList" EntityType="Self.EmpHolidayList" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EmpLeaves" EntityType="Self.EmpLeaves" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeEducationHistory" EntityType="Self.EmployeeEducationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeFamily" EntityType="Self.EmployeeFamily" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EmployeeLeaves" EntityType="Self.EmployeeLeaves" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeMonthlySalary" EntityType="Self.EmployeeMonthlySalary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpManagerGroupMapping" EntityType="Self.EmpManagerGroupMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Exams" EntityType="Self.Exams" Schema="dbo" store:Type="Tables" />
@@ -2942,6 +3363,9 @@
           <EntitySet Name="ExamStudentResult" EntityType="Self.ExamStudentResult" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExamStudentSubjectResult" EntityType="Self.ExamStudentSubjectResult" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FilesNPhotos" EntityType="Self.FilesNPhotos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveBalances" EntityType="Self.LeaveBalances" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveEmployeeLeaves" EntityType="Self.LeaveEmployeeLeaves" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeavePolicy" EntityType="Self.LeavePolicy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MasterData" EntityType="Self.MasterData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
@@ -2949,7 +3373,9 @@
           <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhotoGallery" EntityType="Self.PhotoGallery" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleUser" EntityType="Self.RoleUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SchoolClassPeriods" EntityType="Self.SchoolClassPeriods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SchoolFeeTypes" EntityType="Self.SchoolFeeTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SchoolTimeTable" EntityType="Self.SchoolTimeTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SlotAndClassSubject" EntityType="Self.SlotAndClassSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentActivity" EntityType="Self.StudentActivity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentCertificate" EntityType="Self.StudentCertificate" Schema="dbo" store:Type="Tables" />
@@ -2961,6 +3387,8 @@
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudTeacherClassMapping" EntityType="Self.StudTeacherClassMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubjectTypes" EntityType="Self.SubjectTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskAssignmentComments" EntityType="Self.TaskAssignmentComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskAssignments" EntityType="Self.TaskAssignments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaskConfiguration" EntityType="Self.TaskConfiguration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VariableConfiguration" EntityType="Self.VariableConfiguration" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AccountingTrialBalances_MasterDataLedgerId" Association="Self.FK_AccountingTrialBalances_MasterDataLedgerId">
@@ -3006,6 +3434,18 @@
           <AssociationSet Name="FK_Attendance_StudentClassId" Association="Self.FK_Attendance_StudentClassId">
             <End Role="StudentClass" EntitySet="StudentClass" />
             <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendanceReports_BatchesFinancialYear" Association="Self.FK_AttendanceReports_BatchesFinancialYear">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="AttendanceReports" EntitySet="AttendanceReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendanceReports_EmpEmployees" Association="Self.FK_AttendanceReports_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="AttendanceReports" EntitySet="AttendanceReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendanceReports_OrgId" Association="Self.FK_AttendanceReports_OrgId">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="AttendanceReports" EntitySet="AttendanceReports" />
           </AssociationSet>
           <AssociationSet Name="FK_Batches_Organization" Association="Self.FK_Batches_Organization">
             <End Role="Organization" EntitySet="Organization" />
@@ -3135,10 +3575,6 @@
             <End Role="Organization" EntitySet="Organization" />
             <End Role="EmpEmployeeSkills" EntitySet="EmpEmployeeSkills" />
           </AssociationSet>
-          <AssociationSet Name="FK_EmpLeaves_Organization" Association="Self.FK_EmpLeaves_Organization">
-            <End Role="Organization" EntitySet="Organization" />
-            <End Role="EmpLeaves" EntitySet="EmpLeaves" />
-          </AssociationSet>
           <AssociationSet Name="FK_EmployeeEducationHistory_EmpEmployees" Association="Self.FK_EmployeeEducationHistory_EmpEmployees">
             <End Role="EmpEmployees" EntitySet="EmpEmployees" />
             <End Role="EmployeeEducationHistory" EntitySet="EmployeeEducationHistory" />
@@ -3165,19 +3601,19 @@
           </AssociationSet>
           <AssociationSet Name="FK_EmployeeLeaves_EmpEmployees" Association="Self.FK_EmployeeLeaves_EmpEmployees">
             <End Role="EmpEmployees" EntitySet="EmpEmployees" />
-            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
+            <End Role="LeaveEmployeeLeaves" EntitySet="LeaveEmployeeLeaves" />
           </AssociationSet>
           <AssociationSet Name="FK_EmployeeLeaves_MasterDataLeaveStatus" Association="Self.FK_EmployeeLeaves_MasterDataLeaveStatus">
             <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
+            <End Role="LeaveEmployeeLeaves" EntitySet="LeaveEmployeeLeaves" />
           </AssociationSet>
           <AssociationSet Name="FK_EmployeeLeaves_MasterDataLeaveTypeId" Association="Self.FK_EmployeeLeaves_MasterDataLeaveTypeId">
             <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
+            <End Role="LeaveEmployeeLeaves" EntitySet="LeaveEmployeeLeaves" />
           </AssociationSet>
           <AssociationSet Name="FK_EmployeeLeaves_Organization" Association="Self.FK_EmployeeLeaves_Organization">
             <End Role="Organization" EntitySet="Organization" />
-            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
+            <End Role="LeaveEmployeeLeaves" EntitySet="LeaveEmployeeLeaves" />
           </AssociationSet>
           <AssociationSet Name="FK_EmployeeMonthlySalary_EmpEmployees" Association="Self.FK_EmployeeMonthlySalary_EmpEmployees">
             <End Role="EmpEmployees" EntitySet="EmpEmployees" />
@@ -3299,6 +3735,38 @@
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="EmpHolidayList" EntitySet="EmpHolidayList" />
           </AssociationSet>
+          <AssociationSet Name="FK_LeaveBalances_BatchesFinancialYear" Association="Self.FK_LeaveBalances_BatchesFinancialYear">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="LeaveBalances" EntitySet="LeaveBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveBalances_EmpEmployees" Association="Self.FK_LeaveBalances_EmpEmployees">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="LeaveBalances" EntitySet="LeaveBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveBalances_LeavePolicy" Association="Self.FK_LeaveBalances_LeavePolicy">
+            <End Role="LeavePolicy" EntitySet="LeavePolicy" />
+            <End Role="LeaveBalances" EntitySet="LeaveBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveBalances_Organization" Association="Self.FK_LeaveBalances_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="LeaveBalances" EntitySet="LeaveBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeavePolicy_BatchesFinancialYear" Association="Self.FK_LeavePolicy_BatchesFinancialYear">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="LeavePolicy" EntitySet="LeavePolicy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeavePolicy_MasterDataLeaveNameId" Association="Self.FK_LeavePolicy_MasterDataLeaveNameId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="LeavePolicy" EntitySet="LeavePolicy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeavePolicy_MasterDataOpenAdjustClose" Association="Self.FK_LeavePolicy_MasterDataOpenAdjustClose">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="LeavePolicy" EntitySet="LeavePolicy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeavePolicy_Organization" Association="Self.FK_LeavePolicy_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="LeavePolicy" EntitySet="LeavePolicy" />
+          </AssociationSet>
           <AssociationSet Name="FK_Ledgers_Batches" Association="Self.FK_Ledgers_Batches">
             <End Role="Batches" EntitySet="Batches" />
             <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalance" />
@@ -3374,6 +3842,38 @@
           <AssociationSet Name="FK_RoleUser_OrganizationId" Association="Self.FK_RoleUser_OrganizationId">
             <End Role="Organization" EntitySet="Organization" />
             <End Role="RoleUser" EntitySet="RoleUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolClassPeriods_Batches" Association="Self.FK_SchoolClassPeriods_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="SchoolClassPeriods" EntitySet="SchoolClassPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolClassPeriods_MasterDataClassId" Association="Self.FK_SchoolClassPeriods_MasterDataClassId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="SchoolClassPeriods" EntitySet="SchoolClassPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolClassPeriods_MasterDataPeriodId" Association="Self.FK_SchoolClassPeriods_MasterDataPeriodId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="SchoolClassPeriods" EntitySet="SchoolClassPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolClassPeriods_Organization" Association="Self.FK_SchoolClassPeriods_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="SchoolClassPeriods" EntitySet="SchoolClassPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolTimeTable_Batches" Association="Self.FK_SchoolTimeTable_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="SchoolTimeTable" EntitySet="SchoolTimeTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolTimeTable_ClassSubject" Association="Self.FK_SchoolTimeTable_ClassSubject">
+            <End Role="ClassSubject" EntitySet="ClassSubject" />
+            <End Role="SchoolTimeTable" EntitySet="SchoolTimeTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolTimeTable_OrgId" Association="Self.FK_SchoolTimeTable_OrgId">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="SchoolTimeTable" EntitySet="SchoolTimeTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolTimeTable_SchoolClassPeriodId" Association="Self.FK_SchoolTimeTable_SchoolClassPeriodId">
+            <End Role="SchoolClassPeriods" EntitySet="SchoolClassPeriods" />
+            <End Role="SchoolTimeTable" EntitySet="SchoolTimeTable" />
           </AssociationSet>
           <AssociationSet Name="FK_SlotAndClassSubject_Batches" Association="Self.FK_SlotAndClassSubject_Batches">
             <End Role="Batches" EntitySet="Batches" />
@@ -3570,6 +4070,34 @@
           <AssociationSet Name="FK_SubjectTypes_Batches" Association="Self.FK_SubjectTypes_Batches">
             <End Role="Batches" EntitySet="Batches" />
             <End Role="SubjectTypes" EntitySet="SubjectTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssignmentComments_OrgId" Association="Self.FK_TaskAssignmentComments_OrgId">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="TaskAssignmentComments" EntitySet="TaskAssignmentComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssignmentComments_TaskAssignments" Association="Self.FK_TaskAssignmentComments_TaskAssignments">
+            <End Role="TaskAssignments" EntitySet="TaskAssignments" />
+            <End Role="TaskAssignmentComments" EntitySet="TaskAssignmentComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssignments_EmpEmployeesAssignedBy" Association="Self.FK_TaskAssignments_EmpEmployeesAssignedBy">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="TaskAssignments" EntitySet="TaskAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssignments_EmpEmployeesAssignedTo" Association="Self.FK_TaskAssignments_EmpEmployeesAssignedTo">
+            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
+            <End Role="TaskAssignments" EntitySet="TaskAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssignments_MasterDataAssignmentStatusId" Association="Self.FK_TaskAssignments_MasterDataAssignmentStatusId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="TaskAssignments" EntitySet="TaskAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssignments_Organization" Association="Self.FK_TaskAssignments_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="TaskAssignments" EntitySet="TaskAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssignments_StudentClass" Association="Self.FK_TaskAssignments_StudentClass">
+            <End Role="StudentClass" EntitySet="StudentClass" />
+            <End Role="TaskAssignments" EntitySet="TaskAssignments" />
           </AssociationSet>
           <AssociationSet Name="FK_TaskConfiguration_OrganizationId" Association="Self.FK_TaskConfiguration_OrganizationId">
             <End Role="Organization" EntitySet="Organization" />
@@ -3792,7 +4320,7 @@
           <Property Name="StudentClassId" Type="Int32" />
           <Property Name="TeacherId" Type="Int16" />
           <Property Name="AttendanceStatus" Type="Byte" />
-          <Property Name="AttendanceDate" Type="DateTime" Precision="3" />
+          <Property Name="AttendanceDate" Type="DateTime" Precision="0" />
           <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="OrgId" Type="Int16" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
@@ -3842,6 +4370,11 @@
           <NavigationProperty Name="StudTeacherClassMappings" Relationship="Self.FK_StudTeacherClassMapping_Batches" FromRole="Batches" ToRole="StudTeacherClassMapping" />
           <NavigationProperty Name="SubjectTypes" Relationship="Self.FK_SubjectTypes_Batches" FromRole="Batches" ToRole="SubjectTypes" />
           <NavigationProperty Name="StudentFeeReceipts" Relationship="TTPModel.FK_StudentFeeReceipts_Batches" FromRole="Batch" ToRole="StudentFeeReceipt" />
+          <NavigationProperty Name="SchoolClassPeriods" Relationship="TTPModel.FK_SchoolClassPeriods_Batches" FromRole="Batch" ToRole="SchoolClassPeriod" />
+          <NavigationProperty Name="SchoolTimeTables" Relationship="TTPModel.FK_SchoolTimeTable_Batches" FromRole="Batch" ToRole="SchoolTimeTable" />
+          <NavigationProperty Name="AttendanceReports" Relationship="TTPModel.FK_AttendanceReports_BatchesFinancialYear" FromRole="Batch" ToRole="AttendanceReport" />
+          <NavigationProperty Name="LeavePolicies" Relationship="TTPModel.FK_LeavePolicy_BatchesFinancialYear" FromRole="Batch" ToRole="LeavePolicy" />
+          <NavigationProperty Name="LeaveBalances" Relationship="TTPModel.FK_LeaveBalances_BatchesFinancialYear" FromRole="Batch" ToRole="LeaveBalance" />
         </EntityType>
         <EntityType Name="ClassFee">
           <Key>
@@ -3873,7 +4406,7 @@
           <Key>
             <PropertyRef Name="ClassSubjectId" />
           </Key>
-          <Property Name="ClassSubjectId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassSubjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClassId" Type="Int32" Nullable="false" />
           <Property Name="SubjectId" Type="Int32" Nullable="false" />
           <Property Name="SubjectTypeId" Type="Int16" Nullable="false" />
@@ -3894,13 +4427,14 @@
           <NavigationProperty Name="ClassSubjectTeachers" Relationship="Self.FK_ClassSubjectTeacher_ClassSubject" FromRole="ClassSubject" ToRole="ClassSubjectTeacher" />
           <NavigationProperty Name="SlotAndClassSubjects" Relationship="Self.FK_SlotAndClassSubject_ClassSubjectId" FromRole="ClassSubject" ToRole="SlotAndClassSubject" />
           <NavigationProperty Name="StudentClassSubjects" Relationship="Self.FK_StudentClassSubject_ClassSubjectId" FromRole="ClassSubject" ToRole="StudentClassSubject" />
+          <NavigationProperty Name="SchoolTimeTables" Relationship="TTPModel.FK_SchoolTimeTable_ClassSubject" FromRole="ClassSubject" ToRole="SchoolTimeTable" />
         </EntityType>
         <EntityType Name="ClassSubjectMarkComponent">
           <Key>
             <PropertyRef Name="ClassSubjectMarkComponentId" />
           </Key>
           <Property Name="ClassSubjectMarkComponentId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClassSubjectId" Type="Int16" Nullable="false" />
+          <Property Name="ClassSubjectId" Type="Int32" Nullable="false" />
           <Property Name="SubjectComponentId" Type="Int32" Nullable="false" />
           <Property Name="FullMark" Type="Int16" Nullable="false" />
           <Property Name="PassMark" Type="Int16" Nullable="false" />
@@ -3923,7 +4457,7 @@
           </Key>
           <Property Name="ClassSubjectTeacherId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TeacherId" Type="Int32" Nullable="false" />
-          <Property Name="ClassSubjectId" Type="Int16" Nullable="false" />
+          <Property Name="ClassSubjectId" Type="Int32" Nullable="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
           <Property Name="BatchId" Type="Int16" Nullable="false" />
           <Property Name="Active" Type="Byte" Nullable="false" />
@@ -3982,6 +4516,8 @@
           <NavigationProperty Name="MasterData" Relationship="Self.FK_EmpEmployeeGradeSalHistory_MasterDataGradeId" FromRole="EmpEmployeeGradeSalHistory" ToRole="MasterData" />
           <NavigationProperty Name="MasterData1" Relationship="Self.FK_EmpEmployeeGradeSalHistory_MasterDataWorkAccountId" FromRole="EmpEmployeeGradeSalHistory" ToRole="MasterData" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_EmpEmployeeGradeSalHistory_OrganizationId" FromRole="EmpEmployeeGradeSalHistory" ToRole="Organization" />
+          <Property Name="ManagerId" Type="Int32" Nullable="false" />
+          <Property Name="ReportingTo" Type="Int32" />
         </EntityType>
         <EntityType Name="EmpEmployeeGroup">
           <Key>
@@ -4062,10 +4598,15 @@
           <NavigationProperty Name="EmpEmployeeSkills" Relationship="Self.FK_EmpEmployeeSkills_EmpEmployees" FromRole="EmpEmployees" ToRole="EmpEmployeeSkills" />
           <NavigationProperty Name="EmployeeEducationHistories" Relationship="Self.FK_EmployeeEducationHistory_EmpEmployees" FromRole="EmpEmployees" ToRole="EmployeeEducationHistory" />
           <NavigationProperty Name="EmployeeFamilies" Relationship="Self.FK_EmployeeFamily_EmpEmployees" FromRole="EmpEmployees" ToRole="EmployeeFamily" />
-          <NavigationProperty Name="EmployeeLeaves" Relationship="Self.FK_EmployeeLeaves_EmpEmployees" FromRole="EmpEmployees" ToRole="EmployeeLeaves" />
           <NavigationProperty Name="EmployeeMonthlySalaries" Relationship="Self.FK_EmployeeMonthlySalary_EmpEmployees" FromRole="EmpEmployees" ToRole="EmployeeMonthlySalary" />
           <NavigationProperty Name="EmpEmployeeSalaryComponents" Relationship="Self.FK_EmployeeSalaryComponents_EmpEmployees" FromRole="EmpEmployees" ToRole="EmpEmployeeSalaryComponents" />
           <NavigationProperty Name="StudTeacherClassMappings" Relationship="Self.FK_StudTeacherClassMapping_EmpEmployeesTeacherId" FromRole="EmpEmployees" ToRole="StudTeacherClassMapping" />
+          <NavigationProperty Name="TaskAssignments" Relationship="TTPModel.FK_TaskAssignments_EmpEmployeesAssignedBy" FromRole="EmpEmployee" ToRole="TaskAssignment" />
+          <NavigationProperty Name="TaskAssignments1" Relationship="TTPModel.FK_TaskAssignments_EmpEmployeesAssignedTo" FromRole="EmpEmployee" ToRole="TaskAssignment" />
+          <Property Name="ShortName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LeaveEmployeeLeaves" Relationship="TTPModel.FK_EmployeeLeaves_EmpEmployees1" FromRole="EmpEmployee" ToRole="LeaveEmployeeLeaf" />
+          <NavigationProperty Name="AttendanceReport" Relationship="TTPModel.FK_AttendanceReports_EmpEmployees" FromRole="EmpEmployee" ToRole="AttendanceReport" />
+          <NavigationProperty Name="LeaveBalances" Relationship="TTPModel.FK_LeaveBalances_EmpEmployees" FromRole="EmpEmployee" ToRole="LeaveBalance" />
         </EntityType>
         <EntityType Name="EmpEmployeeSalaryComponent">
           <Key>
@@ -4122,22 +4663,6 @@
           <NavigationProperty Name="MasterData" Relationship="Self.FK_HolidayList_MasterDataHolidayType" FromRole="EmpHolidayList" ToRole="MasterData" />
           <NavigationProperty Name="MasterData1" Relationship="Self.FK_HolidayList_MasterDataLocationId" FromRole="EmpHolidayList" ToRole="MasterData" />
         </EntityType>
-        <EntityType Name="EmpLeaf">
-          <Key>
-            <PropertyRef Name="EmpLeaveId" />
-          </Key>
-          <Property Name="EmpLeaveId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LeaveName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FormulaOrDays" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NoOfDays" Type="Int16" Nullable="false" />
-          <Property Name="Active" Type="Byte" Nullable="false" />
-          <Property Name="OrgId" Type="Int16" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int16" />
-          <Property Name="UpdatedBy" Type="Int16" />
-          <NavigationProperty Name="Organization" Relationship="Self.FK_EmpLeaves_Organization" FromRole="EmpLeaves" ToRole="Organization" />
-        </EntityType>
         <EntityType Name="EmployeeEducationHistory">
           <Key>
             <PropertyRef Name="EmployeeEducationHistoryId" />
@@ -4170,33 +4695,6 @@
           <NavigationProperty Name="MasterData" Relationship="Self.FK_EmployeeFamily_MasterDataGenderId" FromRole="EmployeeFamily" ToRole="MasterData" />
           <NavigationProperty Name="MasterData1" Relationship="Self.FK_EmployeeFamily_MasterDataRelationshipId" FromRole="EmployeeFamily" ToRole="MasterData" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_EmployeeFamily_Organization" FromRole="EmployeeFamily" ToRole="Organization" />
-        </EntityType>
-        <EntityType Name="EmployeeLeaf">
-          <Key>
-            <PropertyRef Name="EmployeeLeaveId" />
-          </Key>
-          <Property Name="EmployeeLeaveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="LeaveTypeId" Type="Int32" Nullable="false" />
-          <Property Name="LeaveFrom" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="LeaveTo" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="NoOfDays" Type="Int16" Nullable="false" />
-          <Property Name="LeaveReason" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ApplyDate" Type="DateTime" Precision="3" />
-          <Property Name="LeaveStatusId" Type="Int32" />
-          <Property Name="ApproveRejecteDate" Type="DateTime" Precision="3" />
-          <Property Name="ApprovedBy" Type="Int16" />
-          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="OrgId" Type="Int16" Nullable="false" />
-          <Property Name="Active" Type="Byte" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int16" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Int16" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="EmpEmployee" Relationship="Self.FK_EmployeeLeaves_EmpEmployees" FromRole="EmployeeLeaves" ToRole="EmpEmployees" />
-          <NavigationProperty Name="MasterData" Relationship="Self.FK_EmployeeLeaves_MasterDataLeaveStatus" FromRole="EmployeeLeaves" ToRole="MasterData" />
-          <NavigationProperty Name="MasterData1" Relationship="Self.FK_EmployeeLeaves_MasterDataLeaveTypeId" FromRole="EmployeeLeaves" ToRole="MasterData" />
-          <NavigationProperty Name="Organization" Relationship="Self.FK_EmployeeLeaves_Organization" FromRole="EmployeeLeaves" ToRole="Organization" />
         </EntityType>
         <EntityType Name="EmployeeMonthlySalary">
           <Key>
@@ -4353,7 +4851,7 @@
           </Key>
           <Property Name="MasterDataId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MasterDataName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <Property Name="ParentId" Type="Int16" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int16" />
@@ -4380,8 +4878,6 @@
           <NavigationProperty Name="EmpHolidayLists1" Relationship="Self.FK_HolidayList_MasterDataLocationId" FromRole="MasterData" ToRole="EmpHolidayList" />
           <NavigationProperty Name="EmployeeFamilies" Relationship="Self.FK_EmployeeFamily_MasterDataGenderId" FromRole="MasterData" ToRole="EmployeeFamily" />
           <NavigationProperty Name="EmployeeFamilies1" Relationship="Self.FK_EmployeeFamily_MasterDataRelationshipId" FromRole="MasterData" ToRole="EmployeeFamily" />
-          <NavigationProperty Name="EmployeeLeaves" Relationship="Self.FK_EmployeeLeaves_MasterDataLeaveStatus" FromRole="MasterData" ToRole="EmployeeLeaves" />
-          <NavigationProperty Name="EmployeeLeaves1" Relationship="Self.FK_EmployeeLeaves_MasterDataLeaveTypeId" FromRole="MasterData" ToRole="EmployeeLeaves" />
           <NavigationProperty Name="Exams" Relationship="Self.FK_Exams_MasterDataExamNameId" FromRole="MasterData" ToRole="Exams" />
           <NavigationProperty Name="ExamStudentResults" Relationship="Self.FK_ExamStudentClass_MasterDataGrade" FromRole="MasterData" ToRole="ExamStudentResult" />
           <NavigationProperty Name="ExamStudentResults1" Relationship="Self.FK_ExamStudentClass_MasterDataStatus" FromRole="MasterData" ToRole="ExamStudentResult" />
@@ -4403,6 +4899,15 @@
           <NavigationProperty Name="Students8" Relationship="Self.FK_Students_State" FromRole="MasterData" ToRole="Students" />
           <NavigationProperty Name="StudTeacherClassMappings" Relationship="Self.FK_StudTeacherClassMapping_MasterDataClassId" FromRole="MasterData" ToRole="StudTeacherClassMapping" />
           <NavigationProperty Name="StudTeacherClassMappings1" Relationship="Self.FK_StudTeacherClassMapping_MasterDataSectionId" FromRole="MasterData" ToRole="StudTeacherClassMapping" />
+          <Property Name="Logic" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Sequence" Type="Byte" />
+          <NavigationProperty Name="TaskAssignments" Relationship="TTPModel.FK_TaskAssignments_MasterDataAssignmentStatusId" FromRole="MasterData" ToRole="TaskAssignment" />
+          <NavigationProperty Name="SchoolClassPeriods" Relationship="TTPModel.FK_SchoolClassPeriods_MasterDataClassId" FromRole="MasterData" ToRole="SchoolClassPeriod" />
+          <NavigationProperty Name="SchoolClassPeriods1" Relationship="TTPModel.FK_SchoolClassPeriods_MasterDataPeriodId" FromRole="MasterData" ToRole="SchoolClassPeriod" />
+          <NavigationProperty Name="LeaveEmployeeLeaves" Relationship="TTPModel.FK_EmployeeLeaves_MasterDataLeaveStatus1" FromRole="MasterData" ToRole="LeaveEmployeeLeaf" />
+          <NavigationProperty Name="LeaveEmployeeLeaves1" Relationship="TTPModel.FK_EmployeeLeaves_MasterDataLeaveTypeId1" FromRole="MasterData" ToRole="LeaveEmployeeLeaf" />
+          <NavigationProperty Name="LeavePolicies" Relationship="TTPModel.FK_LeavePolicy_MasterDataLeaveNameId" FromRole="MasterData" ToRole="LeavePolicy" />
+          <NavigationProperty Name="LeavePolicies1" Relationship="TTPModel.FK_LeavePolicy_MasterDataOpenAdjustClose" FromRole="MasterData" ToRole="LeavePolicy" />
         </EntityType>
         <EntityType Name="Message">
           <Key>
@@ -4456,10 +4961,8 @@
           <NavigationProperty Name="EmpEmployeeGroups1" Relationship="Self.FK_EmpEmployeeGroups_OrganizationSubOrgId" FromRole="Organization" ToRole="EmpEmployeeGroups" />
           <NavigationProperty Name="EmpEmployeeSalaryComponents" Relationship="Self.FK_EmployeeSalaryComponents_Organization" FromRole="Organization" ToRole="EmpEmployeeSalaryComponents" />
           <NavigationProperty Name="EmpEmployeeSkills" Relationship="Self.FK_EmpEmployeeSkills_Organization" FromRole="Organization" ToRole="EmpEmployeeSkills" />
-          <NavigationProperty Name="EmpLeaves" Relationship="Self.FK_EmpLeaves_Organization" FromRole="Organization" ToRole="EmpLeaves" />
           <NavigationProperty Name="EmployeeEducationHistories" Relationship="Self.FK_EmployeeEducationHistory_Organization" FromRole="Organization" ToRole="EmployeeEducationHistory" />
           <NavigationProperty Name="EmployeeFamilies" Relationship="Self.FK_EmployeeFamily_Organization" FromRole="Organization" ToRole="EmployeeFamily" />
-          <NavigationProperty Name="EmployeeLeaves" Relationship="Self.FK_EmployeeLeaves_Organization" FromRole="Organization" ToRole="EmployeeLeaves" />
           <NavigationProperty Name="EmployeeMonthlySalaries" Relationship="Self.FK_EmployeeMonthlySalary_Organization" FromRole="Organization" ToRole="EmployeeMonthlySalary" />
           <NavigationProperty Name="Exams" Relationship="Self.FK_Exams_OrganizationId" FromRole="Organization" ToRole="Exams" />
           <NavigationProperty Name="ExamSlots" Relationship="Self.FK_ExamSlot_OrganizationId" FromRole="Organization" ToRole="ExamSlot" />
@@ -4484,6 +4987,14 @@
           <NavigationProperty Name="TaskConfigurations" Relationship="Self.FK_TaskConfiguration_OrganizationId" FromRole="Organization" ToRole="TaskConfiguration" />
           <NavigationProperty Name="VariableConfigurations" Relationship="Self.FK_VariableConfiguration_Organization" FromRole="Organization" ToRole="VariableConfiguration" />
           <NavigationProperty Name="StudentFeeReceipts" Relationship="TTPModel.FK_StudentFeeReceipts_Organization" FromRole="Organization" ToRole="StudentFeeReceipt" />
+          <NavigationProperty Name="TaskAssignmentComments" Relationship="TTPModel.FK_TaskAssignmentComments_OrgId" FromRole="Organization" ToRole="TaskAssignmentComment" />
+          <NavigationProperty Name="TaskAssignments" Relationship="TTPModel.FK_TaskAssignments_Organization" FromRole="Organization" ToRole="TaskAssignment" />
+          <NavigationProperty Name="SchoolClassPeriods" Relationship="TTPModel.FK_SchoolClassPeriods_Organization" FromRole="Organization" ToRole="SchoolClassPeriod" />
+          <NavigationProperty Name="SchoolTimeTables" Relationship="TTPModel.FK_SchoolTimeTable_OrgId" FromRole="Organization" ToRole="SchoolTimeTable" />
+          <NavigationProperty Name="LeaveEmployeeLeaves" Relationship="TTPModel.FK_EmployeeLeaves_Organization1" FromRole="Organization" ToRole="LeaveEmployeeLeaf" />
+          <NavigationProperty Name="AttendanceReports" Relationship="TTPModel.FK_AttendanceReports_OrgId" FromRole="Organization" ToRole="AttendanceReport" />
+          <NavigationProperty Name="LeavePolicies" Relationship="TTPModel.FK_LeavePolicy_Organization" FromRole="Organization" ToRole="LeavePolicy" />
+          <NavigationProperty Name="LeaveBalances" Relationship="TTPModel.FK_LeaveBalances_Organization" FromRole="Organization" ToRole="LeaveBalance" />
         </EntityType>
         <EntityType Name="PageHistory">
           <Key>
@@ -4596,7 +5107,7 @@
           </Key>
           <Property Name="SlotClassSubjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SlotId" Type="Int16" Nullable="false" />
-          <Property Name="ClassSubjectId" Type="Int16" Nullable="false" />
+          <Property Name="ClassSubjectId" Type="Int32" Nullable="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
           <Property Name="BatchId" Type="Int16" Nullable="false" />
           <Property Name="Active" Type="Byte" Nullable="false" />
@@ -4684,13 +5195,14 @@
           <NavigationProperty Name="StudentClassSubjects" Relationship="Self.FK_StudentClassSubject_StudentClassId" FromRole="StudentClass" ToRole="StudentClassSubject" />
           <NavigationProperty Name="StudentDocuments" Relationship="Self.FK_StudentDocuments_StudentClass" FromRole="StudentClass" ToRole="StudentDocuments" />
           <NavigationProperty Name="StudentFeePayments" Relationship="Self.FK_StudentFeePayment_StudentFeePayment" FromRole="StudentClass" ToRole="StudentFeePayment" />
+          <NavigationProperty Name="TaskAssignments" Relationship="TTPModel.FK_TaskAssignments_StudentClass" FromRole="StudentClass" ToRole="TaskAssignment" />
         </EntityType>
         <EntityType Name="StudentClassSubject">
           <Key>
             <PropertyRef Name="StudentClassSubjectId" />
           </Key>
           <Property Name="StudentClassSubjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClassSubjectId" Type="Int16" Nullable="false" />
+          <Property Name="ClassSubjectId" Type="Int32" Nullable="false" />
           <Property Name="StudentClassId" Type="Int32" Nullable="false" />
           <Property Name="Active" Type="Byte" Nullable="false" />
           <Property Name="OrgId" Type="Int16" Nullable="false" />
@@ -4756,32 +5268,11 @@
           <NavigationProperty Name="StudentClass" Relationship="Self.FK_StudentFeePayment_StudentFeePayment" FromRole="StudentFeePayment" ToRole="StudentClass" />
           <NavigationProperty Name="Student" Relationship="Self.FK_StudentFeePayment_Student" FromRole="StudentFeePayment" ToRole="Students" />
         </EntityType>
-        <EntityType Name="StudentFeeReceipt">
-          <Key>
-            <PropertyRef Name="StudentFeeReceiptId" />
-          </Key>
-          <Property Name="StudentFeeReceiptId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="ReceiptNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="BatchId" Type="Int16" />
-          <Property Name="OrgId" Type="Int16" />
-          <Property Name="CreatedBy" Type="Int16" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Int16" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="AccountingVouchers" Relationship="TTPModel.FK_AccountingVouchers_StudentFeeReceipts" FromRole="StudentFeeReceipt" ToRole="AccountingVoucher" />
-          <NavigationProperty Name="Batch" Relationship="TTPModel.FK_StudentFeeReceipts_Batches" FromRole="StudentFeeReceipt" ToRole="Batch" />
-          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_StudentFeeReceipts_Organization" FromRole="StudentFeeReceipt" ToRole="Organization" />
-          <Property Name="StudentClassId" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="StudentId" />
           </Key>
           <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MotherName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Gender" Type="Int32" />
@@ -4843,6 +5334,8 @@
           <NavigationProperty Name="StudentFeePayments" Relationship="Self.FK_StudentFeePayment_Student" FromRole="Students" ToRole="StudentFeePayment" />
           <NavigationProperty Name="Students1" Relationship="Self.FK_Students_Students" FromRole="Students" ToRole="Students1" />
           <NavigationProperty Name="Student1" Relationship="Self.FK_Students_Students" FromRole="Students1" ToRole="Students" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="StudTeacherClassMapping">
           <Key>
@@ -5793,18 +6286,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EmployeeLeaves_EmpEmployees">
-          <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
-          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaf" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EmpEmployees">
-              <PropertyRef Name="EmpEmployeeId" />
-            </Principal>
-            <Dependent Role="EmployeeLeaves">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EmployeeMonthlySalary_EmpEmployees">
           <End Role="EmpEmployees" Type="Self.EmpEmployee" Multiplicity="1" />
           <End Role="EmployeeMonthlySalary" Type="Self.EmployeeMonthlySalary" Multiplicity="*" />
@@ -5889,18 +6370,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EmpLeaves_Organization">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
-          <End Role="EmpLeaves" Type="Self.EmpLeaf" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="EmpLeaves">
-              <PropertyRef Name="OrgId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EmployeeEducationHistory_Organization">
           <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
           <End Role="EmployeeEducationHistory" Type="Self.EmployeeEducationHistory" Multiplicity="*" />
@@ -5945,42 +6414,6 @@
               <PropertyRef Name="OrganizationId" />
             </Principal>
             <Dependent Role="EmployeeFamily">
-              <PropertyRef Name="OrgId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeLeaves_MasterDataLeaveStatus">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
-          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaf" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="EmployeeLeaves">
-              <PropertyRef Name="LeaveStatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeLeaves_MasterDataLeaveTypeId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaf" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="EmployeeLeaves">
-              <PropertyRef Name="LeaveTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeLeaves_Organization">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
-          <End Role="EmployeeLeaves" Type="Self.EmployeeLeaf" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="EmployeeLeaves">
               <PropertyRef Name="OrgId" />
             </Dependent>
           </ReferentialConstraint>
@@ -6747,10 +7180,8 @@
           <EntitySet Name="EmpEmployeeSalaryComponents" EntityType="Self.EmpEmployeeSalaryComponent" />
           <EntitySet Name="EmpEmployeeSkills" EntityType="Self.EmpEmployeeSkill" />
           <EntitySet Name="EmpHolidayLists" EntityType="Self.EmpHolidayList" />
-          <EntitySet Name="EmpLeaves" EntityType="Self.EmpLeaf" />
           <EntitySet Name="EmployeeEducationHistories" EntityType="Self.EmployeeEducationHistory" />
           <EntitySet Name="EmployeeFamilies" EntityType="Self.EmployeeFamily" />
-          <EntitySet Name="EmployeeLeaves" EntityType="Self.EmployeeLeaf" />
           <EntitySet Name="EmployeeMonthlySalaries" EntityType="Self.EmployeeMonthlySalary" />
           <EntitySet Name="EmpManagerGroupMappings" EntityType="Self.EmpManagerGroupMapping" />
           <EntitySet Name="Exams" EntityType="Self.Exam" />
@@ -6773,7 +7204,6 @@
           <EntitySet Name="StudentClassSubjects" EntityType="Self.StudentClassSubject" />
           <EntitySet Name="StudentDocuments" EntityType="Self.StudentDocument" />
           <EntitySet Name="StudentFeePayments" EntityType="Self.StudentFeePayment" />
-          <EntitySet Name="StudentFeeReceipts" EntityType="Self.StudentFeeReceipt" />
           <EntitySet Name="Students" EntityType="Self.Student" />
           <EntitySet Name="StudTeacherClassMappings" EntityType="Self.StudTeacherClassMapping" />
           <EntitySet Name="SubjectTypes" EntityType="Self.SubjectType" />
@@ -7067,10 +7497,6 @@
             <End Role="EmpEmployees" EntitySet="EmpEmployees" />
             <End Role="EmployeeFamily" EntitySet="EmployeeFamilies" />
           </AssociationSet>
-          <AssociationSet Name="FK_EmployeeLeaves_EmpEmployees" Association="Self.FK_EmployeeLeaves_EmpEmployees">
-            <End Role="EmpEmployees" EntitySet="EmpEmployees" />
-            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
-          </AssociationSet>
           <AssociationSet Name="FK_EmployeeMonthlySalary_EmpEmployees" Association="Self.FK_EmployeeMonthlySalary_EmpEmployees">
             <End Role="EmpEmployees" EntitySet="EmpEmployees" />
             <End Role="EmployeeMonthlySalary" EntitySet="EmployeeMonthlySalaries" />
@@ -7099,10 +7525,6 @@
             <End Role="MasterData" EntitySet="MasterDatas" />
             <End Role="EmpHolidayList" EntitySet="EmpHolidayLists" />
           </AssociationSet>
-          <AssociationSet Name="FK_EmpLeaves_Organization" Association="Self.FK_EmpLeaves_Organization">
-            <End Role="Organization" EntitySet="Organizations" />
-            <End Role="EmpLeaves" EntitySet="EmpLeaves" />
-          </AssociationSet>
           <AssociationSet Name="FK_EmployeeEducationHistory_Organization" Association="Self.FK_EmployeeEducationHistory_Organization">
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="EmployeeEducationHistory" EntitySet="EmployeeEducationHistories" />
@@ -7118,18 +7540,6 @@
           <AssociationSet Name="FK_EmployeeFamily_Organization" Association="Self.FK_EmployeeFamily_Organization">
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="EmployeeFamily" EntitySet="EmployeeFamilies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeLeaves_MasterDataLeaveStatus" Association="Self.FK_EmployeeLeaves_MasterDataLeaveStatus">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeLeaves_MasterDataLeaveTypeId" Association="Self.FK_EmployeeLeaves_MasterDataLeaveTypeId">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeLeaves_Organization" Association="Self.FK_EmployeeLeaves_Organization">
-            <End Role="Organization" EntitySet="Organizations" />
-            <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
           </AssociationSet>
           <AssociationSet Name="FK_EmployeeMonthlySalary_Organization" Association="Self.FK_EmployeeMonthlySalary_Organization">
             <End Role="Organization" EntitySet="Organizations" />
@@ -7379,6 +7789,7 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="StudentFeeReceipts" EntityType="TTPModel.StudentFeeReceipt" />
           <AssociationSet Name="FK_AccountingVouchers_StudentFeeReceipts" Association="TTPModel.FK_AccountingVouchers_StudentFeeReceipts">
             <End Role="StudentFeeReceipt" EntitySet="StudentFeeReceipts" />
             <End Role="AccountingVoucher" EntitySet="AccountingVouchers" />
@@ -7391,7 +7802,158 @@
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="StudentFeeReceipt" EntitySet="StudentFeeReceipts" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="TaskAssignmentComments" EntityType="TTPModel.TaskAssignmentComment" />
+          <EntitySet Name="TaskAssignments" EntityType="TTPModel.TaskAssignment" />
+          <AssociationSet Name="FK_TaskAssignments_EmpEmployeesAssignedBy" Association="TTPModel.FK_TaskAssignments_EmpEmployeesAssignedBy">
+            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
+            <End Role="TaskAssignment" EntitySet="TaskAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssignments_EmpEmployeesAssignedTo" Association="TTPModel.FK_TaskAssignments_EmpEmployeesAssignedTo">
+            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
+            <End Role="TaskAssignment" EntitySet="TaskAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssignments_MasterDataAssignmentStatusId" Association="TTPModel.FK_TaskAssignments_MasterDataAssignmentStatusId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="TaskAssignment" EntitySet="TaskAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssignmentComments_OrgId" Association="TTPModel.FK_TaskAssignmentComments_OrgId">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="TaskAssignmentComment" EntitySet="TaskAssignmentComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssignments_Organization" Association="TTPModel.FK_TaskAssignments_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="TaskAssignment" EntitySet="TaskAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssignments_StudentClass" Association="TTPModel.FK_TaskAssignments_StudentClass">
+            <End Role="StudentClass" EntitySet="StudentClasses" />
+            <End Role="TaskAssignment" EntitySet="TaskAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssignmentComments_TaskAssignments" Association="TTPModel.FK_TaskAssignmentComments_TaskAssignments">
+            <End Role="TaskAssignment" EntitySet="TaskAssignments" />
+            <End Role="TaskAssignmentComment" EntitySet="TaskAssignmentComments" />
+          </AssociationSet>
+          <EntitySet Name="SchoolClassPeriods" EntityType="TTPModel.SchoolClassPeriod" />
+          <AssociationSet Name="FK_SchoolClassPeriods_Batches" Association="TTPModel.FK_SchoolClassPeriods_Batches">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="SchoolClassPeriod" EntitySet="SchoolClassPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolClassPeriods_MasterDataClassId" Association="TTPModel.FK_SchoolClassPeriods_MasterDataClassId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="SchoolClassPeriod" EntitySet="SchoolClassPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolClassPeriods_MasterDataPeriodId" Association="TTPModel.FK_SchoolClassPeriods_MasterDataPeriodId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="SchoolClassPeriod" EntitySet="SchoolClassPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolClassPeriods_Organization" Association="TTPModel.FK_SchoolClassPeriods_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="SchoolClassPeriod" EntitySet="SchoolClassPeriods" />
+          </AssociationSet>
+          <EntitySet Name="SchoolTimeTables" EntityType="TTPModel.SchoolTimeTable" />
+          <AssociationSet Name="FK_SchoolTimeTable_Batches" Association="TTPModel.FK_SchoolTimeTable_Batches">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="SchoolTimeTable" EntitySet="SchoolTimeTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolTimeTable_ClassSubject" Association="TTPModel.FK_SchoolTimeTable_ClassSubject">
+            <End Role="ClassSubject" EntitySet="ClassSubjects" />
+            <End Role="SchoolTimeTable" EntitySet="SchoolTimeTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolTimeTable_OrgId" Association="TTPModel.FK_SchoolTimeTable_OrgId">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="SchoolTimeTable" EntitySet="SchoolTimeTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolTimeTable_SchoolClassPeriodId" Association="TTPModel.FK_SchoolTimeTable_SchoolClassPeriodId">
+            <End Role="SchoolClassPeriod" EntitySet="SchoolClassPeriods" />
+            <End Role="SchoolTimeTable" EntitySet="SchoolTimeTables" />
+          </AssociationSet>
+          <EntitySet Name="LeaveEmployeeLeaves" EntityType="TTPModel.LeaveEmployeeLeaf" />
+          <AssociationSet Name="FK_EmployeeLeaves_EmpEmployees1" Association="TTPModel.FK_EmployeeLeaves_EmpEmployees1">
+            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
+            <End Role="LeaveEmployeeLeaf" EntitySet="LeaveEmployeeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeLeaves_MasterDataLeaveStatus1" Association="TTPModel.FK_EmployeeLeaves_MasterDataLeaveStatus1">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="LeaveEmployeeLeaf" EntitySet="LeaveEmployeeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeLeaves_MasterDataLeaveTypeId1" Association="TTPModel.FK_EmployeeLeaves_MasterDataLeaveTypeId1">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="LeaveEmployeeLeaf" EntitySet="LeaveEmployeeLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeLeaves_Organization1" Association="TTPModel.FK_EmployeeLeaves_Organization1">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="LeaveEmployeeLeaf" EntitySet="LeaveEmployeeLeaves" />
+          </AssociationSet>
+          <EntitySet Name="AttendanceReports" EntityType="TTPModel.AttendanceReport" />
+          <AssociationSet Name="FK_AttendanceReports_BatchesFinancialYear" Association="TTPModel.FK_AttendanceReports_BatchesFinancialYear">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="AttendanceReport" EntitySet="AttendanceReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendanceReports_EmpEmployees" Association="TTPModel.FK_AttendanceReports_EmpEmployees">
+            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
+            <End Role="AttendanceReport" EntitySet="AttendanceReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendanceReports_OrgId" Association="TTPModel.FK_AttendanceReports_OrgId">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="AttendanceReport" EntitySet="AttendanceReports" />
+          </AssociationSet>
+          <EntitySet Name="LeavePolicies" EntityType="TTPModel.LeavePolicy" />
+          <AssociationSet Name="FK_LeavePolicy_BatchesFinancialYear" Association="TTPModel.FK_LeavePolicy_BatchesFinancialYear">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="LeavePolicy" EntitySet="LeavePolicies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeavePolicy_MasterDataLeaveNameId" Association="TTPModel.FK_LeavePolicy_MasterDataLeaveNameId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="LeavePolicy" EntitySet="LeavePolicies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeavePolicy_MasterDataOpenAdjustClose" Association="TTPModel.FK_LeavePolicy_MasterDataOpenAdjustClose">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="LeavePolicy" EntitySet="LeavePolicies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeavePolicy_Organization" Association="TTPModel.FK_LeavePolicy_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="LeavePolicy" EntitySet="LeavePolicies" />
+          </AssociationSet>
+          <EntitySet Name="LeaveBalances" EntityType="TTPModel.LeaveBalance" />
+          <AssociationSet Name="FK_LeaveBalances_BatchesFinancialYear" Association="TTPModel.FK_LeaveBalances_BatchesFinancialYear">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="LeaveBalance" EntitySet="LeaveBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveBalances_EmpEmployees" Association="TTPModel.FK_LeaveBalances_EmpEmployees">
+            <End Role="EmpEmployee" EntitySet="EmpEmployees" />
+            <End Role="LeaveBalance" EntitySet="LeaveBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveBalances_LeavePolicy" Association="TTPModel.FK_LeaveBalances_LeavePolicy">
+            <End Role="LeavePolicy" EntitySet="LeavePolicies" />
+            <End Role="LeaveBalance" EntitySet="LeaveBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveBalances_Organization" Association="TTPModel.FK_LeaveBalances_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="LeaveBalance" EntitySet="LeaveBalances" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="StudentFeeReceipt">
+          <Key>
+            <PropertyRef Name="StudentFeeReceiptId" />
+          </Key>
+          <Property Name="StudentFeeReceiptId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentClassId" Type="Int32" Nullable="false" />
+          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ReceiptNo" Type="Int32" Nullable="false" />
+          <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="AccountingVouchers" Relationship="TTPModel.FK_AccountingVouchers_StudentFeeReceipts" FromRole="StudentFeeReceipt" ToRole="AccountingVoucher" />
+          <NavigationProperty Name="Batch" Relationship="TTPModel.FK_StudentFeeReceipts_Batches" FromRole="StudentFeeReceipt" ToRole="Batch" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_StudentFeeReceipts_Organization" FromRole="StudentFeeReceipt" ToRole="Organization" />
+          <Property Name="OffLineReceiptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
         <Association Name="FK_AccountingVouchers_StudentFeeReceipts">
           <End Type="TTPModel.StudentFeeReceipt" Role="StudentFeeReceipt" Multiplicity="0..1" />
           <End Type="TTPModel.AccountingVoucher" Role="AccountingVoucher" Multiplicity="*" />
@@ -7405,7 +7967,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentFeeReceipts_Batches">
-          <End Type="TTPModel.Batch" Role="Batch" Multiplicity="0..1" />
+          <End Type="TTPModel.Batch" Role="Batch" Multiplicity="1" />
           <End Type="TTPModel.StudentFeeReceipt" Role="StudentFeeReceipt" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Batch">
@@ -7417,7 +7979,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentFeeReceipts_Organization">
-          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="0..1" />
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
           <End Type="TTPModel.StudentFeeReceipt" Role="StudentFeeReceipt" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organization">
@@ -7428,7 +7990,551 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="TaskAssignmentComment">
+          <Key>
+            <PropertyRef Name="AssignmentCommentId" />
+          </Key>
+          <Property Name="AssignmentCommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskAssignmentId" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="CommentedBy" Type="Int16" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_TaskAssignmentComments_OrgId" FromRole="TaskAssignmentComment" ToRole="Organization" />
+          <NavigationProperty Name="TaskAssignment" Relationship="TTPModel.FK_TaskAssignmentComments_TaskAssignments" FromRole="TaskAssignmentComment" ToRole="TaskAssignment" />
+        </EntityType>
+        <EntityType Name="TaskAssignment">
+          <Key>
+            <PropertyRef Name="AssignmentId" />
+          </Key>
+          <Property Name="AssignmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AssignmentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="AssignedToStudentClassId" Type="Int32" />
+          <Property Name="AssignedToEmployeeId" Type="Int32" />
+          <Property Name="AssignedByEmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="AssignmentStatusId" Type="Int32" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Score" Type="Byte" />
+          <Property Name="AssignmentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpectedCompletion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ActualCompletion" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="BatchId" Type="Int32" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EmpEmployee" Relationship="TTPModel.FK_TaskAssignments_EmpEmployeesAssignedBy" FromRole="TaskAssignment" ToRole="EmpEmployee" />
+          <NavigationProperty Name="EmpEmployee1" Relationship="TTPModel.FK_TaskAssignments_EmpEmployeesAssignedTo" FromRole="TaskAssignment" ToRole="EmpEmployee" />
+          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_TaskAssignments_MasterDataAssignmentStatusId" FromRole="TaskAssignment" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_TaskAssignments_Organization" FromRole="TaskAssignment" ToRole="Organization" />
+          <NavigationProperty Name="StudentClass" Relationship="TTPModel.FK_TaskAssignments_StudentClass" FromRole="TaskAssignment" ToRole="StudentClass" />
+          <NavigationProperty Name="TaskAssignmentComments" Relationship="TTPModel.FK_TaskAssignmentComments_TaskAssignments" FromRole="TaskAssignment" ToRole="TaskAssignmentComment" />
+        </EntityType>
+        <Association Name="FK_TaskAssignments_EmpEmployeesAssignedBy">
+          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="1" />
+          <End Type="TTPModel.TaskAssignment" Role="TaskAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployee">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="TaskAssignment">
+              <PropertyRef Name="AssignedByEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssignments_EmpEmployeesAssignedTo">
+          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="0..1" />
+          <End Type="TTPModel.TaskAssignment" Role="TaskAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployee">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="TaskAssignment">
+              <PropertyRef Name="AssignedToEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssignments_MasterDataAssignmentStatusId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.TaskAssignment" Role="TaskAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="TaskAssignment">
+              <PropertyRef Name="AssignmentStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssignmentComments_OrgId">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.TaskAssignmentComment" Role="TaskAssignmentComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="TaskAssignmentComment">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssignments_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.TaskAssignment" Role="TaskAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="TaskAssignment">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssignments_StudentClass">
+          <End Type="TTPModel.StudentClass" Role="StudentClass" Multiplicity="0..1" />
+          <End Type="TTPModel.TaskAssignment" Role="TaskAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentClass">
+              <PropertyRef Name="StudentClassId" />
+            </Principal>
+            <Dependent Role="TaskAssignment">
+              <PropertyRef Name="AssignedToStudentClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssignmentComments_TaskAssignments">
+          <End Type="TTPModel.TaskAssignment" Role="TaskAssignment" Multiplicity="1" />
+          <End Type="TTPModel.TaskAssignmentComment" Role="TaskAssignmentComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskAssignment">
+              <PropertyRef Name="AssignmentId" />
+            </Principal>
+            <Dependent Role="TaskAssignmentComment">
+              <PropertyRef Name="TaskAssignmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SchoolClassPeriod">
+          <Key>
+            <PropertyRef Name="SchoolClassPeriodId" />
+          </Key>
+          <Property Name="SchoolClassPeriodId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassId" Type="Int32" Nullable="false" />
+          <Property Name="PeriodId" Type="Int32" Nullable="false" />
+          <Property Name="FromToTime" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Batch" Relationship="TTPModel.FK_SchoolClassPeriods_Batches" FromRole="SchoolClassPeriod" ToRole="Batch" />
+          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_SchoolClassPeriods_MasterDataClassId" FromRole="SchoolClassPeriod" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="TTPModel.FK_SchoolClassPeriods_MasterDataPeriodId" FromRole="SchoolClassPeriod" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_SchoolClassPeriods_Organization" FromRole="SchoolClassPeriod" ToRole="Organization" />
+          <NavigationProperty Name="SchoolTimeTables" Relationship="TTPModel.FK_SchoolTimeTable_SchoolClassPeriodId" FromRole="SchoolClassPeriod" ToRole="SchoolTimeTable" />
+        </EntityType>
+        <Association Name="FK_SchoolClassPeriods_Batches">
+          <End Type="TTPModel.Batch" Role="Batch" Multiplicity="1" />
+          <End Type="TTPModel.SchoolClassPeriod" Role="SchoolClassPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="SchoolClassPeriod">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolClassPeriods_MasterDataClassId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.SchoolClassPeriod" Role="SchoolClassPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="SchoolClassPeriod">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolClassPeriods_MasterDataPeriodId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.SchoolClassPeriod" Role="SchoolClassPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="SchoolClassPeriod">
+              <PropertyRef Name="PeriodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolClassPeriods_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.SchoolClassPeriod" Role="SchoolClassPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="SchoolClassPeriod">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SchoolTimeTable">
+          <Key>
+            <PropertyRef Name="TimeTableId" />
+          </Key>
+          <Property Name="TimeTableId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolClassPeriodId" Type="Int32" Nullable="false" />
+          <Property Name="ClassSubjectId" Type="Int32" Nullable="false" />
+          <Property Name="BatchId" Type="Int16" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Batch" Relationship="TTPModel.FK_SchoolTimeTable_Batches" FromRole="SchoolTimeTable" ToRole="Batch" />
+          <NavigationProperty Name="ClassSubject" Relationship="TTPModel.FK_SchoolTimeTable_ClassSubject" FromRole="SchoolTimeTable" ToRole="ClassSubject" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_SchoolTimeTable_OrgId" FromRole="SchoolTimeTable" ToRole="Organization" />
+          <NavigationProperty Name="SchoolClassPeriod" Relationship="TTPModel.FK_SchoolTimeTable_SchoolClassPeriodId" FromRole="SchoolTimeTable" ToRole="SchoolClassPeriod" />
+          <Property Name="SectionId" Type="Int32" Nullable="false" />
+          <Property Name="DayId" Type="Int32" Nullable="false" />
+          <Property Name="ClassId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_SchoolTimeTable_Batches">
+          <End Type="TTPModel.Batch" Role="Batch" Multiplicity="1" />
+          <End Type="TTPModel.SchoolTimeTable" Role="SchoolTimeTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="SchoolTimeTable">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolTimeTable_ClassSubject">
+          <End Type="TTPModel.ClassSubject" Role="ClassSubject" Multiplicity="1" />
+          <End Type="TTPModel.SchoolTimeTable" Role="SchoolTimeTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassSubject">
+              <PropertyRef Name="ClassSubjectId" />
+            </Principal>
+            <Dependent Role="SchoolTimeTable">
+              <PropertyRef Name="ClassSubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolTimeTable_OrgId">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.SchoolTimeTable" Role="SchoolTimeTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="SchoolTimeTable">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolTimeTable_SchoolClassPeriodId">
+          <End Type="TTPModel.SchoolClassPeriod" Role="SchoolClassPeriod" Multiplicity="1" />
+          <End Type="TTPModel.SchoolTimeTable" Role="SchoolTimeTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolClassPeriod">
+              <PropertyRef Name="SchoolClassPeriodId" />
+            </Principal>
+            <Dependent Role="SchoolTimeTable">
+              <PropertyRef Name="SchoolClassPeriodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LeaveEmployeeLeaf">
+          <Key>
+            <PropertyRef Name="EmployeeLeaveId" />
+          </Key>
+          <Property Name="EmployeeLeaveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="LeaveTypeId" Type="Int32" Nullable="false" />
+          <Property Name="LeaveFrom" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LeaveTo" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NoOfDays" Type="Int16" Nullable="false" />
+          <Property Name="LeaveReason" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ApplyDate" Type="DateTime" Precision="3" />
+          <Property Name="LeaveStatusId" Type="Int32" />
+          <Property Name="ApproveRejectedDate" Type="DateTime" Precision="3" />
+          <Property Name="ApprovedBy" Type="Int16" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EmpEmployee" Relationship="TTPModel.FK_EmployeeLeaves_EmpEmployees1" FromRole="LeaveEmployeeLeaf" ToRole="EmpEmployee" />
+          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_EmployeeLeaves_MasterDataLeaveStatus1" FromRole="LeaveEmployeeLeaf" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="TTPModel.FK_EmployeeLeaves_MasterDataLeaveTypeId1" FromRole="LeaveEmployeeLeaf" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_EmployeeLeaves_Organization1" FromRole="LeaveEmployeeLeaf" ToRole="Organization" />
+        </EntityType>
+        <Association Name="FK_EmployeeLeaves_EmpEmployees1">
+          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="1" />
+          <End Type="TTPModel.LeaveEmployeeLeaf" Role="LeaveEmployeeLeaf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployee">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="LeaveEmployeeLeaf">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeLeaves_MasterDataLeaveStatus1">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="0..1" />
+          <End Type="TTPModel.LeaveEmployeeLeaf" Role="LeaveEmployeeLeaf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="LeaveEmployeeLeaf">
+              <PropertyRef Name="LeaveStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeLeaves_MasterDataLeaveTypeId1">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.LeaveEmployeeLeaf" Role="LeaveEmployeeLeaf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="LeaveEmployeeLeaf">
+              <PropertyRef Name="LeaveTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeLeaves_Organization1">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.LeaveEmployeeLeaf" Role="LeaveEmployeeLeaf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="LeaveEmployeeLeaf">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AttendanceReport">
+          <Key>
+            <PropertyRef Name="AttendanceReportId" />
+          </Key>
+          <Property Name="AttendanceReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="MonthYear" Type="Int32" Nullable="false" />
+          <Property Name="Presents" Type="Byte" Nullable="false" />
+          <Property Name="WeekOffs" Type="Byte" Nullable="false" />
+          <Property Name="Holiday" Type="Byte" Nullable="false" />
+          <Property Name="LeaveAjusted" Type="Byte" Nullable="false" />
+          <Property Name="PaidDays" Type="Byte" Nullable="false" />
+          <Property Name="LossOfPay" Type="Byte" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="FinancialYear" Type="Int16" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Batch" Relationship="TTPModel.FK_AttendanceReports_BatchesFinancialYear" FromRole="AttendanceReport" ToRole="Batch" />
+          <NavigationProperty Name="EmpEmployee" Relationship="TTPModel.FK_AttendanceReports_EmpEmployees" FromRole="AttendanceReport" ToRole="EmpEmployee" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_AttendanceReports_OrgId" FromRole="AttendanceReport" ToRole="Organization" />
+        </EntityType>
+        <Association Name="FK_AttendanceReports_BatchesFinancialYear">
+          <End Type="TTPModel.Batch" Role="Batch" Multiplicity="1" />
+          <End Type="TTPModel.AttendanceReport" Role="AttendanceReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="AttendanceReport">
+              <PropertyRef Name="FinancialYear" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendanceReports_EmpEmployees">
+          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="1" />
+          <End Type="TTPModel.AttendanceReport" Role="AttendanceReport" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployee">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="AttendanceReport">
+              <PropertyRef Name="AttendanceReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendanceReports_OrgId">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.AttendanceReport" Role="AttendanceReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="AttendanceReport">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LeavePolicy">
+          <Key>
+            <PropertyRef Name="LeavePolicyId" />
+          </Key>
+          <Property Name="LeavePolicyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeaveNameId" Type="Int32" Nullable="false" />
+          <Property Name="LeaveOpenAdjustCloseId" Type="Int32" Nullable="false" />
+          <Property Name="FormulaOrDays" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="FinancialYearId" Type="Int16" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Batch" Relationship="TTPModel.FK_LeavePolicy_BatchesFinancialYear" FromRole="LeavePolicy" ToRole="Batch" />
+          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_LeavePolicy_MasterDataLeaveNameId" FromRole="LeavePolicy" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="TTPModel.FK_LeavePolicy_MasterDataOpenAdjustClose" FromRole="LeavePolicy" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_LeavePolicy_Organization" FromRole="LeavePolicy" ToRole="Organization" />
+          <NavigationProperty Name="LeaveBalances" Relationship="TTPModel.FK_LeaveBalances_LeavePolicy" FromRole="LeavePolicy" ToRole="LeaveBalance" />
+        </EntityType>
+        <Association Name="FK_LeavePolicy_BatchesFinancialYear">
+          <End Type="TTPModel.Batch" Role="Batch" Multiplicity="1" />
+          <End Type="TTPModel.LeavePolicy" Role="LeavePolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="LeavePolicy">
+              <PropertyRef Name="FinancialYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeavePolicy_MasterDataLeaveNameId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.LeavePolicy" Role="LeavePolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="LeavePolicy">
+              <PropertyRef Name="LeaveNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeavePolicy_MasterDataOpenAdjustClose">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.LeavePolicy" Role="LeavePolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="LeavePolicy">
+              <PropertyRef Name="LeaveOpenAdjustCloseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeavePolicy_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.LeavePolicy" Role="LeavePolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="LeavePolicy">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LeaveBalance">
+          <Key>
+            <PropertyRef Name="LeaveBalanceId" />
+          </Key>
+          <Property Name="LeaveBalanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="LeavePolicyId" Type="Int32" Nullable="false" />
+          <Property Name="YearMonth" Type="Int16" Nullable="false" />
+          <Property Name="FinancialYearId" Type="Int16" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Batch" Relationship="TTPModel.FK_LeaveBalances_BatchesFinancialYear" FromRole="LeaveBalance" ToRole="Batch" />
+          <NavigationProperty Name="EmpEmployee" Relationship="TTPModel.FK_LeaveBalances_EmpEmployees" FromRole="LeaveBalance" ToRole="EmpEmployee" />
+          <NavigationProperty Name="LeavePolicy" Relationship="TTPModel.FK_LeaveBalances_LeavePolicy" FromRole="LeaveBalance" ToRole="LeavePolicy" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_LeaveBalances_Organization" FromRole="LeaveBalance" ToRole="Organization" />
+          <Property Name="NoOfDays" Type="Byte" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_LeaveBalances_BatchesFinancialYear">
+          <End Type="TTPModel.Batch" Role="Batch" Multiplicity="1" />
+          <End Type="TTPModel.LeaveBalance" Role="LeaveBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="LeaveBalance">
+              <PropertyRef Name="FinancialYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveBalances_EmpEmployees">
+          <End Type="TTPModel.EmpEmployee" Role="EmpEmployee" Multiplicity="1" />
+          <End Type="TTPModel.LeaveBalance" Role="LeaveBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpEmployee">
+              <PropertyRef Name="EmpEmployeeId" />
+            </Principal>
+            <Dependent Role="LeaveBalance">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveBalances_LeavePolicy">
+          <End Type="TTPModel.LeavePolicy" Role="LeavePolicy" Multiplicity="1" />
+          <End Type="TTPModel.LeaveBalance" Role="LeaveBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeavePolicy">
+              <PropertyRef Name="LeavePolicyId" />
+            </Principal>
+            <Dependent Role="LeaveBalance">
+              <PropertyRef Name="LeavePolicyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveBalances_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.LeaveBalance" Role="LeaveBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="LeaveBalance">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -7745,6 +8851,8 @@
           <EntitySetMapping Name="EmpEmployeeGradeSalHistories">
             <EntityTypeMapping TypeName="TTPModel.EmpEmployeeGradeSalHistory">
               <MappingFragment StoreEntitySet="EmpEmployeeGradeSalHistory">
+                <ScalarProperty Name="ReportingTo" ColumnName="ReportingTo" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
                 <ScalarProperty Name="EmployeeGradeHistoryId" ColumnName="EmployeeGradeHistoryId" />
                 <ScalarProperty Name="EmpGradeId" ColumnName="EmpGradeId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
@@ -7792,6 +8900,7 @@
           <EntitySetMapping Name="EmpEmployees">
             <EntityTypeMapping TypeName="TTPModel.EmpEmployee">
               <MappingFragment StoreEntitySet="EmpEmployees">
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
                 <ScalarProperty Name="EmpEmployeeId" ColumnName="EmpEmployeeId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -7890,22 +8999,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EmpLeaves">
-            <EntityTypeMapping TypeName="TTPModel.EmpLeaf">
-              <MappingFragment StoreEntitySet="EmpLeaves">
-                <ScalarProperty Name="EmpLeaveId" ColumnName="EmpLeaveId" />
-                <ScalarProperty Name="LeaveName" ColumnName="LeaveName" />
-                <ScalarProperty Name="FormulaOrDays" ColumnName="FormulaOrDays" />
-                <ScalarProperty Name="NoOfDays" ColumnName="NoOfDays" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EmployeeEducationHistories">
             <EntityTypeMapping TypeName="TTPModel.EmployeeEducationHistory">
               <MappingFragment StoreEntitySet="EmployeeEducationHistory">
@@ -7932,30 +9025,6 @@
                 <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EmployeeLeaves">
-            <EntityTypeMapping TypeName="TTPModel.EmployeeLeaf">
-              <MappingFragment StoreEntitySet="EmployeeLeaves">
-                <ScalarProperty Name="EmployeeLeaveId" ColumnName="EmployeeLeaveId" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="LeaveTypeId" ColumnName="LeaveTypeId" />
-                <ScalarProperty Name="LeaveFrom" ColumnName="LeaveFrom" />
-                <ScalarProperty Name="LeaveTo" ColumnName="LeaveTo" />
-                <ScalarProperty Name="NoOfDays" ColumnName="NoOfDays" />
-                <ScalarProperty Name="LeaveReason" ColumnName="LeaveReason" />
-                <ScalarProperty Name="ApplyDate" ColumnName="ApplyDate" />
-                <ScalarProperty Name="LeaveStatusId" ColumnName="LeaveStatusId" />
-                <ScalarProperty Name="ApproveRejecteDate" ColumnName="ApproveRejecteDate" />
-                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8092,6 +9161,8 @@
           <EntitySetMapping Name="MasterDatas">
             <EntityTypeMapping TypeName="TTPModel.MasterData">
               <MappingFragment StoreEntitySet="MasterData">
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="Logic" ColumnName="Logic" />
                 <ScalarProperty Name="MasterDataId" ColumnName="MasterDataId" />
                 <ScalarProperty Name="MasterDataName" ColumnName="MasterDataName" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -8376,29 +9447,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StudentFeeReceipts">
-            <EntityTypeMapping TypeName="TTPModel.StudentFeeReceipt">
-              <MappingFragment StoreEntitySet="StudentFeeReceipts">
-                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
-                <ScalarProperty Name="StudentFeeReceiptId" ColumnName="StudentFeeReceiptId" />
-                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
-                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
-                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Students">
             <EntityTypeMapping TypeName="TTPModel.Student">
               <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="FatherName" ColumnName="FatherName" />
                 <ScalarProperty Name="MotherName" ColumnName="MotherName" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
@@ -8531,6 +9585,186 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="StudentFeeReceipts">
+            <EntityTypeMapping TypeName="TTPModel.StudentFeeReceipt">
+              <MappingFragment StoreEntitySet="StudentFeeReceipts">
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="OffLineReceiptNo" ColumnName="OffLineReceiptNo" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
+                <ScalarProperty Name="StudentFeeReceiptId" ColumnName="StudentFeeReceiptId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskAssignmentComments">
+            <EntityTypeMapping TypeName="TTPModel.TaskAssignmentComment">
+              <MappingFragment StoreEntitySet="TaskAssignmentComments">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CommentedBy" ColumnName="CommentedBy" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="TaskAssignmentId" ColumnName="TaskAssignmentId" />
+                <ScalarProperty Name="AssignmentCommentId" ColumnName="AssignmentCommentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskAssignments">
+            <EntityTypeMapping TypeName="TTPModel.TaskAssignment">
+              <MappingFragment StoreEntitySet="TaskAssignments">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="ActualCompletion" ColumnName="ActualCompletion" />
+                <ScalarProperty Name="ExpectedCompletion" ColumnName="ExpectedCompletion" />
+                <ScalarProperty Name="AssignmentDate" ColumnName="AssignmentDate" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="AssignmentStatusId" ColumnName="AssignmentStatusId" />
+                <ScalarProperty Name="AssignedByEmployeeId" ColumnName="AssignedByEmployeeId" />
+                <ScalarProperty Name="AssignedToEmployeeId" ColumnName="AssignedToEmployeeId" />
+                <ScalarProperty Name="AssignedToStudentClassId" ColumnName="AssignedToStudentClassId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AssignmentName" ColumnName="AssignmentName" />
+                <ScalarProperty Name="AssignmentId" ColumnName="AssignmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchoolClassPeriods">
+            <EntityTypeMapping TypeName="TTPModel.SchoolClassPeriod">
+              <MappingFragment StoreEntitySet="SchoolClassPeriods">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="FromToTime" ColumnName="FromToTime" />
+                <ScalarProperty Name="PeriodId" ColumnName="PeriodId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="SchoolClassPeriodId" ColumnName="SchoolClassPeriodId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchoolTimeTables">
+            <EntityTypeMapping TypeName="TTPModel.SchoolTimeTable">
+              <MappingFragment StoreEntitySet="SchoolTimeTable">
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="DayId" ColumnName="DayId" />
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="ClassSubjectId" ColumnName="ClassSubjectId" />
+                <ScalarProperty Name="SchoolClassPeriodId" ColumnName="SchoolClassPeriodId" />
+                <ScalarProperty Name="TimeTableId" ColumnName="TimeTableId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveEmployeeLeaves">
+            <EntityTypeMapping TypeName="TTPModel.LeaveEmployeeLeaf">
+              <MappingFragment StoreEntitySet="LeaveEmployeeLeaves">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="ApproveRejectedDate" ColumnName="ApproveRejectedDate" />
+                <ScalarProperty Name="LeaveStatusId" ColumnName="LeaveStatusId" />
+                <ScalarProperty Name="ApplyDate" ColumnName="ApplyDate" />
+                <ScalarProperty Name="LeaveReason" ColumnName="LeaveReason" />
+                <ScalarProperty Name="NoOfDays" ColumnName="NoOfDays" />
+                <ScalarProperty Name="LeaveTo" ColumnName="LeaveTo" />
+                <ScalarProperty Name="LeaveFrom" ColumnName="LeaveFrom" />
+                <ScalarProperty Name="LeaveTypeId" ColumnName="LeaveTypeId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="EmployeeLeaveId" ColumnName="EmployeeLeaveId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttendanceReports">
+            <EntityTypeMapping TypeName="TTPModel.AttendanceReport">
+              <MappingFragment StoreEntitySet="AttendanceReports">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="LossOfPay" ColumnName="LossOfPay" />
+                <ScalarProperty Name="PaidDays" ColumnName="PaidDays" />
+                <ScalarProperty Name="LeaveAjusted" ColumnName="LeaveAjusted" />
+                <ScalarProperty Name="Holiday" ColumnName="Holiday" />
+                <ScalarProperty Name="WeekOffs" ColumnName="WeekOffs" />
+                <ScalarProperty Name="Presents" ColumnName="Presents" />
+                <ScalarProperty Name="MonthYear" ColumnName="MonthYear" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="AttendanceReportId" ColumnName="AttendanceReportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeavePolicies">
+            <EntityTypeMapping TypeName="TTPModel.LeavePolicy">
+              <MappingFragment StoreEntitySet="LeavePolicy">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="FinancialYearId" ColumnName="FinancialYearId" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="FormulaOrDays" ColumnName="FormulaOrDays" />
+                <ScalarProperty Name="LeaveOpenAdjustCloseId" ColumnName="LeaveOpenAdjustCloseId" />
+                <ScalarProperty Name="LeaveNameId" ColumnName="LeaveNameId" />
+                <ScalarProperty Name="LeavePolicyId" ColumnName="LeavePolicyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveBalances">
+            <EntityTypeMapping TypeName="TTPModel.LeaveBalance">
+              <MappingFragment StoreEntitySet="LeaveBalances">
+                <ScalarProperty Name="NoOfDays" ColumnName="NoOfDays" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="FinancialYearId" ColumnName="FinancialYearId" />
+                <ScalarProperty Name="YearMonth" ColumnName="YearMonth" />
+                <ScalarProperty Name="LeavePolicyId" ColumnName="LeavePolicyId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="LeaveBalanceId" ColumnName="LeaveBalanceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

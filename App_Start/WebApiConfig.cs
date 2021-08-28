@@ -79,16 +79,15 @@ namespace schools
             builder.EntitySet<EmpEmployee>("EmpEmployees");
             builder.EntitySet<EmpEmployeeSkill>("EmpEmployeeSkills");
             builder.EntitySet<EmployeeFamily>("EmployeeFamilies");
-            builder.EntitySet<EmployeeLeaf>("EmployeeLeaves");
+            builder.EntitySet<LeaveEmployeeLeaf>("LeaveEmployeeLeaves");
             builder.EntitySet<EmployeeMonthlySalary>("EmployeeMonthlySalaries");
             builder.EntitySet<EmpEmployeeSalaryComponent>("EmpEmployeeSalaryComponents");
             //builder.EntitySet<EmpGradeComponent>("EmpGradeComponents");
             builder.EntitySet<EmpComponent>("EmpComponents");
             builder.EntitySet<EmpEmployeeSkill>("EmpEmployeeSkills");
             //builder.EntitySet<EmployeeGradeLeaf>("EmployeeGradeLeaves");
-            builder.EntitySet<EmpLeaf>("EmpLeaves");
             builder.EntitySet<EmployeeEducationHistory>("EmployeeEducationHistories");
-            builder.EntitySet<EmployeeLeaf>("EmployeeLeaves");
+            builder.EntitySet<LeaveEmployeeLeaf>("LeaveEmployeeLeaves");
             builder.EntitySet<EmpEmployeeGradeSalHistory>("EmpEmployeeGradeSalHistories");
             builder.EntitySet<VariableConfiguration>("VariableConfigurations");
             builder.EntitySet<EmpHolidayList>("EmpHolidayLists");
@@ -96,11 +95,19 @@ namespace schools
             builder.EntitySet<EmpEmployeeGroup>("EmpEmployeeGroups");
             //builder.EntitySet<StudTeacherStudentMapping>("StudTeacherStudentMappings");
             builder.EntitySet<StudTeacherClassMapping>("StudTeacherClassMappings");
-            //builder.EntitySet<ClassSubjectTeacher>("ClassSubjectTeachers");
+            builder.EntitySet<ClassSubjectTeacher>("ClassSubjectTeachers");
             builder.EntitySet<AccountingVoucher>("AccountingVouchers");
             builder.EntitySet<AccountingTrialBalance>("AccountingTrialBalances");
             builder.EntitySet<AccountingLedgerTrialBalance>("AccountingLedgerTrialBalances");
             builder.EntitySet<SchoolFeeType>("SchoolFeeTypes");
+            builder.EntitySet<SchoolClassPeriod>("SchoolClassPeriods");
+            builder.EntitySet<SchoolTimeTable>("SchoolTimeTables");
+            builder.EntitySet<TaskAssignment>("TaskAssignments");
+            builder.EntitySet<TaskAssignmentComment>("TaskAssignmentComments");
+            builder.EntitySet<LeaveBalance>("LeaveBalances");
+            builder.EntitySet<MasterData>("MasterDatas");
+            builder.EntitySet<AttendanceReport>("AttendanceReports");
+            builder.EntitySet<LeavePolicy>("LeavePolicies");
 
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 

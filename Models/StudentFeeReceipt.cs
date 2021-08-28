@@ -21,17 +21,20 @@ namespace schools.Models
         }
     
         public int StudentFeeReceiptId { get; set; }
+        public int StudentClassId { get; set; }
         public decimal TotalAmount { get; set; }
-        public string ReceiptNo { get; set; }
+        public int ReceiptNo { get; set; }
         public System.DateTime ReceiptDate { get; set; }
         public Nullable<decimal> Discount { get; set; }
-        public Nullable<short> BatchId { get; set; }
-        public Nullable<short> OrgId { get; set; }
+        public short BatchId { get; set; }
+        public short OrgId { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
-        public int StudentClassId { get; set; }
+        public byte Active { get; set; }
+        public string OffLineReceiptNo { get; set; }
+        public Nullable<decimal> Balance { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountingVoucher> AccountingVouchers { get; set; }

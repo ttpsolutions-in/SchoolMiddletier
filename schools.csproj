@@ -371,6 +371,7 @@
     <Compile Include="Controllers\ApplicationFeatureRolesPermsController.cs" />
     <Compile Include="Controllers\ApplicationFeaturesController.cs" />
     <Compile Include="Controllers\AppUsersController.cs" />
+    <Compile Include="Controllers\AttendanceReportsController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\BatchesController.cs" />
     <Compile Include="Controllers\ClassFeesController.cs" />
@@ -384,10 +385,8 @@
     <Compile Include="Controllers\EmpEmployeesController.cs" />
     <Compile Include="Controllers\EmpEmployeeSkillsController.cs" />
     <Compile Include="Controllers\EmpHolidayListsController.cs" />
-    <Compile Include="Controllers\EmpLeavesController.cs" />
     <Compile Include="Controllers\EmployeeEducationHistoriesController.cs" />
     <Compile Include="Controllers\EmployeeFamiliesController.cs" />
-    <Compile Include="Controllers\EmployeeLeavesController.cs" />
     <Compile Include="Controllers\EmployeeMonthlySalariesController.cs" />
     <Compile Include="Controllers\EmpManagerGroupMappingsController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
@@ -397,6 +396,9 @@
     <Compile Include="Controllers\FilesNPhotoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\LeaveBalancesController.cs" />
+    <Compile Include="Controllers\LeaveEmployeeLeavesController.cs" />
+    <Compile Include="Controllers\LeavePoliciesController.cs" />
     <Compile Include="Controllers\MasterDatasController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
@@ -406,7 +408,9 @@
     <Compile Include="Controllers\PhotoGalleriesController.cs" />
     <Compile Include="Controllers\PhotoGalleryAPIController.cs" />
     <Compile Include="Controllers\RoleUsersController.cs" />
+    <Compile Include="Controllers\SchoolClassPeriodsController.cs" />
     <Compile Include="Controllers\SchoolFeeTypesController.cs" />
+    <Compile Include="Controllers\SchoolTimeTablesController.cs" />
     <Compile Include="Controllers\SlotAndClassSubjectsController.cs" />
     <Compile Include="Controllers\StudentActivitiesController.cs" />
     <Compile Include="Controllers\StudentCertificatesController.cs" />
@@ -418,6 +422,7 @@
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\StudTeacherClassMappingsController.cs" />
     <Compile Include="Controllers\SubjectTypesController.cs" />
+    <Compile Include="Controllers\TaskAssignmentsController.cs" />
     <Compile Include="Controllers\TaskConfigurationsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VariableConfigurationsController.cs" />
@@ -462,6 +467,9 @@
     <Compile Include="Models\Attendance.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AttendanceReport.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Batch.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
@@ -501,16 +509,10 @@
     <Compile Include="Models\EmpHolidayList.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EmpLeaf.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EmployeeEducationHistory.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeFamily.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EmployeeLeaf.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeMonthlySalary.cs">
@@ -535,6 +537,15 @@
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LeaveBalance.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LeaveEmployeeLeaf.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LeavePolicy.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MasterData.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
@@ -556,7 +567,13 @@
     <Compile Include="Models\RoleUser.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SchoolClassPeriod.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SchoolFeeType.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SchoolTimeTable.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SlotAndClassSubject.cs">
@@ -590,6 +607,12 @@
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SubjectType.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskAssignment.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskAssignmentComment.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaskConfiguration.cs">

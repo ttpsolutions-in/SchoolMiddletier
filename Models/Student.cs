@@ -24,7 +24,6 @@ namespace schools.Models
         }
     
         public int StudentId { get; set; }
-        public string Name { get; set; }
         public string FatherName { get; set; }
         public string MotherName { get; set; }
         public Nullable<int> Gender { get; set; }
@@ -70,6 +69,8 @@ namespace schools.Models
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     
         public virtual MasterData MasterData { get; set; }
         public virtual MasterData MasterData1 { get; set; }

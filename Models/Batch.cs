@@ -39,6 +39,11 @@ namespace schools.Models
             this.StudTeacherClassMappings = new HashSet<StudTeacherClassMapping>();
             this.SubjectTypes = new HashSet<SubjectType>();
             this.StudentFeeReceipts = new HashSet<StudentFeeReceipt>();
+            this.SchoolClassPeriods = new HashSet<SchoolClassPeriod>();
+            this.SchoolTimeTables = new HashSet<SchoolTimeTable>();
+            this.AttendanceReports = new HashSet<AttendanceReport>();
+            this.LeavePolicies = new HashSet<LeavePolicy>();
+            this.LeaveBalances = new HashSet<LeaveBalance>();
         }
     
         public short BatchId { get; set; }
@@ -98,5 +103,15 @@ namespace schools.Models
         public virtual ICollection<SubjectType> SubjectTypes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentFeeReceipt> StudentFeeReceipts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SchoolClassPeriod> SchoolClassPeriods { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SchoolTimeTable> SchoolTimeTables { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AttendanceReport> AttendanceReports { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LeavePolicy> LeavePolicies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LeaveBalance> LeaveBalances { get; set; }
     }
 }

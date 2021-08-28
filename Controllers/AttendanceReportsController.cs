@@ -22,32 +22,32 @@ namespace schools.Controllers
     using System.Web.Http.OData.Extensions;
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<StudentFeeReceipt>("StudentFeeReceipts");
-    builder.EntitySet<AccountingVoucher>("AccountingVouchers"); 
+    builder.EntitySet<AttendanceReport>("AttendanceReports");
     builder.EntitySet<Batch>("Batches"); 
+    builder.EntitySet<EmpEmployee>("EmpEmployees"); 
     builder.EntitySet<Organization>("Organizations"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class StudentFeeReceiptsController : ODataController
+    public class AttendanceReportsController : ODataController
     {
         private TTPEntities db = new TTPEntities();
 
-        // GET: odata/StudentFeeReceipts
+        // GET: odata/AttendanceReports
         [EnableQuery]
-        public IQueryable<StudentFeeReceipt> GetStudentFeeReceipts()
+        public IQueryable<AttendanceReport> GetAttendanceReports()
         {
-            return db.StudentFeeReceipts;
+            return db.AttendanceReports;
         }
 
-        // GET: odata/StudentFeeReceipts(5)
+        // GET: odata/AttendanceReports(5)
         [EnableQuery]
-        public SingleResult<StudentFeeReceipt> GetStudentFeeReceipt([FromODataUri] int key)
+        public SingleResult<AttendanceReport> GetAttendanceReport([FromODataUri] int key)
         {
-            return SingleResult.Create(db.StudentFeeReceipts.Where(studentFeeReceipt => studentFeeReceipt.StudentFeeReceiptId == key));
+            return SingleResult.Create(db.AttendanceReports.Where(attendanceReport => attendanceReport.AttendanceReportId == key));
         }
 
-        // PUT: odata/StudentFeeReceipts(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<StudentFeeReceipt> patch)
+        // PUT: odata/AttendanceReports(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<AttendanceReport> patch)
         {
             Validate(patch.GetEntity());
 
@@ -56,13 +56,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            StudentFeeReceipt studentFeeReceipt = await db.StudentFeeReceipts.FindAsync(key);
-            if (studentFeeReceipt == null)
+            AttendanceReport attendanceReport = await db.AttendanceReports.FindAsync(key);
+            if (attendanceReport == null)
             {
                 return NotFound();
             }
 
-            patch.Put(studentFeeReceipt);
+            patch.Put(attendanceReport);
 
             try
             {
@@ -70,7 +70,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StudentFeeReceiptExists(key))
+                if (!AttendanceReportExists(key))
                 {
                     return NotFound();
                 }
@@ -80,26 +80,26 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(studentFeeReceipt);
+            return Updated(attendanceReport);
         }
 
-        // POST: odata/StudentFeeReceipts
-        public async Task<IHttpActionResult> Post(StudentFeeReceipt studentFeeReceipt)
+        // POST: odata/AttendanceReports
+        public async Task<IHttpActionResult> Post(AttendanceReport attendanceReport)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.StudentFeeReceipts.Add(studentFeeReceipt);
+            db.AttendanceReports.Add(attendanceReport);
             await db.SaveChangesAsync();
 
-            return Created(studentFeeReceipt);
+            return Created(attendanceReport);
         }
 
-        // PATCH: odata/StudentFeeReceipts(5)
+        // PATCH: odata/AttendanceReports(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<StudentFeeReceipt> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<AttendanceReport> patch)
         {
             Validate(patch.GetEntity());
 
@@ -108,13 +108,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            StudentFeeReceipt studentFeeReceipt = await db.StudentFeeReceipts.FindAsync(key);
-            if (studentFeeReceipt == null)
+            AttendanceReport attendanceReport = await db.AttendanceReports.FindAsync(key);
+            if (attendanceReport == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(studentFeeReceipt);
+            patch.Patch(attendanceReport);
 
             try
             {
@@ -122,7 +122,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StudentFeeReceiptExists(key))
+                if (!AttendanceReportExists(key))
                 {
                     return NotFound();
                 }
@@ -132,43 +132,43 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(studentFeeReceipt);
+            return Updated(attendanceReport);
         }
 
-        // DELETE: odata/StudentFeeReceipts(5)
+        // DELETE: odata/AttendanceReports(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] int key)
         {
-            StudentFeeReceipt studentFeeReceipt = await db.StudentFeeReceipts.FindAsync(key);
-            if (studentFeeReceipt == null)
+            AttendanceReport attendanceReport = await db.AttendanceReports.FindAsync(key);
+            if (attendanceReport == null)
             {
                 return NotFound();
             }
 
-            db.StudentFeeReceipts.Remove(studentFeeReceipt);
+            db.AttendanceReports.Remove(attendanceReport);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/StudentFeeReceipts(5)/AccountingVouchers
-        [EnableQuery]
-        public IQueryable<AccountingVoucher> GetAccountingVouchers([FromODataUri] int key)
-        {
-            return db.StudentFeeReceipts.Where(m => m.StudentFeeReceiptId == key).SelectMany(m => m.AccountingVouchers);
-        }
-
-        // GET: odata/StudentFeeReceipts(5)/Batch
+        // GET: odata/AttendanceReports(5)/Batch
         [EnableQuery]
         public SingleResult<Batch> GetBatch([FromODataUri] int key)
         {
-            return SingleResult.Create(db.StudentFeeReceipts.Where(m => m.StudentFeeReceiptId == key).Select(m => m.Batch));
+            return SingleResult.Create(db.AttendanceReports.Where(m => m.AttendanceReportId == key).Select(m => m.Batch));
         }
 
-        // GET: odata/StudentFeeReceipts(5)/Organization
+        // GET: odata/AttendanceReports(5)/EmpEmployee
+        [EnableQuery]
+        public SingleResult<EmpEmployee> GetEmpEmployee([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.AttendanceReports.Where(m => m.AttendanceReportId == key).Select(m => m.EmpEmployee));
+        }
+
+        // GET: odata/AttendanceReports(5)/Organization
         [EnableQuery]
         public SingleResult<Organization> GetOrganization([FromODataUri] int key)
         {
-            return SingleResult.Create(db.StudentFeeReceipts.Where(m => m.StudentFeeReceiptId == key).Select(m => m.Organization));
+            return SingleResult.Create(db.AttendanceReports.Where(m => m.AttendanceReportId == key).Select(m => m.Organization));
         }
 
         protected override void Dispose(bool disposing)
@@ -180,9 +180,9 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool StudentFeeReceiptExists(int key)
+        private bool AttendanceReportExists(int key)
         {
-            return db.StudentFeeReceipts.Count(e => e.StudentFeeReceiptId == key) > 0;
+            return db.AttendanceReports.Count(e => e.AttendanceReportId == key) > 0;
         }
     }
 }

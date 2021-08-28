@@ -25,6 +25,7 @@ namespace schools.Models
             this.StudentClassSubjects = new HashSet<StudentClassSubject>();
             this.StudentDocuments = new HashSet<StudentDocument>();
             this.StudentFeePayments = new HashSet<StudentFeePayment>();
+            this.TaskAssignments = new HashSet<TaskAssignment>();
         }
     
         public int StudentClassId { get; set; }
@@ -65,5 +66,7 @@ namespace schools.Models
         public virtual ICollection<StudentDocument> StudentDocuments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentFeePayment> StudentFeePayments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskAssignment> TaskAssignments { get; set; }
     }
 }

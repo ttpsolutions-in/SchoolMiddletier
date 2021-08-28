@@ -22,32 +22,33 @@ namespace schools.Controllers
     using System.Web.Http.OData.Extensions;
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<EmployeeLeaf>("EmployeeLeaves");
+    builder.EntitySet<LeaveBalance>("LeaveBalances");
+    builder.EntitySet<Batch>("Batches"); 
     builder.EntitySet<EmpEmployee>("EmpEmployees"); 
-    builder.EntitySet<MasterData>("MasterDatas"); 
+    builder.EntitySet<LeavePolicy>("LeavePolicies"); 
     builder.EntitySet<Organization>("Organizations"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class EmployeeLeavesController : ODataController
+    public class LeaveBalancesController : ODataController
     {
         private TTPEntities db = new TTPEntities();
 
-        // GET: odata/EmployeeLeaves
+        // GET: odata/LeaveBalances
         [EnableQuery]
-        public IQueryable<EmployeeLeaf> GetEmployeeLeaves()
+        public IQueryable<LeaveBalance> GetLeaveBalances()
         {
-            return db.EmployeeLeaves;
+            return db.LeaveBalances;
         }
 
-        // GET: odata/EmployeeLeaves(5)
+        // GET: odata/LeaveBalances(5)
         [EnableQuery]
-        public SingleResult<EmployeeLeaf> GetEmployeeLeaf([FromODataUri] short key)
+        public SingleResult<LeaveBalance> GetLeaveBalance([FromODataUri] int key)
         {
-            return SingleResult.Create(db.EmployeeLeaves.Where(employeeLeaf => employeeLeaf.EmployeeLeaveId == key));
+            return SingleResult.Create(db.LeaveBalances.Where(leaveBalance => leaveBalance.LeaveBalanceId == key));
         }
 
-        // PUT: odata/EmployeeLeaves(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<EmployeeLeaf> patch)
+        // PUT: odata/LeaveBalances(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<LeaveBalance> patch)
         {
             Validate(patch.GetEntity());
 
@@ -56,13 +57,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            EmployeeLeaf employeeLeaf = await db.EmployeeLeaves.FindAsync(key);
-            if (employeeLeaf == null)
+            LeaveBalance leaveBalance = await db.LeaveBalances.FindAsync(key);
+            if (leaveBalance == null)
             {
                 return NotFound();
             }
 
-            patch.Put(employeeLeaf);
+            patch.Put(leaveBalance);
 
             try
             {
@@ -70,7 +71,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EmployeeLeafExists(key))
+                if (!LeaveBalanceExists(key))
                 {
                     return NotFound();
                 }
@@ -80,26 +81,26 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(employeeLeaf);
+            return Updated(leaveBalance);
         }
 
-        // POST: odata/EmployeeLeaves
-        public async Task<IHttpActionResult> Post(EmployeeLeaf employeeLeaf)
+        // POST: odata/LeaveBalances
+        public async Task<IHttpActionResult> Post(LeaveBalance leaveBalance)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.EmployeeLeaves.Add(employeeLeaf);
+            db.LeaveBalances.Add(leaveBalance);
             await db.SaveChangesAsync();
 
-            return Created(employeeLeaf);
+            return Created(leaveBalance);
         }
 
-        // PATCH: odata/EmployeeLeaves(5)
+        // PATCH: odata/LeaveBalances(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<EmployeeLeaf> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<LeaveBalance> patch)
         {
             Validate(patch.GetEntity());
 
@@ -108,13 +109,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            EmployeeLeaf employeeLeaf = await db.EmployeeLeaves.FindAsync(key);
-            if (employeeLeaf == null)
+            LeaveBalance leaveBalance = await db.LeaveBalances.FindAsync(key);
+            if (leaveBalance == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(employeeLeaf);
+            patch.Patch(leaveBalance);
 
             try
             {
@@ -122,7 +123,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EmployeeLeafExists(key))
+                if (!LeaveBalanceExists(key))
                 {
                     return NotFound();
                 }
@@ -132,50 +133,50 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(employeeLeaf);
+            return Updated(leaveBalance);
         }
 
-        // DELETE: odata/EmployeeLeaves(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] short key)
+        // DELETE: odata/LeaveBalances(5)
+        public async Task<IHttpActionResult> Delete([FromODataUri] int key)
         {
-            EmployeeLeaf employeeLeaf = await db.EmployeeLeaves.FindAsync(key);
-            if (employeeLeaf == null)
+            LeaveBalance leaveBalance = await db.LeaveBalances.FindAsync(key);
+            if (leaveBalance == null)
             {
                 return NotFound();
             }
 
-            db.EmployeeLeaves.Remove(employeeLeaf);
+            db.LeaveBalances.Remove(leaveBalance);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/EmployeeLeaves(5)/EmpEmployee
+        // GET: odata/LeaveBalances(5)/Batch
         [EnableQuery]
-        public SingleResult<EmpEmployee> GetEmpEmployee([FromODataUri] short key)
+        public SingleResult<Batch> GetBatch([FromODataUri] int key)
         {
-            return SingleResult.Create(db.EmployeeLeaves.Where(m => m.EmployeeLeaveId == key).Select(m => m.EmpEmployee));
+            return SingleResult.Create(db.LeaveBalances.Where(m => m.LeaveBalanceId == key).Select(m => m.Batch));
         }
 
-        // GET: odata/EmployeeLeaves(5)/MasterData
+        // GET: odata/LeaveBalances(5)/EmpEmployee
         [EnableQuery]
-        public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
+        public SingleResult<EmpEmployee> GetEmpEmployee([FromODataUri] int key)
         {
-            return SingleResult.Create(db.EmployeeLeaves.Where(m => m.EmployeeLeaveId == key).Select(m => m.MasterData));
+            return SingleResult.Create(db.LeaveBalances.Where(m => m.LeaveBalanceId == key).Select(m => m.EmpEmployee));
         }
 
-        // GET: odata/EmployeeLeaves(5)/MasterData1
+        // GET: odata/LeaveBalances(5)/LeavePolicy
         [EnableQuery]
-        public SingleResult<MasterData> GetMasterData1([FromODataUri] short key)
+        public SingleResult<LeavePolicy> GetLeavePolicy([FromODataUri] int key)
         {
-            return SingleResult.Create(db.EmployeeLeaves.Where(m => m.EmployeeLeaveId == key).Select(m => m.MasterData1));
+            return SingleResult.Create(db.LeaveBalances.Where(m => m.LeaveBalanceId == key).Select(m => m.LeavePolicy));
         }
 
-        // GET: odata/EmployeeLeaves(5)/Organization
+        // GET: odata/LeaveBalances(5)/Organization
         [EnableQuery]
-        public SingleResult<Organization> GetOrganization([FromODataUri] short key)
+        public SingleResult<Organization> GetOrganization([FromODataUri] int key)
         {
-            return SingleResult.Create(db.EmployeeLeaves.Where(m => m.EmployeeLeaveId == key).Select(m => m.Organization));
+            return SingleResult.Create(db.LeaveBalances.Where(m => m.LeaveBalanceId == key).Select(m => m.Organization));
         }
 
         protected override void Dispose(bool disposing)
@@ -187,9 +188,9 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool EmployeeLeafExists(short key)
+        private bool LeaveBalanceExists(int key)
         {
-            return db.EmployeeLeaves.Count(e => e.EmployeeLeaveId == key) > 0;
+            return db.LeaveBalances.Count(e => e.LeaveBalanceId == key) > 0;
         }
     }
 }

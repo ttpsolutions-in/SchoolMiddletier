@@ -22,32 +22,32 @@ namespace schools.Controllers
     using System.Web.Http.OData.Extensions;
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<StudentFeeReceipt>("StudentFeeReceipts");
-    builder.EntitySet<AccountingVoucher>("AccountingVouchers"); 
-    builder.EntitySet<Batch>("Batches"); 
+    builder.EntitySet<LeaveEmployeeLeaf>("LeaveEmployeeLeaves");
+    builder.EntitySet<EmpEmployee>("EmpEmployees"); 
+    builder.EntitySet<MasterData>("MasterDatas"); 
     builder.EntitySet<Organization>("Organizations"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class StudentFeeReceiptsController : ODataController
+    public class LeaveEmployeeLeavesController : ODataController
     {
         private TTPEntities db = new TTPEntities();
 
-        // GET: odata/StudentFeeReceipts
+        // GET: odata/LeaveEmployeeLeaves
         [EnableQuery]
-        public IQueryable<StudentFeeReceipt> GetStudentFeeReceipts()
+        public IQueryable<LeaveEmployeeLeaf> GetLeaveEmployeeLeaves()
         {
-            return db.StudentFeeReceipts;
+            return db.LeaveEmployeeLeaves;
         }
 
-        // GET: odata/StudentFeeReceipts(5)
+        // GET: odata/LeaveEmployeeLeaves(5)
         [EnableQuery]
-        public SingleResult<StudentFeeReceipt> GetStudentFeeReceipt([FromODataUri] int key)
+        public SingleResult<LeaveEmployeeLeaf> GetLeaveEmployeeLeaf([FromODataUri] int key)
         {
-            return SingleResult.Create(db.StudentFeeReceipts.Where(studentFeeReceipt => studentFeeReceipt.StudentFeeReceiptId == key));
+            return SingleResult.Create(db.LeaveEmployeeLeaves.Where(leaveEmployeeLeaf => leaveEmployeeLeaf.EmployeeLeaveId == key));
         }
 
-        // PUT: odata/StudentFeeReceipts(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<StudentFeeReceipt> patch)
+        // PUT: odata/LeaveEmployeeLeaves(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<LeaveEmployeeLeaf> patch)
         {
             Validate(patch.GetEntity());
 
@@ -56,13 +56,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            StudentFeeReceipt studentFeeReceipt = await db.StudentFeeReceipts.FindAsync(key);
-            if (studentFeeReceipt == null)
+            LeaveEmployeeLeaf leaveEmployeeLeaf = await db.LeaveEmployeeLeaves.FindAsync(key);
+            if (leaveEmployeeLeaf == null)
             {
                 return NotFound();
             }
 
-            patch.Put(studentFeeReceipt);
+            patch.Put(leaveEmployeeLeaf);
 
             try
             {
@@ -70,7 +70,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StudentFeeReceiptExists(key))
+                if (!LeaveEmployeeLeafExists(key))
                 {
                     return NotFound();
                 }
@@ -80,26 +80,26 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(studentFeeReceipt);
+            return Updated(leaveEmployeeLeaf);
         }
 
-        // POST: odata/StudentFeeReceipts
-        public async Task<IHttpActionResult> Post(StudentFeeReceipt studentFeeReceipt)
+        // POST: odata/LeaveEmployeeLeaves
+        public async Task<IHttpActionResult> Post(LeaveEmployeeLeaf leaveEmployeeLeaf)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.StudentFeeReceipts.Add(studentFeeReceipt);
+            db.LeaveEmployeeLeaves.Add(leaveEmployeeLeaf);
             await db.SaveChangesAsync();
 
-            return Created(studentFeeReceipt);
+            return Created(leaveEmployeeLeaf);
         }
 
-        // PATCH: odata/StudentFeeReceipts(5)
+        // PATCH: odata/LeaveEmployeeLeaves(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<StudentFeeReceipt> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<LeaveEmployeeLeaf> patch)
         {
             Validate(patch.GetEntity());
 
@@ -108,13 +108,13 @@ namespace schools.Controllers
                 return BadRequest(ModelState);
             }
 
-            StudentFeeReceipt studentFeeReceipt = await db.StudentFeeReceipts.FindAsync(key);
-            if (studentFeeReceipt == null)
+            LeaveEmployeeLeaf leaveEmployeeLeaf = await db.LeaveEmployeeLeaves.FindAsync(key);
+            if (leaveEmployeeLeaf == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(studentFeeReceipt);
+            patch.Patch(leaveEmployeeLeaf);
 
             try
             {
@@ -122,7 +122,7 @@ namespace schools.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StudentFeeReceiptExists(key))
+                if (!LeaveEmployeeLeafExists(key))
                 {
                     return NotFound();
                 }
@@ -132,43 +132,50 @@ namespace schools.Controllers
                 }
             }
 
-            return Updated(studentFeeReceipt);
+            return Updated(leaveEmployeeLeaf);
         }
 
-        // DELETE: odata/StudentFeeReceipts(5)
+        // DELETE: odata/LeaveEmployeeLeaves(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] int key)
         {
-            StudentFeeReceipt studentFeeReceipt = await db.StudentFeeReceipts.FindAsync(key);
-            if (studentFeeReceipt == null)
+            LeaveEmployeeLeaf leaveEmployeeLeaf = await db.LeaveEmployeeLeaves.FindAsync(key);
+            if (leaveEmployeeLeaf == null)
             {
                 return NotFound();
             }
 
-            db.StudentFeeReceipts.Remove(studentFeeReceipt);
+            db.LeaveEmployeeLeaves.Remove(leaveEmployeeLeaf);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/StudentFeeReceipts(5)/AccountingVouchers
+        // GET: odata/LeaveEmployeeLeaves(5)/EmpEmployee
         [EnableQuery]
-        public IQueryable<AccountingVoucher> GetAccountingVouchers([FromODataUri] int key)
+        public SingleResult<EmpEmployee> GetEmpEmployee([FromODataUri] int key)
         {
-            return db.StudentFeeReceipts.Where(m => m.StudentFeeReceiptId == key).SelectMany(m => m.AccountingVouchers);
+            return SingleResult.Create(db.LeaveEmployeeLeaves.Where(m => m.EmployeeLeaveId == key).Select(m => m.EmpEmployee));
         }
 
-        // GET: odata/StudentFeeReceipts(5)/Batch
+        // GET: odata/LeaveEmployeeLeaves(5)/MasterData
         [EnableQuery]
-        public SingleResult<Batch> GetBatch([FromODataUri] int key)
+        public SingleResult<MasterData> GetMasterData([FromODataUri] int key)
         {
-            return SingleResult.Create(db.StudentFeeReceipts.Where(m => m.StudentFeeReceiptId == key).Select(m => m.Batch));
+            return SingleResult.Create(db.LeaveEmployeeLeaves.Where(m => m.EmployeeLeaveId == key).Select(m => m.MasterData));
         }
 
-        // GET: odata/StudentFeeReceipts(5)/Organization
+        // GET: odata/LeaveEmployeeLeaves(5)/MasterData1
+        [EnableQuery]
+        public SingleResult<MasterData> GetMasterData1([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.LeaveEmployeeLeaves.Where(m => m.EmployeeLeaveId == key).Select(m => m.MasterData1));
+        }
+
+        // GET: odata/LeaveEmployeeLeaves(5)/Organization
         [EnableQuery]
         public SingleResult<Organization> GetOrganization([FromODataUri] int key)
         {
-            return SingleResult.Create(db.StudentFeeReceipts.Where(m => m.StudentFeeReceiptId == key).Select(m => m.Organization));
+            return SingleResult.Create(db.LeaveEmployeeLeaves.Where(m => m.EmployeeLeaveId == key).Select(m => m.Organization));
         }
 
         protected override void Dispose(bool disposing)
@@ -180,9 +187,9 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool StudentFeeReceiptExists(int key)
+        private bool LeaveEmployeeLeafExists(int key)
         {
-            return db.StudentFeeReceipts.Count(e => e.StudentFeeReceiptId == key) > 0;
+            return db.LeaveEmployeeLeaves.Count(e => e.EmployeeLeaveId == key) > 0;
         }
     }
 }

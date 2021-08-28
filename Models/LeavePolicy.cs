@@ -12,30 +12,31 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StudentClassSubject
+    public partial class LeavePolicy
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public StudentClassSubject()
+        public LeavePolicy()
         {
-            this.ExamStudentSubjectResults = new HashSet<ExamStudentSubjectResult>();
+            this.LeaveBalances = new HashSet<LeaveBalance>();
         }
     
-        public int StudentClassSubjectId { get; set; }
-        public int ClassSubjectId { get; set; }
-        public int StudentClassId { get; set; }
-        public byte Active { get; set; }
+        public int LeavePolicyId { get; set; }
+        public int LeaveNameId { get; set; }
+        public int LeaveOpenAdjustCloseId { get; set; }
+        public string FormulaOrDays { get; set; }
         public short OrgId { get; set; }
-        public short BatchId { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public short FinancialYearId { get; set; }
         public Nullable<short> CreatedBy { get; set; }
-        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public byte Active { get; set; }
     
         public virtual Batch Batch { get; set; }
-        public virtual ClassSubject ClassSubject { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExamStudentSubjectResult> ExamStudentSubjectResults { get; set; }
+        public virtual MasterData MasterData { get; set; }
+        public virtual MasterData MasterData1 { get; set; }
         public virtual Organization Organization { get; set; }
-        public virtual StudentClass StudentClass { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LeaveBalance> LeaveBalances { get; set; }
     }
 }
