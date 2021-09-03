@@ -95,7 +95,6 @@ namespace schools
             builder.EntitySet<EmpEmployeeGroup>("EmpEmployeeGroups");
             //builder.EntitySet<StudTeacherStudentMapping>("StudTeacherStudentMappings");
             builder.EntitySet<StudTeacherClassMapping>("StudTeacherClassMappings");
-            builder.EntitySet<ClassSubjectTeacher>("ClassSubjectTeachers");
             builder.EntitySet<AccountingVoucher>("AccountingVouchers");
             builder.EntitySet<AccountingTrialBalance>("AccountingTrialBalances");
             builder.EntitySet<AccountingLedgerTrialBalance>("AccountingLedgerTrialBalances");
@@ -108,6 +107,13 @@ namespace schools
             builder.EntitySet<MasterData>("MasterDatas");
             builder.EntitySet<AttendanceReport>("AttendanceReports");
             builder.EntitySet<LeavePolicy>("LeavePolicies");
+            builder.EntitySet<AspNetRole>("AspNetRoles");
+            builder.EntitySet<AspNetUser>("AspNetUsers");
+            builder.EntitySet<AspNetUserClaim>("AspNetUserClaims");
+            builder.EntitySet<AspNetUserLogin>("AspNetUserLogins");
+            builder.EntitySet<ReportConfigData>("ReportConfigDatas");
+            builder.EntitySet<ReportOrgReportName>("ReportOrgReportNames");
+            builder.EntitySet<ReportOrgReportColumn>("ReportOrgReportColumns");
 
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 

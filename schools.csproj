@@ -371,13 +371,14 @@
     <Compile Include="Controllers\ApplicationFeatureRolesPermsController.cs" />
     <Compile Include="Controllers\ApplicationFeaturesController.cs" />
     <Compile Include="Controllers\AppUsersController.cs" />
+    <Compile Include="Controllers\AspNetRolesController.cs" />
+    <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\AttendanceReportsController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\BatchesController.cs" />
     <Compile Include="Controllers\ClassFeesController.cs" />
     <Compile Include="Controllers\ClassSubjectMarkComponentsController.cs" />
     <Compile Include="Controllers\ClassSubjectsController.cs" />
-    <Compile Include="Controllers\ClassSubjectTeachersController.cs" />
     <Compile Include="Controllers\EmpComponentsController.cs" />
     <Compile Include="Controllers\EmpEmployeeGradeSalHistoriesController.cs" />
     <Compile Include="Controllers\EmpEmployeeGroupsController.cs" />
@@ -407,6 +408,9 @@
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\PhotoGalleriesController.cs" />
     <Compile Include="Controllers\PhotoGalleryAPIController.cs" />
+    <Compile Include="Controllers\ReportConfigDatasController.cs" />
+    <Compile Include="Controllers\ReportOrgReportColumnsController.cs" />
+    <Compile Include="Controllers\ReportOrgReportNamesController.cs" />
     <Compile Include="Controllers\RoleUsersController.cs" />
     <Compile Include="Controllers\SchoolClassPeriodsController.cs" />
     <Compile Include="Controllers\SchoolFeeTypesController.cs" />
@@ -480,9 +484,6 @@
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClassSubjectMarkComponent.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ClassSubjectTeacher.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
@@ -562,6 +563,15 @@
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhotoGallery.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReportConfigData.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReportOrgReportColumn.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReportOrgReportName.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RoleUser.cs">

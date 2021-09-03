@@ -164,13 +164,6 @@ namespace schools.Controllers
             return db.EmpEmployees.Where(m => m.EmpEmployeeId == key).SelectMany(m => m.AccountingLedgerTrialBalances);
         }
 
-        // GET: odata/EmpEmployees(5)/ClassSubjectTeachers
-        [EnableQuery]
-        public IQueryable<ClassSubjectTeacher> GetClassSubjectTeachers([FromODataUri] int key)
-        {
-            return db.EmpEmployees.Where(m => m.EmpEmployeeId == key).SelectMany(m => m.ClassSubjectTeachers);
-        }
-
         // GET: odata/EmpEmployees(5)/EmpEmployeeGradeSalHistories
         [EnableQuery]
         public IQueryable<EmpEmployeeGradeSalHistory> GetEmpEmployeeGradeSalHistories([FromODataUri] int key)

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="663a9c601cba4f9e9ac1ba6b0f7a7d30" Name="Diagram1" ZoomLevel="100">
+      <Diagram DiagramId="663a9c601cba4f9e9ac1ba6b0f7a7d30" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="TTPModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.AccountingLedgerTrialBalance" Width="1.5" PointX="5.25" PointY="125" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.AccountingTrialBalance" Width="2" PointX="8.25" PointY="126.125" IsExpanded="true" />
@@ -14,15 +14,13 @@
         <EntityTypeShape EntityType="TTPModel.ApplicationFeature" Width="1.5" PointX="5.25" PointY="157.5" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.AppUser" Width="1.5" PointX="3" PointY="85" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.AspNetUserClaim" Width="2.375" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTPModel.AspNetUserLogin" Width="2.125" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Attendance" Width="1.5" PointX="5.25" PointY="95.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Batch" Width="1.5" PointX="3" PointY="95.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.ClassFee" Width="1.5" PointX="8.25" PointY="119.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.ClassSubject" Width="1.5" PointX="10.5" PointY="122.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.ClassSubjectMarkComponent" Width="1.5" PointX="18.75" PointY="120.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.ClassSubjectTeacher" Width="1.5" PointX="12.75" PointY="107.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.EmpComponent" Width="1.5" PointX="13.25" PointY="124.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.EmpEmployeeGradeSalHistory" Width="1.5" PointX="14.25" PointY="129.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.EmpEmployeeGroup" Width="1.5" PointX="3" PointY="113.875" IsExpanded="true" />
@@ -82,9 +80,7 @@
         <AssociationConnector Association="TTPModel.FK_Attendance_StudentClassId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_Batches_Organization" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ClassFee_Batches" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ClassSubject_Batches" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ClassSubjectMarkComponents_Batches" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ClassSubjectTeacher_Batches" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_Exams_BatchesBatchId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ExamSlot_Batches" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ExamStudentResult_Batches" ManuallyRouted="false" />
@@ -105,19 +101,9 @@
         <AssociationConnector Association="TTPModel.FK_FeeMaster_FeeNameMaster" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_FeeMaster_LocationMaster" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_StudentFeePayment_ClassFee" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ClassSubject_MasterDataClassId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ClassSubject_MasterDataSubjectsId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ClassSubject_OrganizationId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ClassSubject_SubjectTypesId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ClassSubjectMarkComponents_ClassSubjectId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ClassSubjectTeacher_ClassSubject" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_SlotAndClassSubject_ClassSubjectId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_StudentClassSubject_ClassSubjectId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ClassSubjectMarkComponents_OrganizationId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_ClassSubjectMarkComponentId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ClassSubjectTeacher_EmpEmployees" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_ClassSubjectTeacher_Organization" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmpComponents_ComponentType" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmpComponents_OrganizationId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_EmpEmployeeSalaryComponents_ComponentId" ManuallyRouted="false" />
@@ -224,7 +210,6 @@
         <AssociationConnector Association="TTPModel.FK_SchoolClassPeriods_Organization" />
         <EntityTypeShape EntityType="TTPModel.SchoolTimeTable" Width="1.5" PointX="18.5" PointY="103.625" />
         <AssociationConnector Association="TTPModel.FK_SchoolTimeTable_Batches" />
-        <AssociationConnector Association="TTPModel.FK_SchoolTimeTable_ClassSubject" />
         <AssociationConnector Association="TTPModel.FK_SchoolTimeTable_OrgId" />
         <AssociationConnector Association="TTPModel.FK_SchoolTimeTable_SchoolClassPeriodId" />
         <EntityTypeShape EntityType="TTPModel.LeaveEmployeeLeaf" Width="1.5" PointX="5.25" PointY="112.875" />
@@ -236,16 +221,36 @@
         <AssociationConnector Association="TTPModel.FK_AttendanceReports_BatchesFinancialYear" />
         <AssociationConnector Association="TTPModel.FK_AttendanceReports_EmpEmployees" />
         <AssociationConnector Association="TTPModel.FK_AttendanceReports_OrgId" />
-        <EntityTypeShape EntityType="TTPModel.LeavePolicy" Width="1.5" PointX="8.25" PointY="136" />
-        <AssociationConnector Association="TTPModel.FK_LeavePolicy_BatchesFinancialYear" />
-        <AssociationConnector Association="TTPModel.FK_LeavePolicy_MasterDataLeaveNameId" />
-        <AssociationConnector Association="TTPModel.FK_LeavePolicy_MasterDataOpenAdjustClose" />
-        <AssociationConnector Association="TTPModel.FK_LeavePolicy_Organization" />
-        <EntityTypeShape EntityType="TTPModel.LeaveBalance" Width="1.5" PointX="10.5" PointY="107.625" />
+        <EntityTypeShape EntityType="TTPModel.LeaveBalance" Width="1.5" PointX="11.25" PointY="91.5" />
+        <EntityTypeShape EntityType="TTPModel.LeavePolicy" Width="1.5" PointX="8.25" PointY="135.875" />
         <AssociationConnector Association="TTPModel.FK_LeaveBalances_BatchesFinancialYear" />
+        <AssociationConnector Association="TTPModel.FK_LeavePolicy_BatchesFinancialYear" />
         <AssociationConnector Association="TTPModel.FK_LeaveBalances_EmpEmployees" />
         <AssociationConnector Association="TTPModel.FK_LeaveBalances_LeavePolicy" />
         <AssociationConnector Association="TTPModel.FK_LeaveBalances_Organization" />
+        <AssociationConnector Association="TTPModel.FK_LeavePolicy_MasterDataLeaveNameId" />
+        <AssociationConnector Association="TTPModel.FK_LeavePolicy_MasterDataOpenAdjustClose" />
+        <AssociationConnector Association="TTPModel.FK_LeavePolicy_Organization" />
+        <EntityTypeShape EntityType="TTPModel.ClassSubject" Width="1.5" PointX="19.5" PointY="132.125" />
+        <AssociationConnector Association="TTPModel.FK_ClassSubject_Batches" />
+        <AssociationConnector Association="TTPModel.FK_ClassSubject_ClassSubject" />
+        <AssociationConnector Association="TTPModel.FK_ClassSubject_MasterDataClassId" />
+        <AssociationConnector Association="TTPModel.FK_ClassSubject_MasterDataSubjectsId" />
+        <AssociationConnector Association="TTPModel.FK_ClassSubject_OrganizationId" />
+        <AssociationConnector Association="TTPModel.FK_ClassSubject_SubjectTypesId" />
+        <AssociationConnector Association="TTPModel.FK_ClassSubjectMarkComponents_ClassSubjectId" />
+        <AssociationConnector Association="TTPModel.FK_SchoolTimeTable_ClassSubject" />
+        <AssociationConnector Association="TTPModel.FK_SlotAndClassSubject_ClassSubjectId" />
+        <AssociationConnector Association="TTPModel.FK_StudentClassSubject_ClassSubjectId" />
+        <AssociationConnector Association="TTPModel.FK_ClassSubject_EmployeeTeacherId" />
+        <EntityTypeShape EntityType="TTPModel.ReportConfigData" Width="1.5" PointX="5.25" PointY="153.125" />
+        <AssociationConnector Association="TTPModel.FK_ReportConfigurations_MasterDataApplicationId1" />
+        <EntityTypeShape EntityType="TTPModel.ReportOrgReportName" Width="1.5" PointX="7.5" PointY="114.5" />
+        <AssociationConnector Association="TTPModel.FK_ReportOrgReports_Organization" />
+        <AssociationConnector Association="TTPModel.FK_ReportOrgReports_ReportConfigurations" />
+        <EntityTypeShape EntityType="TTPModel.ReportOrgReportColumn" Width="1.5" PointX="9.75" PointY="106.375" />
+        <AssociationConnector Association="TTPModel.FK_ReportOrgReportColumns_Organization" />
+        <AssociationConnector Association="TTPModel.FK_ReportOrgReportColumns_ReportOrgReports" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -31,6 +31,8 @@ namespace schools.Models
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public int PeriodTypeId { get; set; }
+        public byte Sequence { get; set; }
     
         public virtual Batch Batch { get; set; }
         public virtual MasterData MasterData { get; set; }

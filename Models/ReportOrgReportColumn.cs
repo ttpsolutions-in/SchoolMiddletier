@@ -12,22 +12,21 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ClassSubjectTeacher
+    public partial class ReportOrgReportColumn
     {
-        public int ClassSubjectTeacherId { get; set; }
-        public int TeacherId { get; set; }
-        public int ClassSubjectId { get; set; }
+        public short ReportOrgReportColumnId { get; set; }
+        public short ReportOrgReportNameId { get; set; }
+        public string ColumnDisplayName { get; set; }
+        public string FormulaOrColumnName { get; set; }
+        public byte Sequence { get; set; }
         public short OrgId { get; set; }
-        public short BatchId { get; set; }
         public byte Active { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
     
-        public virtual Batch Batch { get; set; }
-        public virtual ClassSubject ClassSubject { get; set; }
-        public virtual EmpEmployee EmpEmployee { get; set; }
         public virtual Organization Organization { get; set; }
+        public virtual ReportOrgReportName ReportOrgReportName { get; set; }
     }
 }

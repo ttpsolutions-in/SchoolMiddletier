@@ -17,15 +17,15 @@ namespace schools.Models
         public int LeaveBalanceId { get; set; }
         public int EmployeeId { get; set; }
         public int LeavePolicyId { get; set; }
+        public byte NoOfDays { get; set; }
         public short YearMonth { get; set; }
-        public short FinancialYearId { get; set; }
+        public short BatchId { get; set; }
         public short OrgId { get; set; }
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte Active { get; set; }
-        public byte NoOfDays { get; set; }
     
         public virtual Batch Batch { get; set; }
         public virtual EmpEmployee EmpEmployee { get; set; }

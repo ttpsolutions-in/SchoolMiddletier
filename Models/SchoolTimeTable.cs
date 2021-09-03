@@ -29,8 +29,8 @@ namespace schools.Models
         public int ClassId { get; set; }
     
         public virtual Batch Batch { get; set; }
-        public virtual ClassSubject ClassSubject { get; set; }
         public virtual Organization Organization { get; set; }
         public virtual SchoolClassPeriod SchoolClassPeriod { get; set; }
+        public virtual ClassSubject ClassSubject { get; set; }
     }
 }

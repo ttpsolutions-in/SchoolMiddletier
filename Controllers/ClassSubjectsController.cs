@@ -23,10 +23,13 @@ namespace schools.Controllers
     using schools.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<ClassSubject>("ClassSubjects");
+    builder.EntitySet<Batch>("Batches"); 
     builder.EntitySet<MasterData>("MasterDatas"); 
     builder.EntitySet<Organization>("Organizations"); 
     builder.EntitySet<SubjectType>("SubjectTypes"); 
     builder.EntitySet<ClassSubjectMarkComponent>("ClassSubjectMarkComponents"); 
+    builder.EntitySet<ClassSubjectTeacher>("ClassSubjectTeachers"); 
+    builder.EntitySet<SchoolTimeTable>("SchoolTimeTables"); 
     builder.EntitySet<SlotAndClassSubject>("SlotAndClassSubjects"); 
     builder.EntitySet<StudentClassSubject>("StudentClassSubjects"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
@@ -44,13 +47,13 @@ namespace schools.Controllers
 
         // GET: odata/ClassSubjects(5)
         [EnableQuery]
-        public SingleResult<ClassSubject> GetClassSubject([FromODataUri] short key)
+        public SingleResult<ClassSubject> GetClassSubject([FromODataUri] int key)
         {
             return SingleResult.Create(db.ClassSubjects.Where(classSubject => classSubject.ClassSubjectId == key));
         }
 
         // PUT: odata/ClassSubjects(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] short key, Delta<ClassSubject> patch)
+        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<ClassSubject> patch)
         {
             Validate(patch.GetEntity());
 
@@ -102,7 +105,7 @@ namespace schools.Controllers
 
         // PATCH: odata/ClassSubjects(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] short key, Delta<ClassSubject> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<ClassSubject> patch)
         {
             Validate(patch.GetEntity());
 
@@ -139,7 +142,7 @@ namespace schools.Controllers
         }
 
         // DELETE: odata/ClassSubjects(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] short key)
+        public async Task<IHttpActionResult> Delete([FromODataUri] int key)
         {
             ClassSubject classSubject = await db.ClassSubjects.FindAsync(key);
             if (classSubject == null)
@@ -153,51 +156,79 @@ namespace schools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // GET: odata/ClassSubjects(5)/Batch
+        [EnableQuery]
+        public SingleResult<Batch> GetBatch([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.ClassSubjects.Where(m => m.ClassSubjectId == key).Select(m => m.Batch));
+        }
+
+        // GET: odata/ClassSubjects(5)/ClassSubject1
+        [EnableQuery]
+        public SingleResult<ClassSubject> GetClassSubject1([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.ClassSubjects.Where(m => m.ClassSubjectId == key).Select(m => m.ClassSubject1));
+        }
+
+        // GET: odata/ClassSubjects(5)/ClassSubject2
+        [EnableQuery]
+        public SingleResult<ClassSubject> GetClassSubject2([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.ClassSubjects.Where(m => m.ClassSubjectId == key).Select(m => m.ClassSubject2));
+        }
+
         // GET: odata/ClassSubjects(5)/MasterData
         [EnableQuery]
-        public SingleResult<MasterData> GetMasterData([FromODataUri] short key)
+        public SingleResult<MasterData> GetMasterData([FromODataUri] int key)
         {
             return SingleResult.Create(db.ClassSubjects.Where(m => m.ClassSubjectId == key).Select(m => m.MasterData));
         }
 
         // GET: odata/ClassSubjects(5)/MasterData1
         [EnableQuery]
-        public SingleResult<MasterData> GetMasterData1([FromODataUri] short key)
+        public SingleResult<MasterData> GetMasterData1([FromODataUri] int key)
         {
             return SingleResult.Create(db.ClassSubjects.Where(m => m.ClassSubjectId == key).Select(m => m.MasterData1));
         }
 
         // GET: odata/ClassSubjects(5)/Organization
         [EnableQuery]
-        public SingleResult<Organization> GetOrganization([FromODataUri] short key)
+        public SingleResult<Organization> GetOrganization([FromODataUri] int key)
         {
             return SingleResult.Create(db.ClassSubjects.Where(m => m.ClassSubjectId == key).Select(m => m.Organization));
         }
 
         // GET: odata/ClassSubjects(5)/SubjectType
         [EnableQuery]
-        public SingleResult<SubjectType> GetSubjectType([FromODataUri] short key)
+        public SingleResult<SubjectType> GetSubjectType([FromODataUri] int key)
         {
             return SingleResult.Create(db.ClassSubjects.Where(m => m.ClassSubjectId == key).Select(m => m.SubjectType));
         }
 
-        //// GET: odata/ClassSubjects(5)/ClassSubjectMarkComponents
-        //[EnableQuery]
-        //public IQueryable<ClassSubjectMarkComponent> GetClassSubjectMarkComponents([FromODataUri] short key)
-        //{
-        //    return db.ClassSubjects.Where(m => m.ClassSubjectId == key).SelectMany(m => m.ClassSubjectMarkComponents);
-        //}
+        // GET: odata/ClassSubjects(5)/ClassSubjectMarkComponents
+        [EnableQuery]
+        public IQueryable<ClassSubjectMarkComponent> GetClassSubjectMarkComponents([FromODataUri] int key)
+        {
+            return db.ClassSubjects.Where(m => m.ClassSubjectId == key).SelectMany(m => m.ClassSubjectMarkComponents);
+        }
+
+        // GET: odata/ClassSubjects(5)/SchoolTimeTables
+        [EnableQuery]
+        public IQueryable<SchoolTimeTable> GetSchoolTimeTables([FromODataUri] int key)
+        {
+            return db.ClassSubjects.Where(m => m.ClassSubjectId == key).SelectMany(m => m.SchoolTimeTables);
+        }
 
         // GET: odata/ClassSubjects(5)/SlotAndClassSubjects
         [EnableQuery]
-        public IQueryable<SlotAndClassSubject> GetSlotAndClassSubjects([FromODataUri] short key)
+        public IQueryable<SlotAndClassSubject> GetSlotAndClassSubjects([FromODataUri] int key)
         {
             return db.ClassSubjects.Where(m => m.ClassSubjectId == key).SelectMany(m => m.SlotAndClassSubjects);
         }
 
         // GET: odata/ClassSubjects(5)/StudentClassSubjects
         [EnableQuery]
-        public IQueryable<StudentClassSubject> GetStudentClassSubjects([FromODataUri] short key)
+        public IQueryable<StudentClassSubject> GetStudentClassSubjects([FromODataUri] int key)
         {
             return db.ClassSubjects.Where(m => m.ClassSubjectId == key).SelectMany(m => m.StudentClassSubjects);
         }
@@ -211,7 +242,7 @@ namespace schools.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ClassSubjectExists(short key)
+        private bool ClassSubjectExists(int key)
         {
             return db.ClassSubjects.Count(e => e.ClassSubjectId == key) > 0;
         }

@@ -34,6 +34,7 @@ namespace schools.Models
         public byte Active { get; set; }
         public int ManagerId { get; set; }
         public Nullable<int> ReportingTo { get; set; }
+        public Nullable<byte> IsCurrent { get; set; }
     
         public virtual EmpEmployeeGradeSalHistory EmpEmployeeGradeSalHistory1 { get; set; }
         public virtual EmpEmployeeGradeSalHistory EmpEmployeeGradeSalHistory2 { get; set; }

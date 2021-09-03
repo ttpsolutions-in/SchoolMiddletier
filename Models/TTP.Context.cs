@@ -40,9 +40,7 @@ namespace schools.Models
         public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<Batch> Batches { get; set; }
         public virtual DbSet<ClassFee> ClassFees { get; set; }
-        public virtual DbSet<ClassSubject> ClassSubjects { get; set; }
         public virtual DbSet<ClassSubjectMarkComponent> ClassSubjectMarkComponents { get; set; }
-        public virtual DbSet<ClassSubjectTeacher> ClassSubjectTeachers { get; set; }
         public virtual DbSet<EmpComponent> EmpComponents { get; set; }
         public virtual DbSet<EmpEmployeeGradeSalHistory> EmpEmployeeGradeSalHistories { get; set; }
         public virtual DbSet<EmpEmployeeGroup> EmpEmployeeGroups { get; set; }
@@ -86,7 +84,11 @@ namespace schools.Models
         public virtual DbSet<SchoolTimeTable> SchoolTimeTables { get; set; }
         public virtual DbSet<LeaveEmployeeLeaf> LeaveEmployeeLeaves { get; set; }
         public virtual DbSet<AttendanceReport> AttendanceReports { get; set; }
-        public virtual DbSet<LeavePolicy> LeavePolicies { get; set; }
         public virtual DbSet<LeaveBalance> LeaveBalances { get; set; }
+        public virtual DbSet<LeavePolicy> LeavePolicies { get; set; }
+        public virtual DbSet<ClassSubject> ClassSubjects { get; set; }
+        public virtual DbSet<ReportConfigData> ReportConfigDatas { get; set; }
+        public virtual DbSet<ReportOrgReportName> ReportOrgReportNames { get; set; }
+        public virtual DbSet<ReportOrgReportColumn> ReportOrgReportColumns { get; set; }
     }
 }

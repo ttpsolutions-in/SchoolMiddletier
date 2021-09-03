@@ -18,16 +18,16 @@ namespace schools.Models
         public ClassSubject()
         {
             this.ClassSubjectMarkComponents = new HashSet<ClassSubjectMarkComponent>();
-            this.ClassSubjectTeachers = new HashSet<ClassSubjectTeacher>();
+            this.SchoolTimeTables = new HashSet<SchoolTimeTable>();
             this.SlotAndClassSubjects = new HashSet<SlotAndClassSubject>();
             this.StudentClassSubjects = new HashSet<StudentClassSubject>();
-            this.SchoolTimeTables = new HashSet<SchoolTimeTable>();
         }
     
         public int ClassSubjectId { get; set; }
         public int ClassId { get; set; }
         public int SubjectId { get; set; }
         public short SubjectTypeId { get; set; }
+        public Nullable<int> TeacherId { get; set; }
         public byte Active { get; set; }
         public short OrgId { get; set; }
         public short BatchId { get; set; }
@@ -35,9 +35,10 @@ namespace schools.Models
         public Nullable<short> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
-        public Nullable<short> TeacherId { get; set; }
     
         public virtual Batch Batch { get; set; }
+        public virtual ClassSubject ClassSubject1 { get; set; }
+        public virtual ClassSubject ClassSubject2 { get; set; }
         public virtual MasterData MasterData { get; set; }
         public virtual MasterData MasterData1 { get; set; }
         public virtual Organization Organization { get; set; }
@@ -45,12 +46,11 @@ namespace schools.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassSubjectMarkComponent> ClassSubjectMarkComponents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClassSubjectTeacher> ClassSubjectTeachers { get; set; }
+        public virtual ICollection<SchoolTimeTable> SchoolTimeTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SlotAndClassSubject> SlotAndClassSubjects { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentClassSubject> StudentClassSubjects { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SchoolTimeTable> SchoolTimeTables { get; set; }
+        public virtual EmpEmployee EmpEmployee { get; set; }
     }
 }
