@@ -237,12 +237,12 @@ namespace schools.Controllers
             return db.StudentClasses.Where(m => m.StudentClassId == key).SelectMany(m => m.StudentDocuments);
         }
 
-        // GET: odata/StudentClasses(5)/StudentFeePayments
-        [EnableQuery]
-        public IQueryable<StudentFeePayment> GetStudentFeePayments([FromODataUri] int key)
-        {
-            return db.StudentClasses.Where(m => m.StudentClassId == key).SelectMany(m => m.StudentFeePayments);
-        }
+        //// GET: odata/StudentClasses(5)/StudentFeePayments
+        //[EnableQuery]
+        //public IQueryable<StudentFeePayment> GetStudentFeePayments([FromODataUri] int key)
+        //{
+        //    return db.StudentClasses.Where(m => m.StudentClassId == key).SelectMany(m => m.StudentFeePayments);
+        //}
 
         // GET: odata/StudentClasses(5)/AccountingLedgerTrialBalances
         [EnableQuery]

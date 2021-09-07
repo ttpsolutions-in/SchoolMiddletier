@@ -27,7 +27,6 @@ namespace schools.Models
     
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<AccountingLedgerTrialBalance> AccountingLedgerTrialBalances { get; set; }
-        public virtual DbSet<AccountingTrialBalance> AccountingTrialBalances { get; set; }
         public virtual DbSet<AccountingVoucher> AccountingVouchers { get; set; }
         public virtual DbSet<Album> Albums { get; set; }
         public virtual DbSet<ApplicationFeatureRolesPerm> ApplicationFeatureRolesPerms { get; set; }
@@ -71,7 +70,6 @@ namespace schools.Models
         public virtual DbSet<StudentClass> StudentClasses { get; set; }
         public virtual DbSet<StudentClassSubject> StudentClassSubjects { get; set; }
         public virtual DbSet<StudentDocument> StudentDocuments { get; set; }
-        public virtual DbSet<StudentFeePayment> StudentFeePayments { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudTeacherClassMapping> StudTeacherClassMappings { get; set; }
         public virtual DbSet<SubjectType> SubjectTypes { get; set; }
@@ -90,5 +88,11 @@ namespace schools.Models
         public virtual DbSet<ReportConfigData> ReportConfigDatas { get; set; }
         public virtual DbSet<ReportOrgReportName> ReportOrgReportNames { get; set; }
         public virtual DbSet<ReportOrgReportColumn> ReportOrgReportColumns { get; set; }
+        public virtual DbSet<CustomerInvoice> CustomerInvoices { get; set; }
+        public virtual DbSet<ApplicationPrice> ApplicationPrices { get; set; }
+        public virtual DbSet<InventoryItem> InventoryItems { get; set; }
+        public virtual DbSet<InvoiceComponent> InvoiceComponents { get; set; }
+        public virtual DbSet<CustomerInvoiceItem> CustomerInvoiceItems { get; set; }
+        public virtual DbSet<CustomerApp> CustomerApps { get; set; }
     }
 }

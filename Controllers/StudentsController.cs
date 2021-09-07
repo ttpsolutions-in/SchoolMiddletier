@@ -245,11 +245,11 @@ namespace schools.Controllers
         }
 
         // GET: odata/Students(5)/StudentFeePayments
-        [EnableQuery]
-        public IQueryable<StudentFeePayment> GetStudentFeePayments([FromODataUri] int key)
-        {
-            return db.Students.Where(m => m.StudentId == key).SelectMany(m => m.StudentFeePayments);
-        }
+        //[EnableQuery]
+        //public IQueryable<StudentFeePayment> GetStudentFeePayments([FromODataUri] int key)
+        //{
+        //    return db.Students.Where(m => m.StudentId == key).SelectMany(m => m.StudentFeePayments);
+        //}
 
         // GET: odata/Students(5)/Students1
         [EnableQuery]

@@ -12,21 +12,23 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AccountingTrialBalance
+    public partial class CustomerInvoiceItem
     {
-        public short AccountingTrialBalanceId { get; set; }
-        public int LedgerId { get; set; }
-        public decimal TotalDebit { get; set; }
-        public decimal TotalCredit { get; set; }
-        public decimal Balance { get; set; }
+        public int CustomerInvoiceItemId { get; set; }
+        public int CustomerInvoiceId { get; set; }
+        public Nullable<int> InventoryItemId { get; set; }
+        public Nullable<short> ClassFeeId { get; set; }
+        public Nullable<short> CustomerAppItemId { get; set; }
         public short OrgId { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public byte Active { get; set; }
         public Nullable<short> CreatedBy { get; set; }
-        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
-        public Nullable<byte> Active { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
     
-        public virtual MasterData MasterData { get; set; }
+        public virtual CustomerInvoice CustomerInvoice { get; set; }
+        public virtual InventoryItem InventoryItem { get; set; }
         public virtual Organization Organization { get; set; }
+        public virtual CustomerApp CustomerApp { get; set; }
     }
 }

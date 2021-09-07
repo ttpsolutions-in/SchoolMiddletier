@@ -33,7 +33,6 @@ namespace schools.Models
             this.StudentClasses = new HashSet<StudentClass>();
             this.StudentClassSubjects = new HashSet<StudentClassSubject>();
             this.StudentDocuments = new HashSet<StudentDocument>();
-            this.StudentFeePayments = new HashSet<StudentFeePayment>();
             this.StudTeacherClassMappings = new HashSet<StudTeacherClassMapping>();
             this.SubjectTypes = new HashSet<SubjectType>();
             this.StudentFeeReceipts = new HashSet<StudentFeeReceipt>();
@@ -90,8 +89,6 @@ namespace schools.Models
         public virtual ICollection<StudentClassSubject> StudentClassSubjects { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentDocument> StudentDocuments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentFeePayment> StudentFeePayments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudTeacherClassMapping> StudTeacherClassMappings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

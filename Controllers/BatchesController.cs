@@ -280,12 +280,12 @@ namespace schools.Controllers
             return db.Batches.Where(m => m.BatchId == key).SelectMany(m => m.StudentDocuments);
         }
 
-        // GET: odata/Batches(5)/StudentFeePayments
-        [EnableQuery]
-        public IQueryable<StudentFeePayment> GetStudentFeePayments([FromODataUri] short key)
-        {
-            return db.Batches.Where(m => m.BatchId == key).SelectMany(m => m.StudentFeePayments);
-        }
+        //// GET: odata/Batches(5)/StudentFeePayments
+        //[EnableQuery]
+        //public IQueryable<StudentFeePayment> GetStudentFeePayments([FromODataUri] short key)
+        //{
+        //    return db.Batches.Where(m => m.BatchId == key).SelectMany(m => m.StudentFeePayments);
+        //}
 
         //// GET: odata/Batches(5)/StudentFeeReceipts
         //[EnableQuery]

@@ -4,10 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="663a9c601cba4f9e9ac1ba6b0f7a7d30" Name="Diagram1" ZoomLevel="82">
+      <Diagram DiagramId="663a9c601cba4f9e9ac1ba6b0f7a7d30" Name="Diagram1" ZoomLevel="100">
         <EntityTypeShape EntityType="TTPModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.AccountingLedgerTrialBalance" Width="1.5" PointX="5.25" PointY="125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.AccountingTrialBalance" Width="2" PointX="8.25" PointY="126.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.AccountingVoucher" Width="1.5" PointX="7.5" PointY="108.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Album" Width="1.5" PointX="6.75" PointY="88.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.ApplicationFeatureRolesPerm" Width="1.5" PointX="7.5" PointY="157.125" IsExpanded="true" />
@@ -51,7 +50,6 @@
         <EntityTypeShape EntityType="TTPModel.StudentClass" Width="1.5" PointX="5.25" PointY="131.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.StudentClassSubject" Width="1.5" PointX="12.75" PointY="112.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.StudentDocument" Width="1.5" PointX="22.5" PointY="124.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TTPModel.StudentFeePayment" Width="1.5" PointX="19.5" PointY="114.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.Student" Width="1.5" PointX="17.25" PointY="129.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.StudTeacherClassMapping" Width="1.5" PointX="13.25" PointY="117.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TTPModel.SubjectType" Width="1.5" PointX="5.25" PointY="140.25" IsExpanded="true" />
@@ -65,8 +63,6 @@
         <AssociationConnector Association="TTPModel.FK_Ledgers_MasterDataGeneralLedgerId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_Ledgers_OrganizationId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_Ledgers_StudentClassId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_AccountingTrialBalances_MasterDataLedgerId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_AccountingTrialBalances_Organization" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_AccountingVouchers_Organization" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_PhotoGallery_Albums" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ApplicationRoleUsers_ApplicationFeatureId" ManuallyRouted="false" />
@@ -93,14 +89,12 @@
         <AssociationConnector Association="TTPModel.FK_StudentClass_Batches" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_StudentClassSubject_BatchesBatchId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_StudentDocuments_Batches" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_StudentFeePayment_Batches" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_StudTeacherClassMapping_Batches" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_SubjectTypes_Batches" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ClassFee_OrganizationId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_FeeMaster_ClassMaster" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_FeeMaster_FeeNameMaster" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_FeeMaster_LocationMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_StudentFeePayment_ClassFee" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ClassSubjectMarkComponents_OrganizationId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_ExamStudentSubject_ClassSubjectMarkComponentId" ManuallyRouted="false" />
@@ -172,7 +166,6 @@
         <AssociationConnector Association="TTPModel.FK_StudentClass_OrganizationOrgId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_StudentClassSubject_OrganizationOrgId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_StudentDocuments_OrganizationId" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_StudentFeePayment_OrganizationId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_Students_OrganizationOrgId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_StudTeacherClassMapping_Organization" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_TaskConfiguration_OrganizationId" ManuallyRouted="false" />
@@ -185,9 +178,7 @@
         <AssociationConnector Association="TTPModel.FK_StudentClass_Student" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_StudentClassSubject_StudentClassId" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_StudentDocuments_StudentClass" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_StudentFeePayment_StudentFeePayment" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_StudentPhoto_Students" ManuallyRouted="false" />
-        <AssociationConnector Association="TTPModel.FK_StudentFeePayment_Student" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.FK_Students_Students" ManuallyRouted="false" />
         <AssociationConnector Association="TTPModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="TTPModel.StudentFeeReceipt" Width="1.5" PointX="10.25" PointY="100.75" />
@@ -251,6 +242,31 @@
         <EntityTypeShape EntityType="TTPModel.ReportOrgReportColumn" Width="1.5" PointX="9.75" PointY="106.375" />
         <AssociationConnector Association="TTPModel.FK_ReportOrgReportColumns_Organization" />
         <AssociationConnector Association="TTPModel.FK_ReportOrgReportColumns_ReportOrgReports" />
+        <EntityTypeShape EntityType="TTPModel.CustomerInvoice" Width="1.5" PointX="11.25" PointY="138.875" />
+        <AssociationConnector Association="TTPModel.FK_CustomerInvoice_MasterDataPaymentStatus" />
+        <AssociationConnector Association="TTPModel.FK_CustomerInvoice_Organization" />
+        <AssociationConnector Association="TTPModel.FK_CustomerInvoice_OrganizationCustomerId" />
+        <EntityTypeShape EntityType="TTPModel.ApplicationPrice" Width="1.5" PointX="8.25" PointY="125.125" />
+        <AssociationConnector Association="TTPModel.FK_ApplicationPrice_ApplicationPriceApplicationId" />
+        <AssociationConnector Association="TTPModel.FK_ApplicationPrice_MasterDataCurrencyId" />
+        <AssociationConnector Association="TTPModel.FK_ApplicationPrice_Organization" />
+        <EntityTypeShape EntityType="TTPModel.InventoryItem" Width="1.5" PointX="8.25" PointY="140.875" />
+        <AssociationConnector Association="TTPModel.FK_InventoryItems_MasterDataCategoryId" />
+        <AssociationConnector Association="TTPModel.FK_InventoryItems_MasterDataUnitId" />
+        <AssociationConnector Association="TTPModel.FK_InventoryItems_Organization" />
+        <EntityTypeShape EntityType="TTPModel.InvoiceComponent" Width="1.5" PointX="22.5" PointY="130.75" />
+        <AssociationConnector Association="TTPModel.FK_ApplicationPrice_ApplicationPrice" />
+        <AssociationConnector Association="TTPModel.FK_InvoiceComponents_CustomerInvoice" />
+        <AssociationConnector Association="TTPModel.FK_InvoiceComponents_InvoiceComponents" />
+        <AssociationConnector Association="TTPModel.FK_InvoiceComponents_Organization" />
+        <EntityTypeShape EntityType="TTPModel.CustomerInvoiceItem" Width="1.5" PointX="13.5" PointY="74.625" />
+        <AssociationConnector Association="TTPModel.FK_CustomerInvoiceItems_CustomerInvoice" />
+        <AssociationConnector Association="TTPModel.FK_CustomerInvoiceItems_InventoryId" />
+        <AssociationConnector Association="TTPModel.FK_CustomerInvoiceItems_Organization" />
+        <EntityTypeShape EntityType="TTPModel.CustomerApp" Width="1.5" PointX="18.5" PointY="114.125" />
+        <AssociationConnector Association="TTPModel.FK_CustomterAppItems_ApplicationPrice1" />
+        <AssociationConnector Association="TTPModel.FK_CustomerInvoiceItems_AppItemId1" />
+        <AssociationConnector Association="TTPModel.FK_CustomterAppItems_Organization1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

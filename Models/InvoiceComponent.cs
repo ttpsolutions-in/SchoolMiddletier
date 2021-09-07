@@ -12,28 +12,21 @@ namespace schools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ClassFee
+    public partial class InvoiceComponent
     {
-        public short ClassFeeId { get; set; }
-        public int FeeNameId { get; set; }
-        public int ClassId { get; set; }
+        public short InvoiceComponentId { get; set; }
+        public int CustomerInvoiceId { get; set; }
+        public int ComponentId { get; set; }
         public decimal Amount { get; set; }
-        public short BatchId { get; set; }
-        public byte Month { get; set; }
-        public byte Recurring { get; set; }
         public byte Active { get; set; }
-        public Nullable<int> LocationId { get; set; }
-        public Nullable<byte> PaymentOrder { get; set; }
         public short OrgId { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> CreatedBy { get; set; }
-        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<short> UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
     
-        public virtual Batch Batch { get; set; }
-        public virtual Organization Organization { get; set; }
+        public virtual CustomerInvoice CustomerInvoice { get; set; }
         public virtual MasterData MasterData { get; set; }
-        public virtual MasterData MasterData1 { get; set; }
-        public virtual MasterData MasterData2 { get; set; }
+        public virtual Organization Organization { get; set; }
     }
 }

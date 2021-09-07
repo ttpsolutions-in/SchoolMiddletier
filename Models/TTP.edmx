@@ -37,22 +37,6 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="Active" Type="tinyint" Nullable="false" />
         </EntityType>
-        <EntityType Name="AccountingTrialBalances">
-          <Key>
-            <PropertyRef Name="AccountingTrialBalanceId" />
-          </Key>
-          <Property Name="AccountingTrialBalanceId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LedgerId" Type="int" Nullable="false" />
-          <Property Name="TotalDebit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="TotalCredit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Balance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="OrgId" Type="smallint" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="CreatedBy" Type="smallint" />
-          <Property Name="UpdatedDate" Type="datetime" />
-          <Property Name="UpdatedBy" Type="smallint" />
-          <Property Name="Active" Type="tinyint" />
-        </EntityType>
         <EntityType Name="AccountingVouchers">
           <Key>
             <PropertyRef Name="AccountingVoucherId" />
@@ -114,6 +98,24 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ApplicationPrice">
+          <Key>
+            <PropertyRef Name="ApplicationPriceId" />
+          </Key>
+          <Property Name="ApplicationPriceId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationId" Type="int" Nullable="false" />
+          <Property Name="PCPM" Type="tinyint" Nullable="false" />
+          <Property Name="MinCount" Type="tinyint" Nullable="false" />
+          <Property Name="MinPrice" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="CurrencyId" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="date" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="date" />
         </EntityType>
         <EntityType Name="AppUsers">
           <Key>
@@ -295,6 +297,58 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
+        </EntityType>
+        <EntityType Name="CustomerApps">
+          <Key>
+            <PropertyRef Name="CustomerAppsId" />
+          </Key>
+          <Property Name="CustomerAppsId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationPriceId" Type="smallint" Nullable="false" />
+          <Property Name="LoginUserCount" Type="smallint" Nullable="false" />
+          <Property Name="PersonOrItemCount" Type="smallint" Nullable="false" />
+          <Property Name="Formula" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="AmountPerMonth" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CustomerInvoice">
+          <Key>
+            <PropertyRef Name="CustomerInvoiceId" />
+          </Key>
+          <Property Name="CustomerInvoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="smallint" />
+          <Property Name="StudentClassId" Type="int" />
+          <Property Name="DueForMonth" Type="smallint" />
+          <Property Name="InvoiceDate" Type="date" Nullable="false" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DueDate" Type="datetime" Nullable="false" />
+          <Property Name="PaymentStatusId" Type="int" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CustomerInvoiceItems">
+          <Key>
+            <PropertyRef Name="CustomerInvoiceItemId" />
+          </Key>
+          <Property Name="CustomerInvoiceItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerInvoiceId" Type="int" Nullable="false" />
+          <Property Name="InventoryItemId" Type="int" />
+          <Property Name="ClassFeeId" Type="smallint" />
+          <Property Name="CustomerAppItemId" Type="smallint" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="EmpComponents">
           <Key>
@@ -607,6 +661,44 @@
           <Property Name="BatchId" Type="smallint" />
           <Property Name="OrgId" Type="smallint" />
         </EntityType>
+        <EntityType Name="InventoryItems">
+          <Key>
+            <PropertyRef Name="InventoryItemId" />
+          </Key>
+          <Property Name="InventoryItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SKU" Type="varchar" MaxLength="20" />
+          <Property Name="ItemCode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ShortName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="UnitId" Type="int" />
+          <Property Name="QtyPerUnit" Type="smallint" />
+          <Property Name="PPP" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PPU" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MinPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MinCount" Type="smallint" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="InvoiceComponents">
+          <Key>
+            <PropertyRef Name="InvoiceComponentId" />
+          </Key>
+          <Property Name="InvoiceComponentId" Type="smallint" Nullable="false" />
+          <Property Name="CustomerInvoiceId" Type="int" Nullable="false" />
+          <Property Name="ComponentId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="OrgId" Type="smallint" Nullable="false" />
+          <Property Name="CreatedBy" Type="smallint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="smallint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="LeaveBalances">
           <Key>
             <PropertyRef Name="LeaveBalanceId" />
@@ -709,7 +801,6 @@
           <Property Name="ValidFrom" Type="datetime" />
           <Property Name="ValidTo" Type="datetime" />
           <Property Name="Active" Type="tinyint" />
-          <Property Name="PlanId" Type="smallint" />
           <Property Name="ParentId" Type="smallint" />
           <Property Name="MainOrgId" Type="smallint" />
           <Property Name="CreatedDate" Type="datetime" />
@@ -996,29 +1087,6 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="smallint" />
         </EntityType>
-        <EntityType Name="StudentFeePayment">
-          <Key>
-            <PropertyRef Name="StudentFeeId" />
-          </Key>
-          <Property Name="StudentFeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StudentId" Type="int" Nullable="false" />
-          <Property Name="StudentClassId" Type="int" Nullable="false" />
-          <Property Name="ClassFeeId" Type="smallint" Nullable="false" />
-          <Property Name="FeeNameId" Type="smallint" />
-          <Property Name="FeeAmount" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="PayableAmt" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="PaidAmt" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="BalanceAmt" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="PaymentDate" Type="datetime" Nullable="false" />
-          <Property Name="BatchId" Type="smallint" Nullable="false" />
-          <Property Name="Remarks" Type="varchar" MaxLength="250" />
-          <Property Name="Active" Type="tinyint" />
-          <Property Name="OrgId" Type="smallint" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="CreatedBy" Type="smallint" />
-          <Property Name="UpdatedDate" Type="datetime" />
-          <Property Name="UpdatedBy" Type="smallint" />
-        </EntityType>
         <EntityType Name="StudentFeeReceipts">
           <Key>
             <PropertyRef Name="StudentFeeReceiptId" />
@@ -1204,30 +1272,6 @@
           <Property Name="UpdatedBy" Type="smallint" />
           <Property Name="UpdatedDate" Type="datetime" />
         </EntityType>
-        <Association Name="FK_AccountingTrialBalances_MasterDataLedgerId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="AccountingTrialBalances" Type="Self.AccountingTrialBalances" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="AccountingTrialBalances">
-              <PropertyRef Name="LedgerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AccountingTrialBalances_Organization">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
-          <End Role="AccountingTrialBalances" Type="Self.AccountingTrialBalances" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="AccountingTrialBalances">
-              <PropertyRef Name="OrgId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AccountingVouchers_AccountingLedgerTrialBalance">
           <End Role="AccountingLedgerTrialBalance" Type="Self.AccountingLedgerTrialBalance" Multiplicity="1" />
           <End Role="AccountingVouchers" Type="Self.AccountingVouchers" Multiplicity="*" />
@@ -1273,6 +1317,54 @@
             </Principal>
             <Dependent Role="ApplicationFeatures">
               <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationPrice_ApplicationPrice">
+          <End Role="ApplicationPrice" Type="Self.ApplicationPrice" Multiplicity="1" />
+          <End Role="ApplicationPrice1" Type="Self.ApplicationPrice" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationPrice">
+              <PropertyRef Name="ApplicationPriceId" />
+            </Principal>
+            <Dependent Role="ApplicationPrice1">
+              <PropertyRef Name="ApplicationPriceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationPrice_ApplicationPriceApplicationId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="ApplicationPrice" Type="Self.ApplicationPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="ApplicationPrice">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationPrice_MasterDataCurrencyId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="ApplicationPrice" Type="Self.ApplicationPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="ApplicationPrice">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationPrice_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="ApplicationPrice" Type="Self.ApplicationPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="ApplicationPrice">
+              <PropertyRef Name="OrgId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1524,6 +1616,114 @@
               <PropertyRef Name="OrganizationId" />
             </Principal>
             <Dependent Role="ClassSubjectMarkComponents">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInvoice_MasterDataPaymentStatus">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="CustomerInvoice" Type="Self.CustomerInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="CustomerInvoice">
+              <PropertyRef Name="PaymentStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInvoice_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="CustomerInvoice" Type="Self.CustomerInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="CustomerInvoice">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInvoice_OrganizationCustomerId">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+          <End Role="CustomerInvoice" Type="Self.CustomerInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="CustomerInvoice">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInvoiceItems_AppItemId">
+          <End Role="CustomerApps" Type="Self.CustomerApps" Multiplicity="0..1" />
+          <End Role="CustomerInvoiceItems" Type="Self.CustomerInvoiceItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerApps">
+              <PropertyRef Name="CustomerAppsId" />
+            </Principal>
+            <Dependent Role="CustomerInvoiceItems">
+              <PropertyRef Name="CustomerAppItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInvoiceItems_CustomerInvoice">
+          <End Role="CustomerInvoice" Type="Self.CustomerInvoice" Multiplicity="1" />
+          <End Role="CustomerInvoiceItems" Type="Self.CustomerInvoiceItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerInvoice">
+              <PropertyRef Name="CustomerInvoiceId" />
+            </Principal>
+            <Dependent Role="CustomerInvoiceItems">
+              <PropertyRef Name="CustomerInvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInvoiceItems_InventoryId">
+          <End Role="InventoryItems" Type="Self.InventoryItems" Multiplicity="0..1" />
+          <End Role="CustomerInvoiceItems" Type="Self.CustomerInvoiceItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryItems">
+              <PropertyRef Name="InventoryItemId" />
+            </Principal>
+            <Dependent Role="CustomerInvoiceItems">
+              <PropertyRef Name="InventoryItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInvoiceItems_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="CustomerInvoiceItems" Type="Self.CustomerInvoiceItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="CustomerInvoiceItems">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomterAppItems_ApplicationPrice">
+          <End Role="ApplicationPrice" Type="Self.ApplicationPrice" Multiplicity="1" />
+          <End Role="CustomerApps" Type="Self.CustomerApps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationPrice">
+              <PropertyRef Name="ApplicationPriceId" />
+            </Principal>
+            <Dependent Role="CustomerApps">
+              <PropertyRef Name="ApplicationPriceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomterAppItems_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="CustomerApps" Type="Self.CustomerApps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="CustomerApps">
               <PropertyRef Name="OrgId" />
             </Dependent>
           </ReferentialConstraint>
@@ -2205,6 +2405,78 @@
             </Principal>
             <Dependent Role="EmpHolidayList">
               <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryItems_MasterDataCategoryId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="InventoryItems" Type="Self.InventoryItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="InventoryItems">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryItems_MasterDataUnitId">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="InventoryItems" Type="Self.InventoryItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="InventoryItems">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryItems_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="InventoryItems" Type="Self.InventoryItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="InventoryItems">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceComponents_CustomerInvoice">
+          <End Role="CustomerInvoice" Type="Self.CustomerInvoice" Multiplicity="1" />
+          <End Role="InvoiceComponents" Type="Self.InvoiceComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerInvoice">
+              <PropertyRef Name="CustomerInvoiceId" />
+            </Principal>
+            <Dependent Role="InvoiceComponents">
+              <PropertyRef Name="CustomerInvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceComponents_InvoiceComponents">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
+          <End Role="InvoiceComponents" Type="Self.InvoiceComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="InvoiceComponents">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceComponents_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="InvoiceComponents" Type="Self.InvoiceComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="InvoiceComponents">
+              <PropertyRef Name="OrgId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2928,66 +3200,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentFeePayment_Batches">
-          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
-          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Batches">
-              <PropertyRef Name="BatchId" />
-            </Principal>
-            <Dependent Role="StudentFeePayment">
-              <PropertyRef Name="BatchId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentFeePayment_ClassFee">
-          <End Role="ClassFee" Type="Self.ClassFee" Multiplicity="1" />
-          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClassFee">
-              <PropertyRef Name="ClassFeeId" />
-            </Principal>
-            <Dependent Role="StudentFeePayment">
-              <PropertyRef Name="ClassFeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentFeePayment_OrganizationId">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
-          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="StudentFeePayment">
-              <PropertyRef Name="OrgId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentFeePayment_Student">
-          <End Role="Students" Type="Self.Students" Multiplicity="1" />
-          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Students">
-              <PropertyRef Name="StudentId" />
-            </Principal>
-            <Dependent Role="StudentFeePayment">
-              <PropertyRef Name="StudentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentFeePayment_StudentFeePayment">
-          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="1" />
-          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StudentClass">
-              <PropertyRef Name="StudentClassId" />
-            </Principal>
-            <Dependent Role="StudentFeePayment">
-              <PropertyRef Name="StudentClassId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StudentFeeReceipts_Batches">
           <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
           <End Role="StudentFeeReceipts" Type="Self.StudentFeeReceipts" Multiplicity="*" />
@@ -3339,11 +3551,11 @@
         <EntityContainer Name="TTPModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountingLedgerTrialBalance" EntityType="Self.AccountingLedgerTrialBalance" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AccountingTrialBalances" EntityType="Self.AccountingTrialBalances" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountingVouchers" EntityType="Self.AccountingVouchers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicationFeatureRolesPerm" EntityType="Self.ApplicationFeatureRolesPerm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicationFeatures" EntityType="Self.ApplicationFeatures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationPrice" EntityType="Self.ApplicationPrice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppUsers" EntityType="Self.AppUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -3356,6 +3568,9 @@
           <EntitySet Name="ClassFee" EntityType="Self.ClassFee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSubject" EntityType="Self.ClassSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSubjectMarkComponents" EntityType="Self.ClassSubjectMarkComponents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerApps" EntityType="Self.CustomerApps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerInvoice" EntityType="Self.CustomerInvoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerInvoiceItems" EntityType="Self.CustomerInvoiceItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpComponents" EntityType="Self.EmpComponents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpEmployeeGradeSalHistory" EntityType="Self.EmpEmployeeGradeSalHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpEmployeeGroups" EntityType="Self.EmpEmployeeGroups" Schema="dbo" store:Type="Tables" />
@@ -3372,6 +3587,8 @@
           <EntitySet Name="ExamStudentResult" EntityType="Self.ExamStudentResult" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExamStudentSubjectResult" EntityType="Self.ExamStudentSubjectResult" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FilesNPhotos" EntityType="Self.FilesNPhotos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryItems" EntityType="Self.InventoryItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceComponents" EntityType="Self.InvoiceComponents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeaveBalances" EntityType="Self.LeaveBalances" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeaveEmployeeLeaves" EntityType="Self.LeaveEmployeeLeaves" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeavePolicy" EntityType="Self.LeavePolicy" Schema="dbo" store:Type="Tables" />
@@ -3394,7 +3611,6 @@
           <EntitySet Name="StudentClass" EntityType="Self.StudentClass" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentClassSubject" EntityType="Self.StudentClassSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentDocuments" EntityType="Self.StudentDocuments" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="StudentFeePayment" EntityType="Self.StudentFeePayment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentFeeReceipts" EntityType="Self.StudentFeeReceipts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudTeacherClassMapping" EntityType="Self.StudTeacherClassMapping" Schema="dbo" store:Type="Tables" />
@@ -3403,14 +3619,6 @@
           <EntitySet Name="TaskAssignments" EntityType="Self.TaskAssignments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaskConfiguration" EntityType="Self.TaskConfiguration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VariableConfiguration" EntityType="Self.VariableConfiguration" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AccountingTrialBalances_MasterDataLedgerId" Association="Self.FK_AccountingTrialBalances_MasterDataLedgerId">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="AccountingTrialBalances" EntitySet="AccountingTrialBalances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AccountingTrialBalances_Organization" Association="Self.FK_AccountingTrialBalances_Organization">
-            <End Role="Organization" EntitySet="Organization" />
-            <End Role="AccountingTrialBalances" EntitySet="AccountingTrialBalances" />
-          </AssociationSet>
           <AssociationSet Name="FK_AccountingVouchers_AccountingLedgerTrialBalance" Association="Self.FK_AccountingVouchers_AccountingLedgerTrialBalance">
             <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalance" />
             <End Role="AccountingVouchers" EntitySet="AccountingVouchers" />
@@ -3426,6 +3634,22 @@
           <AssociationSet Name="FK_ApplicationFeatures_MasterDataApplicationId" Association="Self.FK_ApplicationFeatures_MasterDataApplicationId">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="ApplicationFeatures" EntitySet="ApplicationFeatures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationPrice_ApplicationPrice" Association="Self.FK_ApplicationPrice_ApplicationPrice">
+            <End Role="ApplicationPrice" EntitySet="ApplicationPrice" />
+            <End Role="ApplicationPrice1" EntitySet="ApplicationPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationPrice_ApplicationPriceApplicationId" Association="Self.FK_ApplicationPrice_ApplicationPriceApplicationId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="ApplicationPrice" EntitySet="ApplicationPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationPrice_MasterDataCurrencyId" Association="Self.FK_ApplicationPrice_MasterDataCurrencyId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="ApplicationPrice" EntitySet="ApplicationPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationPrice_Organization" Association="Self.FK_ApplicationPrice_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="ApplicationPrice" EntitySet="ApplicationPrice" />
           </AssociationSet>
           <AssociationSet Name="FK_ApplicationRoleUsers_ApplicationFeatureId" Association="Self.FK_ApplicationRoleUsers_ApplicationFeatureId">
             <End Role="ApplicationFeatures" EntitySet="ApplicationFeatures" />
@@ -3510,6 +3734,42 @@
           <AssociationSet Name="FK_ClassSubjectMarkComponents_OrganizationId" Association="Self.FK_ClassSubjectMarkComponents_OrganizationId">
             <End Role="Organization" EntitySet="Organization" />
             <End Role="ClassSubjectMarkComponents" EntitySet="ClassSubjectMarkComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInvoice_MasterDataPaymentStatus" Association="Self.FK_CustomerInvoice_MasterDataPaymentStatus">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="CustomerInvoice" EntitySet="CustomerInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInvoice_Organization" Association="Self.FK_CustomerInvoice_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="CustomerInvoice" EntitySet="CustomerInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInvoice_OrganizationCustomerId" Association="Self.FK_CustomerInvoice_OrganizationCustomerId">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="CustomerInvoice" EntitySet="CustomerInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInvoiceItems_AppItemId" Association="Self.FK_CustomerInvoiceItems_AppItemId">
+            <End Role="CustomerApps" EntitySet="CustomerApps" />
+            <End Role="CustomerInvoiceItems" EntitySet="CustomerInvoiceItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInvoiceItems_CustomerInvoice" Association="Self.FK_CustomerInvoiceItems_CustomerInvoice">
+            <End Role="CustomerInvoice" EntitySet="CustomerInvoice" />
+            <End Role="CustomerInvoiceItems" EntitySet="CustomerInvoiceItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInvoiceItems_InventoryId" Association="Self.FK_CustomerInvoiceItems_InventoryId">
+            <End Role="InventoryItems" EntitySet="InventoryItems" />
+            <End Role="CustomerInvoiceItems" EntitySet="CustomerInvoiceItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInvoiceItems_Organization" Association="Self.FK_CustomerInvoiceItems_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="CustomerInvoiceItems" EntitySet="CustomerInvoiceItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomterAppItems_ApplicationPrice" Association="Self.FK_CustomterAppItems_ApplicationPrice">
+            <End Role="ApplicationPrice" EntitySet="ApplicationPrice" />
+            <End Role="CustomerApps" EntitySet="CustomerApps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomterAppItems_Organization" Association="Self.FK_CustomterAppItems_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="CustomerApps" EntitySet="CustomerApps" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -3734,6 +3994,30 @@
           <AssociationSet Name="FK_HolidayList_MasterDataLocationId" Association="Self.FK_HolidayList_MasterDataLocationId">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="EmpHolidayList" EntitySet="EmpHolidayList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryItems_MasterDataCategoryId" Association="Self.FK_InventoryItems_MasterDataCategoryId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="InventoryItems" EntitySet="InventoryItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryItems_MasterDataUnitId" Association="Self.FK_InventoryItems_MasterDataUnitId">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="InventoryItems" EntitySet="InventoryItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryItems_Organization" Association="Self.FK_InventoryItems_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="InventoryItems" EntitySet="InventoryItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceComponents_CustomerInvoice" Association="Self.FK_InvoiceComponents_CustomerInvoice">
+            <End Role="CustomerInvoice" EntitySet="CustomerInvoice" />
+            <End Role="InvoiceComponents" EntitySet="InvoiceComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceComponents_InvoiceComponents" Association="Self.FK_InvoiceComponents_InvoiceComponents">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="InvoiceComponents" EntitySet="InvoiceComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceComponents_Organization" Association="Self.FK_InvoiceComponents_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="InvoiceComponents" EntitySet="InvoiceComponents" />
           </AssociationSet>
           <AssociationSet Name="FK_LeaveBalances_BatchesFinancialYear" Association="Self.FK_LeaveBalances_BatchesFinancialYear">
             <End Role="Batches" EntitySet="Batches" />
@@ -3975,26 +4259,6 @@
             <End Role="StudentClass" EntitySet="StudentClass" />
             <End Role="StudentDocuments" EntitySet="StudentDocuments" />
           </AssociationSet>
-          <AssociationSet Name="FK_StudentFeePayment_Batches" Association="Self.FK_StudentFeePayment_Batches">
-            <End Role="Batches" EntitySet="Batches" />
-            <End Role="StudentFeePayment" EntitySet="StudentFeePayment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentFeePayment_ClassFee" Association="Self.FK_StudentFeePayment_ClassFee">
-            <End Role="ClassFee" EntitySet="ClassFee" />
-            <End Role="StudentFeePayment" EntitySet="StudentFeePayment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentFeePayment_OrganizationId" Association="Self.FK_StudentFeePayment_OrganizationId">
-            <End Role="Organization" EntitySet="Organization" />
-            <End Role="StudentFeePayment" EntitySet="StudentFeePayment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentFeePayment_Student" Association="Self.FK_StudentFeePayment_Student">
-            <End Role="Students" EntitySet="Students" />
-            <End Role="StudentFeePayment" EntitySet="StudentFeePayment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentFeePayment_StudentFeePayment" Association="Self.FK_StudentFeePayment_StudentFeePayment">
-            <End Role="StudentClass" EntitySet="StudentClass" />
-            <End Role="StudentFeePayment" EntitySet="StudentFeePayment" />
-          </AssociationSet>
           <AssociationSet Name="FK_StudentFeeReceipts_Batches" Association="Self.FK_StudentFeeReceipts_Batches">
             <End Role="Batches" EntitySet="Batches" />
             <End Role="StudentFeeReceipts" EntitySet="StudentFeeReceipts" />
@@ -4155,24 +4419,6 @@
           <NavigationProperty Name="MasterData2" Relationship="Self.FK_Ledgers_MasterDataGeneralLedgerId" FromRole="AccountingLedgerTrialBalance" ToRole="MasterData" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_Ledgers_OrganizationId" FromRole="AccountingLedgerTrialBalance" ToRole="Organization" />
           <NavigationProperty Name="StudentClass" Relationship="Self.FK_Ledgers_StudentClassId" FromRole="AccountingLedgerTrialBalance" ToRole="StudentClass" />
-        </EntityType>
-        <EntityType Name="AccountingTrialBalance">
-          <Key>
-            <PropertyRef Name="AccountingTrialBalanceId" />
-          </Key>
-          <Property Name="AccountingTrialBalanceId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LedgerId" Type="Int32" Nullable="false" />
-          <Property Name="TotalDebit" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="TotalCredit" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="OrgId" Type="Int16" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int16" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Int16" />
-          <Property Name="Active" Type="Byte" />
-          <NavigationProperty Name="MasterData" Relationship="Self.FK_AccountingTrialBalances_MasterDataLedgerId" FromRole="AccountingTrialBalances" ToRole="MasterData" />
-          <NavigationProperty Name="Organization" Relationship="Self.FK_AccountingTrialBalances_Organization" FromRole="AccountingTrialBalances" ToRole="Organization" />
         </EntityType>
         <EntityType Name="AccountingVoucher">
           <Key>
@@ -4368,7 +4614,6 @@
           <NavigationProperty Name="StudentClasses" Relationship="Self.FK_StudentClass_Batches" FromRole="Batches" ToRole="StudentClass" />
           <NavigationProperty Name="StudentClassSubjects" Relationship="Self.FK_StudentClassSubject_BatchesBatchId" FromRole="Batches" ToRole="StudentClassSubject" />
           <NavigationProperty Name="StudentDocuments" Relationship="Self.FK_StudentDocuments_Batches" FromRole="Batches" ToRole="StudentDocuments" />
-          <NavigationProperty Name="StudentFeePayments" Relationship="Self.FK_StudentFeePayment_Batches" FromRole="Batches" ToRole="StudentFeePayment" />
           <NavigationProperty Name="StudTeacherClassMappings" Relationship="Self.FK_StudTeacherClassMapping_Batches" FromRole="Batches" ToRole="StudTeacherClassMapping" />
           <NavigationProperty Name="SubjectTypes" Relationship="Self.FK_SubjectTypes_Batches" FromRole="Batches" ToRole="SubjectTypes" />
           <NavigationProperty Name="StudentFeeReceipts" Relationship="TTPModel.FK_StudentFeeReceipts_Batches" FromRole="Batch" ToRole="StudentFeeReceipt" />
@@ -4403,7 +4648,6 @@
           <NavigationProperty Name="MasterData" Relationship="Self.FK_FeeMaster_ClassMaster" FromRole="ClassFee" ToRole="MasterData" />
           <NavigationProperty Name="MasterData1" Relationship="Self.FK_FeeMaster_FeeNameMaster" FromRole="ClassFee" ToRole="MasterData" />
           <NavigationProperty Name="MasterData2" Relationship="Self.FK_FeeMaster_LocationMaster" FromRole="ClassFee" ToRole="MasterData" />
-          <NavigationProperty Name="StudentFeePayments" Relationship="Self.FK_StudentFeePayment_ClassFee" FromRole="ClassFee" ToRole="StudentFeePayment" />
         </EntityType>
         <EntityType Name="ClassSubjectMarkComponent">
           <Key>
@@ -4821,7 +5065,6 @@
           <NavigationProperty Name="AccountingLedgerTrialBalances" Relationship="Self.FK_Ledgers_MasterDataAccountGroupId" FromRole="MasterData" ToRole="AccountingLedgerTrialBalance" />
           <NavigationProperty Name="AccountingLedgerTrialBalances1" Relationship="Self.FK_Ledgers_MasterDataAccountNatureId" FromRole="MasterData" ToRole="AccountingLedgerTrialBalance" />
           <NavigationProperty Name="AccountingLedgerTrialBalances2" Relationship="Self.FK_Ledgers_MasterDataGeneralLedgerId" FromRole="MasterData" ToRole="AccountingLedgerTrialBalance" />
-          <NavigationProperty Name="AccountingTrialBalances" Relationship="Self.FK_AccountingTrialBalances_MasterDataLedgerId" FromRole="MasterData" ToRole="AccountingTrialBalances" />
           <NavigationProperty Name="ApplicationFeatures" Relationship="Self.FK_ApplicationFeatures_MasterDataApplicationId" FromRole="MasterData" ToRole="ApplicationFeatures" />
           <NavigationProperty Name="ClassFees" Relationship="Self.FK_FeeMaster_ClassMaster" FromRole="MasterData" ToRole="ClassFee" />
           <NavigationProperty Name="ClassFees1" Relationship="Self.FK_FeeMaster_FeeNameMaster" FromRole="MasterData" ToRole="ClassFee" />
@@ -4867,7 +5110,13 @@
           <NavigationProperty Name="ClassSubjects" Relationship="TTPModel.FK_ClassSubject_MasterDataClassId" FromRole="MasterData" ToRole="ClassSubject" />
           <NavigationProperty Name="ClassSubjects1" Relationship="TTPModel.FK_ClassSubject_MasterDataSubjectsId" FromRole="MasterData" ToRole="ClassSubject" />
           <NavigationProperty Name="ReportConfigDatas" Relationship="TTPModel.FK_ReportConfigurations_MasterDataApplicationId1" FromRole="MasterData" ToRole="ReportConfigData" />
-        </EntityType>
+          <NavigationProperty Name="CustomerInvoices" Relationship="TTPModel.FK_CustomerInvoice_MasterDataPaymentStatus" FromRole="MasterData" ToRole="CustomerInvoice" />
+          <NavigationProperty Name="ApplicationPrices" Relationship="TTPModel.FK_ApplicationPrice_ApplicationPriceApplicationId" FromRole="MasterData" ToRole="ApplicationPrice" />
+          <NavigationProperty Name="ApplicationPrices1" Relationship="TTPModel.FK_ApplicationPrice_MasterDataCurrencyId" FromRole="MasterData" ToRole="ApplicationPrice" />
+          <NavigationProperty Name="InventoryItems" Relationship="TTPModel.FK_InventoryItems_MasterDataCategoryId" FromRole="MasterData" ToRole="InventoryItem" />
+          <NavigationProperty Name="InventoryItems1" Relationship="TTPModel.FK_InventoryItems_MasterDataUnitId" FromRole="MasterData" ToRole="InventoryItem" />
+          <NavigationProperty Name="InvoiceComponents" Relationship="TTPModel.FK_InvoiceComponents_InvoiceComponents" FromRole="MasterData" ToRole="InvoiceComponent" />
+          </EntityType>
         <EntityType Name="Message">
           <Key>
             <PropertyRef Name="MessageId" />
@@ -4897,7 +5146,6 @@
           <Property Name="ValidFrom" Type="DateTime" Precision="3" />
           <Property Name="ValidTo" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Byte" />
-          <Property Name="PlanId" Type="Int16" />
           <Property Name="ParentId" Type="Int16" />
           <Property Name="MainOrgId" Type="Int16" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
@@ -4905,7 +5153,6 @@
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int16" />
           <NavigationProperty Name="AccountingLedgerTrialBalances" Relationship="Self.FK_Ledgers_OrganizationId" FromRole="Organization" ToRole="AccountingLedgerTrialBalance" />
-          <NavigationProperty Name="AccountingTrialBalances" Relationship="Self.FK_AccountingTrialBalances_Organization" FromRole="Organization" ToRole="AccountingTrialBalances" />
           <NavigationProperty Name="AccountingVouchers" Relationship="Self.FK_AccountingVouchers_Organization" FromRole="Organization" ToRole="AccountingVouchers" />
           <NavigationProperty Name="AppUsers" Relationship="Self.FK_AppUsers_OrganizationOrgId" FromRole="Organization" ToRole="AppUsers" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_OrganizationId" FromRole="Organization" ToRole="Attendance" />
@@ -4938,7 +5185,6 @@
           <NavigationProperty Name="StudentClasses" Relationship="Self.FK_StudentClass_OrganizationOrgId" FromRole="Organization" ToRole="StudentClass" />
           <NavigationProperty Name="StudentClassSubjects" Relationship="Self.FK_StudentClassSubject_OrganizationOrgId" FromRole="Organization" ToRole="StudentClassSubject" />
           <NavigationProperty Name="StudentDocuments" Relationship="Self.FK_StudentDocuments_OrganizationId" FromRole="Organization" ToRole="StudentDocuments" />
-          <NavigationProperty Name="StudentFeePayments" Relationship="Self.FK_StudentFeePayment_OrganizationId" FromRole="Organization" ToRole="StudentFeePayment" />
           <NavigationProperty Name="Students" Relationship="Self.FK_Students_OrganizationOrgId" FromRole="Organization" ToRole="Students" />
           <NavigationProperty Name="StudTeacherClassMappings" Relationship="Self.FK_StudTeacherClassMapping_Organization" FromRole="Organization" ToRole="StudTeacherClassMapping" />
           <NavigationProperty Name="TaskConfigurations" Relationship="Self.FK_TaskConfiguration_OrganizationId" FromRole="Organization" ToRole="TaskConfiguration" />
@@ -4955,6 +5201,13 @@
           <NavigationProperty Name="ClassSubjects" Relationship="TTPModel.FK_ClassSubject_OrganizationId" FromRole="Organization" ToRole="ClassSubject" />
           <NavigationProperty Name="ReportOrgReportNames" Relationship="TTPModel.FK_ReportOrgReports_Organization" FromRole="Organization" ToRole="ReportOrgReportName" />
           <NavigationProperty Name="ReportOrgReportColumns" Relationship="TTPModel.FK_ReportOrgReportColumns_Organization" FromRole="Organization" ToRole="ReportOrgReportColumn" />
+          <NavigationProperty Name="CustomerInvoices" Relationship="TTPModel.FK_CustomerInvoice_Organization" FromRole="Organization" ToRole="CustomerInvoice" />
+          <NavigationProperty Name="CustomerInvoices1" Relationship="TTPModel.FK_CustomerInvoice_OrganizationCustomerId" FromRole="Organization" ToRole="CustomerInvoice" />
+          <NavigationProperty Name="ApplicationPrices" Relationship="TTPModel.FK_ApplicationPrice_Organization" FromRole="Organization" ToRole="ApplicationPrice" />
+          <NavigationProperty Name="InventoryItems" Relationship="TTPModel.FK_InventoryItems_Organization" FromRole="Organization" ToRole="InventoryItem" />
+          <NavigationProperty Name="InvoiceComponents" Relationship="TTPModel.FK_InvoiceComponents_Organization" FromRole="Organization" ToRole="InvoiceComponent" />
+          <NavigationProperty Name="CustomerInvoiceItems" Relationship="TTPModel.FK_CustomerInvoiceItems_Organization" FromRole="Organization" ToRole="CustomerInvoiceItem" />
+          <NavigationProperty Name="CustomerApps" Relationship="TTPModel.FK_CustomterAppItems_Organization1" FromRole="Organization" ToRole="CustomerApp" />
         </EntityType>
         <EntityType Name="PageHistory">
           <Key>
@@ -5154,7 +5407,6 @@
           <NavigationProperty Name="Student" Relationship="Self.FK_StudentClass_Student" FromRole="StudentClass" ToRole="Students" />
           <NavigationProperty Name="StudentClassSubjects" Relationship="Self.FK_StudentClassSubject_StudentClassId" FromRole="StudentClass" ToRole="StudentClassSubject" />
           <NavigationProperty Name="StudentDocuments" Relationship="Self.FK_StudentDocuments_StudentClass" FromRole="StudentClass" ToRole="StudentDocuments" />
-          <NavigationProperty Name="StudentFeePayments" Relationship="Self.FK_StudentFeePayment_StudentFeePayment" FromRole="StudentClass" ToRole="StudentFeePayment" />
           <NavigationProperty Name="TaskAssignments" Relationship="TTPModel.FK_TaskAssignments_StudentClass" FromRole="StudentClass" ToRole="TaskAssignment" />
         </EntityType>
         <EntityType Name="StudentClassSubject">
@@ -5199,34 +5451,6 @@
           <NavigationProperty Name="Organization" Relationship="Self.FK_StudentDocuments_OrganizationId" FromRole="StudentDocuments" ToRole="Organization" />
           <NavigationProperty Name="StudentClass" Relationship="Self.FK_StudentDocuments_StudentClass" FromRole="StudentDocuments" ToRole="StudentClass" />
           <NavigationProperty Name="Student" Relationship="Self.FK_StudentPhoto_Students" FromRole="StudentDocuments" ToRole="Students" />
-        </EntityType>
-        <EntityType Name="StudentFeePayment">
-          <Key>
-            <PropertyRef Name="StudentFeeId" />
-          </Key>
-          <Property Name="StudentFeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StudentId" Type="Int32" Nullable="false" />
-          <Property Name="StudentClassId" Type="Int32" Nullable="false" />
-          <Property Name="ClassFeeId" Type="Int16" Nullable="false" />
-          <Property Name="FeeNameId" Type="Int16" />
-          <Property Name="FeeAmount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="PayableAmt" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="PaidAmt" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="BalanceAmt" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="BatchId" Type="Int16" Nullable="false" />
-          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Active" Type="Byte" />
-          <Property Name="OrgId" Type="Int16" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int16" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Int16" />
-          <NavigationProperty Name="Batch" Relationship="Self.FK_StudentFeePayment_Batches" FromRole="StudentFeePayment" ToRole="Batches" />
-          <NavigationProperty Name="ClassFee" Relationship="Self.FK_StudentFeePayment_ClassFee" FromRole="StudentFeePayment" ToRole="ClassFee" />
-          <NavigationProperty Name="Organization" Relationship="Self.FK_StudentFeePayment_OrganizationId" FromRole="StudentFeePayment" ToRole="Organization" />
-          <NavigationProperty Name="StudentClass" Relationship="Self.FK_StudentFeePayment_StudentFeePayment" FromRole="StudentFeePayment" ToRole="StudentClass" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_StudentFeePayment_Student" FromRole="StudentFeePayment" ToRole="Students" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -5291,7 +5515,6 @@
           <NavigationProperty Name="StudentActivities" Relationship="Self.FK_StudentActivity_StudentId" FromRole="Students" ToRole="StudentActivity" />
           <NavigationProperty Name="StudentClasses" Relationship="Self.FK_StudentClass_Student" FromRole="Students" ToRole="StudentClass" />
           <NavigationProperty Name="StudentDocuments" Relationship="Self.FK_StudentPhoto_Students" FromRole="Students" ToRole="StudentDocuments" />
-          <NavigationProperty Name="StudentFeePayments" Relationship="Self.FK_StudentFeePayment_Student" FromRole="Students" ToRole="StudentFeePayment" />
           <NavigationProperty Name="Students1" Relationship="Self.FK_Students_Students" FromRole="Students" ToRole="Students1" />
           <NavigationProperty Name="Student1" Relationship="Self.FK_Students_Students" FromRole="Students1" ToRole="Students" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -5471,30 +5694,6 @@
             </Principal>
             <Dependent Role="AccountingLedgerTrialBalance">
               <PropertyRef Name="StudentClassId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AccountingTrialBalances_MasterDataLedgerId">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="AccountingTrialBalances" Type="Self.AccountingTrialBalance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="MasterDataId" />
-            </Principal>
-            <Dependent Role="AccountingTrialBalances">
-              <PropertyRef Name="LedgerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AccountingTrialBalances_Organization">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
-          <End Role="AccountingTrialBalances" Type="Self.AccountingTrialBalance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="AccountingTrialBalances">
-              <PropertyRef Name="OrgId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5814,18 +6013,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentFeePayment_Batches">
-          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
-          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Batches">
-              <PropertyRef Name="BatchId" />
-            </Principal>
-            <Dependent Role="StudentFeePayment">
-              <PropertyRef Name="BatchId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StudTeacherClassMapping_Batches">
           <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
           <End Role="StudTeacherClassMapping" Type="Self.StudTeacherClassMapping" Multiplicity="*" />
@@ -5895,18 +6082,6 @@
             </Principal>
             <Dependent Role="ClassFee">
               <PropertyRef Name="LocationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentFeePayment_ClassFee">
-          <End Role="ClassFee" Type="Self.ClassFee" Multiplicity="1" />
-          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClassFee">
-              <PropertyRef Name="ClassFeeId" />
-            </Principal>
-            <Dependent Role="StudentFeePayment">
-              <PropertyRef Name="ClassFeeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6762,18 +6937,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentFeePayment_OrganizationId">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
-          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="StudentFeePayment">
-              <PropertyRef Name="OrgId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Students_OrganizationOrgId">
           <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
           <End Role="Students" Type="Self.Student" Multiplicity="*" />
@@ -6918,18 +7081,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentFeePayment_StudentFeePayment">
-          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="1" />
-          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StudentClass">
-              <PropertyRef Name="StudentClassId" />
-            </Principal>
-            <Dependent Role="StudentFeePayment">
-              <PropertyRef Name="StudentClassId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StudentPhoto_Students">
           <End Role="Students" Type="Self.Student" Multiplicity="1" />
           <End Role="StudentDocuments" Type="Self.StudentDocument" Multiplicity="*" />
@@ -6938,18 +7089,6 @@
               <PropertyRef Name="StudentId" />
             </Principal>
             <Dependent Role="StudentDocuments">
-              <PropertyRef Name="StudentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentFeePayment_Student">
-          <End Role="Students" Type="Self.Student" Multiplicity="1" />
-          <End Role="StudentFeePayment" Type="Self.StudentFeePayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Students">
-              <PropertyRef Name="StudentId" />
-            </Principal>
-            <Dependent Role="StudentFeePayment">
               <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
@@ -6973,7 +7112,6 @@
         <EntityContainer Name="TTPEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="AccountingLedgerTrialBalances" EntityType="Self.AccountingLedgerTrialBalance" />
-          <EntitySet Name="AccountingTrialBalances" EntityType="Self.AccountingTrialBalance" />
           <EntitySet Name="AccountingVouchers" EntityType="Self.AccountingVoucher" />
           <EntitySet Name="Albums" EntityType="Self.Album" />
           <EntitySet Name="ApplicationFeatureRolesPerms" EntityType="Self.ApplicationFeatureRolesPerm" />
@@ -7017,7 +7155,6 @@
           <EntitySet Name="StudentClasses" EntityType="Self.StudentClass" />
           <EntitySet Name="StudentClassSubjects" EntityType="Self.StudentClassSubject" />
           <EntitySet Name="StudentDocuments" EntityType="Self.StudentDocument" />
-          <EntitySet Name="StudentFeePayments" EntityType="Self.StudentFeePayment" />
           <EntitySet Name="Students" EntityType="Self.Student" />
           <EntitySet Name="StudTeacherClassMappings" EntityType="Self.StudTeacherClassMapping" />
           <EntitySet Name="SubjectTypes" EntityType="Self.SubjectType" />
@@ -7054,14 +7191,6 @@
           <AssociationSet Name="FK_Ledgers_StudentClassId" Association="Self.FK_Ledgers_StudentClassId">
             <End Role="StudentClass" EntitySet="StudentClasses" />
             <End Role="AccountingLedgerTrialBalance" EntitySet="AccountingLedgerTrialBalances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AccountingTrialBalances_MasterDataLedgerId" Association="Self.FK_AccountingTrialBalances_MasterDataLedgerId">
-            <End Role="MasterData" EntitySet="MasterDatas" />
-            <End Role="AccountingTrialBalances" EntitySet="AccountingTrialBalances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AccountingTrialBalances_Organization" Association="Self.FK_AccountingTrialBalances_Organization">
-            <End Role="Organization" EntitySet="Organizations" />
-            <End Role="AccountingTrialBalances" EntitySet="AccountingTrialBalances" />
           </AssociationSet>
           <AssociationSet Name="FK_AccountingVouchers_Organization" Association="Self.FK_AccountingVouchers_Organization">
             <End Role="Organization" EntitySet="Organizations" />
@@ -7167,10 +7296,6 @@
             <End Role="Batches" EntitySet="Batches" />
             <End Role="StudentDocuments" EntitySet="StudentDocuments" />
           </AssociationSet>
-          <AssociationSet Name="FK_StudentFeePayment_Batches" Association="Self.FK_StudentFeePayment_Batches">
-            <End Role="Batches" EntitySet="Batches" />
-            <End Role="StudentFeePayment" EntitySet="StudentFeePayments" />
-          </AssociationSet>
           <AssociationSet Name="FK_StudTeacherClassMapping_Batches" Association="Self.FK_StudTeacherClassMapping_Batches">
             <End Role="Batches" EntitySet="Batches" />
             <End Role="StudTeacherClassMapping" EntitySet="StudTeacherClassMappings" />
@@ -7194,10 +7319,6 @@
           <AssociationSet Name="FK_FeeMaster_LocationMaster" Association="Self.FK_FeeMaster_LocationMaster">
             <End Role="MasterData" EntitySet="MasterDatas" />
             <End Role="ClassFee" EntitySet="ClassFees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentFeePayment_ClassFee" Association="Self.FK_StudentFeePayment_ClassFee">
-            <End Role="ClassFee" EntitySet="ClassFees" />
-            <End Role="StudentFeePayment" EntitySet="StudentFeePayments" />
           </AssociationSet>
           <AssociationSet Name="FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId" Association="Self.FK_ClassSubjectMarkComponents_MasterDataSubjectCompomentId">
             <End Role="MasterData" EntitySet="MasterDatas" />
@@ -7483,10 +7604,6 @@
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="StudentDocuments" EntitySet="StudentDocuments" />
           </AssociationSet>
-          <AssociationSet Name="FK_StudentFeePayment_OrganizationId" Association="Self.FK_StudentFeePayment_OrganizationId">
-            <End Role="Organization" EntitySet="Organizations" />
-            <End Role="StudentFeePayment" EntitySet="StudentFeePayments" />
-          </AssociationSet>
           <AssociationSet Name="FK_Students_OrganizationOrgId" Association="Self.FK_Students_OrganizationOrgId">
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="Students" EntitySet="Students" />
@@ -7535,17 +7652,9 @@
             <End Role="StudentClass" EntitySet="StudentClasses" />
             <End Role="StudentDocuments" EntitySet="StudentDocuments" />
           </AssociationSet>
-          <AssociationSet Name="FK_StudentFeePayment_StudentFeePayment" Association="Self.FK_StudentFeePayment_StudentFeePayment">
-            <End Role="StudentClass" EntitySet="StudentClasses" />
-            <End Role="StudentFeePayment" EntitySet="StudentFeePayments" />
-          </AssociationSet>
           <AssociationSet Name="FK_StudentPhoto_Students" Association="Self.FK_StudentPhoto_Students">
             <End Role="Students" EntitySet="Students" />
             <End Role="StudentDocuments" EntitySet="StudentDocuments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentFeePayment_Student" Association="Self.FK_StudentFeePayment_Student">
-            <End Role="Students" EntitySet="Students" />
-            <End Role="StudentFeePayment" EntitySet="StudentFeePayments" />
           </AssociationSet>
           <AssociationSet Name="FK_Students_Students" Association="Self.FK_Students_Students">
             <End Role="Students" EntitySet="Students" />
@@ -7759,6 +7868,88 @@
           <AssociationSet Name="FK_ReportOrgReportColumns_ReportOrgReports" Association="TTPModel.FK_ReportOrgReportColumns_ReportOrgReports">
             <End Role="ReportOrgReportName" EntitySet="ReportOrgReportNames" />
             <End Role="ReportOrgReportColumn" EntitySet="ReportOrgReportColumns" />
+          </AssociationSet>
+          <EntitySet Name="CustomerInvoices" EntityType="TTPModel.CustomerInvoice" />
+          <AssociationSet Name="FK_CustomerInvoice_MasterDataPaymentStatus" Association="TTPModel.FK_CustomerInvoice_MasterDataPaymentStatus">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="CustomerInvoice" EntitySet="CustomerInvoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInvoice_Organization" Association="TTPModel.FK_CustomerInvoice_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="CustomerInvoice" EntitySet="CustomerInvoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInvoice_OrganizationCustomerId" Association="TTPModel.FK_CustomerInvoice_OrganizationCustomerId">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="CustomerInvoice" EntitySet="CustomerInvoices" />
+          </AssociationSet>
+          <EntitySet Name="ApplicationPrices" EntityType="TTPModel.ApplicationPrice" />
+          <AssociationSet Name="FK_ApplicationPrice_ApplicationPriceApplicationId" Association="TTPModel.FK_ApplicationPrice_ApplicationPriceApplicationId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="ApplicationPrice" EntitySet="ApplicationPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationPrice_MasterDataCurrencyId" Association="TTPModel.FK_ApplicationPrice_MasterDataCurrencyId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="ApplicationPrice" EntitySet="ApplicationPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationPrice_Organization" Association="TTPModel.FK_ApplicationPrice_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="ApplicationPrice" EntitySet="ApplicationPrices" />
+          </AssociationSet>
+          <EntitySet Name="InventoryItems" EntityType="TTPModel.InventoryItem" />
+          <AssociationSet Name="FK_InventoryItems_MasterDataCategoryId" Association="TTPModel.FK_InventoryItems_MasterDataCategoryId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="InventoryItem" EntitySet="InventoryItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryItems_MasterDataUnitId" Association="TTPModel.FK_InventoryItems_MasterDataUnitId">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="InventoryItem" EntitySet="InventoryItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryItems_Organization" Association="TTPModel.FK_InventoryItems_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="InventoryItem" EntitySet="InventoryItems" />
+          </AssociationSet>
+          <EntitySet Name="InvoiceComponents" EntityType="TTPModel.InvoiceComponent" />
+          <AssociationSet Name="FK_ApplicationPrice_ApplicationPrice" Association="TTPModel.FK_ApplicationPrice_ApplicationPrice">
+            <End Role="ApplicationPrice" EntitySet="ApplicationPrices" />
+            <End Role="ApplicationPrice1" EntitySet="ApplicationPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceComponents_CustomerInvoice" Association="TTPModel.FK_InvoiceComponents_CustomerInvoice">
+            <End Role="CustomerInvoice" EntitySet="CustomerInvoices" />
+            <End Role="InvoiceComponent" EntitySet="InvoiceComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceComponents_InvoiceComponents" Association="TTPModel.FK_InvoiceComponents_InvoiceComponents">
+            <End Role="MasterData" EntitySet="MasterDatas" />
+            <End Role="InvoiceComponent" EntitySet="InvoiceComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceComponents_Organization" Association="TTPModel.FK_InvoiceComponents_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="InvoiceComponent" EntitySet="InvoiceComponents" />
+          </AssociationSet>
+          <EntitySet Name="CustomerInvoiceItems" EntityType="TTPModel.CustomerInvoiceItem" />
+          <AssociationSet Name="FK_CustomerInvoiceItems_CustomerInvoice" Association="TTPModel.FK_CustomerInvoiceItems_CustomerInvoice">
+            <End Role="CustomerInvoice" EntitySet="CustomerInvoices" />
+            <End Role="CustomerInvoiceItem" EntitySet="CustomerInvoiceItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInvoiceItems_InventoryId" Association="TTPModel.FK_CustomerInvoiceItems_InventoryId">
+            <End Role="InventoryItem" EntitySet="InventoryItems" />
+            <End Role="CustomerInvoiceItem" EntitySet="CustomerInvoiceItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInvoiceItems_Organization" Association="TTPModel.FK_CustomerInvoiceItems_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="CustomerInvoiceItem" EntitySet="CustomerInvoiceItems" />
+          </AssociationSet>
+          <EntitySet Name="CustomerApps" EntityType="TTPModel.CustomerApp" />
+          <AssociationSet Name="FK_CustomterAppItems_ApplicationPrice1" Association="TTPModel.FK_CustomterAppItems_ApplicationPrice1">
+            <End Role="ApplicationPrice" EntitySet="ApplicationPrices" />
+            <End Role="CustomerApp" EntitySet="CustomerApps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInvoiceItems_AppItemId1" Association="TTPModel.FK_CustomerInvoiceItems_AppItemId1">
+            <End Role="CustomerApp" EntitySet="CustomerApps" />
+            <End Role="CustomerInvoiceItem" EntitySet="CustomerInvoiceItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomterAppItems_Organization1" Association="TTPModel.FK_CustomterAppItems_Organization1">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="CustomerApp" EntitySet="CustomerApps" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="StudentFeeReceipt">
@@ -8628,6 +8819,367 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CustomerInvoice">
+          <Key>
+            <PropertyRef Name="CustomerInvoiceId" />
+          </Key>
+          <Property Name="CustomerInvoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int16" />
+          <Property Name="StudentClassId" Type="Int32" />
+          <Property Name="DueForMonth" Type="Int16" />
+          <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaymentStatusId" Type="Int32" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_CustomerInvoice_MasterDataPaymentStatus" FromRole="CustomerInvoice" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_CustomerInvoice_Organization" FromRole="CustomerInvoice" ToRole="Organization" />
+          <NavigationProperty Name="Organization1" Relationship="TTPModel.FK_CustomerInvoice_OrganizationCustomerId" FromRole="CustomerInvoice" ToRole="Organization" />
+          <NavigationProperty Name="InvoiceComponents" Relationship="TTPModel.FK_InvoiceComponents_CustomerInvoice" FromRole="CustomerInvoice" ToRole="InvoiceComponent" />
+          <NavigationProperty Name="CustomerInvoiceItems" Relationship="TTPModel.FK_CustomerInvoiceItems_CustomerInvoice" FromRole="CustomerInvoice" ToRole="CustomerInvoiceItem" />
+        </EntityType>
+        <Association Name="FK_CustomerInvoice_MasterDataPaymentStatus">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.CustomerInvoice" Role="CustomerInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="CustomerInvoice">
+              <PropertyRef Name="PaymentStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInvoice_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.CustomerInvoice" Role="CustomerInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="CustomerInvoice">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInvoice_OrganizationCustomerId">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="0..1" />
+          <End Type="TTPModel.CustomerInvoice" Role="CustomerInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="CustomerInvoice">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ApplicationPrice">
+          <Key>
+            <PropertyRef Name="ApplicationPriceId" />
+          </Key>
+          <Property Name="ApplicationPriceId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationId" Type="Int32" Nullable="false" />
+          <Property Name="PCPM" Type="Byte" Nullable="false" />
+          <Property Name="MinCount" Type="Byte" Nullable="false" />
+          <Property Name="MinPrice" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="CurrencyId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_ApplicationPrice_ApplicationPriceApplicationId" FromRole="ApplicationPrice" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="TTPModel.FK_ApplicationPrice_MasterDataCurrencyId" FromRole="ApplicationPrice" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_ApplicationPrice_Organization" FromRole="ApplicationPrice" ToRole="Organization" />
+          <NavigationProperty Name="ApplicationPrice1" Relationship="TTPModel.FK_ApplicationPrice_ApplicationPrice" FromRole="ApplicationPrice" ToRole="ApplicationPrice1" />
+          <NavigationProperty Name="ApplicationPrice2" Relationship="TTPModel.FK_ApplicationPrice_ApplicationPrice" FromRole="ApplicationPrice1" ToRole="ApplicationPrice" />
+          <NavigationProperty Name="CustomerApps" Relationship="TTPModel.FK_CustomterAppItems_ApplicationPrice1" FromRole="ApplicationPrice" ToRole="CustomerApp" />
+        </EntityType>
+        <Association Name="FK_ApplicationPrice_ApplicationPriceApplicationId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.ApplicationPrice" Role="ApplicationPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="ApplicationPrice">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationPrice_MasterDataCurrencyId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="0..1" />
+          <End Type="TTPModel.ApplicationPrice" Role="ApplicationPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="ApplicationPrice">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationPrice_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.ApplicationPrice" Role="ApplicationPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="ApplicationPrice">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InventoryItem">
+          <Key>
+            <PropertyRef Name="InventoryItemId" />
+          </Key>
+          <Property Name="InventoryItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SKU" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ItemCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="UnitId" Type="Int32" />
+          <Property Name="QtyPerUnit" Type="Int16" />
+          <Property Name="PPP" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="PPU" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MinPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MinCount" Type="Int16" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_InventoryItems_MasterDataCategoryId" FromRole="InventoryItem" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="TTPModel.FK_InventoryItems_MasterDataUnitId" FromRole="InventoryItem" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_InventoryItems_Organization" FromRole="InventoryItem" ToRole="Organization" />
+          <NavigationProperty Name="CustomerInvoiceItems" Relationship="TTPModel.FK_CustomerInvoiceItems_InventoryId" FromRole="InventoryItem" ToRole="CustomerInvoiceItem" />
+        </EntityType>
+        <Association Name="FK_InventoryItems_MasterDataCategoryId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="0..1" />
+          <End Type="TTPModel.InventoryItem" Role="InventoryItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="InventoryItem">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryItems_MasterDataUnitId">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="0..1" />
+          <End Type="TTPModel.InventoryItem" Role="InventoryItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="InventoryItem">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryItems_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.InventoryItem" Role="InventoryItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="InventoryItem">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InvoiceComponent">
+          <Key>
+            <PropertyRef Name="InvoiceComponentId" />
+          </Key>
+          <Property Name="InvoiceComponentId" Type="Int16" Nullable="false" />
+          <Property Name="CustomerInvoiceId" Type="Int32" Nullable="false" />
+          <Property Name="ComponentId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CustomerInvoice" Relationship="TTPModel.FK_InvoiceComponents_CustomerInvoice" FromRole="InvoiceComponent" ToRole="CustomerInvoice" />
+          <NavigationProperty Name="MasterData" Relationship="TTPModel.FK_InvoiceComponents_InvoiceComponents" FromRole="InvoiceComponent" ToRole="MasterData" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_InvoiceComponents_Organization" FromRole="InvoiceComponent" ToRole="Organization" />
+        </EntityType>
+        <Association Name="FK_ApplicationPrice_ApplicationPrice">
+          <End Type="TTPModel.ApplicationPrice" Role="ApplicationPrice" Multiplicity="1" />
+          <End Type="TTPModel.ApplicationPrice" Role="ApplicationPrice1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationPrice">
+              <PropertyRef Name="ApplicationPriceId" />
+            </Principal>
+            <Dependent Role="ApplicationPrice1">
+              <PropertyRef Name="ApplicationPriceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceComponents_CustomerInvoice">
+          <End Type="TTPModel.CustomerInvoice" Role="CustomerInvoice" Multiplicity="1" />
+          <End Type="TTPModel.InvoiceComponent" Role="InvoiceComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerInvoice">
+              <PropertyRef Name="CustomerInvoiceId" />
+            </Principal>
+            <Dependent Role="InvoiceComponent">
+              <PropertyRef Name="CustomerInvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceComponents_InvoiceComponents">
+          <End Type="TTPModel.MasterData" Role="MasterData" Multiplicity="1" />
+          <End Type="TTPModel.InvoiceComponent" Role="InvoiceComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="MasterDataId" />
+            </Principal>
+            <Dependent Role="InvoiceComponent">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceComponents_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.InvoiceComponent" Role="InvoiceComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="InvoiceComponent">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CustomerInvoiceItem">
+          <Key>
+            <PropertyRef Name="CustomerInvoiceItemId" />
+          </Key>
+          <Property Name="CustomerInvoiceItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerInvoiceId" Type="Int32" Nullable="false" />
+          <Property Name="InventoryItemId" Type="Int32" />
+          <Property Name="ClassFeeId" Type="Int16" />
+          <Property Name="CustomerAppItemId" Type="Int16" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CustomerInvoice" Relationship="TTPModel.FK_CustomerInvoiceItems_CustomerInvoice" FromRole="CustomerInvoiceItem" ToRole="CustomerInvoice" />
+          <NavigationProperty Name="InventoryItem" Relationship="TTPModel.FK_CustomerInvoiceItems_InventoryId" FromRole="CustomerInvoiceItem" ToRole="InventoryItem" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_CustomerInvoiceItems_Organization" FromRole="CustomerInvoiceItem" ToRole="Organization" />
+          <NavigationProperty Name="CustomerApp" Relationship="TTPModel.FK_CustomerInvoiceItems_AppItemId1" FromRole="CustomerInvoiceItem" ToRole="CustomerApp" />
+        </EntityType>
+        <Association Name="FK_CustomerInvoiceItems_CustomerInvoice">
+          <End Type="TTPModel.CustomerInvoice" Role="CustomerInvoice" Multiplicity="1" />
+          <End Type="TTPModel.CustomerInvoiceItem" Role="CustomerInvoiceItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerInvoice">
+              <PropertyRef Name="CustomerInvoiceId" />
+            </Principal>
+            <Dependent Role="CustomerInvoiceItem">
+              <PropertyRef Name="CustomerInvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInvoiceItems_InventoryId">
+          <End Type="TTPModel.InventoryItem" Role="InventoryItem" Multiplicity="0..1" />
+          <End Type="TTPModel.CustomerInvoiceItem" Role="CustomerInvoiceItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryItem">
+              <PropertyRef Name="InventoryItemId" />
+            </Principal>
+            <Dependent Role="CustomerInvoiceItem">
+              <PropertyRef Name="InventoryItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInvoiceItems_Organization">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.CustomerInvoiceItem" Role="CustomerInvoiceItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="CustomerInvoiceItem">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CustomerApp">
+          <Key>
+            <PropertyRef Name="CustomerAppsId" />
+          </Key>
+          <Property Name="CustomerAppsId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationPriceId" Type="Int16" Nullable="false" />
+          <Property Name="LoginUserCount" Type="Int16" Nullable="false" />
+          <Property Name="PersonOrItemCount" Type="Int16" Nullable="false" />
+          <Property Name="Formula" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="AmountPerMonth" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="OrgId" Type="Int16" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int16" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int16" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ApplicationPrice" Relationship="TTPModel.FK_CustomterAppItems_ApplicationPrice1" FromRole="CustomerApp" ToRole="ApplicationPrice" />
+          <NavigationProperty Name="CustomerInvoiceItems" Relationship="TTPModel.FK_CustomerInvoiceItems_AppItemId1" FromRole="CustomerApp" ToRole="CustomerInvoiceItem" />
+          <NavigationProperty Name="Organization" Relationship="TTPModel.FK_CustomterAppItems_Organization1" FromRole="CustomerApp" ToRole="Organization" />
+        </EntityType>
+        <Association Name="FK_CustomterAppItems_ApplicationPrice1">
+          <End Type="TTPModel.ApplicationPrice" Role="ApplicationPrice" Multiplicity="1" />
+          <End Type="TTPModel.CustomerApp" Role="CustomerApp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationPrice">
+              <PropertyRef Name="ApplicationPriceId" />
+            </Principal>
+            <Dependent Role="CustomerApp">
+              <PropertyRef Name="ApplicationPriceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInvoiceItems_AppItemId1">
+          <End Type="TTPModel.CustomerApp" Role="CustomerApp" Multiplicity="0..1" />
+          <End Type="TTPModel.CustomerInvoiceItem" Role="CustomerInvoiceItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerApp">
+              <PropertyRef Name="CustomerAppsId" />
+            </Principal>
+            <Dependent Role="CustomerInvoiceItem">
+              <PropertyRef Name="CustomerAppItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomterAppItems_Organization1">
+          <End Type="TTPModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TTPModel.CustomerApp" Role="CustomerApp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="CustomerApp">
+              <PropertyRef Name="OrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8663,23 +9215,6 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AccountingTrialBalances">
-            <EntityTypeMapping TypeName="TTPModel.AccountingTrialBalance">
-              <MappingFragment StoreEntitySet="AccountingTrialBalances">
-                <ScalarProperty Name="AccountingTrialBalanceId" ColumnName="AccountingTrialBalanceId" />
-                <ScalarProperty Name="LedgerId" ColumnName="LedgerId" />
-                <ScalarProperty Name="TotalDebit" ColumnName="TotalDebit" />
-                <ScalarProperty Name="TotalCredit" ColumnName="TotalCredit" />
-                <ScalarProperty Name="Balance" ColumnName="Balance" />
-                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -9266,7 +9801,6 @@
                 <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
                 <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="PlanId" ColumnName="PlanId" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="MainOrgId" ColumnName="MainOrgId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -9477,30 +10011,6 @@
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
                 <ScalarProperty Name="BatchId" ColumnName="BatchId" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StudentFeePayments">
-            <EntityTypeMapping TypeName="TTPModel.StudentFeePayment">
-              <MappingFragment StoreEntitySet="StudentFeePayment">
-                <ScalarProperty Name="StudentFeeId" ColumnName="StudentFeeId" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
-                <ScalarProperty Name="ClassFeeId" ColumnName="ClassFeeId" />
-                <ScalarProperty Name="FeeNameId" ColumnName="FeeNameId" />
-                <ScalarProperty Name="FeeAmount" ColumnName="FeeAmount" />
-                <ScalarProperty Name="PayableAmt" ColumnName="PayableAmt" />
-                <ScalarProperty Name="PaidAmt" ColumnName="PaidAmt" />
-                <ScalarProperty Name="BalanceAmt" ColumnName="BalanceAmt" />
-                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
-                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
@@ -9892,6 +10402,120 @@
                 <ScalarProperty Name="ColumnDisplayName" ColumnName="ColumnDisplayName" />
                 <ScalarProperty Name="ReportOrgReportNameId" ColumnName="ReportOrgReportNameId" />
                 <ScalarProperty Name="ReportOrgReportColumnId" ColumnName="ReportOrgReportColumnId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerInvoices">
+            <EntityTypeMapping TypeName="TTPModel.CustomerInvoice">
+              <MappingFragment StoreEntitySet="CustomerInvoice">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="PaymentStatusId" ColumnName="PaymentStatusId" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="DueForMonth" ColumnName="DueForMonth" />
+                <ScalarProperty Name="StudentClassId" ColumnName="StudentClassId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CustomerInvoiceId" ColumnName="CustomerInvoiceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationPrices">
+            <EntityTypeMapping TypeName="TTPModel.ApplicationPrice">
+              <MappingFragment StoreEntitySet="ApplicationPrice">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
+                <ScalarProperty Name="MinCount" ColumnName="MinCount" />
+                <ScalarProperty Name="PCPM" ColumnName="PCPM" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="ApplicationPriceId" ColumnName="ApplicationPriceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryItems">
+            <EntityTypeMapping TypeName="TTPModel.InventoryItem">
+              <MappingFragment StoreEntitySet="InventoryItems">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="MinCount" ColumnName="MinCount" />
+                <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
+                <ScalarProperty Name="PPU" ColumnName="PPU" />
+                <ScalarProperty Name="PPP" ColumnName="PPP" />
+                <ScalarProperty Name="QtyPerUnit" ColumnName="QtyPerUnit" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="InventoryItemId" ColumnName="InventoryItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceComponents">
+            <EntityTypeMapping TypeName="TTPModel.InvoiceComponent">
+              <MappingFragment StoreEntitySet="InvoiceComponents">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+                <ScalarProperty Name="CustomerInvoiceId" ColumnName="CustomerInvoiceId" />
+                <ScalarProperty Name="InvoiceComponentId" ColumnName="InvoiceComponentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerInvoiceItems">
+            <EntityTypeMapping TypeName="TTPModel.CustomerInvoiceItem">
+              <MappingFragment StoreEntitySet="CustomerInvoiceItems">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="CustomerAppItemId" ColumnName="CustomerAppItemId" />
+                <ScalarProperty Name="ClassFeeId" ColumnName="ClassFeeId" />
+                <ScalarProperty Name="InventoryItemId" ColumnName="InventoryItemId" />
+                <ScalarProperty Name="CustomerInvoiceId" ColumnName="CustomerInvoiceId" />
+                <ScalarProperty Name="CustomerInvoiceItemId" ColumnName="CustomerInvoiceItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerApps">
+            <EntityTypeMapping TypeName="TTPModel.CustomerApp">
+              <MappingFragment StoreEntitySet="CustomerApps">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="AmountPerMonth" ColumnName="AmountPerMonth" />
+                <ScalarProperty Name="Formula" ColumnName="Formula" />
+                <ScalarProperty Name="PersonOrItemCount" ColumnName="PersonOrItemCount" />
+                <ScalarProperty Name="LoginUserCount" ColumnName="LoginUserCount" />
+                <ScalarProperty Name="ApplicationPriceId" ColumnName="ApplicationPriceId" />
+                <ScalarProperty Name="CustomerAppsId" ColumnName="CustomerAppsId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

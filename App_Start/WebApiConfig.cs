@@ -53,7 +53,7 @@ namespace schools
             builder.EntitySet<ClassFee>("ClassFees");
             builder.EntitySet<Student>("Students");
             builder.EntitySet<StudentClass>("StudentClasses");
-            builder.EntitySet<StudentFeePayment>("StudentFeePayments");
+            //builder.EntitySet<StudentFeePayment>("StudentFeePayments");
             builder.EntitySet<StudentFeeReceipt>("StudentFeeReceipts");
             builder.EntitySet<StudentDocument>("StudentDocuments");
             builder.EntitySet<TaskConfiguration>("TaskConfigurations");
@@ -82,10 +82,8 @@ namespace schools
             builder.EntitySet<LeaveEmployeeLeaf>("LeaveEmployeeLeaves");
             builder.EntitySet<EmployeeMonthlySalary>("EmployeeMonthlySalaries");
             builder.EntitySet<EmpEmployeeSalaryComponent>("EmpEmployeeSalaryComponents");
-            //builder.EntitySet<EmpGradeComponent>("EmpGradeComponents");
             builder.EntitySet<EmpComponent>("EmpComponents");
             builder.EntitySet<EmpEmployeeSkill>("EmpEmployeeSkills");
-            //builder.EntitySet<EmployeeGradeLeaf>("EmployeeGradeLeaves");
             builder.EntitySet<EmployeeEducationHistory>("EmployeeEducationHistories");
             builder.EntitySet<LeaveEmployeeLeaf>("LeaveEmployeeLeaves");
             builder.EntitySet<EmpEmployeeGradeSalHistory>("EmpEmployeeGradeSalHistories");
@@ -93,10 +91,8 @@ namespace schools
             builder.EntitySet<EmpHolidayList>("EmpHolidayLists");
             builder.EntitySet<EmpManagerGroupMapping>("EmpManagerGroupMappings");
             builder.EntitySet<EmpEmployeeGroup>("EmpEmployeeGroups");
-            //builder.EntitySet<StudTeacherStudentMapping>("StudTeacherStudentMappings");
             builder.EntitySet<StudTeacherClassMapping>("StudTeacherClassMappings");
             builder.EntitySet<AccountingVoucher>("AccountingVouchers");
-            builder.EntitySet<AccountingTrialBalance>("AccountingTrialBalances");
             builder.EntitySet<AccountingLedgerTrialBalance>("AccountingLedgerTrialBalances");
             builder.EntitySet<SchoolFeeType>("SchoolFeeTypes");
             builder.EntitySet<SchoolClassPeriod>("SchoolClassPeriods");
@@ -114,6 +110,12 @@ namespace schools
             builder.EntitySet<ReportConfigData>("ReportConfigDatas");
             builder.EntitySet<ReportOrgReportName>("ReportOrgReportNames");
             builder.EntitySet<ReportOrgReportColumn>("ReportOrgReportColumns");
+
+            builder.EntitySet<ApplicationPrice>("ApplicationPrices");
+            builder.EntitySet<InventoryItem>("InventoryItems");
+            builder.EntitySet<CustomerInvoice>("CustomerInvoices");            
+            builder.EntitySet<CustomerInvoiceItem>("CustomerInvoiceItems");
+            builder.EntitySet<CustomerApp>("CustomerApps");
 
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 

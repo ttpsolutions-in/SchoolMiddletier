@@ -24,10 +24,8 @@ namespace schools.Controllers
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<MasterData>("MasterDatas");
     builder.EntitySet<AccountingLedgerTrialBalance>("AccountingLedgerTrialBalances"); 
-    builder.EntitySet<AccountingTrialBalance>("AccountingTrialBalances"); 
     builder.EntitySet<ApplicationFeature>("ApplicationFeatures"); 
     builder.EntitySet<ClassFee>("ClassFees"); 
-    builder.EntitySet<ClassSubject>("ClassSubjects"); 
     builder.EntitySet<ClassSubjectMarkComponent>("ClassSubjectMarkComponents"); 
     builder.EntitySet<EmpComponent>("EmpComponents"); 
     builder.EntitySet<EmpEmployeeGradeSalHistory>("EmpEmployeeGradeSalHistories"); 
@@ -48,6 +46,12 @@ namespace schools.Controllers
     builder.EntitySet<SchoolClassPeriod>("SchoolClassPeriods"); 
     builder.EntitySet<LeaveEmployeeLeaf>("LeaveEmployeeLeaves"); 
     builder.EntitySet<LeavePolicy>("LeavePolicies"); 
+    builder.EntitySet<ClassSubject>("ClassSubjects"); 
+    builder.EntitySet<ReportConfigData>("ReportConfigDatas"); 
+    builder.EntitySet<CustomerInvoice>("CustomerInvoices"); 
+    builder.EntitySet<ApplicationPrice>("ApplicationPrices"); 
+    builder.EntitySet<InventoryItem>("InventoryItems"); 
+    builder.EntitySet<InvoiceComponent>("InvoiceComponents"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class MasterDatasController : ODataController
@@ -193,13 +197,6 @@ namespace schools.Controllers
             return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.AccountingLedgerTrialBalances2);
         }
 
-        // GET: odata/MasterDatas(5)/AccountingTrialBalances
-        [EnableQuery]
-        public IQueryable<AccountingTrialBalance> GetAccountingTrialBalances([FromODataUri] int key)
-        {
-            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.AccountingTrialBalances);
-        }
-
         // GET: odata/MasterDatas(5)/ApplicationFeatures
         [EnableQuery]
         public IQueryable<ApplicationFeature> GetApplicationFeatures([FromODataUri] int key)
@@ -226,20 +223,6 @@ namespace schools.Controllers
         public IQueryable<ClassFee> GetClassFees2([FromODataUri] int key)
         {
             return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.ClassFees2);
-        }
-
-        // GET: odata/MasterDatas(5)/ClassSubjects
-        [EnableQuery]
-        public IQueryable<ClassSubject> GetClassSubjects([FromODataUri] int key)
-        {
-            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.ClassSubjects);
-        }
-
-        // GET: odata/MasterDatas(5)/ClassSubjects1
-        [EnableQuery]
-        public IQueryable<ClassSubject> GetClassSubjects1([FromODataUri] int key)
-        {
-            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.ClassSubjects1);
         }
 
         // GET: odata/MasterDatas(5)/ClassSubjectMarkComponents
@@ -492,6 +475,69 @@ namespace schools.Controllers
         public IQueryable<LeavePolicy> GetLeavePolicies1([FromODataUri] int key)
         {
             return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.LeavePolicies1);
+        }
+
+        // GET: odata/MasterDatas(5)/ClassSubjects
+        [EnableQuery]
+        public IQueryable<ClassSubject> GetClassSubjects([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.ClassSubjects);
+        }
+
+        // GET: odata/MasterDatas(5)/ClassSubjects1
+        [EnableQuery]
+        public IQueryable<ClassSubject> GetClassSubjects1([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.ClassSubjects1);
+        }
+
+        // GET: odata/MasterDatas(5)/ReportConfigDatas
+        [EnableQuery]
+        public IQueryable<ReportConfigData> GetReportConfigDatas([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.ReportConfigDatas);
+        }
+
+        // GET: odata/MasterDatas(5)/CustomerInvoices
+        [EnableQuery]
+        public IQueryable<CustomerInvoice> GetCustomerInvoices([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.CustomerInvoices);
+        }
+
+        // GET: odata/MasterDatas(5)/ApplicationPrices
+        [EnableQuery]
+        public IQueryable<ApplicationPrice> GetApplicationPrices([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.ApplicationPrices);
+        }
+
+        // GET: odata/MasterDatas(5)/ApplicationPrices1
+        [EnableQuery]
+        public IQueryable<ApplicationPrice> GetApplicationPrices1([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.ApplicationPrices1);
+        }
+
+        // GET: odata/MasterDatas(5)/InventoryItems
+        [EnableQuery]
+        public IQueryable<InventoryItem> GetInventoryItems([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.InventoryItems);
+        }
+
+        // GET: odata/MasterDatas(5)/InventoryItems1
+        [EnableQuery]
+        public IQueryable<InventoryItem> GetInventoryItems1([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.InventoryItems1);
+        }
+
+        // GET: odata/MasterDatas(5)/InvoiceComponents
+        [EnableQuery]
+        public IQueryable<InvoiceComponent> GetInvoiceComponents([FromODataUri] int key)
+        {
+            return db.MasterDatas.Where(m => m.MasterDataId == key).SelectMany(m => m.InvoiceComponents);
         }
 
         protected override void Dispose(bool disposing)

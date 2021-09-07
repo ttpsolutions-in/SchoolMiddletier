@@ -206,12 +206,12 @@ namespace schools.Controllers
             return db.Organizations.Where(m => m.OrganizationId == key).SelectMany(m => m.StudentDocuments);
         }
 
-        // GET: odata/Organizations(5)/StudentFeePayments
-        [EnableQuery]
-        public IQueryable<StudentFeePayment> GetStudentFeePayments([FromODataUri] short key)
-        {
-            return db.Organizations.Where(m => m.OrganizationId == key).SelectMany(m => m.StudentFeePayments);
-        }
+        //// GET: odata/Organizations(5)/StudentFeePayments
+        //[EnableQuery]
+        //public IQueryable<StudentFeePayment> GetStudentFeePayments([FromODataUri] short key)
+        //{
+        //    return db.Organizations.Where(m => m.OrganizationId == key).SelectMany(m => m.StudentFeePayments);
+        //}
 
         //// GET: odata/Organizations(5)/StudentFeeReceipt
         //[EnableQuery]

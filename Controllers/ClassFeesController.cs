@@ -188,11 +188,11 @@ namespace schools.Controllers
         }
 
               // GET: odata/ClassFees(5)/StudentFeePayments
-        [EnableQuery]
-        public IQueryable<StudentFeePayment> GetStudentFeePayments([FromODataUri] short key)
-        {
-            return db.ClassFees.Where(m => m.ClassFeeId == key).SelectMany(m => m.StudentFeePayments);
-        }
+        //[EnableQuery]
+        //public IQueryable<StudentFeePayment> GetStudentFeePayments([FromODataUri] short key)
+        //{
+        //    return db.ClassFees.Where(m => m.ClassFeeId == key).SelectMany(m => m.StudentFeePayments);
+        //}
 
         protected override void Dispose(bool disposing)
         {

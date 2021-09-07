@@ -370,6 +370,7 @@
     <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\ApplicationFeatureRolesPermsController.cs" />
     <Compile Include="Controllers\ApplicationFeaturesController.cs" />
+    <Compile Include="Controllers\ApplicationPricesController.cs" />
     <Compile Include="Controllers\AppUsersController.cs" />
     <Compile Include="Controllers\AspNetRolesController.cs" />
     <Compile Include="Controllers\AspNetUsersController.cs" />
@@ -379,6 +380,9 @@
     <Compile Include="Controllers\ClassFeesController.cs" />
     <Compile Include="Controllers\ClassSubjectMarkComponentsController.cs" />
     <Compile Include="Controllers\ClassSubjectsController.cs" />
+    <Compile Include="Controllers\CustomerAppsController.cs" />
+    <Compile Include="Controllers\CustomerInvoiceItemsController.cs" />
+    <Compile Include="Controllers\CustomerInvoicesController.cs" />
     <Compile Include="Controllers\EmpComponentsController.cs" />
     <Compile Include="Controllers\EmpEmployeeGradeSalHistoriesController.cs" />
     <Compile Include="Controllers\EmpEmployeeGroupsController.cs" />
@@ -397,6 +401,7 @@
     <Compile Include="Controllers\FilesNPhotoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\InventoryItemsController.cs" />
     <Compile Include="Controllers\LeaveBalancesController.cs" />
     <Compile Include="Controllers\LeaveEmployeeLeavesController.cs" />
     <Compile Include="Controllers\LeavePoliciesController.cs" />
@@ -421,7 +426,6 @@
     <Compile Include="Controllers\StudentClassesController.cs" />
     <Compile Include="Controllers\StudentClassSubjectsController.cs" />
     <Compile Include="Controllers\StudentDocumentsController.cs" />
-    <Compile Include="Controllers\StudentFeePaymentsController.cs" />
     <Compile Include="Controllers\StudentFeeReceiptsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\StudTeacherClassMappingsController.cs" />
@@ -437,9 +441,6 @@
     <Compile Include="Models\AccountingLedgerTrialBalance.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountingTrialBalance.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\AccountingVoucher.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
@@ -451,6 +452,9 @@
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ApplicationFeatureRolesPerm.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationPrice.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AppUser.cs">
@@ -484,6 +488,15 @@
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClassSubjectMarkComponent.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerApp.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerInvoice.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerInvoiceItem.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
@@ -538,6 +551,12 @@
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InventoryItem.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InvoiceComponent.cs">
+      <DependentUpon>ttp.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LeaveBalance.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
@@ -605,9 +624,6 @@
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentDocument.cs">
-      <DependentUpon>ttp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\StudentFeePayment.cs">
       <DependentUpon>ttp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentFeeReceipt.cs">
